@@ -1,0 +1,6 @@
+# up/down
+"\e[A": history-search-backward
+"\e[B": history-search-forward
+
+#Ignore case on tab completion
+set completion-ignore-case On
