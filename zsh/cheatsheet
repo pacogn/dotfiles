@@ -1,0 +1,29 @@
+##########   CH3   ####################################################################################
+############   ZLE   ##########
+Ctrl + r ==> search history incremental ==>pg 55
+Ctrl + u ==> delete current line
+Ctrl + w ==> delete last word
+!! ==> redo last cmd
+!num ==>redo cmd numbered num in the history file
+history | grep something ==> see all cmds and numbers containing "something"
+
+############   keymaps   ##########
+bindkey -L ==> show current keybindings ==> pg 58
+read ==> enter this cmd (and enter) to see keystrokes codes ==>pg 58
+Ctrl+v ==> print the next pressed key's code
+find the key binding by command name:{
+    % # enter where-is mode via Esc + X
+    > Where is: capitalize-word
+    > capitalize-word is on "^[C" "^[c"
+}
+
+########### ADVANCED EDITING ############
+Esc + return ==> enter improved multiline mode ==> better than \ escape ==>pg 66
+
+echo *zsh(<Tab> ==> see options for echo
+###### MAN ##################
+man -k "string" ==> find all related to "string"
+######ZSHLOVERS############
+tips, tricks and examples for the Z shell:{
+  http://grml.org/zsh/zsh-lovers.html
+}

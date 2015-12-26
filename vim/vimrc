@@ -1,0 +1,10 @@
+"https://github.com/tpope/vim-pathogen
+execute pathogen#infect()
+
+"http://mayurrokade.com/blog/using-zsh-and-vim-to-improve-terminal-visibility/
+set t_Co=256
+colorscheme wombat256mod
+let g:airline_theme='bubblegum'
+
+syntax on
+set number

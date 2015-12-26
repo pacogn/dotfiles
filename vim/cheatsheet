@@ -1,0 +1,9 @@
+zt -> move current line to top of screen
+zz -> move current line to middle of screen
+zb -> move current line to bottom of screen
+Ctrl + y -> move screen up one line
+Ctrl + e -> move screen down one line
+Ctrl + u -> move screen up 1/2 page
+Ctrl + d -> move screen down 1/2 page
+Ctrl + b -> move screen up one page
+Ctrl + f -> move screen down one page

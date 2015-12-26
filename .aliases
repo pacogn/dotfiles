@@ -1,0 +1,28 @@
+alias rm='rm -i'
+alias cp='cp -i'
+alias hidden='ls -a | grep "^\."'
+alias restart='sudo shutdown -r now'
+alias textedit='open -a TextEdit'
+alias lockscreen='pmset displaysleepnow'
+alias mongod='mongod --dbpath ~/Dropbox/Mongodb/data24'
+
+alias pdf2jpeg='echo "enter filename : " && read MSG && sips -s format jpeg "$MSG".pdf --out "$MSG".jpeg'
+
+alias startitsmylife='osascript ~/Developer/ItsMyLife/start_Mongod_Nodemon_Watch.scpt'
+alias startwixday='sudo osascript ~/projects/startwixday.scpt'
+alias wixpoc='osascript ~/projects/WIX_CHECKOUT_POC.scpt'
+alias wixmaster='osascript ~/projects/WIX_CHECKOUT_MASTER.scpt'
+
+#GIT STUFF
+alias gitLogNoBuild='git log --grep=build --invert-grep'
+alias gitbuild='git add dist/. && git add debug/. && git commit -m"build"'
+alias gacp='echo "enter commit message : " && read MSG && git add . && git commit -m "$MSG" && git push'
+
+#projects
+alias txtp='cd ~/projects/wix-ck-editor'
+alias gbhp='cd ~/Developer/git-branch-helper'
+alias santavp='cd ~/projects/santa'
+alias santaep='cd ~/projects/santa-editor'
+
+alias open8080='open http://localhost:8080'
+alias opensham='open http://www.1k.2010.ym.byedu.org.il/'
