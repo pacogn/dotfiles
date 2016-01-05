@@ -1,17 +1,19 @@
 [user]
-	name = David 
+	name = David
 	email = davidsu@wix.com
 [core]
 	excludesfile = /Users/davidsu/.gitignore_global
 	autocrlf = false
-#[diff]
-#    tool = webstorm
-#[difftool "webstorm"]
-#    cmd = /Applications/WebStorm10.app/Contents/MacOS/webstorm diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
 [diff]
-    tool = vimdiff
-[difftool]
-    prompt = false
+   tool = webstorm
+[difftool "webstorm"]
+	#cmd = /usr/bin/opendiff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
+	cmd = webstorm diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
+  ####  cmd = /Applications/WebStorm10.app/Contents/MacOS/webstorm diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
+# [diff]
+#     tool = vimdiff
+# [difftool]
+#     prompt = false
 [alias]
     d = difftool
 [mergetool "sourcetree"]

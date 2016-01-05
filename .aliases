@@ -1,3 +1,4 @@
+function specialchars(){echo '⇧⌘⌥⇥⌫⌦⎋⌃'}
 alias rm='rm -i'
 alias cp='cp -i'
 alias hidden='ls -a | grep "^\."'
@@ -17,6 +18,7 @@ alias wixmaster='osascript ~/projects/WIX_CHECKOUT_MASTER.scpt'
 alias gitLogNoBuild='git log --grep=build --invert-grep'
 alias gitbuild='git add dist/. && git add debug/. && git commit -m"build"'
 alias gacp='echo "enter commit message : " && read MSG && git add . && git commit -m "$MSG" && git push'
+alias gmdc='git merge --no-commit --no-ff'
 
 #projects
 alias txtp='cd ~/projects/wix-ck-editor'

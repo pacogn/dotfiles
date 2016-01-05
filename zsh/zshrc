@@ -7,8 +7,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 # antigen theme robbyrussell
 antigen apply
 
+alias vim='/usr/local/bin/vim'
 alias setbash='chsh -s /bin/bash'
-alias cheatsheet='cat ~/.dotFiles/zsh/cheatsheet'
 alias reload='. ~/.zshrc'
 # alias grep='egrep'
 alias ls='ls -GF'
@@ -71,8 +71,23 @@ zstyle ':completion:*' verbose yes #pg 96 =>Learning Shell Scripting with ZSH
      echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/} $(git_prompt_status)$ZSH_THEME_GIT_PROMPT_SUFFIX"
    fi
  }
+
+ function boo() {
+   if [[ $(pwd) =~ .*santa-edi.* ]]; then
+    echo "%{[38;5;101m%}"
+  elif [[ $(pwd) =~ .*santa.* ]]; then
+    echo "%{[38;5;67m%}"
+  elif [[ $(pwd) =~ .*wix-ck-ed.* ]]; then
+    echo "%{[38;5;131m%}"
+  else
+    echo "%{$reset_color%}"
+  fi
+ }
+
+ local dir_color="%{$reset_color%}"
  local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜%s)"
- PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$reset_color%}%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+ # PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$reset_color%}%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+ PROMPT='${ret_status}%{$fg_bold[green]%}%p $(boo)%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}( %{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}) "

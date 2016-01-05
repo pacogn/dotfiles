@@ -6,5 +6,46 @@ set t_Co=256
 colorscheme wombat256mod
 let g:airline_theme='bubblegum'
 
+"the following link finally solved my folding issues
+"http://www.dafishinsea.com/blog/2012/01/23/vim-for-javascript/
+
+" show existing tab with 4 spaces width
+let tabstop=4
+" when indenting with '>', use 4 spaces width
+set shiftwidth=4
+" On pressing tab, insert 4 spaces
+set expandtab
 syntax on
 set number
+
+filetype off
+" https://github.com/rasendubi/dotfiles/blob/master/.vimrc
+"let g:ycm_autoclose_preview_window_after_completion = 1
+"let g:ycm_autoclose_preview_window_after_insertion = 1
+"let g:ycm_use_ultisnips_completer = 1
+"let g:ycm_key_list_select_completion=[]
+"let g:ycm_key_list_previous_completion=[]
+
+" let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
+
+"http://askubuntu.com/questions/223018/vim-is-not-remembering-last-position
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+"http://stackoverflow.com/questions/2142402/code-folding-is-not-saved-in-my-vimrc
+" save and restore folds when a file is closed and re-opened
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
+
+
+"Practical vim book
+"help :find finding my files in the following directories
+"note: this should be in some local vimrc to enable for specific projects
+"but this I'll dive deeper later...
+:set path+=~/projects/wix-ck-editor/tests/**
+:set path+=~/projects/wix-ck-editor/src/**
+:set path+=~/projects/wix-ck-editor/*.*
+:set path+=~/projects/wix-ck-editor/src/config/**
+
+

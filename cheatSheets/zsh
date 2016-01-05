@@ -1,4 +1,7 @@
 ##########   CH3   ####################################################################################
+############   functions   ##########
+
+spectrum_ls  ==> show all possible 256 zsh colors     ##https://gabri.me/blog/custom-colors-in-your-zsh-prompt
 ############   ZLE   ##########
 Ctrl + r ==> search history incremental ==>pg 55
 Ctrl + u ==> delete current line
