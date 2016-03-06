@@ -13,7 +13,7 @@ alias reload='. ~/.zshrc'
 # alias grep='egrep'
 alias ls='ls -GF'
 alias updatedb='sudo /usr/libexec/locate.updatedb' #for locate's sake
-
+alias opengabi='cd ~/Developer/selenium/criancas/selenium && jasmine spec/escola.spec.js gabi'
 # calls cd, and immediately list its contents
 function cs {
   cd "$@" && ls -A
@@ -84,7 +84,6 @@ zstyle ':completion:*' verbose yes #pg 96 =>Learning Shell Scripting with ZSH
   fi
  }
 
- local dir_color="%{$reset_color%}"
  local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜%s)"
  # PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$reset_color%}%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
  PROMPT='${ret_status}%{$fg_bold[green]%}%p $(boo)%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'

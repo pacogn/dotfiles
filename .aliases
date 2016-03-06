@@ -28,3 +28,4 @@ alias santaep='cd ~/projects/santa-editor'
 
 alias open8080='open http://localhost:8080'
 alias opensham='open http://www.1k.2010.ym.byedu.org.il/'
+alias openplayground='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --app=http://localhost:63342/projects/wix-ck-editor/samples/playground.html?theme=dark'
