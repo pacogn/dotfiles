@@ -1,3 +1,4 @@
+echo "loading .aliases"
 function specialchars(){echo '⇧⌘⌥⇥⌫⌦⎋⌃'}
 alias rm='rm -i'
 alias cp='cp -i'
