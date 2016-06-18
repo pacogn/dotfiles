@@ -1,15 +1,13 @@
 echo "loading .zshrc"
-source ~/.dotFiles/antigen/antigen.zsh
-antigen use oh-my-zsh
-#antigen bundle robbyrussell/oh-my-zsh lib/
-antigen bundle zsh-users/zsh-syntax-highlighting
- antigen bundle git
-antigen-bundle wting/autojump
-# antigen theme gozilla
-# antigen theme robbyrussell
-antigen apply
+source ~/.zgen/zgen.zsh
+if ! zgen saved; then
+    zgen oh-my-zsh
+    zgen load zsh-users/zsh-syntax-highlighting
+    zgen oh-my-zsh plugins/git
+    zgen load wting/autojump
+fi
 
-source ~/.antigen/repos/https-COLON--SLASH--SLASH-github.com-SLASH-wting-SLASH-autojump.git/bin/autojump.zsh
+source ~/.zgen/wting/autojump-master/bin/autojump.zsh
 
 alias vim='/usr/local/bin/vim'
 alias setbash='chsh -s /bin/bash'
@@ -89,9 +87,8 @@ zstyle ':completion:*' verbose yes #pg 96 =>Learning Shell Scripting with ZSH
   fi
  }
 
- local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜%s)"
- # PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$reset_color%}%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
- PROMPT='${ret_status}%{$fg_bold[green]%}%p $(color_for_most_used_dirs)%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜%s)"
+PROMPT='${ret_status}%{$fg_bold[green]%}%p $(color_for_most_used_dirs)%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}( %{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}) "
