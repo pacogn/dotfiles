@@ -77,7 +77,7 @@ zstyle ':completion:*' verbose yes #pg 96 =>Learning Shell Scripting with ZSH
    fi
  }
 
- function boo() {
+ function color_for_most_used_dirs() {
    if [[ $(pwd) =~ .*santa-edi.* ]]; then
     echo "%{[38;5;101m%}"
   elif [[ $(pwd) =~ .*santa.* ]]; then
@@ -91,7 +91,7 @@ zstyle ':completion:*' verbose yes #pg 96 =>Learning Shell Scripting with ZSH
 
  local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜%s)"
  # PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$reset_color%}%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
- PROMPT='${ret_status}%{$fg_bold[green]%}%p $(boo)%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+ PROMPT='${ret_status}%{$fg_bold[green]%}%p $(color_for_most_used_dirs)%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}( %{$fg[blue]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}) "
@@ -102,23 +102,6 @@ ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✗"
 ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[blue]%}➦"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%}✂"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[grey]%}✱"
-
-
-#set red right marker for error code
-#
-# RPS1="%F{red}%(?..(%?%))%f"
-# #set prompt with git
-# source ~/.dotfiles/git/.git-prompt.sh
-# setopt PROMPT_SUBST
-#
-# precmd () { __git_ps1 "%5~" "$ %s" }
-# export GIT_PS1_SHOWDIRTYSTATE="true" #unstaged(*)/staged(+)
-# export GIT_PS1_SHOWSTASHSTATE="true"
-# export GIT_PS1_SHOWUNTRACKEDFILES="true" #%
-# export GIT_PS1_SHOWCOLORHINTS="true"
-
-# export GIT_PS1_SHOWUPSTREAM="auto"
-# PS1='%c$(__git_ps1 " (%s)")\$ '
 
 ###########################################################################################################################
 #SET COLORS IN MAN PAGES
