@@ -12,6 +12,7 @@ alias pdf2jpeg='echo "enter filename : " && read MSG && sips -s format jpeg "$MS
 alias startitsmylife='osascript ~/Developer/ItsMyLife/start_Mongod_Nodemon_Watch.scpt'
 #alias startwixday='sudo osascript ~/projects/startwixday.scpt'
 alias startwixday='cd ~/projects/santa && git pull && npm i && grunt all --force & cd ~/projects/santa-editor && git pull && npm i && grunt all --force & cd ~/projects/wix-ck-editor && git pull && bower update && grunt all && cd ~/projects/santa && sudo npm start'
+alias startwixcode='cd ~/projects/js-wixcode-sdk && git pull && npm i && grunt all && npm run build && cd ~/projects/santa/static/wixcode && grunt'
 alias wixpoc='osascript ~/projects/WIX_CHECKOUT_POC.scpt'
 alias wixmaster='osascript ~/projects/WIX_CHECKOUT_MASTER.scpt'
 
