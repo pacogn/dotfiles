@@ -1,4 +1,3 @@
-echo "loading .aliases"
 function specialchars(){echo '⇧⌘⌥⇥⌫⌦⎋⌃'}
 function startsantaday(){ cd ~/projects/santa && git pull && npm i && grunt all --force }
 function startsantaeditorday(){  cd ~/projects/santa-editor && git pull && npm i && grunt all --force }
@@ -8,10 +7,10 @@ alias startwixday='( startsantaday ) & ( startsantaeditorday ) & ( startckday ) 
 function checkoutmasterfunc(){ cd $1 && echo $fg[yellow]$PWD$reset_color && git checkout master && printf '*%.0s' {1..50} && printf '\n\n'}
 alias checkoutmaster='checkoutmasterfunc ~/projects/wix-ck-editor && checkoutmasterfunc ~/projects/santa && checkoutmasterfunc ~/projects/santa-editor && checkoutmasterfunc ~/projects/js-wixcode-sdk' 
 function findalias(){
-for dir in $(echo ~/.dotFiles && echo $PATH | tr ':' '\n' | grep '^/Users/')
-do
-egrep -r $1 $dir 
-done
+    for dir in $(echo ~/.dotFiles && echo $PATH | tr ':' '\n' | grep '^/Users/' | grep -v '\.nvm')
+    do
+      egrep -r $1 $dir 
+    done
 }
 alias resetnpm='rm -rf ~/.npm && rm -rf node_modules && npm cache clear && npm i'
 alias vim='/usr/local/bin/vim'
@@ -33,24 +32,9 @@ alias mongod='mongod --dbpath ~/Dropbox/Mongodb/data24'
 alias pdf2jpeg='echo "enter filename : " && read MSG && sips -s format jpeg "$MSG".pdf --out "$MSG".jpeg'
 
 alias startitsmylife='osascript ~/Developer/ItsMyLife/start_Mongod_Nodemon_Watch.scpt'
-#alias startwixday='sudo osascript ~/projects/startwixday.scpt'
-
-alias wixpoc='osascript ~/projects/WIX_CHECKOUT_POC.scpt'
-alias wixmaster='osascript ~/projects/WIX_CHECKOUT_MASTER.scpt'
 
 #GIT STUFF
-alias gitLogNoBuild='git log --grep=build --invert-grep'
-alias gitbuild='git add dist/. && git add debug/. && git commit -m"build"'
 alias gacp='echo "enter commit message : " && read MSG && git add . && git commit -m "$MSG" && git push'
 alias gmdc='git merge --no-commit --no-ff'
 
-#projects
-alias txtp='cd ~/projects/wix-ck-editor'
-alias wixcodep='cd ~/projects/js-wixcode-sdk'
-alias gbhp='cd ~/Developer/git-branch-helper'
-alias santavp='cd ~/projects/santa'
-alias santaep='cd ~/projects/santa-editor'
-
 alias open8080='open http://localhost:8080'
-alias opensham='open http://www.1k.2010.ym.byedu.org.il/'
-alias openplayground='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --app=http://localhost:63342/projects/wix-ck-editor/samples/playground.html?theme=dark'
