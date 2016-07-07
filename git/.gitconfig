@@ -3,7 +3,7 @@
 	email = davidsu@wix.com
 [core]
 	excludesfile = /Users/davidsu/.gitignore_global
-	autocrlf = false
+	autocrlf = input
 [diff]
    tool = webstorm
 [difftool "webstorm"]

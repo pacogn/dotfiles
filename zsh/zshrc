@@ -9,14 +9,6 @@ fi
 
 source ~/.zgen/wting/autojump-master/bin/autojump.zsh
 
-alias vim='/usr/local/bin/vim'
-alias setbash='chsh -s /bin/bash'
-alias reload='. ~/.zshrc'
-# alias grep='egrep'
-alias ls='ls -GF'
-alias updatedb='sudo /usr/libexec/locate.updatedb' #for locate's sake
-alias opengabi='cd ~/Developer/selenium/criancas/selenium && jasmine spec/escola.spec.js gabi'
-alias startwixday='cd ~/projects/santa && git pull && npm i && grunt all --force & cd ~/projects/santa-editor && git pull && npm i && grunt all --force & cd ~/projects/wix-ck-editor && git pull && bower update && grunt all'
 # calls cd, and immediately list its contents
 function cs {
   cd "$@" && ls -A
@@ -53,6 +45,7 @@ setopt SHARE_HISTORY
 ###########################################################################################################################
 setopt COMPLETE_ALIASES
 [[ -s "$HOME/.dotfiles/.aliases" ]] && source "$HOME/.dotfiles/.aliases"
+[[ -s "$HOME/.dotfiles/.variables" ]] && source "$HOME/.dotfiles/.variables"
 
 ###########################################################################################################################
 # completion
@@ -119,3 +112,4 @@ bindkey "^[[3~" delete-char-or-list #backspace
 bindkey '\e[A' history-beginning-search-backward #search history match already typed ==> pg 67indkey '\e[B' history-beginning-search-forward
 #bindkey '^Q' push-line-or-edit #see pg 67 of Learning Shell Scripting with ZSH
 #bindkey '\eQ' push-line-or-edit #see pg 67 of Learning Shell Scripting with ZSH
+PATH=$(echo $PATH | tr ':' '\n' | sort | uniq | tr '\n' ':')
