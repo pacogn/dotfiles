@@ -33,4 +33,27 @@ if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
     ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[blue]%}➦"
     ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%}✂"
     ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[grey]%}✱"
+    function git_prompt(){
+        local str=$2 #local limits str variable scope
+        echo -n $1 | sed 's/%{\(.*\)%}.*/\1/g' #color
+        echo -n "$2 " #name of status
+        echo -n "$(printf '\055%.0s' {1..20})" | head -c $(( 20 - ${#str} )) #dashes 
+        echo -n $1 | sed 's/%{\(.*\)%}/ \1/g' #character that represents it
+    }
+    function gitprompt(){
+        function git_prompt(){
+            local str=$2 #local limits str variable scope
+            echo -n $1 | sed 's/%{\(.*\)%}.*/\1/g' #color
+            echo -n "$2 " #name of status
+            echo -n "$(printf '\055%.0s' {1..20})" | head -c $(( 20 - ${#str} )) #dashes 
+            echo -n $1 | sed 's/%{\(.*\)%}/ \1/g' #character that represents it
+        }
+        git_prompt $ZSH_THEME_GIT_PROMPT_ADDED added
+        git_prompt $ZSH_THEME_GIT_PROMPT_MODIFIED modified
+        git_prompt $ZSH_THEME_GIT_PROMPT_DELETED deleted
+        git_prompt $ZSH_THEME_GIT_PROMPT_RENAMED renamed
+        git_prompt $ZSH_THEME_GIT_PROMPT_UNMERGED unmerged
+        git_prompt $ZSH_THEME_GIT_PROMPT_UNTRACKED untracked
+        unset -f git_prompt #keep global namespace clean
+    }
 fi
