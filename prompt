@@ -1,3 +1,4 @@
+#!/bin/zsh
 if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
     # Outputs current branch info in prompt format
       function my_git_prompt_info() {
