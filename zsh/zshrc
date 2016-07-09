@@ -13,14 +13,12 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/git
     zgen load wting/autojump
 fi
+#unset SET_CUSTOM_PROMPT value if you want to test other prompt than 
+#the custom in ~/.dotFiles/prompt 
+SET_CUSTOM_PROMPT=true
 
 echo "loading autojump"
 source ~/.zgen/wting/autojump-master/bin/autojump.zsh
-
-# calls cd, and immediately list its contents
-function cs {
-  cd "$@" && ls -A
-}
 
 export LSCOLORS=GxFxCxDxBxegedabagaced #better colors for ls
 
@@ -53,10 +51,11 @@ setopt SHARE_HISTORY
 
 ###########################################################################################################################
 setopt COMPLETE_ALIASES
-echo "loading aliases"
-[[ -s "$HOME/.dotfiles/aliases" ]] && source "$HOME/.dotfiles/aliases"
-echo "loading variables"
-[[ -s "$HOME/.dotfiles/variables" ]] && source "$HOME/.dotfiles/variables"
+for f in ~/.dotFiles/* #foreach file in directory 
+do
+    #if its a normal file (-f) then log and source it
+    [[ -f $f ]] && echo loading $f && source $f 
+done
 
 ###########################################################################################################################
 # completion
@@ -68,42 +67,6 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 zstyle ':completion:*' insert-tab pending
 zstyle ':completion:*' verbose yes #pg 96 =>Learning Shell Scripting with ZSH
 #zstyle ':completion:*' format %d =>pg 94 Learning Shell Scripting with ZSH
-###########################################################################################################################
-# Outputs current branch info in prompt format
-  function my_git_prompt_info() {
-   local ref
-   if [[ "$(command git config --get oh-my-zsh.hide-status 2>/dev/null)" != "1" ]]; then
-     ref=$(command git symbolic-ref HEAD 2> /dev/null) || \
-     ref=$(command git rev-parse --short HEAD 2> /dev/null) || return 0
-     echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/} $(git_prompt_status)$ZSH_THEME_GIT_PROMPT_SUFFIX"
-   fi
- }
-
- function color_for_most_used_dirs() {
-   if [[ $(pwd) =~ .*santa-edi.* ]]; then
-    echo "%{[38;5;101m%}"
-  elif [[ $(pwd) =~ .*santa.* ]]; then
-    echo "%{[38;5;67m%}"
-  elif [[ $(pwd) =~ .*wix-ck-ed.* ]]; then
-    echo "%{[38;5;131m%}"
-  else
-    echo "%{$reset_color%}"
-  fi
- }
-
-local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜%s)"
-PROMPT='${ret_status}%{$fg_bold[green]%}%p $(color_for_most_used_dirs)%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
-
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}( %{$fg[blue]%}"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}) "
-
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[cyan]%}✈"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}✭"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✗"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[blue]%}➦"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%}✂"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[grey]%}✱"
-
 ###########################################################################################################################
 #SET COLORS IN MAN PAGES
 export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
