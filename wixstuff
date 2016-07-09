@@ -1,0 +1,32 @@
+#!/bin/sh
+function startsantaday(){
+    cd ~/projects/santa
+    git pull
+    npm i
+    grunt all --force 
+}
+function startsantaeditorday(){
+    cd ~/projects/santa-editor
+    git pull
+    npm i
+    grunt all --force
+}
+function startckday(){
+    cd ~/projects/wix-ck-editor
+    git pull
+    bower update
+    grunt all
+}
+function startwixcodeday(){
+    cd ~/projects/js-wixcode-sdk
+    git pull
+    npm i
+    grunt all
+    npm run build
+    cd ~/projects/santa/static/wixcode
+    grunt
+}
+alias startwixday='( startsantaday ) & ( startsantaeditorday ) & ( startckday ) & ( startwixcodeday )'
+function checkoutmasterfunc(){ cd $1 && echo $fg[yellow]$PWD$reset_color && git checkout master && printf '*%.0s' {1..50} && printf '\n\n'}
+alias checkoutmaster='checkoutmasterfunc ~/projects/wix-ck-editor && checkoutmasterfunc ~/projects/santa && checkoutmasterfunc ~/projects/santa-editor && checkoutmasterfunc ~/projects/js-wixcode-sdk' 
+

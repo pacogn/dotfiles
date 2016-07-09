@@ -1,5 +1,4 @@
 echo "loading zshrc"
-
 echo "loading{ 
     zgen,
     load oh-my-zsh,
@@ -26,31 +25,16 @@ autoload zmv # => pg 88 Learning Shell scripting with ZSH
 setopt HIST_VERIFY # !! => copy cmd from history before executing
 
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/.bin" # Add RVM to PATH for scripting
+echo "loading rvm"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 [ -s ~/.nvm/nvm.sh ] && source ~/.nvm/nvm.sh
 export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
-
-echo "loading rvm"
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 #this doesn't seem to work here... need to learn more
 ZDOTDIR='~/.dotFiles/zsh'
 
 ###########################################################################################################################
-#reference: https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/history.zsh
-HISTFILE=$HOME/.zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-setopt append_history
-setopt HIST_IGNORE_ALL_DUPS
-setopt SHARE_HISTORY
-#setopt EXTENDED_GLOB # ==> see pg 81 of Learning Shell Scripting with ZSH
-
-#setopt csh_null_glob # ==> see pg 80 of Learning Shell Scripting with ZSH
-#setopt numericglobsort # ==> see pg 84 of Learning Shell Scripting with ZSH
-
-###########################################################################################################################
-setopt COMPLETE_ALIASES
 for f in ~/.dotFiles/* #foreach file in directory 
 do
     #if its a normal file (-f) then log and source it
@@ -87,4 +71,4 @@ bindkey '\e[A' history-beginning-search-backward #search history match already t
 #bindkey '^Q' push-line-or-edit #see pg 67 of Learning Shell Scripting with ZSH
 #bindkey '\eQ' push-line-or-edit #see pg 67 of Learning Shell Scripting with ZSH
 PATH=$(echo $PATH | tr ':' '\n' | sort | uniq | tr '\n' ':')
-clear
+#clear

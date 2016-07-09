@@ -1,0 +1,14 @@
+#!/bin/sh
+#reference: https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/history.zsh
+HISTFILE=$HOME/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt append_history
+setopt HIST_IGNORE_ALL_DUPS
+setopt SHARE_HISTORY
+#setopt EXTENDED_GLOB # ==> see pg 81 of Learning Shell Scripting with ZSH
+
+#setopt csh_null_glob # ==> see pg 80 of Learning Shell Scripting with ZSH
+#setopt numericglobsort # ==> see pg 84 of Learning Shell Scripting with ZSH
+
+
