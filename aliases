@@ -12,6 +12,7 @@ function findalias(){
       egrep -r $1 $dir 
     done
 }
+alias escape="read"
 alias resetnpm='rm -rf ~/.npm && rm -rf node_modules && npm cache clear && npm i'
 alias vim='/usr/local/bin/vim'
 alias egrep='egrep --color=auto'

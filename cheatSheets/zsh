@@ -6,6 +6,10 @@ spectrum_ls  ==> show all possible 256 zsh colors     ##https://gabri.me/blog/cu
 Ctrl + r ==> search history incremental ==>pg 55
 Ctrl + u ==> delete current line
 Ctrl + w ==> delete last word
+Ctrl + a ==> move to beggining of line
+Ctrl + e ==> move to end line
+Esc + f ==> move forward one word
+Esc + b ==> move backward one word
 !! ==> redo last cmd
 !num ==>redo cmd numbered num in the history file
 history | grep something ==> see all cmds and numbers containing "something"
@@ -16,16 +20,7 @@ read ==> enter this cmd (and enter) to see keystrokes codes ==>pg 58
 Ctrl+v ==> print the next pressed key's code
 find the key binding by command name:{
     % # enter where-is mode via Esc + X
-    > Where is: capitalize-word
-    > capitalize-word is on "^[C" "^[c"
-}
-
-########### ADVANCED EDITING ############
-Esc + return ==> enter improved multiline mode ==> better than \ escape ==>pg 66
-
-echo *zsh(<Tab> ==> see options for echo
-###### MAN ##################
-man -k "string" ==> find all related to "string"
+    > Where is: capitalize-word > capitalize-word is on "^[C" "^[c" } ########### ADVANCED EDITING ############ Esc + return ==> enter improved multiline mode ==> better than \ escape ==>pg 66 echo *zsh(<Tab> ==> see options for echo ###### MAN ################## man -k "string" ==> find all related to "string"
 ######ZSHLOVERS############
 tips, tricks and examples for the Z shell:{
   http://grml.org/zsh/zsh-lovers.html
