@@ -26,7 +26,20 @@ function startwixcodeday(){
     cd ~/projects/santa/static/wixcode
     grunt
 }
-alias startwixday='( startsantaday ) & ( startsantaeditorday ) & ( startckday ) & ( startwixcodeday )'
-function checkoutmasterfunc(){ cd $1 && echo $fg[yellow]$PWD$reset_color && git checkout master && printf '*%.0s' {1..50} && printf '\n\n'}
+function startwixday(){
+#command inside ( parenthesis ) will be run in a subshell
+#allowing for parallelism
+    ( startsantaday ) &
+    ( startsantaeditorday ) &
+    ( startckday ) &
+    ( startwixcodeday )
+}
+function checkoutmasterfunc(){ 
+    cd $1
+    echo $fg[yellow]$PWD$reset_color
+    git checkout master
+    printf '*%.0s' {1..50}
+    printf '\n\n'
+}
 alias checkoutmaster='checkoutmasterfunc ~/projects/wix-ck-editor && checkoutmasterfunc ~/projects/santa && checkoutmasterfunc ~/projects/santa-editor && checkoutmasterfunc ~/projects/js-wixcode-sdk' 
 

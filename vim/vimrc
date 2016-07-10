@@ -1,10 +1,23 @@
-"https://github.com/tpope/vim-pathogen
-execute pathogen#infect()
+call plug#begin('~/.vim/plugged')
+
+Plug 'michalbachowski/vim-wombat256mod'
+Plug 'vim-airline/vim-airline' " fancy statusline
+Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
+
+Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
+Plug 'tpope/vim-sensible'
+call plug#end()
 
 "http://mayurrokade.com/blog/using-zsh-and-vim-to-improve-terminal-visibility/
 set t_Co=256
 colorscheme wombat256mod
-let g:airline_theme='bubblegum'
+
+let g:airline_powerline_fonts=1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+let g:airline_theme='raven'
+"let g:airline_theme='distinguished'
+"let g:airline_theme='bubblegum'
 
 "the following link finally solved my folding issues
 "http://www.dafishinsea.com/blog/2012/01/23/vim-for-javascript/
@@ -47,5 +60,3 @@ autocmd BufWinEnter *.* silent loadview
 :set path+=~/projects/wix-ck-editor/src/**
 :set path+=~/projects/wix-ck-editor/*.*
 :set path+=~/projects/wix-ck-editor/src/config/**
-
-
