@@ -4,7 +4,7 @@ function specialchars(){echo '⇧⌘⌥⇥⌫⌦⎋⌃'}
 function findalias(){
     for dir in $(echo ~/.dotFiles && echo $PATH | tr ':' '\n' | grep '^/Users/' | grep -v '\.nvm')
     do
-       ack $1 $dir #ack is like grep, recursive by default, great option 
+       ack $1 $dir #ack is like grep, recursive by default, great option
     done
 }
 alias resetnpm='rm -rf ~/.npm && rm -rf node_modules && npm cache clear && npm i'

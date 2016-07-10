@@ -28,17 +28,17 @@ if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
     ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}( %{$fg[blue]%}"
     ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}) "
 
-    ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[cyan]%}✈"
-    ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}✭"
-    ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✗"
-    ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[blue]%}➦"
-    ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%}✂"
-    ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[grey]%}✱"
+    ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[cyan]%}✈ "
+    ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}✭ "
+    ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✗ "
+    ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[blue]%}➦ "
+    ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[magenta]%}✂ "
+    ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[grey]%}✱ "
     function git_prompt(){
         local str=$2 #local limits str variable scope
         echo -n $1 | sed 's/%{\(.*\)%}.*/\1/g' #color
         echo -n "$2 " #name of status
-        echo -n "$(printf '\055%.0s' {1..20})" | head -c $(( 20 - ${#str} )) #dashes 
+        echo -n "$(printf '\055%.0s' {1..20})" | head -c $(( 20 - ${#str} )) #dashes
         echo -n $1 | sed 's/%{\(.*\)%}/ \1/g' #character that represents it
     }
     function gitprompt(){
@@ -46,7 +46,7 @@ if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
             local str=$2 #local limits str variable scope
             echo -n $1 | sed 's/%{\(.*\)%}.*/\1/g' #color
             echo -n "$2 " #name of status
-            echo -n "$(printf '\055%.0s' {1..20})" | head -c $(( 20 - ${#str} )) #dashes 
+            echo -n "$(printf '\055%.0s' {1..20})" | head -c $(( 20 - ${#str} )) #dashes
             echo -n $1 | sed 's/%{\(.*\)%}/ \1/g' #character that represents it
         }
         git_prompt $ZSH_THEME_GIT_PROMPT_ADDED added
