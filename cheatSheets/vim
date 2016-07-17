@@ -111,6 +111,8 @@ ctrl+wq - Quit a window
 ctrl+wv - Split windows vertically
 
 
-
+other
+:map - list current keybindings
+:help index - find all keybindings
 
 

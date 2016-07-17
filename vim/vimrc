@@ -1,6 +1,9 @@
 call plug#begin('~/.vim/plugged')
-
+"colorschemes
+"Plug 'chriskempson/base16-vim'
+Plug 'crusoexia/vim-monokai'
 Plug 'michalbachowski/vim-wombat256mod'
+
 Plug 'vim-airline/vim-airline' " fancy statusline
 Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
 
@@ -10,7 +13,12 @@ call plug#end()
 
 "http://mayurrokade.com/blog/using-zsh-and-vim-to-improve-terminal-visibility/
 set t_Co=256
+"set background=dark
+"let base16colorspace=256
 colorscheme wombat256mod
+
+autocmd BufEnter * colorscheme wombat256mod
+autocmd BufEnter *.js colorscheme monokai
 
 let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
