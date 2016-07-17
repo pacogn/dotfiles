@@ -4,6 +4,7 @@
 [core]
 	excludesfile = /Users/davidsu/.gitignore_global
 	autocrlf = input
+	editor = /usr/local/bin/vim
 [diff]
    tool = webstorm
 [difftool "webstorm"]
