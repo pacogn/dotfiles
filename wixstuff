@@ -14,16 +14,20 @@ function startdynamic(){
    wait
 }
 function startsantaday(){
-    cd ~/projects/santa &&
-    git pull &&
-    npm i &&
-    grunt all --force
+    {
+        cd $WIX_SV &&
+        git pull &&
+        npm  i &&
+        grunt all --force
+    } | egrep -v $LOG
 }
 function startsantaeditorday(){
-    cd ~/projects/santa-editor &&
-    git pull &&
-    npm i &&
-    grunt all --force
+    {
+        cd ~/projects/santa-editor &&
+        git pull &&
+        npm i &&
+        grunt all --force
+    } | egrep -v $LOG
 }
 function startckday(){
     cd ~/projects/wix-ck-editor &&

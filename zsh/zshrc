@@ -1,8 +1,8 @@
 echo "loading zshrc"
-echo "loading{ 
+echo "loading{
     zgen,
     load oh-my-zsh,
-    oh-my-zsh/git, 
+    oh-my-zsh/git,
     zsh-users/zsh-syntax-highlight
 }"
 source ~/.zgen/zgen.zsh
@@ -12,8 +12,8 @@ if ! zgen saved; then
     zgen oh-my-zsh plugins/git
     zgen load wting/autojump
 fi
-#unset SET_CUSTOM_PROMPT value if you want to test other prompt than 
-#the custom in ~/.dotFiles/prompt 
+#unset SET_CUSTOM_PROMPT value if you want to test other prompt than
+#the custom in ~/.dotFiles/prompt
 SET_CUSTOM_PROMPT=true
 
 echo "loading autojump"
@@ -35,10 +35,10 @@ export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
 ZDOTDIR='~/.dotFiles/zsh'
 
 ###########################################################################################################################
-for f in ~/.dotFiles/* #foreach file in directory 
+for f in ~/.dotFiles/* #foreach file in directory
 do
     #if its a normal file (-f) then log and source it
-    [[ -f $f ]] && echo loading $f && source $f 
+    [[ -f $f ]] && echo loading $f && source $f
 done
 
 ###########################################################################################################################
