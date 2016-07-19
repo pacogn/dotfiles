@@ -8,7 +8,7 @@ function findalias(){
     done
 }
 alias resetnpm='rm -rf ~/.npm && rm -rf node_modules && npm cache clear && npm i'
-alias vim='/usr/local/bin/vim'
+[[ -e /usr/local/bin/vim ]] && alias vim='/usr/local/bin/vim'
 alias egrep='egrep --color=auto'
 alias setbash='chsh -s /bin/bash'
 alias reload='. ~/.zshrc'
