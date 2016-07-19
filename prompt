@@ -23,7 +23,7 @@ if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
      }
 
     local ret_status="%(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜%s)"
-    PROMPT='${ret_status}%{$fg_bold[green]%}%p $(color_for_most_used_dirs)%5~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
+    PROMPT='${ret_status}%{$fg_bold[green]%}%p $(color_for_most_used_dirs)%3~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
     ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}( %{$fg[blue]%}"
     ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}) "

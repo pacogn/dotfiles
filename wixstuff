@@ -4,6 +4,15 @@ WIX_SV="$HOME/projects/santa/"
 WIX_SE="$HOME/projects/santa-editor/"
 WIX_CODE_SDK="$HOME/projects/js-wixcode-sdk/"
 
+function startdynamic(){
+    (#parentheses causes code to be run in subshell
+        trap "kill $(jobs -p)" SIGINT SIGTERM EXIT
+        node $WIX_SV/beaker/dynamicPages/backend.js &
+        cd $WIX_SV
+        sudo npm start
+    )
+   wait
+}
 function startsantaday(){
     cd ~/projects/santa &&
     git pull &&
