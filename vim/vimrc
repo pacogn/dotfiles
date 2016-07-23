@@ -10,7 +10,7 @@ Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
 Plug 'tpope/vim-sensible'
 call plug#end()
-
+ set clipboard=unnamed
 "http://mayurrokade.com/blog/using-zsh-and-vim-to-improve-terminal-visibility/
 set t_Co=256
 "set background=dark

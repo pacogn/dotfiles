@@ -1,6 +1,15 @@
-##########   CH3   ####################################################################################
-############   functions   ##########
+############   Book: From Bash to Z Shell   ##########
 
+ps ==> show current running process
+tty ==> show number of current terminal
+bindkey ==> show key bindings
+HAVE A LOOK AT COMMAND vi-history-search-backward
+HAVE A LOOK AT COMMAND vi-history-search-forward
+############    End of Book: From Bash to Z Shell   ##########
+
+
+
+############   Book:  Learning Shell Scripting with Zsh.pdf  ##########
 spectrum_ls  ==> show all possible 256 zsh colors     ##https://gabri.me/blog/custom-colors-in-your-zsh-prompt
 ############   ZLE   ##########
 Ctrl + r ==> search history incremental ==>pg 55

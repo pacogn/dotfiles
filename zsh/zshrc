@@ -1,17 +1,19 @@
 echo "loading zshrc"
-echo "loading{
-    zgen,
-    load oh-my-zsh,
-    oh-my-zsh/git,
-    zsh-users/zsh-syntax-highlight
-}"
+echo "loading zgen + plugins"
 source ~/.zgen/zgen.zsh
 if ! zgen saved; then
     zgen oh-my-zsh
     zgen load zsh-users/zsh-syntax-highlighting
+    zgen load zsh-users/zsh-history-substring-search
     zgen oh-my-zsh plugins/git
     zgen load wting/autojump
 fi
+
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='fg=red,bold' # zsh-users/zsh-history-substring-search highlight match
+
+
+#bindkey -v #set "key schema" to vi mode, improved with plugins/vi-mode...WORKS GREAT
+
 #unset SET_CUSTOM_PROMPT value if you want to test other prompt than
 #the custom in ~/.dotFiles/prompt
 SET_CUSTOM_PROMPT=true
@@ -40,7 +42,7 @@ do
     #if its a normal file (-f) then log and source it
     [[ -f $f ]] && echo loading $f && source $f
 done
-
+useViKeys
 ###########################################################################################################################
 # completion
 autoload -U compinit
@@ -63,12 +65,7 @@ export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 ###########################################################################################################################
 #see more iterm key binding at http://stackoverflow.com/questions/6205157/iterm2-how-to-get-jump-to-beginning-end-of-line-in-bash-shell/29403520#29403520
-bindkey -e #see pg 50 of "Learning Shell Scripting with zsh"
-bindkey '[C' forward-word #alt->
-bindkey '[D' backward-word #alt<-
 bindkey "^[[3~" delete-char-or-list #backspace
-bindkey '\e[A' history-beginning-search-backward #search history match already typed ==> pg 67indkey '\e[B' history-beginning-search-forward
-#bindkey '^Q' push-line-or-edit #see pg 67 of Learning Shell Scripting with ZSH
-#bindkey '\eQ' push-line-or-edit #see pg 67 of Learning Shell Scripting with ZSH
+#bindkey '\e[A' history-beginning-search-backward #search history match already typed ==> pg 67indkey '\e[B' history-beginning-search-forward
 PATH=$(echo $PATH | tr ':' '\n' | sort | uniq | tr '\n' ':')
 #clear
