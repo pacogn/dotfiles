@@ -13,7 +13,7 @@ alias egrep='egrep --color=auto'
 alias setbash='chsh -s /bin/bash'
 alias reload='. ~/.zshrc'
 # alias grep='egrep'
-alias ls='ls -GF'
+alias ls='ls -GF1'
 alias updatedb='sudo /usr/libexec/locate.updatedb' #for locate's sake
 alias opengabi='cd ~/Developer/selenium/criancas/selenium && jasmine spec/escola.spec.js gabi'
 alias rm='rm -i'
