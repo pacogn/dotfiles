@@ -5,6 +5,9 @@ tty ==> show number of current terminal
 bindkey ==> show key bindings
 HAVE A LOOK AT COMMAND vi-history-search-backward
 HAVE A LOOK AT COMMAND vi-history-search-forward
+zsh -f ==> skip startup files:w
+set -v ==> verbose
+set +v ==> unset verbose
 ############    End of Book: From Bash to Z Shell   ##########
 
 

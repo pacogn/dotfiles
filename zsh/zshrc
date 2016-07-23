@@ -6,6 +6,7 @@ if ! zgen saved; then
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zsh-history-substring-search
     zgen oh-my-zsh plugins/git
+    zgen oh-my-zsh plugins/vi-mode
     zgen load wting/autojump
 fi
 
@@ -36,14 +37,6 @@ export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
 #this doesn't seem to work here... need to learn more
 ZDOTDIR='~/.dotFiles/zsh'
 
-###########################################################################################################################
-for f in ~/.dotFiles/* #foreach file in directory
-do
-    #if its a normal file (-f) then log and source it
-    [[ -f $f ]] && echo loading $f && source $f
-done
-useViKeys
-###########################################################################################################################
 # completion
 autoload -U compinit
 compinit
@@ -64,8 +57,14 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 ###########################################################################################################################
-#see more iterm key binding at http://stackoverflow.com/questions/6205157/iterm2-how-to-get-jump-to-beginning-end-of-line-in-bash-shell/29403520#29403520
-bindkey "^[[3~" delete-char-or-list #backspace
-#bindkey '\e[A' history-beginning-search-backward #search history match already typed ==> pg 67indkey '\e[B' history-beginning-search-forward
 PATH=$(echo $PATH | tr ':' '\n' | sort | uniq | tr '\n' ':')
+############################################################################################################################
+for f in ~/.dotFiles/* #foreach file in directory
+do
+    #if its a normal file (-f) then log and source it
+    [[ -f $f ]] && echo loading $f && source $f
+done
+useViKeys
+###########################################################################################################################
+
 #clear

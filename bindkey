@@ -1,0 +1,19 @@
+#!/usr/sh
+bindkey -M viins "^G" push-line-or-edit # [Ctrl + g] save current to buffer and run another command - like man to get further info
+
+zmodload zsh/terminfo
+bindkey "${terminfo[kcuu1]}" history-substring-search-up # start typing + [Up-Arrow] - fuzzy find history forward
+bindkey "^[OB" history-substring-search-down # start typing + [Down-Arrow] - fuzzy find history backward
+
+#bindkey "${terminfo[kcud1]}" down-line-or-beginning-search# start typing + [Down-Arrow] - fuzzy find history backward
+#bindkey "^[OB" down-line-or-beginning-search # start typing + [Down-Arrow] - fuzzy find history backward
+
+bindkey -M viins "^A" beginning-of-line # Command + left arrow, insert mode
+bindkey -M vicmd "^A" beginning-of-line # Command + left arrow, command mode
+bindkey -M viins "^E" end-of-line # Command + right arrow
+bindkey -M vicmd "^E" end-of-line # Command + right arrow
+
+#make sure to re-read CUSTOMIZING ZSH’S RUN-HELP COMMAND in "From Bash to Z Shel" pg 101
+unalias run-help
+autoload -U run-help
+bindkey -M viins "^H" run-help # [Ctrl + H] open man page for currently typed command
