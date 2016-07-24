@@ -1,1 +1,12 @@
 LOG="(LOG:)|(✓)"
+nicethemes=(
+' darktooth ==> yellowinsh\n'
+'chalk\n'
+'eighties ==> although background is kind of "too bright"\n'
+'pico ==> nice high contrast theme\n'
+'pop ==> nice high contrast theme\n'
+'default-dark ==> like chalk but less vibrant\n'
+'base16-3024.sh ==> vibrant colors\n'
+'embers ==> very nice low colors theme\n'
+'hopscotch ==> mix of vibrant + low colors\n'
+)

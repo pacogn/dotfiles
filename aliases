@@ -1,5 +1,6 @@
 #!/bin/zsh
 setopt COMPLETE_ALIASES
+alias colortest='$DOTFILES/.config/base16-shell/colortest'
 function specialchars(){echo '⇧⌘⌥⇥⌫⌦⎋⌃'}
 function findalias(){
     for dir in $(echo ~/.dotFiles && echo $PATH | tr ':' '\n' | grep '^/Users/' | grep -v '\.nvm')

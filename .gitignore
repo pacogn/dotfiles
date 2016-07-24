@@ -1,4 +1,5 @@
 vim/view/*
+vim/plugged/*
 .DS_Store
 *.swp
 quando_o_build_ta_shavur

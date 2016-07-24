@@ -1,5 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_cnt =8
 let g:netrw_dirhist_1='/Users/davidsu'
 let g:netrw_dirhist_2='/usr/local/Cellar/vim/7.4.979/share/vim/vim74/doc'
 let g:netrw_dirhist_3='/Users/davidsu'
@@ -7,3 +7,4 @@ let g:netrw_dirhist_4='/private/var/folders/bf/r173r07s4j5dw_64tvw4t885dv04wg/T/
 let g:netrw_dirhist_5='/private/var/folders/bf/r173r07s4j5dw_64tvw4t885dv04wg/T/git-difftool.JmmOs/right'
 let g:netrw_dirhist_6='/private/var/folders/bf/r173r07s4j5dw_64tvw4t885dv04wg/T/git-difftool.JmmOs/left'
 let g:netrw_dirhist_7='/Users/davidsu/.dotFiles/bin'
+let g:netrw_dirhist_8='/Users/davidsu/Desktop/dotfiles/nginx'

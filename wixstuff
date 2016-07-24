@@ -4,6 +4,7 @@ WIX_SV="$HOME/projects/santa/"
 WIX_SE="$HOME/projects/santa-editor/"
 WIX_CODE_SDK="$HOME/projects/js-wixcode-sdk/"
 
+alias whokilledsanta='open http://santa.wixpress.com'
 function startdynamic(){
     (#parentheses causes code to be run in subshell
         trap "kill $(jobs -p)" SIGINT SIGTERM EXIT
