@@ -6,7 +6,7 @@
 	autocrlf = input
 	editor = /usr/local/bin/vim
 [diff]
-   tool = webstorm
+	tool = vimdiff
 [difftool "webstorm"]
 	#cmd = /usr/bin/opendiff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
 	cmd = webstorm diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
@@ -16,7 +16,7 @@
 # [difftool]
 #     prompt = false
 [alias]
-    d = difftool
+	d = difftool
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
@@ -39,3 +39,5 @@
     added = yellow
     changed = green
     untracked = cyan
+[difftool]
+	prompt = false
