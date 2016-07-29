@@ -2,6 +2,13 @@
 setopt COMPLETE_ALIASES
 alias E=' | egrep '
 alias -g G=' | grep -i '
+#we pipe overwrite '>' to a file instead of openning it derectly in vim '| vim -'
+#because we want to exit ZZ 
+alias -g V=' > ~/.vim-tmp/t && vim ~/.vim-tmp/t -c '\''nmap q :q!<cr>'\'
+# git status in vim. Due to our vim setup, "map ,d" opens diff in webstorm. also all vim-fugitive stuff work
+alias gsv='vim -c '\''source $DOTFILES/vim/startup/gitstatus'\'' $(git rev-parse --show-toplevel)/.git/index'
+# git log in vim. Limit to last 500 commits otherwise its pretty slow.
+alias glv='git log --max-count=500 --name-only V'
 function specialchars(){echo '⇧⌘⌥⇥⌫⌦⎋⌃'}
 function findalias(){
     for dir in $(echo ~/.dotFiles && echo $PATH | tr ':' '\n' | grep '^/Users/' | grep -v '\.nvm')
