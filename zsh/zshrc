@@ -1,15 +1,8 @@
 export DOTFILES=$HOME/.dotfiles
-if [ "$BACKGROUND" = "light" ]; then
-    export THEME="base16-google-light"
-    BACKGROUND=""
-else
-    export THEME="base16-chalk"
-fi
+export THEME
+source $DOTFILES/theme
+chthr
 
-# Base16 Shell
-BASE16_SHELL="$DOTFILES/.config/base16-shell/scripts/$THEME.sh"
-# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-source $BASE16_SHELL
 echo "loading zshrc"
 echo "loading zgen + plugins"
 source ~/.zgen/zgen.zsh
@@ -82,3 +75,4 @@ useViKeys
 
 
 #clear
+
