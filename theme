@@ -1,21 +1,26 @@
-#!/bin/sh
+#!/bin/zsh
+alias colortest='$DOTFILES/.config/base16-shell/colortest'
 _nicethemes=(
 'base16-3024'
-'base16-chalk'
+'base16-chalk' #**
 'base16-darktooth'
 'base16-default-dark'
 'base16-eighties'
 'base16-embers'
-'base16-hopscotch'
-'base16-pico'
+'base16-hopscotch' #**
 'base16-pop'
+'base16-railscasts' #**
+#'base16-shapeshifter'
+'base16-solar-flare'
+'base16-solarized-dark'
+'base16-tomorrow-night'
 )
 function themes(){
 	for i in `seq 1 ${#_nicethemes}`; do
 		printf "%s\t%s\n" "$i" "${_nicethemes[$i]}"
 	done
 }
-function changetheme(){
+function chth(){
 	echo $1
 	#local idx=$(( $1 % ${#_nicethemes[@]} ))
 	local idx=$1
@@ -23,3 +28,14 @@ function changetheme(){
 	echo "changing theme to: $THEME:u" #:u is zsh's toUpperCase
 	source "$DOTFILES/.config/base16-shell/scripts/$THEME.sh"
 }
+function chthr(){
+	N=${#_nicethemes[@]}
+	((N=(RANDOM%N)+1))
+	chth $N
+	if [[ -n $(alias | grep 'colortest') ]] # -n ==> non zero length. Means colortest exists as alias
+	then
+		colortest
+	fi
+}
+export c='chthr'
+alias thls='themes'
