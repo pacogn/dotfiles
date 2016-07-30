@@ -33,7 +33,7 @@ autoload zmv # => pg 88 Learning Shell scripting with ZSH
 setopt HIST_VERIFY # !! => copy cmd from history before executing
 
 export PATH="$PATH:$HOME/.rvm/bin:$HOME/.bin" # Add RVM to PATH for scripting
-echo "loading rvm"
+# echo "loading rvm"
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 [ -s ~/.nvm/nvm.sh ] && source ~/.nvm/nvm.sh
@@ -62,7 +62,9 @@ export LESS_TERMCAP_ue=$'\E[0m'           # end underline
 export LESS_TERMCAP_us=$'\E[04;38;5;146m' # begin underline
 
 ###########################################################################################################################
-PATH=$(echo $PATH | tr ':' '\n' | sort | uniq | tr '\n' ':')
+# PATH=$(echo $PATH | tr ':' '\n' | sort | uniq | tr '\n' ':')
+# rvm complains about not being first in path
+PATH=$(echo $PATH | tr ':' '\n' | uniq | tr '\n' ':')
 ############################################################################################################################
 for f in ~/.dotFiles/* #foreach file in directory
 do
