@@ -1,5 +1,5 @@
 #!/bin/zsh
-alias colortest='$DOTFILES/.config/base16-shell/colortest'
+alias colortest='$DOTFILES/base16-shell/colortest'
 _nicethemes=(
 'base16-3024'
 'base16-chalk' #**
@@ -26,7 +26,7 @@ function chth(){
 	local idx=$1
 	THEME=${_nicethemes[idx]}
 	echo "changing theme to: $THEME:u" #:u is zsh's toUpperCase
-	source "$DOTFILES/.config/base16-shell/scripts/$THEME.sh"
+	source "$DOTFILES/base16-shell/scripts/$THEME.sh"
 }
 function chthr(){
 	N=${#_nicethemes[@]}

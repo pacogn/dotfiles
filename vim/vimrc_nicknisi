@@ -294,9 +294,7 @@ function! WinMove(key)
 endfunction
 
 "david ==> make base16 :colorscheme command actualy chage the blody color
-autocmd ColorScheme base16* execute 'silent !source $DOTFILES/.config/base16-shell/scripts/'.g:colors_name.'.sh'
-"consider: antares, birds-of-paradise, bluedrake, bvemu, darkburn
-au FilterWritePre * if &diff | colorscheme OceanicNext | endif
+autocmd ColorScheme base16* execute 'silent !source $DOTFILES/base16-shell/scripts/'.g:colors_name.'.sh'
 " recursively search up from dirname, sourcing all .vimrc.local files along the way
 function! ApplyLocalSettings(dirname)
     " convert windows paths to unix style
