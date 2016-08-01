@@ -176,17 +176,27 @@ set showbreak=… " show ellipsis at breaking
 set autoindent " automatically set indent of new line
 set smartindent
 
-" }}}
+" ,}}
 
 " Section Mappings {{{
 
 "david mappings
-nmap <leader>e :!
+nmap <leader>ee :!
+nmap <leader>ed <C-w><C-h><C-w><C-c>
 nmap <leader>b :bn<cr>:bd #<cr>
+"I never liked this s anyway, use it for easymotion instead
+nmap ,sn <Plug>(easymotion-sn)
+nmap ,ss <Plug>(easymotion-prefix)
+nmap ,sf <Plug>(easymotion-f)
+nmap ,sF <Plug>(easymotion-F)
+nmap sn <Plug>(easymotion-sn)
+nmap ss <Plug>(easymotion-prefix)
+
+nmap ,w <C-w><C-q>
 " increase decrease vertica split by +,_
 nnoremap + 5<C-w>>
 nnoremap - 5<C-w><
-
+let g:ack_use_dispatch = 1
 " remap esc
 inoremap jk <esc>
 
