@@ -19,7 +19,14 @@ abbr fitler filter
 
 set nocompatible " not compatible with vi
 set autoread " detect when a file is changed
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+let g:ack_default_options = " --group "
 
+" let g:ack_autofold_results = 1
+set grepprg=ag\ --vimgrep\ $*
+set grepformat=%f:%l:%c:%m
 " make backspace behave in a sane manner
 set backspace=indent,eol,start
 
@@ -88,6 +95,7 @@ augroup configgroup
     autocmd BufNewFile,BufRead *.es6 set filetype=javascript
 
 	" close help files on 'q'
+        
 	autocmd FileType help nnoremap q :bd<cr>
 
     " make quickfix windows take all the lower section of the screen
