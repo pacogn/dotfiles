@@ -1,22 +1,22 @@
 #!/bin/sh
-WIX_CK="$HOME/projects/wix-ck-editor/"
-WIX_SV="$HOME/projects/santa/"
-WIX_SE="$HOME/projects/santa-editor/"
-WIX_CODE_SDK="$HOME/projects/js-wixcode-sdk/"
+export CK="$HOME/projects/wix-ck-editor/"
+export SV="$HOME/projects/santa/"
+export SE="$HOME/projects/santa-editor/"
+export CODE_SDK="$HOME/projects/js-wixcode-sdk/"
 
 alias whokilledsanta='open http://santa.wixpress.com'
 function startdynamic(){
     (#parentheses causes code to be run in subshell
         trap "kill $(jobs -p)" SIGINT SIGTERM EXIT
-        node $WIX_SV/beaker/dynamicPages/backend.js &
-        cd $WIX_SV
+        node $SV/beaker/dynamicPages/backend.js &
+        cd $SV
         sudo npm start
     )
    wait
 }
 function startsantaday(){
     {
-        cd $WIX_SV &&
+        cd $SV &&
         git pull &&
         npm  i &&
         grunt all --force
@@ -55,19 +55,19 @@ function startwixday(){
 }
 function notonmaster(){
     local pwd=$PWD
-    cd $WIX_SV
+    cd $SV
     local currbranch="$(git rev-parse --abbrev-ref HEAD)"
     [[ $currbranch != "master" ]] && echo $PWD - $currbranch
 
-    cd $WIX_SE
+    cd $SE
     currbranch="$(git rev-parse --abbrev-ref HEAD)"
     [[ $currbranch != "master" ]] && echo $PWD - $currbranch
 
-    cd $WIX_CK
+    cd $CK
     currbranch="$(git rev-parse --abbrev-ref HEAD)"
     [[ $currbranch != "master" ]] && echo $PWD - $currbranch
 
-    cd $WIX_CODE_SDK
+    cd $CODE_SDK
     currbranch="$(git rev-parse --abbrev-ref HEAD)"
     [[ $currbranch != "master" ]] && echo $PWD - $currbranch
 
