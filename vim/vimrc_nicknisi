@@ -1,17 +1,15 @@
-source $DOTFILES/vim/startup/plugins
-source  $DOTFILES/vim/startup/tmp_stuff.vim
-source $DOTFILES/vim/startup/gitstatus
+source $DOTFILES/vim/startup/plugins.vim
+source $DOTFILES/vim/startup/tmp_stuff.vim
+source $DOTFILES/vim/startup/gitstatus.vim
+source $DOTFILES/vim/startup/custom_fold.vim
+source $DOTFILES/vim/startup/NERDTree.vim
+source $DOTFILES/vim/startup/airline.vim
+source $DOTFILES/vim/startup/leader_mappings.vim
+source $DOTFILES/vim/startup/syntastic_config.vim
 " autocmd BufNewFile,BufRead .git/index execute 'source $DOTFILES/vim/startup/gitstatus'."\r" 
 " save all files on focus lost, ignoring warnings about untitled buffers
 " autocmd FocusLost,WinLeave * silent! wa
 " au FocusGained,BufEnter,CursorHold * :silent! !
-
-" }}}
-
-" Section General {{{
-
-" load plugins from vundle
-" source ~/.vim/plugins.vim
 
 " Abbreviations
 abbr funciton function
