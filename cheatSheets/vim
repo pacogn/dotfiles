@@ -1,4 +1,7 @@
 ############   indentation    ##########
+sn                 ==> mapped to easymotion-sn: type a sequence of characters and jump to it
+ss                 ==> mapped to easymotion-prefix: type a movement to find matches
+,fs                ==> 
 g;                 ==> go to last edit position. works for multiple "jumps" too
 ma                 ==> (m- mark, a - name of mark). Later to return to the position type `a
 Ctrl-V             ==> visual block mode
@@ -8,6 +11,8 @@ xgg=yG             ==> fix indentation from line x to line y
 z{some other key}  ==> run ":h z" to see nice stuff
 z{height}<CR>      ==>   redraw, make window {height} lines high
 ex-cmd-index       ==> run help on this!!
+:set list          ==> toggle invisible characters
+Ctrl-w_Ctrl-r      ==> rotate split windows location
 print key mappings to file
     :redir! > vim_keys.txt
     :silent verbose map
