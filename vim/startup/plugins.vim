@@ -2,11 +2,17 @@
 "boo
 call plug#begin('~/.config/nvim/plugged')
 "Plug 'felixhummel/setcolors.vim'
+Plug 'scrooloose/syntastic' "allow for eslint checking
 "david: not terribly usefull, but whatever
 Plug 'gioele/vim-autoswap'
+"session management
+Plug 'tpope/vim-obsession'
+"add git status for each modified line
 Plug 'airblade/vim-gitgutter'
 "in doubt if its worth the trouble, seems like it is though
+"makes scrolling not jumpy!
 Plug 'terryma/vim-smooth-scroll' 
+"mapped sn to be a general find. makes navigation so much easier
 Plug 'easymotion/vim-easymotion'
 "this is an interesting plugin. take your time to learn it
 "leader>
@@ -15,10 +21,16 @@ Plug 'easymotion/vim-easymotion'
 "       fd ==> show less lines around matching line
 "       fi ==> show more lines around matching line
 Plug 'embear/vim-foldsearch'
-Plug 'Xuyuanp/nerdtree-git-plugin'
+"this is actually addade with the nerdtree plugin !?
+"Plug 'Xuyuanp/nerdtree-git-plugin'
+"
+"the following two are probably going to be deleted once we learn tmux
+"Plug 'dhruvasagar/vim-prosession'
+"tpope/vim-obsession
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " colorschemes
 Plug 'chriskempson/base16-vim'
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
 Plug 'dracula/vim'
 " utilities
 Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder, mapped to <leader>t
