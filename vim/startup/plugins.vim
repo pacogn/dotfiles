@@ -3,6 +3,7 @@
 call plug#begin('~/.config/nvim/plugged')
 "Plug 'felixhummel/setcolors.vim'
 Plug 'scrooloose/syntastic' "allow for eslint checking
+Plug 'dahu/vim-fanfingtastic' "improved f F t T commands
 "david: not terribly usefull, but whatever
 Plug 'gioele/vim-autoswap'
 "session management
