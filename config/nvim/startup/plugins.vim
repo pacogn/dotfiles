@@ -2,7 +2,10 @@
 "boo
 call plug#begin('~/.config/nvim/plugged')
 "Plug 'felixhummel/setcolors.vim'
-Plug 'scrooloose/syntastic' "allow for eslint checking
+" Plug 'scrooloose/syntastic' "allow for eslint checking
+
+Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
+Plug 'benekastah/neomake' " neovim replacement for syntastic using neovim's job control functonality
 Plug 'dahu/vim-fanfingtastic' "improved f F t T commands
 "david: not terribly usefull, but whatever
 Plug 'gioele/vim-autoswap'

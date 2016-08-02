@@ -1,11 +1,11 @@
-source $DOTFILES/vim/startup/plugins.vim
-source $DOTFILES/vim/startup/tmp_stuff.vim
-source $DOTFILES/vim/startup/gitstatus.vim
-source $DOTFILES/vim/startup/custom_fold.vim
-source $DOTFILES/vim/startup/NERDTree.vim
-source $DOTFILES/vim/startup/airline.vim
-source $DOTFILES/vim/startup/leader_mappings.vim
-source $DOTFILES/vim/startup/syntastic_config.vim
+source $DOTFILES/config/nvim/startup/plugins.vim
+source $DOTFILES/config/nvim/startup/tmp_stuff.vim
+source $DOTFILES/config/nvim/startup/gitstatus.vim
+source $DOTFILES/config/nvim/startup/custom_fold.vim
+source $DOTFILES/config/nvim/startup/NERDTree.vim
+source $DOTFILES/config/nvim/startup/airline.vim
+source $DOTFILES/config/nvim/startup/leader_mappings.vim
+source $DOTFILES/config/nvim/startup/syntastic_config.vim
 " autocmd BufNewFile,BufRead .git/index execute 'source $DOTFILES/vim/startup/gitstatus'."\r" 
 " save all files on focus lost, ignoring warnings about untitled buffers
 " autocmd FocusLost,WinLeave * silent! wa
@@ -94,9 +94,9 @@ augroup configgroup
     autocmd BufNewFile,BufRead .eslintrc set filetype=json
     autocmd BufNewFile,BufRead *.es6 set filetype=javascript
 
-	" close help files on 'q'
+    " close help files on 'q'
         
-	autocmd FileType help nnoremap <buffer>q :bd<cr>
+    autocmd FileType help nnoremap <buffer>q :bd<cr>
         autocmd BufEnter * call SetQuit() 
 
     " make quickfix windows take all the lower section of the screen
@@ -244,7 +244,7 @@ nnoremap <silent> $ g$
 
 " search for word under the cursor
 "david ==> search for word under cursor
-nnoremap <leader>/ "fyiw :/<c-r>f<cr>
+" nnoremap <leader>/ "fyiw :/<c-r>f<cr>
 
 " inoremap <tab> <c-r>=Smart_TabComplete()<CR>
 
@@ -434,9 +434,39 @@ if (has("gui_running"))
     let g:airline_theme='solarized'
 endif
 
+" FZF
+"""""""""""""""""""""""""""""""""""""
+
+let g:fzf_layout = { 'down': '~25%' }
+
+" Mapping selecting mappings
+nmap <silent> <leader>t :GFiles<cr>
+nmap <silent> <leader>r :Buffers<cr>
+nmap <silent> <leader>e :GFiles?<cr>
+nmap <leader><tab> <plug>(fzf-maps-n)
+xmap <leader><tab> <plug>(fzf-maps-x)
+omap <leader><tab> <plug>(fzf-maps-o)
+
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+nnoremap <silent> <Leader>C :call fzf#run({
+\   'source':
+\     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
+\         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
+\   'sink':    'colo',
+\   'options': '+m',
+\   'left':    30
+\ })<CR>
+
+command! FZFMru call fzf#run({
+\  'source':  v:oldfiles,
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
+
+
 call ApplyLocalSettings(expand('.'))
-
-" }}}
-
-
-" vim:foldmethod=marker:foldlevel=0

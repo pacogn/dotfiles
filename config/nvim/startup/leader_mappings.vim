@@ -17,37 +17,39 @@ endfunction
 
 nmap ,b :bn<cr>:bd #<cr>
 nmap ,ee :!
+"end diff --- clean close diff window
 nmap ,ed <C-w><C-h><C-w><C-c>
-nmap ,F <Plug>(easymotion-F)
-nmap ,f <Plug>(easymotion-f)
+map ,ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
+nmap <silent> ,fb :Buffers<cr>
+nmap <silent> ,ff :GFiles<cr>
+nmap <silent> ,fg :GFiles?<cr>
+"map ,fs FoldSearch
 map <silent> ,h :call WinMove('h')<cr>
 map <silent> ,j :call WinMove('j')<cr>
 map <silent> ,k :call WinMove('k')<cr>
 map <silent> ,l :call WinMove('l')<cr>
 " Toggle NERDTree
-nmap <silent> ,m :NERDTreeToggle<cr>
+nmap <silent> ,n :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
-nmap <silent> ,M :NERDTreeFind<cr>
-nmap <silent> ,N :CtrlPBuffer<cr>
-nmap <silent> ,n :CtrlP<cr>
+nmap <silent> ,N :NERDTreeFind<cr>
 
-nmap <silent> ,r :CtrlPBuffer<cr>
-nmap <silent> ,t :CtrlP<cr>
-nmap <silent> ,tn :tabn<cr>
-nmap <silent> ,tp :tabp<cr>
 noremap s <NOP>
 " nmap ,sn <Plug>(easymotion-sn)
 nmap ,ss <Plug>(easymotion-prefix)
 nmap sn <Plug>(easymotion-sn)
-" learned this trick by looking into t/easymotion_spec.vim
-nmap ss <Plug>(easymotion-prefix)
+nmap ,/ <Plug>(easymotion-sn)
 
 map ,qa :qa<cr>
 map <silent> ,sl :so Session.vim<cr> 
-map ,te :tabedio %<cr>
 map ,tc :tabclose<cr>
+map ,te :tabedit %<cr>
+map ,tn :tabnext<cr>
+map ,tp :tabprevious<cr>
 nmap ,w <C-w><C-q>
 
+nmap <silent> ,m :GFiles<cr>
+nmap <silent> ,M :Buffers<cr>
+nmap <silent> ,<Space>m :GFiles?<cr>
 " map quit :q<cr>
 nnoremap go :call EasyMotion#S(-1,0,0)<cr> 
 map full :tabedit %<cr>
