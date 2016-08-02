@@ -1,4 +1,7 @@
 ############   indentation    ##########
+zj, zk             ==> jump no next/prev fold
+mx, mX             ==> mark (local buffer) position "x" to jump there using "'x", usint uppercase "X" mark it globally to jump there from any file
+Ctrl-o, Ctrl-i     ==> jump backwards, jump forwards, :jumps to view jump list
 sn                 ==> mapped to easymotion-sn: type a sequence of characters and jump to it
 ss                 ==> mapped to easymotion-prefix: type a movement to find matches
 ,fs                ==> 
