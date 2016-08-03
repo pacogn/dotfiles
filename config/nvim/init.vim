@@ -358,6 +358,12 @@ nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
 nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
 hi MatchParen cterm=bold ctermbg=70 ctermfg=198
 highlight Visual ctermfg=NONE ctermbg=24
+let g:airline_theme_patch_func = 'AirlineThemePatch'
+function! AirlineThemePatch(palette)
+        for colors in values(a:palette.inactive)
+            let colors[3] = 58
+        endfor
+endfunction
 hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
 hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
 hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
