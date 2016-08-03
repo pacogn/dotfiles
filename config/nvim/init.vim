@@ -16,7 +16,10 @@ abbr funciton function
 abbr teh the
 abbr tempalte template
 abbr fitler filter
-
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+    tnoremap jk <C-\><C-n>
+endif
 set nocompatible " not compatible with vi
 set autoread " detect when a file is changed
 if executable('ag')
@@ -38,7 +41,7 @@ set history=1000 " change history to 1000
 set textwidth=120
 
 " Tab control
-set noexpandtab " insert tabs rather than spaces for <Tab>
+set expandtab " insert tabs rather than spaces for <Tab>
 set smarttab " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=4 " the visible width of tabs
 set softtabstop=4 " edit as if the tabs are 4 characters wide
@@ -191,7 +194,7 @@ let g:ack_use_dispatch = 1
 inoremap jk <esc>
 
 " markdown to html
-nmap <leader>md :%!markdown --html4tags <cr>
+" nmap <leader>md :%!markdown --html4tags <cr>
 
 " remove extra whitespace
 nmap <leader><space> :%s/\s\+$<cr>
@@ -353,7 +356,8 @@ nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
 nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
 nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
 nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
-
+hi MatchParen cterm=bold ctermbg=70 ctermfg=198
+highlight Visual ctermfg=NONE ctermbg=24
 hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
 hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
 hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
