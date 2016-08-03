@@ -1,6 +1,7 @@
 #!/bin/zsh
 setopt COMPLETE_ALIASES
-alias E=' | egrep '
+# alias vim='nvim'
+alias -g E=' | egrep '
 alias -g G=' | grep -i '
 #we pipe overwrite '>' to a file instead of openning it derectly in vim '| vim -'
 #because we want to exit ZZ 
