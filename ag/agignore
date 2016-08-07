@@ -1,3 +1,5 @@
 *.rt.js
 *.min.js
 vendor/
+base16-shell/
+nvim/plugged/
