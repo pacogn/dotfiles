@@ -13,6 +13,7 @@ source $DOTFILES/config/nvim/startup/tab_titles.vim
 " au FocusGained,BufEnter,CursorHold * :silent! !
 
 " Abbreviations
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js"
 abbr funciton function
 abbr teh the
 abbr tempalte template

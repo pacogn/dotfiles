@@ -75,7 +75,8 @@ Plug 'junegunn/limelight.vim', { 'on': 'Limelight' } " focus tool. Good for pres
 
 " language-specific plugins
 Plug 'mattn/emmet-vim', { 'for': 'html' } " emmet support for vim - easily create markdup wth CSS-like syntax
-Plug 'gregsexton/MatchTag', { 'for': 'html' } " match tags in html, similar to paren support
+" Plug 'gregsexton/MatchTag', { 'for': 'html' } " match tags in html, similar to paren support
+Plug 'alvan/vim-closetag'
 Plug 'othree/html5.vim', { 'for': 'html' } " html5 support
 " Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
 Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' } " JavaScript indent support
