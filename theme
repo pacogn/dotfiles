@@ -32,8 +32,9 @@ function chthr(){
 	N=${#_nicethemes[@]}
 	((N=(RANDOM%N)+1))
 	chth $N
-	if [[ -n $(alias | grep 'colortest') ]] # -n ==> non zero length. Means colortest exists as alias
+	if [[ -n $(alias | grep 'colortest') && $# == 0 ]] # -n ==> non zero length. Means colortest exists as alias
 	then
+		echo $1
 		colortest
 	fi
 }
