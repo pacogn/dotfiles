@@ -6,6 +6,7 @@ source $DOTFILES/config/nvim/startup/NERDTree.vim
 source $DOTFILES/config/nvim/startup/airline.vim
 source $DOTFILES/config/nvim/startup/leader_mappings.vim
 source $DOTFILES/config/nvim/startup/syntastic_config.vim
+source $DOTFILES/config/nvim/startup/tab_titles.vim
 " autocmd BufNewFile,BufRead .git/index execute 'source $DOTFILES/vim/startup/gitstatus'."\r" 
 " save all files on focus lost, ignoring warnings about untitled buffers
 " autocmd FocusLost,WinLeave * silent! wa
@@ -100,6 +101,9 @@ augroup configgroup
     " close help files on 'q'
         
     autocmd FileType help nnoremap <buffer>q :bd<cr>
+    if has('nvim')
+        autocmd FileType fzf nnoremap <buffer><Esc> <Esc>:q<cr>
+    endif
         autocmd BufEnter * call SetQuit() 
 
     " make quickfix windows take all the lower section of the screen
@@ -171,8 +175,14 @@ syntax on
 
 let base16colorspace=256  " Access colors present in 256 colorspace"
 set t_Co=256 " Explicitly tell vim that the terminal supports 256 colors"
-execute "colorscheme ".$THEME
-"highlight Comment cterm=italic
+set background=dark
+if ( $THEME =~ 'base16' )
+    execute "colorscheme ".$THEME
+else
+    colorscheme PaperColor
+    hi Function ctermfg=146
+endif
+highlight Comment cterm=italic
 highlight htmlArg cterm=italic
 
 set number " show line numbers
@@ -234,6 +244,7 @@ map <leader>wc :wincmd q<cr>
 
 " toggle cursor line
 nnoremap <leader>i :set cursorline!<cr>
+nnoremap  ,I :call CursorPing()<CR>
 
 " scroll the viewport faster
 nnoremap <C-e> :call smooth_scroll#down(9, 0, 6)<CR>
@@ -350,13 +361,17 @@ function! HiInterestingWord(n)
     normal! `z
 endfunction
 
-nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
-nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
-nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
-nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
-nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
-nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
-hi MatchParen cterm=bold ctermbg=70 ctermfg=198
+function! HiDiffDark()
+  highlight DiffAdd ctermfg=NONE ctermbg=22
+  highlight DiffChange ctermfg=NONE ctermbg=24
+  highlight DiffText ctermfg=NONE ctermbg=25
+  highlight DiffDelete ctermfg=NONE ctermbg=52
+endfunction
+call HiDiffDark()
+
+highlight CursorLine ctermfg=NONE ctermbg=24
+highlight CursorColumn ctermfg=NONE ctermbg=24
+hi MatchParen cterm=bold ctermbg=197 ctermfg=232
 highlight Visual ctermfg=NONE ctermbg=24
 let g:airline_theme_patch_func = 'AirlineThemePatch'
 function! AirlineThemePatch(palette)
@@ -364,6 +379,13 @@ function! AirlineThemePatch(palette)
             let colors[3] = 58
         endfor
 endfunction
+
+nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
+nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
+nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
+nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
+nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
+nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
 hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
 hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
 hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
@@ -433,7 +455,6 @@ let g:vim_json_syntax_conceal = 0
 
 
 let g:SuperTabCrMapping = 0
-
 if (has("gui_running"))
     set guioptions=egmrt
     set background=light
@@ -443,6 +464,13 @@ if (has("gui_running"))
     let g:airline_powerline_fonts=0
     let g:airline_theme='solarized'
 endif
+
+function! CursorPing()
+    set cursorline cursorcolumn
+    redraw
+    sleep 50m
+    set nocursorline nocursorcolumn
+endfunction
 
 " FZF
 """""""""""""""""""""""""""""""""""""
