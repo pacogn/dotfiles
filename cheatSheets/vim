@@ -1,4 +1,9 @@
 ############   indentation    ##########
+Ctrl-d, Ctrl-p/n   ==> after <tab> for SuperTab: accept completion and close, up/down
+:sort u            ==> sort and delete duplicate lines
+:v/{pattern}/d     ==> delete line that dont contain {pattern}
+`.                 ==> jump to last edit position`
+gt, gT             ==> next tab, previous tab
 Ctrl-z, fg         ==> suspend vim, go back into it
 zj, zk             ==> jump no next/prev fold
 mx, mX             ==> mark (local buffer) position "x" to jump there using "'x", usint uppercase "X" mark it globally to jump there from any file
