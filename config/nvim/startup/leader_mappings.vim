@@ -15,6 +15,7 @@ function! WinMove(key)
 	endif
 endfunction
 
+map <silent> ,a :call WinMove('h')<cr>
 nmap ,b :bn<cr>:bd #<cr>
 nmap ,ee :!
 "end diff --- clean close diff window
@@ -45,6 +46,7 @@ map ,tc :tabclose<cr>
 map ,te :tabedit %<cr>
 map ,tn :tabnext<cr>
 map ,tp :tabprevious<cr>
+"same as :quit
 nmap ,w <C-w><C-q>
 
 nmap <silent> ,m :GFiles<cr>
