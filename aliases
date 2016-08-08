@@ -3,6 +3,7 @@ setopt COMPLETE_ALIASES
 # alias vim='nvim'
 alias -g E=' | egrep '
 alias -g G=' | grep -i '
+alias -g NOLOG=' | egrep -v $LOG '
 #we pipe overwrite '>' to a file instead of openning it derectly in vim '| vim -'
 #because we want to exit ZZ 
 alias -g V=' > ~/.vim-tmp/t && vim ~/.vim-tmp/t -c '\''nmap q :q!<cr>'\'
@@ -10,10 +11,10 @@ alias -g V=' > ~/.vim-tmp/t && vim ~/.vim-tmp/t -c '\''nmap q :q!<cr>'\'
 alias -g ME='--author=davidsu'
 alias -g NO='--name-only'
 alias -g M='--max-count=100'
-alias gsv='vim -c '\''source $DOTFILES/vim/startup/gitstatus'\'' $(git rev-parse --show-toplevel)/.git/index'
+alias gsv='vim -c '\''source $DOTFILES/config/nvim/startup/gitstatus.vim'\'' $(git rev-parse --show-toplevel)/.git/index'
 # git log in vim. Limit to last 500 commits otherwise its pretty slow.
 alias glv='git log --max-count=500 --name-only V'
-function specialchars(){echo '⇧⌘⌥⇥⌫⌦⎋⌃'}
+function specialchars(){echo '⇧ ⌘ ⌥ ⇥ ⌫  ⌦  ⎋  ⌃ '}
 function findalias(){
     for dir in $(echo ~/.dotFiles && echo $PATH | tr ':' '\n' | grep '^/Users/' | grep -v '\.nvm')
     do
@@ -21,7 +22,6 @@ function findalias(){
     done
 }
 alias resetnpm='rm -rf ~/.npm && rm -rf node_modules && npm cache clear && npm i'
-alias vim='nvim'
 alias egrep='egrep --color=auto'
 alias setbash='chsh -s /bin/bash'
 alias reload='. ~/.zshrc'
@@ -44,3 +44,5 @@ alias gacp='echo "enter commit message : " && read MSG && git add . && git commi
 alias gmdc='git merge --no-commit --no-ff'
 
 alias open8080='open http://localhost:8080'
+alias npmprivate='npm config set registry http://repo.dev.wix/artifactory/api/npm/npm-repos'
+alias npmpublic='npm config set registry https://registry.npmjs.org/'
