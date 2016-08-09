@@ -1,4 +1,5 @@
 ############   indentation    ##########
+fzf_Ctrl-v,Ctrl-x  ==> open split vertival, horizontal
 Ctrl-d, Ctrl-p/n   ==> after <tab> for SuperTab: accept completion and close, up/down
 :sort u            ==> sort and delete duplicate lines
 :v/{pattern}/d     ==> delete line that dont contain {pattern}
@@ -33,6 +34,14 @@ end print key mappings
 					(not |linewise|)
 					When the '#' flag is in 'cpoptions' the count is
 					ignored.
+
+Split commands
+CTRL-W h,j,k,l      ==> move to split on right,down,up,left
+CTRL-W H,J,K,L      ==> move split to right,down,up,left of screen
+CTRL-W +,-          ==> increase,decrease split height
+CTRL-W <,>          ==> increase,decrease split width
+CTRL-W p            ==> go to previous (last accessed) window 
+CTRL-W R	   rotate windows upwards N times
 
 Cursor movement
 
