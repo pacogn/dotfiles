@@ -12,8 +12,17 @@ source $DOTFILES/config/nvim/startup/tab_titles.vim
 " autocmd FocusLost,WinLeave * silent! wa
 " au FocusGained,BufEnter,CursorHold * :silent! !
 
-" Abbreviations
+if exists('$TMUX')
+  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+" :autocmd InsertEnter * set cul
+" :autocmd InsertLeave * set nocul"
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js"
+" Abbreviations
 abbr funciton function
 abbr teh the
 abbr tempalte template
