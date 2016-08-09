@@ -98,6 +98,7 @@ augroup configgroup
     autocmd BufNewFile,BufRead .jshintrc set filetype=json
     autocmd BufNewFile,BufRead .eslintrc set filetype=json
     autocmd BufNewFile,BufRead *.es6 set filetype=javascript
+    autocmd BufNewFile,BufRead *.rt set filetype=html
 
     " close help files on 'q'
         
