@@ -1,3 +1,4 @@
 *.swp
 Session.vim
 s.vim
+.DS_Store
