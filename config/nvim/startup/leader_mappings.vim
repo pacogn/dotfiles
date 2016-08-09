@@ -48,6 +48,7 @@ map ,tn :tabnext<cr>
 map ,tp :tabprevious<cr>
 "same as :quit
 nmap ,w <C-w><C-q>
+map ,, :w<cr>
 
 nmap <silent> ,m :GFiles<cr>
 nmap <silent> ,M :Buffers<cr>
