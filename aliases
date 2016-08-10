@@ -1,6 +1,6 @@
 #!/bin/zsh
 setopt COMPLETE_ALIASES
-# alias vim='nvim'
+alias vim='nvim'
 alias -g E=' | egrep '
 alias -g G=' | grep -i '
 alias -g NOLOG=' | egrep -v $LOG '
