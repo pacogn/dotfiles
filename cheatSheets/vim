@@ -1,4 +1,7 @@
 ############   indentation    ##########
+Ctrl-]             ==> jump to global definition
+*,#                ==> find word under cursor forward,backward 
+%                  ==> jump to matching bracket or parentheses { } [ ] ( )
 fzf_Ctrl-v,Ctrl-x  ==> open split vertival, horizontal
 Ctrl-d, Ctrl-p/n   ==> after <tab> for SuperTab: accept completion and close, up/down
 :sort u            ==> sort and delete duplicate lines
