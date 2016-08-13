@@ -4,15 +4,30 @@ source $DOTFILES/config/nvim/startup/gitstatus.vim
 source $DOTFILES/config/nvim/startup/custom_fold.vim
 source $DOTFILES/config/nvim/startup/NERDTree.vim
 source $DOTFILES/config/nvim/startup/airline.vim
-source $DOTFILES/config/nvim/startup/leader_mappings.vim
 source $DOTFILES/config/nvim/startup/syntastic_config.vim
 source $DOTFILES/config/nvim/startup/tab_titles.vim
+source $DOTFILES/config/nvim/startup/leader_mappings.vim
 " autocmd BufNewFile,BufRead .git/index execute 'source $DOTFILES/vim/startup/gitstatus'."\r" 
 " save all files on focus lost, ignoring warnings about untitled buffers
 " autocmd FocusLost,WinLeave * silent! wa
 " au FocusGained,BufEnter,CursorHold * :silent! !
+if has('nvim')
+    au TextYankPost * let @*=@"
+else
+    au VimEnter * call SyncClipboard() 
+    function! SyncClipboard()
+      if @% =~ 'private\/tmp\/zsh'
+        return
+      endif
+      au CursorHold,CursorMoved,FocusLost * let @*=@0 
+      " map <buffer>quit :qa<cr>
+    endfunction
+    " set clipboard=unnamed
+endif
 
-if exists('$TMUX')
+if has('nvim')
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
+elseif exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 else
@@ -28,11 +43,12 @@ abbr teh the
 abbr tempalte template
 abbr fitler filter
 if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
+    " tnoremap <Esc> <C-\><C-n>
     tnoremap jk <C-\><C-n>
 endif
 set nocompatible " not compatible with vi
 set autoread " detect when a file is changed
+set autowriteall " just :w implicitly, allways
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
@@ -65,7 +81,7 @@ if has('mouse')
     " set ttymouse=xterm2
 endif
 
-set clipboard=unnamed
+" set clipboard=unnamed
 
 " faster redrawing
 set ttyfast
@@ -112,10 +128,7 @@ augroup configgroup
     " close help files on 'q'
         
     autocmd FileType help nnoremap <buffer>q :bd<cr>
-    if has('nvim')
-        autocmd FileType fzf nnoremap <buffer><Esc> <Esc>:q<cr>
-    endif
-        autocmd BufEnter * call SetQuit() 
+    autocmd BufEnter * call SetQuit() 
 
     " make quickfix windows take all the lower section of the screen
     " when there are multiple windows open
@@ -289,7 +302,8 @@ nmap \s :set ts=4 sts=4 sw=4 et<cr>
 " Section Functions ,{{
 
 "david ==> make base16 :colorscheme command actualy chage the blody color
-autocmd ColorScheme base16* execute 'silent !source $DOTFILES/base16-shell/scripts/'.g:colors_name.'.sh'
+" autocmd ColorScheme base16* execute 'silent !/bin/sh $DOTFILES/base16-shell/scripts/'.g:colors_name.'.sh'
+
 " recursively search up from dirname, sourcing all .vimrc.local files along the way
 function! ApplyLocalSettings(dirname)
     " convert windows paths to unix style
@@ -373,10 +387,10 @@ function! HiInterestingWord(n)
 endfunction
 
 function! HiDiffDark()
-  highlight DiffAdd ctermfg=NONE ctermbg=22
-  highlight DiffChange ctermfg=NONE ctermbg=24
-  highlight DiffText ctermfg=NONE ctermbg=25
-  highlight DiffDelete ctermfg=NONE ctermbg=52
+    highlight DiffAdd ctermfg=NONE ctermbg=22
+    highlight DiffChange ctermfg=NONE ctermbg=237
+    highlight DiffText ctermfg=NONE ctermbg=25
+    highlight DiffDelete ctermfg=NONE ctermbg=52
 endfunction
 call HiDiffDark()
 
