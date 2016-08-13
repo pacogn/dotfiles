@@ -1,5 +1,6 @@
 autocmd FileType javascript let g:neomake_javascript_enabled_makers = ['eslint']
 "
+let g:neomake_javascript_eslint_exe='/Users/davidsu/.nvm/versions/node/v4.2.1/bin/eslint'
 " let g:neomake_error_sign = '❌'
 let g:neomake_error_sign = {
 	\ 'text': '❌',
