@@ -1,8 +1,0 @@
-.idea
-Session.vim
-npm-debug.log
-.eslintcache
-node_modules/
-bower_components/
-.DS_Store
-*.swp

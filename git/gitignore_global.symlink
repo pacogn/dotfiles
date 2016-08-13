@@ -1,4 +1,14 @@
-*.swp
-Session.vim
+config/nvim/.init.vim-rplugin~
+config/nvim/.netrwhist
 s.vim
 .DS_Store
+.idea
+Session.vim
+.tern-project
+tern_proj_generator.js
+npm-debug.log
+.eslintcache
+node_modules/
+bower_components/
+.DS_Store
+*.swp
