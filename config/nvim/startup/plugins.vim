@@ -1,8 +1,20 @@
-" Section Plugins {{{
+ " Section Plugins {{{
 "boo
 call plug#begin('~/.config/nvim/plugged')
 "Plug 'felixhummel/setcolors.vim'
 " Plug 'scrooloose/syntastic' "allow for eslint checking
+" Plug 'Valloric/YouCompleteMe'
+Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
+" Plug 'majutsushi/tagbar'
+if(has('nvim'))
+    Plug 'Shougo/deoplete.nvim', { 'for': ['javascript', 'css', 'scss', 'sh', 'zsh', 'vim', 'html'] }
+    Plug 'carlitux/deoplete-ternjs', { 'for': 'javascript'}
+else
+    Plug 'Shougo/neocomplete.vim', { 'for': ['javascript', 'css', 'scss', 'sh', 'vim', 'html'] }
+endif
+" Plug 'xolox/vim-easytags'
+" Plug 'xolox/vim-misc'
+Plug 'Konfekt/FastFold' "fold zyntax is too heavy for vim, makes neocomplete very slow. this plugin solves it
 Plug 'henrik/vim-indexed-search' "Match 123 of 456 /search term/ in Vim searches
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
 Plug 'benekastah/neomake' " neovim replacement for syntastic using neovim's job control functonality
@@ -38,7 +50,6 @@ Plug 'NLKNguyen/papercolor-theme'
 " Plug 'flazz/vim-colorschemes'
 Plug 'dracula/vim'
 " utilities
-Plug 'ctrlpvim/ctrlp.vim' " fuzzy file finder, mapped to <leader>t
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeToggle', 'NERDTreeFind'] } | Plug 'Xuyuanp/nerdtree-git-plugin' | Plug 'ryanoasis/vim-devicons' " file drawer
 Plug 'mileszs/ack.vim' " search inside files using ack. Same as command line ack utility, but use :Ack
 "david: disabled this plugin, is it worth somrthing?
@@ -61,7 +72,7 @@ Plug 'editorconfig/editorconfig-vim' " .editorconfig support
 Plug 'MarcWeber/vim-addon-mw-utils' " interpret a file by function and cache file automatically
 Plug 'tomtom/tlib_vim' " utility functions for vim
 Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
-Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
+" Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
 Plug 'tpope/vim-dispatch' " asynchronous build and test dispatcher
 " Plug 'mtth/scratch.vim'
 " Plug 'tpope/vim-vinegar'
@@ -96,4 +107,86 @@ Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' } " CSS3 syntax support
 Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' } " Open markdown files in Marked.app - mapped to <leader>m
 
+
 call plug#end()
+let g:EasyMotion_do_mapping=0
+autocmd FileType javascript nnoremap <buffer><C-]> :TernDef<cr>
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+    " return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+    " For no inserting <CR> key.
+    return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+if has('nvim')
+    let g:python3_host_prog='/usr/local/bin/python3'
+    let g:deoplete#enable_at_startup = 1
+    inoremap <Esc>  <Esc><Esc>
+    inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
+    let g:tern_request_timeout = 1
+    let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
+    let g:tern#command = ["tern"]
+    let g:tern#arguments = ["--persistent"]
+else
+
+    "Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+    " Disable AutoComplPop.
+    let g:acp_enableAtStartup = 0
+    " Use neocomplete.
+    let g:neocomplete#enable_at_startup = 1
+    " Use smartcase.
+    let g:neocomplete#enable_smart_case = 1
+    " Set minimum syntax keyword length.
+    let g:neocomplete#sources#syntax#min_keyword_length = 3
+    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+
+    " Define dictionary.
+    let g:neocomplete#sources#dictionary#dictionaries = {
+                \ 'default' : '',
+                \ 'vimshell' : $HOME.'/.vimshell_hist',
+                \ 'scheme' : $HOME.'/.gosh_completions'
+                \ }
+
+    " Define keyword.
+    if !exists('g:neocomplete#keyword_patterns')
+        let g:neocomplete#keyword_patterns = {}
+    endif
+    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+    " Plugin key-mappings.
+    inoremap <expr><C-g>     neocomplete#undo_completion()
+    inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+    " Recommended key-mappings.
+    " <CR>: close popup and save indent.
+    " <TAB>: completion.
+    " inoremap <expr><Esc>  pumvisible() ? neocomplete#smart_close_popup() : "\<Esc>\<Esc>"
+    " <C-h>, <BS>: close popup and delete backword char.
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    " inoremap <expr><silent><BS> neocomplete#smart_close_popup()."\<C-h>"
+    " Close popup by <Space>.
+    "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+    " AutoComplPop like behavior.
+    "let g:neocomplete#enable_auto_select = 1
+
+    " Shell like behavior(not recommended).
+    "set completeopt+=longest
+    "let g:neocomplete#enable_auto_select = 1
+    " let g:neocomplete#disable_auto_complete = 1
+" inoremap <expr><Tab>  neocomplete#start_manual_complete()
+
+    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+    " Enable heavy omni completion.
+    if !exists('g:neocomplete#sources#omni#input_patterns')
+        let g:neocomplete#sources#omni#input_patterns = {}
+    endif
+endif
