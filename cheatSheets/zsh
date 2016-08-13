@@ -1,3 +1,6 @@
+############   direcoty stack   ##########
+dirs -v    ==> show directory stack
+cd -n      ==> navigate to entry numbered "n" in directory stask
 ############   Book: From Bash to Z Shell   ##########
 
 ps ==> show current running process
