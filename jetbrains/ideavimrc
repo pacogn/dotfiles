@@ -1,0 +1,21 @@
+let mapleader = ','
+nnoremap ,, :w<CR>
+nnoremap ,ev :source ~/.ideavimrc<CR>
+nnoremap ,w :action Unsplit<CR>
+nnoremap ,l :action MoveTabRight<CR>
+nnoremap ,j :action MoveTabDown<CR>
+echo 'ideavimrc loaded'
+map <C-Down> :action MethodDown<CR>
+map <C-Up> :action MethodUp<CR>
+map ,gd :action Compare.SameVersion<CR>
+nnoremap ,/ :action FindInPath<CR>
+nnoremap ,s :action AceJumpAction<CR>
+nnoremap ,m :action GotoFile<CR>
+nnoremap ,M :action RecentFiles<CR>
+nnoremap ,n :action ActivateProjectToolWindow<CR>
+inoremap <Esc> <Esc><Esc><Esc>
+
+set showmode
+set surround
+set smartcase
+set visualbell
