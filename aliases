@@ -4,13 +4,17 @@ alias vim='nvim'
 alias -g E=' | egrep '
 alias -g G=' | grep -i '
 alias -g NOLOG=' | egrep -v $LOG '
+alias chalk='source $DOTFILES/base16-shell/scripts/base16-chalk.sh && THEME=base16-chalk'
 #we pipe overwrite '>' to a file instead of openning it derectly in vim '| vim -'
 #because we want to exit ZZ 
 alias -g V=' > ~/.vim-tmp/t && vim ~/.vim-tmp/t -c '\''nmap q :q!<cr>'\'
+alias vc='chalk && vim '
+alias vimc='chalk && vim '
 # git status in vim. Due to our vim setup, "map ,d" opens diff in webstorm. also all vim-fugitive stuff work
 alias -g ME='--author=davidsu'
 alias -g NO='--name-only'
 alias -g M='--max-count=100'
+alias -g S='-S Session.vim'
 alias gsv='vim -c '\''source $DOTFILES/config/nvim/startup/gitstatus.vim'\'' $(git rev-parse --show-toplevel)/.git/index'
 # git log in vim. Limit to last 500 commits otherwise its pretty slow.
 alias glv='git log --max-count=500 --name-only V'
@@ -20,6 +24,10 @@ function findalias(){
     do
        ack $1 $dir #ack is like grep, recursive by default, great option
     done
+}
+function go(){
+    #cd into directory containing symlink
+    cd $(dirname $(which $1)) && cd $(dirname $(readlink $(which $1)))
 }
 alias resetnpm='rm -rf ~/.npm && rm -rf node_modules && npm cache clear && npm i'
 alias egrep='egrep --color=auto'
