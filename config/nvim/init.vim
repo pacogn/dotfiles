@@ -13,6 +13,10 @@ source $DOTFILES/config/nvim/startup/leader_mappings.vim
 " au FocusGained,BufEnter,CursorHold * :silent! !
 if has('nvim')
     au TextYankPost * let @*=@"
+    tnoremap jk <C-\><C-n>
+    if (has("termguicolors"))
+        set termguicolors
+    endif
 else
     au VimEnter * call SyncClipboard() 
     function! SyncClipboard()
