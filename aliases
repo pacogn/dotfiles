@@ -1,15 +1,20 @@
 #!/bin/zsh
 setopt COMPLETE_ALIASES
 alias vim='nvim'
+alias ag='ag --color-match='\''1;031'\'
 alias -g E=' | egrep '
 alias -g G=' | grep -i '
 alias -g NOLOG=' | egrep -v $LOG '
+alias -g NOTEST="--ignore '*.unit.js' --ignore '*.spec.js'"
 alias chalk='source $DOTFILES/base16-shell/scripts/base16-chalk.sh && THEME=base16-chalk'
 #we pipe overwrite '>' to a file instead of openning it derectly in vim '| vim -'
 #because we want to exit ZZ 
 alias -g V=' > ~/.vim-tmp/t && vim ~/.vim-tmp/t -c '\''nmap q :q!<cr>'\'
+alias -g CV=' > ~/.vim-tmp/t && vim ~/.vim-tmp/t -c '\''nmap q :q!<cr>'\'
+alias -g VC=' > ~/.vim-tmp/t && vim ~/.vim-tmp/t -c '\''nmap q :q!<cr>'\'
 alias vc='chalk && vim '
 alias vimc='chalk && vim '
+alias cvim='chalk && vim '
 # git status in vim. Due to our vim setup, "map ,d" opens diff in webstorm. also all vim-fugitive stuff work
 alias -g ME='--author=davidsu'
 alias -g NO='--name-only'
@@ -19,6 +24,10 @@ alias gsv='vim -c '\''source $DOTFILES/config/nvim/startup/gitstatus.vim'\'' $(g
 # git log in vim. Limit to last 500 commits otherwise its pretty slow.
 alias glv='git log --max-count=500 --name-only V'
 function specialchars(){echo '⇧ ⌘ ⌥ ⇥ ⌫  ⌦  ⎋  ⌃ '}
+function findfunction(){
+    ag '(function\s+'$1')|('$1'\s*:)' ${@:2}
+}
+alias ff='findfunction'
 function findalias(){
     for dir in $(echo ~/.dotFiles && echo $PATH | tr ':' '\n' | grep '^/Users/' | grep -v '\.nvm')
     do
