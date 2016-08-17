@@ -28,7 +28,8 @@ else
     endfunction
     " set clipboard=unnamed
 endif
-
+autocmd InsertEnter * set cul
+autocmd InsertLeave * set nocul
 let g:gitgutter_map_keys = 0
 if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1

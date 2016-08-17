@@ -35,7 +35,7 @@ nmap <silent>,gb :Gblame<cr>
 "map ,fs FoldSearch
 map <silent> ,h :call WinMove('h')<cr>
 " toggle cursor line
-nnoremap ,I :set cursorline!<cr>
+nnoremap ,I :set cursorline! cursorcolumn!<cr> 
 nnoremap  ,i :call CursorPing()<CR>
 map <silent> ,j :call WinMove('j')<cr>
 map <silent> ,k :call WinMove('k')<cr>
