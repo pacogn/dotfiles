@@ -205,9 +205,57 @@ set showbreak=… " show ellipsis at breaking
 set autoindent " automatically set indent of new line
 set smartindent
 
+function! HorizontalResize(key)
+    let l:winheight = winheight(0)
+    if(a:key == '+')
+        exec '5wincmd +'
+    else
+        exec '5wincmd -'
+    endif
+    if(l:winheight == winheight(0))
+        let g:forcehorizontalresize = 0
+    endif
+endfunction
+function! WinSize(key)
+    if(g:forcehorizontalresize)
+        call HorizontalResize(a:key)
+        return
+    endif
+    let t:curwin = winnr()
+    exec "wincmd l"
+    if (t:curwin == winnr())
+        exec "wincmd h"
+        if (t:curwin == winnr())
+            call HorizontalResize(a:key)
+            return
+        endif
+        exec "wincmd l"
+    else
+        exec "wincmd h"
+    endif
+    if(a:key == '+')
+        exec '5wincmd >'
+    else
+        exec '5wincmd <'
+    endif
+endfunction
+
+function! ToggleForceVerticalResize()
+    if(g:forcehorizontalresize)
+        let g:forcehorizontalresize = 0
+    else
+        let g:forcehorizontalresize = 1
+    endif
+    " sleep 800m
+    " let g:forcehorizontalresize = 0
+endfunction
 " increase decrease vertica split by +,_
-nnoremap + 5<C-w>>
-nnoremap _ 5<C-w><
+" nnoremap + 5<C-w>>
+" nnoremap _ 5<C-w><
+nnoremap + :call WinSize('+')<cr>
+nnoremap _ :call WinSize('-')<cr>
+let g:forcehorizontalresize = 0
+nnoremap ,v :call ToggleForceVerticalResize()<cr>
 let g:ack_use_dispatch = 1
 " remap esc
 inoremap jk <esc>
