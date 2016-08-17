@@ -15,6 +15,9 @@ function! WinMove(key)
 	endif
 endfunction
 
+" switch between current and last buffer
+nmap ,. <c-^>
+
 map <silent> ,a :call WinMove('h')<cr>
 nmap ,b :bn<cr>:bd #<cr>
 nmap ,ee :!
@@ -24,8 +27,16 @@ map ,ev :source ~/.dotfiles/config/nvim/init.vim<cr>
 nmap <silent> ,fb :Buffers<cr>
 nmap <silent> ,ff :GFiles<cr>
 nmap <silent> ,fg :GFiles?<cr>
+"fugitive
+nmap <silent> ,gs :Gstatus<cr>
+nmap ,ge :Gedit<cr>
+nmap <silent>,gr :Gread<cr>
+nmap <silent>,gb :Gblame<cr>
 "map ,fs FoldSearch
 map <silent> ,h :call WinMove('h')<cr>
+" toggle cursor line
+nnoremap ,I :set cursorline!<cr>
+nnoremap  ,i :call CursorPing()<CR>
 map <silent> ,j :call WinMove('j')<cr>
 map <silent> ,k :call WinMove('k')<cr>
 map <silent> ,l :call WinMove('l')<cr>
@@ -40,6 +51,8 @@ nmap ,s <Plug>(easymotion-s)
 nmap sn <Plug>(easymotion-sn)
 nmap ,/ <Plug>(easymotion-sn)
 
+" 'quick git status' give status with fzf
+map ,qgs :GFiles?<cr>
 map ,qa :qa<cr>
 map <silent> ,sl :so Session.vim<cr> 
 map ,tc :tabclose<cr>
@@ -47,7 +60,7 @@ map ,te :tabedit %<cr>
 map ,tn :tabnext<cr>
 map ,tp :tabprevious<cr>
 "same as :quit
-nmap ,w <C-w><C-q>
+nmap ,w :wincmd q<cr>
 map ,, :w<cr>
 inoremap ,, <Esc>:w<cr>
 
