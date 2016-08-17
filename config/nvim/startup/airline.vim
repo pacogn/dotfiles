@@ -3,7 +3,7 @@
 let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_theme='bubblegum'
+let g:airline_theme='kolor'
 " let g:airline_theme='PaperColor'
 let g:airline#extensions#whitespace#checks = []
 "I dont care about the file encoding!
