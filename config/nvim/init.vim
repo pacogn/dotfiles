@@ -38,18 +38,9 @@ else
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
-" :autocmd InsertEnter * set cul
-" :autocmd InsertLeave * set nocul"
+
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js"
-" Abbreviations
-abbr funciton function
-abbr teh the
-abbr tempalte template
-abbr fitler filter
-if has('nvim')
-    " tnoremap <Esc> <C-\><C-n>
-    tnoremap jk <C-\><C-n>
-endif
+
 set nocompatible " not compatible with vi
 set autoread " detect when a file is changed
 set autowriteall " just :w implicitly, allways
@@ -106,11 +97,7 @@ set laststatus=2 " show the satus line all the time
 " file type specific settings
 augroup configgroup
     autocmd!
-    autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-    autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
-    autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
     autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab indentkeys-=*<return>
-    autocmd FileType jade setlocal ts=2 sts=2 sw=2 noexpandtab
     autocmd FileType markdown,textile setlocal textwidth=0 wrapmargin=0 wrap spell
     autocmd FileType .xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
     autocmd FileType crontab setlocal nobackup nowritebackup
@@ -120,11 +107,8 @@ augroup configgroup
     autocmd BufWritePost .vimrc,.vimrc.local,init.vim source %
     autocmd BufWritePost .vimrc.local source %
 
-    autocmd BufNewFile,BufRead *.ejs set filetype=html
-    autocmd BufNewFile,BufRead *.ino set filetype=c
     autocmd BufNewFile,BufRead *.svg set filetype=xml
     autocmd BufNewFile,BufRead .babelrc set filetype=json
-    autocmd BufNewFile,BufRead .jshintrc set filetype=json
     autocmd BufNewFile,BufRead .eslintrc set filetype=json
     autocmd BufNewFile,BufRead *.es6 set filetype=javascript
     autocmd BufNewFile,BufRead *.rt set filetype=html
@@ -155,9 +139,6 @@ function! SetQuit()
 endfunction
 " http://stackoverflow.com/questions/3131393/remapping-help-in-vim-to-open-in-a-new-tab
 cnoreabbrev <expr> h getcmdtype() == ":" && getcmdline() == 'h' ? 'tab help' : 'h'
-" }}}
-
-" Section User Interface {{{
 
 " code folding settings
 set foldmethod=syntax " fold based on indent
@@ -234,11 +215,6 @@ inoremap jk <esc>
 " markdown to html
 " nmap <leader>md :%!markdown --html4tags <cr>
 
-" remove extra whitespace
-nmap <leader><space> :%s/\s\+$<cr>
-
-" wipout buffer
-
 " shortcut to save
 nmap <leader>, :w<cr>
 
@@ -263,50 +239,20 @@ highlight NonText ctermbg=none ctermfg=8
 " highlight Folded ctermbg=234 ctermfg=20
 set showbreak=↪
 
-" switch between current and last buffer
-nmap <leader>. <c-^>
-
 " enable . command in visual mode
 vnoremap . :normal .<cr>
-map <leader>wc :wincmd q<cr>
 
-" toggle cursor line
-nnoremap <leader>i :set cursorline!<cr>
-nnoremap  ,I :call CursorPing()<CR>
 
 " scroll the viewport faster
-nnoremap <C-e> :call smooth_scroll#down(9, 0, 6)<CR>
-nnoremap <C-y>  :call smooth_scroll#up(9, 0, 6)<CR>
-
+nnoremap <C-d> :call smooth_scroll#down(9, 0, 6)<CR>
+nnoremap <C-u>  :call smooth_scroll#up(9, 0, 6)<CR>
+nnoremap <c-e>  3<c-e>
+nnoremap <c-y>  3<c-y>
 " moving up and down work as you would expect
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <silent> ^ g^
 nnoremap <silent> $ g$
-
-" search for word under the cursor
-"david ==> search for word under cursor
-" nnoremap <leader>/ "fyiw :/<c-r>f<cr>
-
-" inoremap <tab> <c-r>=Smart_TabComplete()<CR>
-
-" map <leader>r :call RunCustomCommand()<cr>
-" map <leader>s :call SetCustomCommand()<cr>
-let g:silent_custom_command = 0
-
-" helpers for dealing with other people's code
-nmap \t :set ts=4 sts=4 sw=4 noet<cr>
-nmap \s :set ts=4 sts=4 sw=4 et<cr>
-
-"!!!david ==> interesting, strange, worth looking at, probably I don't want it
-"nmap <leader>w :setf textile<cr> :Goyo<cr>
-
-" }}}
-
-" Section Functions ,{{
-
-"david ==> make base16 :colorscheme command actualy chage the blody color
-" autocmd ColorScheme base16* execute 'silent !/bin/sh $DOTFILES/base16-shell/scripts/'.g:colors_name.'.sh'
 
 " recursively search up from dirname, sourcing all .vimrc.local files along the way
 function! ApplyLocalSettings(dirname)
@@ -325,42 +271,6 @@ function! ApplyLocalSettings(dirname)
     if filereadable(l:settingsFile)
         exec ':source' . l:settingsFile
     endif
-endfunction
-
-" smart tab completion
-function! Smart_TabComplete()
-    let line = getline('.')                         " current line
-
-    let substr = strpart(line, -1, col('.')+1)      " from the start of the current
-    " line to one character right
-    " of the cursor
-    let substr = matchstr(substr, '[^ \t]*$')       " word till cursor
-    if (strlen(substr)==0)                          " nothing to match on empty string
-        return '\<tab>'
-    endif
-    let has_period = match(substr, '\.') != -1      " position of period, if any
-    let has_slash = match(substr, '\/') != -1       " position of slash, if any
-    if (!has_period && !has_slash)
-        return '\<C-X>\<C-P>'                         " existing text matching
-    elseif ( has_slash )
-        return '\<C-X>\<C-F>'                         " file matching
-    else
-        return '\<C-X>\<C-O>'                         " plugin matching
-    endif
-endfunction
-
-" execute a custom command
-function! RunCustomCommand()
-    up
-    if g:silent_custom_command
-        execute 'silent !' . s:customcommand
-    else
-        execute '!' . s:customcommand
-    endif
-endfunction
-
-function! SetCustomCommand()
-    let s:customcommand = input('Enter Custom Command$ ')
 endfunction
 
 function! TrimWhiteSpace()
@@ -434,56 +344,14 @@ nnoremap <silent> <leader>u :call HtmlUnEscape()<cr>
 
 " Section Plugins {{{
 
-" map fuzzyfinder (CtrlP) plugin
-" nmap <silent> <leader>t :CtrlP<cr>
-let g:ctrlp_dotfiles=1
-let g:ctrlp_working_path_mode = 'ra'
 
 " Fugitive Shortcuts
-nmap <silent> <leader>gs :Gstatus<cr>
-nmap <leader>ge :Gedit<cr>
-nmap <silent><leader>gr :Gread<cr>
-nmap <silent><leader>gb :Gblame<cr>
 
 " toggle Limelight
 nmap <leader>f :Limelight!!<cr>
-
-let g:neomake_javascript_jshint_maker = {
-    \ 'args': ['--verbose'],
-    \ 'errorformat': '%A%f: line %l\, col %v\, %m \(%t%*\d\)',
-\ }
-
-let g:neomake_typescript_tsc_maker = {
-    \ 'args': ['-m', 'commonjs', '--noEmit' ],
-    \ 'append_file': 0,
-    \ 'errorformat':
-        \ '%E%f %#(%l\,%c): error %m,' .
-        \ '%E%f %#(%l\,%c): %m,' .
-        \ '%Eerror %m,' .
-        \ '%C%\s%\+%m'
-\ }
-
-autocmd FileType javascript let g:neomake_javascript_enabled_makers = findfile('.jshintrc', '.;') != '' ? ['jshint'] : ['eslint']
-" let g:neomake_javascript_enabled_makers = ['jshint', 'jscs']
-" let g:neomake_javascript_enabled_makers = ['eslint']
-
-" CtrlP ignore patterns
-" let g:ctrlp_custom_ignore = {
-"             \ 'dir': '\.git$\|node_modules$\|bower_components$\|\.hg$\|\.svn$',
-"             \ 'file': '\.exe$\|\.so$'
-"             \ }
-" only show files that are not ignored by git
-let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-" search the nearest ancestor that contains .git, .hg, .svn
-let g:ctrlp_working_path_mode = 2
-
-
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
 
-
-let g:SuperTabCrMapping = 0
 if (has("gui_running"))
     set guioptions=egmrt
     set background=light
