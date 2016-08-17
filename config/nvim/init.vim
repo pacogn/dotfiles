@@ -29,6 +29,7 @@ else
     " set clipboard=unnamed
 endif
 
+let g:gitgutter_map_keys = 0
 if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 elseif exists('$TMUX')
@@ -413,14 +414,14 @@ endif
 function! CursorPing()
     set cursorline cursorcolumn
     redraw
-    sleep 50m
+    sleep 100m
     set nocursorline nocursorcolumn
 endfunction
 
 " FZF
 """""""""""""""""""""""""""""""""""""
 
-let g:fzf_layout = { 'down': '~25%' }
+let g:fzf_layout = { 'down': '~40%' }
 
 " Mapping selecting mappings
 nmap <silent> <leader>t :GFiles<cr>
@@ -436,7 +437,7 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-nnoremap <silent> <Leader>C :call fzf#run({
+nnoremap <silent> <Leader>c :call fzf#run({
 \   'source':
 \     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
 \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
