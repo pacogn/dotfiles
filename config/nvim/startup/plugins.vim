@@ -4,6 +4,7 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'felixhummel/setcolors.vim'
 " Plug 'scrooloose/syntastic' "allow for eslint checking
 " Plug 'Valloric/YouCompleteMe'
+Plug 'blueyed/vim-diminactive'
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 " Plug 'majutsushi/tagbar'
 if(has('nvim'))
@@ -45,7 +46,8 @@ Plug 'embear/vim-foldsearch'
 "tpope/vim-obsession
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " colorschemes
-Plug 'chriskempson/base16-vim'
+Plug '$HOME/.dotfiles/forkedProjects/base16-vim'
+" Plug 'sudavid4/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 " Plug 'flazz/vim-colorschemes'
 Plug 'dracula/vim'
@@ -62,7 +64,8 @@ Plug 'tpope/vim-ragtag' " endings for html, xml, etc. - ehances surround
 Plug 'tpope/vim-surround' " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
 " Plug 'benmills/vimux' " tmux integration for vim
 Plug 'vim-airline/vim-airline' " fancy statusline
-Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
+Plug 'sudavid4/vim-airline-themes' " themes for vim-airline
+" Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
 " Plug 'scrooloose/syntastic' " syntax checking for vim
 Plug 'benekastah/neomake' " neovim replacement for syntastic using neovim's job control functonality
 Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
@@ -132,7 +135,10 @@ if has('nvim')
     inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
     let g:tern_request_timeout = 1
     let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
-    let g:tern#command = ["tern"]
+
+    " if !exists('g:tern#command')
+    "   let g:tern#command = ["/Users/davidsu/.nvm/versions/node/v4.2.1/bin/node", expand('<sfile>:h') . '/../node_modules/tern/bin/tern', '--no-port-file']
+    " endif
     let g:tern#arguments = ["--persistent"]
 else
 
