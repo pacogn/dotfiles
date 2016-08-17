@@ -190,8 +190,7 @@ set background=dark
 if ( $THEME =~ 'base16' )
     execute "colorscheme ".$THEME
 else
-    colorscheme PaperColor
-    hi Function ctermfg=146
+    colorscheme base16-chalk
 endif
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic
