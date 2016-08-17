@@ -5,6 +5,12 @@ zmodload zsh/terminfo
 bindkey "${terminfo[kcuu1]}" history-substring-search-up # start typing + [Up-Arrow] - fuzzy find history forward
 bindkey "^[OB" history-substring-search-down # start typing + [Down-Arrow] - fuzzy find history backward
 
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+bindkey "^p" up-line-or-beginning-search # Up
+bindkey "^n" down-line-or-beginning-search # Down
 #bindkey "${terminfo[kcud1]}" down-line-or-beginning-search# start typing + [Down-Arrow] - fuzzy find history backward
 #bindkey "^[OB" down-line-or-beginning-search # start typing + [Down-Arrow] - fuzzy find history backward
 
