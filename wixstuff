@@ -5,6 +5,8 @@ export SE="$HOME/projects/santa-editor/"
 export CODE_SDK="$HOME/projects/js-wixcode-sdk/"
 
 alias whokilledsanta='open http://santa.wixpress.com'
+alias openteamcitysantaeditor='open http://ci.dev.wix/viewType.html?buildTypeId=Santa_SantaEditor'
+alias openteamcitysantaviewer='open http://ci.dev.wix/viewType.html?buildTypeId=HtmlClient_Reactum'
 function startdynamic(){
     (#parentheses causes code to be run in subshell
         trap "kill $(jobs -p)" SIGINT SIGTERM EXIT
