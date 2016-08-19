@@ -7,13 +7,13 @@ source $DOTFILES/config/nvim/startup/airline.vim
 source $DOTFILES/config/nvim/startup/syntastic_config.vim
 source $DOTFILES/config/nvim/startup/tab_titles.vim
 source $DOTFILES/config/nvim/startup/leader_mappings.vim
+source $DOTFILES/config/nvim/startup/terminal_settings.vim
 " autocmd BufNewFile,BufRead .git/index execute 'source $DOTFILES/vim/startup/gitstatus'."\r" 
 " save all files on focus lost, ignoring warnings about untitled buffers
 " autocmd FocusLost,WinLeave * silent! wa
 " au FocusGained,BufEnter,CursorHold * :silent! !
 if has('nvim')
     au TextYankPost * let @*=@"
-    tnoremap jk <C-\><C-n>
     if (has("termguicolors"))
         set termguicolors
     endif
