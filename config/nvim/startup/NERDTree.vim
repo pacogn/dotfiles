@@ -15,3 +15,5 @@ let g:NERDTreeIndicatorMapCustom = {
     \ "Clean"     : "✔︎",
     \ "Unknown"   : "?"
     \ }
+autocmd FileType nerdtree map <buffer><C-s> i 
+autocmd FileType nerdtree map <buffer><C-v> s 
