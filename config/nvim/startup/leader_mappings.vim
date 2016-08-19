@@ -56,9 +56,7 @@ nmap <silent> ,n :NERDTreeToggle<cr>
 nmap <silent> ,N :NERDTreeFind<cr>
 
 noremap s <NOP>
-" nmap ,sn <Plug>(easymotion-sn)
 nmap ,s <Plug>(easymotion-s)
-nmap sn <Plug>(easymotion-sn)
 nmap ,/ <Plug>(easymotion-sn)
 
 " 'quick git status' give status with fzf
