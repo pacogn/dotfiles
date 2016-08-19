@@ -15,6 +15,15 @@ function! WinMove(key)
 	endif
 endfunction
 
+function! ToggleCurrsorLineColumn()
+	if(&cursorline)
+		set nocursorline nocursorcolumn
+		let g:normal_cursor_line_column = 0
+		return
+	endif
+	let g:normal_cursor_line_column = 1
+	set cursorline cursorcolumn
+endfunction
 " switch between current and last buffer
 nmap ,. <c-^>
 
@@ -35,8 +44,8 @@ nmap <silent>,gb :Gblame<cr>
 "map ,fs FoldSearch
 map <silent> ,h :call WinMove('h')<cr>
 " toggle cursor line
-nnoremap ,I :set cursorline! cursorcolumn!<cr> 
-nnoremap  ,i :call CursorPing()<CR>
+nnoremap ,i :call ToggleCurrsorLineColumn()<cr> 
+nnoremap  ,I :call CursorPing()<CR>
 map <silent> ,j :call WinMove('j')<cr>
 map <silent> ,k :call WinMove('k')<cr>
 map <silent> ,l :call WinMove('l')<cr>
