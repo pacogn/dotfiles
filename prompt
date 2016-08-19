@@ -25,7 +25,11 @@ if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
     local ret_status="%(?:%{$fg[green]%}➜ :%{$fg_bold[red]%}➜%s)"
     PROMPT='${ret_status}%{$fg_bold[green]%}%p $(color_for_most_used_dirs)%3~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
-    ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}( %{$fg[blue]%}"
+    # this blue looks damn ugly on vim embeded terminal gui colors. using something more decent!
+    
+    # ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}( %{$fg[blue]%}"
+    ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}( %{$FG[111]%}"
+    # ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}( %{\033[38;5;153m%}"
     ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}) "
 
     ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[yellow]%}✚ "
