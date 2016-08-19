@@ -37,10 +37,11 @@ nmap <silent> ,fb :Buffers<cr>
 nmap <silent> ,ff :GFiles<cr>
 nmap <silent> ,fg :GFiles?<cr>
 "fugitive
-nmap <silent> ,gs :Gstatus<cr>
+nmap <silent>,gb :Gblame<cr>
+nmap <silent>,gd :Gdiff<cr>
 nmap ,ge :Gedit<cr>
 nmap <silent>,gr :Gread<cr>
-nmap <silent>,gb :Gblame<cr>
+nmap <silent>,gs :Gstatus<cr>
 "map ,fs FoldSearch
 map <silent> ,h :call WinMove('h')<cr>
 " toggle cursor line
