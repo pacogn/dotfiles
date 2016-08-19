@@ -28,8 +28,16 @@ else
     endfunction
     " set clipboard=unnamed
 endif
-autocmd InsertEnter * set cul
-autocmd InsertLeave * set nocul
+function! OnInsertLeave()
+    if(g:normal_cursor_line_column)
+        set cursorline cursorcolumn
+    else
+        set nocursorline nocursorcolumn
+    endif
+endfunction
+let g:normal_cursor_line_column = &cursorcolumn
+autocmd InsertEnter * set cursorline nocursorcolumn
+autocmd InsertLeave * call OnInsertLeave()
 let g:gitgutter_map_keys = 0
 if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
