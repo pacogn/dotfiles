@@ -12,7 +12,7 @@ function! DiffWebstorm()
 	" open diff in webstorm
 	execute '!git difftool -t=webstorm '.b:boo
 endfunction
-autocmd BufEnter *.git/index nmap <buffer> <silent>q :qa<cr>
+autocmd BufEnter *.git/index nmap <buffer> <silent>q :q<cr>
 
 autocmd BufEnter *.git/index map <buffer> <silent> <leader>d :call DiffWebstorm()<cr>
 command! Gdiffw !git difftool -t=webstorm %
