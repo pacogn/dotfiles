@@ -18,7 +18,7 @@ endif
 Plug 'Konfekt/FastFold' "fold zyntax is too heavy for vim, makes neocomplete very slow. this plugin solves it
 Plug 'henrik/vim-indexed-search' "Match 123 of 456 /search term/ in Vim searches
 Plug '/usr/local/opt/fzf' | Plug 'junegunn/fzf.vim' " fuzzy file finder and so much more
-Plug 'benekastah/neomake' " neovim replacement for syntastic using neovim's job control functonality
+Plug 'benekastah/neomake', { 'for': 'javascript' } " neovim replacement for syntastic using neovim's job control functonality
 Plug 'dahu/vim-fanfingtastic' "improved f F t T commands
 "david: not terribly usefull, but whatever
 Plug 'gioele/vim-autoswap'
@@ -67,7 +67,6 @@ Plug 'vim-airline/vim-airline' " fancy statusline
 Plug 'sudavid4/vim-airline-themes' " themes for vim-airline
 " Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
 " Plug 'scrooloose/syntastic' " syntax checking for vim
-Plug 'benekastah/neomake' " neovim replacement for syntastic using neovim's job control functonality
 Plug 'tpope/vim-fugitive' " amazing git wrapper for vim
 Plug 'tpope/vim-repeat' " enables repeating other supported plugins with the . command
 Plug 'garbas/vim-snipmate' " snippet manager
