@@ -75,8 +75,4 @@ inoremap ,, <Esc>:w<cr>
 nmap <silent> ,m :GFiles<cr>
 nmap <silent> ,M :Buffers<cr>
 nmap <silent> ,<Space>m :GFiles?<cr>
-" map quit :q<cr>
-nnoremap go :call EasyMotion#S(-1,0,0)<cr> 
-map full :tabedit %<cr>
-map close :tabclose<cr>
 
