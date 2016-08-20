@@ -2,8 +2,7 @@
 " vim: foldmethod=marker
 if has('nvim')
     " Mappings {{{1
-    tnoremap jk <C-\><C-n>
-    tnoremap ,, <C-\><C-n>:wincmd w<cr>
+    tnoremap \\ <C-\><C-n>
     tnoremap ,k <C-\><C-n>:wincmd k<cr>
     tnoremap ,j <C-\><C-n>:wincmd j<cr>
     tnoremap ,h <C-\><C-n>:wincmd h<cr>
