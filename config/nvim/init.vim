@@ -139,7 +139,7 @@ augroup configgroup
 
     autocmd BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
 
-    autocmd! BufWritePost * Neomake
+    autocmd! BufWritePost * if &ft =~ 'javascript' | Neomake | endif
 augroup END
 function! SetQuit()
   if &ft =~ '\vhelp|text|qf'
