@@ -24,6 +24,12 @@ function! ToggleCurrsorLineColumn()
 	let g:normal_cursor_line_column = 1
 	set cursorline cursorcolumn
 endfunction
+
+function! FindFunctionUnderCursor()
+    let wordUnderCursor = expand("<cword>")
+    exec 'Ag function\s+'.wordUnderCursor.'|'.wordUnderCursor.'\s*:'
+    "fyiw:let @g='function\s+'.@f.'|'.@f.'\s*:'|Ag <c-r>g<cr>
+endfunction
 " switch between current and last buffer
 nmap ,. <c-^>
 
@@ -35,7 +41,8 @@ nmap ,ed <C-w><C-h><C-w><C-c>
 map ,ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
 nmap <silent> ,fb :Buffers<cr>
 nmap <silent> ,ff :GFiles<cr>
-nmap <silent> ,fg :GFiles?<cr>
+" find function definition accross the project
+nmap <silent> ,FF :call FindFunctionUnderCursor()<cr>
 "fugitive
 nmap <silent>,gb :Gblame<cr>
 nmap <silent>,gd :Gdiff<cr>
