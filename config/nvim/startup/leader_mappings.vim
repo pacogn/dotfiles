@@ -34,6 +34,12 @@ endfunction
 nmap ,. <c-^>
 
 map <silent> ,a :call WinMove('h')<cr>
+" http://unix.stackexchange.com/questions/88714/vim-how-can-i-do-a-change-word-using-the-current-paste-buffer
+" delete without changing registers
+nnoremap ,c "_c
+nnoremap ,d "_d
+" http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
+xnoremap ,p "_dP
 nmap ,b :bn<cr>:bd #<cr>
 nmap ,ee :!
 "end diff --- clean close diff window
