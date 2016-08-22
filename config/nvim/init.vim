@@ -284,6 +284,14 @@ nmap <leader>, :w<cr>
 " qq to record, Q to replay (recursive map due to peekaboo)
 nmap Q @q
 
+" ----------------------------------------------------------------------------
+" Moving lines
+" ----------------------------------------------------------------------------
+nnoremap <silent> <C-k> :move-2<cr>
+nnoremap <silent> <C-j> :move+<cr>
+nnoremap <silent> <C-h> <<
+nnoremap <silent> <C-l> >>
+
 " set paste toggle
 "???david
 set pastetoggle=<F6>
