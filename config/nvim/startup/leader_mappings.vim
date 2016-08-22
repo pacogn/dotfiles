@@ -68,8 +68,8 @@ nmap <silent>,gs :Gstatus<cr>
 "map ,fs FoldSearch
 map <silent> ,h :call WinMove('h')<cr>
 " toggle cursor line
-nnoremap ,i :call ToggleCurrsorLineColumn()<cr> 
-nnoremap  ,I :call CursorPing()<CR>
+nnoremap ,I :call ToggleCurrsorLineColumn()<cr> 
+nnoremap  ,i :call CursorPing()<CR>
 map <silent> ,j :call WinMove('j')<cr>
 map <silent> ,k :call WinMove('k')<cr>
 map <silent> ,l :call WinMove('l')<cr>
