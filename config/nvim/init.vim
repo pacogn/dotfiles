@@ -267,15 +267,22 @@ nnoremap ,v :call ToggleForceVerticalResize()<cr>
 let g:ack_use_dispatch = 1
 " remap esc
 inoremap jk <esc>
-
+inoremap <C-h> <C-o>h
+inoremap <C-l> <C-o>a
+inoremap <C-j> <C-o>j
+inoremap <C-k> <C-o>k
+cnoremap jk <C-c>
+cnoremap ,, <C-c>
+" Make Y behave like other capitals
+nnoremap Y y$
 " markdown to html
 " nmap <leader>md :%!markdown --html4tags <cr>
 
 " shortcut to save
 nmap <leader>, :w<cr>
 
-" disable Ex mode
-noremap Q <NOP>
+" qq to record, Q to replay (recursive map due to peekaboo)
+nmap Q @q
 
 " set paste toggle
 "???david
