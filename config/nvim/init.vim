@@ -1,3 +1,4 @@
+autocmd!
 source $DOTFILES/config/nvim/startup/plugins.vim
 source $DOTFILES/config/nvim/startup/tmp_stuff.vim
 source $DOTFILES/config/nvim/startup/gitstatus.vim
@@ -37,8 +38,6 @@ function! OnInsertLeave()
     endif
 endfunction
 let g:normal_cursor_line_column = &cursorcolumn
-autocmd InsertEnter * set cursorline nocursorcolumn
-autocmd InsertLeave * call OnInsertLeave()
 let g:gitgutter_map_keys = 0
 if has('nvim')
   let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
@@ -108,6 +107,9 @@ set laststatus=2 " show the satus line all the time
 " file type specific settings
 augroup configgroup
     autocmd!
+    autocmd FileType javascript call LimeLightExtremeties()
+    autocmd InsertEnter * set cursorline nocursorcolumn
+    autocmd InsertLeave * call OnInsertLeave()
     autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab indentkeys-=*<return>
     autocmd FileType markdown,textile setlocal textwidth=0 wrapmargin=0 wrap spell
     autocmd FileType .xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
@@ -142,6 +144,7 @@ augroup configgroup
 
     autocmd! BufWritePost * if &ft =~ 'javascript' | Neomake | endif
 augroup END
+autocmd FileType javascript nnoremap <buffer>{ /function\s*\w*(.*{/e<cr>
 function! SetQuit()
   if &ft =~ '\vhelp|text|qf'
     return
@@ -418,8 +421,6 @@ nnoremap <silent> <leader>u :call HtmlUnEscape()<cr>
 
 " Fugitive Shortcuts
 
-" toggle Limelight
-nmap <leader>f :Limelight!!<cr>
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
 
@@ -451,8 +452,10 @@ command! BufOnly call BufOnly()
 
 " LimeLight
 """""""""""""""""""""""""""""""""""""
-let g:limelight_eop='^\s\{0,5\}}\|^\s\{0,5\}function\|\w*:\s*function\s*('
-let g:limelight_bop='^\s\{0,5\}function\|\w*:\s*function'
+function! LimeLightExtremeties()
+    let g:limelight_eop='^\s\{0,5\}}\|^\s\{0,5\}function\|\w*:\s*function\s*('
+    let g:limelight_bop='^\s\{0,5\}function\|\w*:\s*function'
+endfunction
 
 " FZF
 """""""""""""""""""""""""""""""""""""
