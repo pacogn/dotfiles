@@ -442,6 +442,7 @@ endfunction
 
 " FZF
 """""""""""""""""""""""""""""""""""""
+autocmd VimEnter * command! -nargs=* -bang Agraw call fzf#vim#ag_raw(<args>)
 
 let g:fzf_layout = { 'down': '~40%' }
 
