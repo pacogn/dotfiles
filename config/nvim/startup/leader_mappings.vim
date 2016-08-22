@@ -46,6 +46,8 @@ nmap ,ee :!
 "end diff --- clean close diff window
 nmap ,ed <C-w><C-h><C-w><C-c>
 map ,ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
+" toggle Limelight
+nmap ,f :Limelight!!<cr>
 " find any file
 nmap <silent> ,fa :FZFFiles<cr>
 " find open buffer
@@ -84,9 +86,12 @@ map <silent> ,l :call WinMove('l')<cr>
 nmap <silent> ,n :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
 nmap <silent> ,N :NERDTreeFind<cr>
+nmap s <Nop>
 "set limelight ending
-nnoremap <unique>,sle :let g:limelight_eop='^'.getline('.')<cr>
+nnoremap ,sle :let g:limelight_eop='^'.getline('.').'$'<cr>
+nnoremap ,slo :let g:limelight_bop='^'.getline('.').'$'<cr>
 nmap ,s <Plug>(easymotion-s)
+nmap ,ss <Plug>(easymotion-s)
 nmap ,/ <Plug>(easymotion-sn)
 
 " 'quick git status' give status with fzf
