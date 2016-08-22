@@ -440,6 +440,20 @@ function! CursorPing()
     set nocursorline nocursorcolumn
 endfunction
 
+function! BufOnly()
+  let curr = bufnr("%")
+  let last = bufnr("$")
+
+  if curr > 1    | silent! execute "1,".(curr-1)."bd"     | endif
+  if curr < last | silent! execute (curr+1).",".last."bd" | endif
+endfunction
+command! BufOnly call BufOnly()
+
+" LimeLight
+"""""""""""""""""""""""""""""""""""""
+let g:limelight_eop='^\s\{0,5\}}\|^\s\{0,5\}function\|\w*:\s*function\s*('
+let g:limelight_bop='^\s\{0,5\}function\|\w*:\s*function'
+
 " FZF
 """""""""""""""""""""""""""""""""""""
 autocmd VimEnter * command! -nargs=* -bang Agraw call fzf#vim#ag_raw(<args>)
