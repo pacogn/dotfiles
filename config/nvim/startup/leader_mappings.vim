@@ -39,10 +39,26 @@ nmap ,ee :!
 "end diff --- clean close diff window
 nmap ,ed <C-w><C-h><C-w><C-c>
 map ,ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
+" find any file
+nmap <silent> ,fa :FZFFiles<cr>
+" find open buffer
 nmap <silent> ,fb :Buffers<cr>
+"find line in current buffer
+nmap <silent> ,fc :BLines<cr>
+" find file tracked by git
 nmap <silent> ,ff :GFiles<cr>
 " find function definition accross the project
 nmap <silent> ,FF :call FindFunctionUnderCursor()<cr>
+" '(function\s+' <c-r>f ')|('<c-r>f'\s*:)'
+
+" find file tracked by git
+nmap <silent> ,fg :GFiles<cr>
+" find help tag
+nmap <silent> ,fh :Helptags<cr>
+" find line in open buffers
+nmap <silent> ,fl :Lines<cr>
+" find uncommited file
+nmap <silent> ,fu :GFiles?<cr>
 "fugitive
 nmap <silent>,gb :Gblame<cr>
 nmap <silent>,gd :Gdiff<cr>
@@ -72,8 +88,6 @@ map ,qa :qa<cr>
 map <silent> ,sl :so Session.vim<cr> 
 map ,tc :tabclose<cr>
 map ,te :tabedit %<cr>
-map ,tn :tabnext<cr>
-map ,tp :tabprevious<cr>
 "same as :quit
 nmap ,w :wincmd q<cr>
 map ,, :w<cr>
