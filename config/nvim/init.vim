@@ -484,5 +484,10 @@ command! FZFMru call fzf#run({
 \  'options': '-m -x +s',
 \  'down':    '40%'})
 
-
+command! FZFFiles call fzf#run({
+\  'source': 'find . | egrep -v \.git',
+\  'sink':    'e',
+\  'options': '-m -x +s',
+\  'down':    '40%'})
+" let g:fzf_layout = { 'up': '~40%' }
 call ApplyLocalSettings(expand('.'))
