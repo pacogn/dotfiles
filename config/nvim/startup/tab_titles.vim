@@ -33,4 +33,5 @@ function! MyTabLabel(n)
   let winnr = tabpagewinnr(a:n)
   let label =  bufname(buflist[winnr - 1]) 
   return fnamemodify(label, ":t") 
+  " return '['.substitute(execute('pwd'),'.*/','','').']'.fnamemodify(label, ":t") 
 endfunction
