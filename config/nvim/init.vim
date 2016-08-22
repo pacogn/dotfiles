@@ -8,6 +8,7 @@ source $DOTFILES/config/nvim/startup/syntastic_config.vim
 source $DOTFILES/config/nvim/startup/tab_titles.vim
 source $DOTFILES/config/nvim/startup/leader_mappings.vim
 source $DOTFILES/config/nvim/startup/terminal_settings.vim
+source $DOTFILES/config/nvim/startup/abbrev.vim
 " autocmd BufNewFile,BufRead .git/index execute 'source $DOTFILES/vim/startup/gitstatus'."\r" 
 " save all files on focus lost, ignoring warnings about untitled buffers
 " autocmd FocusLost,WinLeave * silent! wa
@@ -147,8 +148,6 @@ function! SetQuit()
   endif
   map <buffer>quit :qa<cr>
 endfunction
-" http://stackoverflow.com/questions/3131393/remapping-help-in-vim-to-open-in-a-new-tab
-cnoreabbrev <expr> h getcmdtype() == ":" && getcmdline() == 'h' ? 'tab help' : 'h'
 
 " code folding settings
 set foldmethod=syntax " fold based on indent
