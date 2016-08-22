@@ -30,6 +30,7 @@ function! FindFunctionUnderCursor()
     exec 'Ag function\s+'.wordUnderCursor.'|'.wordUnderCursor.'\s*:'
     "fyiw:let @g='function\s+'.@f.'|'.@f.'\s*:'|Ag <c-r>g<cr>
 endfunction
+
 " switch between current and last buffer
 nmap ,. <c-^>
 
@@ -83,8 +84,8 @@ map <silent> ,l :call WinMove('l')<cr>
 nmap <silent> ,n :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
 nmap <silent> ,N :NERDTreeFind<cr>
-
-noremap s <NOP>
+"set limelight ending
+nnoremap <unique>,sle :let g:limelight_eop='^'.getline('.')<cr>
 nmap ,s <Plug>(easymotion-s)
 nmap ,/ <Plug>(easymotion-sn)
 
