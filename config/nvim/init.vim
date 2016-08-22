@@ -115,8 +115,8 @@ augroup configgroup
 
     " automatically resize panes on resize
     autocmd VimResized * exe 'normal! \<c-w>='
-    autocmd BufWritePost .vimrc,.vimrc.local,init.vim source %
-    autocmd BufWritePost .vimrc.local source %
+    autocmd BufWritePost .vimrc,.vimrc.local,init.vim silent! source %
+    autocmd BufWritePost .vimrc.local silent! source %
 
     autocmd BufNewFile,BufRead *.svg set filetype=xml
     autocmd BufNewFile,BufRead .babelrc set filetype=json
