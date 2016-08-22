@@ -1,7 +1,7 @@
 #!/bin/zsh
 setopt COMPLETE_ALIASES
 alias vim='nvim'
-alias ag='ag --color-match='\''1;031'\'
+alias ag='ag --color-match="1;031"'
 alias -g E=' | egrep '
 alias -g G=' | grep -i '
 alias -g NOLOG=' | egrep -v $LOG '
@@ -19,7 +19,7 @@ alias cvim='chalk && vim '
 alias -g ME='--author=davidsu'
 alias -g NO='--name-only'
 alias -g M='--max-count=100'
-alias -g S='-S Session.vim'
+alias -g S='-S Session.vim -c '\''au VimEnter * silent! Obsession<cr>'\'
 alias gsv='vim -c '\''source $DOTFILES/config/nvim/startup/gitstatus.vim'\'' $(git rev-parse --show-toplevel)/.git/index'
 # git log in vim. Limit to last 500 commits otherwise its pretty slow.
 alias glv='git log --max-count=500 --name-only V'
