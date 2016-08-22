@@ -173,7 +173,7 @@ else
     " <TAB>: completion.
     " inoremap <expr><Esc>  pumvisible() ? neocomplete#smart_close_popup() : "\<Esc>\<Esc>"
     " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    " inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
     " inoremap <expr><silent><BS> neocomplete#smart_close_popup()."\<C-h>"
     " Close popup by <Space>.
     "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
