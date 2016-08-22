@@ -21,15 +21,17 @@ function startsantaday(){
         cd $SV &&
         git pull &&
         npm  i &&
-        grunt all --force
-    } | egrep -v $LOG
+        grunt all --force &&
+        node tern_proj_generator `pwd`/packages > .tern-project
+     } | egrep -v $LOG
 }
 function startsantaeditorday(){
     {
         cd ~/projects/santa-editor &&
         git pull &&
         npm i &&
-        grunt all --force
+        grunt all --force &&
+        node tern_proj_generator `pwd`/packages > .tern-project
     } | egrep -v $LOG
 }
 function startckday(){
