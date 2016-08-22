@@ -483,6 +483,7 @@ command! FZFMru call fzf#run({
 \  'sink':    'e',
 \  'options': '-m -x +s',
 \  'down':    '40%'})
+" command! FF call FindFunction
 
 command! FZFFiles call fzf#run({
 \  'source': 'find . | egrep -v \.git',
