@@ -459,6 +459,9 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+if has('nvim')
+    let g:fzf_layout = { 'window': 'enew' }
+endif
 
 nnoremap <silent> <Leader>c :call fzf#run({
 \   'source':
