@@ -463,7 +463,13 @@ if has('nvim')
     let g:fzf_layout = { 'window': 'enew' }
 endif
 
-nnoremap <silent> <Leader>c :call fzf#run({
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
+
+nnoremap <silent> ,C :call fzf#run({
 \   'source':
 \     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
 \         "substitute(fnamemodify(v:val, ':t'), '\\..\\{-}$', '', '')"),
