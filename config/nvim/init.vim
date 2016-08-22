@@ -436,7 +436,7 @@ endif
 function! CursorPing()
     set cursorline cursorcolumn
     redraw
-    sleep 100m
+    sleep 350m
     set nocursorline nocursorcolumn
 endfunction
 
