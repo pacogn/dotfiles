@@ -131,7 +131,6 @@ if has('nvim')
     let g:python3_host_prog='/usr/local/bin/python3'
     let g:deoplete#enable_at_startup = 1
     inoremap <Esc>  <Esc><Esc>
-    inoremap <expr><C-h> deoplete#smart_close_popup()."\<C-h>"
     let g:tern_request_timeout = 1
     let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
 
