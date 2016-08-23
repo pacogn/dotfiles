@@ -144,12 +144,12 @@ augroup configgroup
 
     autocmd! BufWritePost * if &ft =~ 'javascript' | Neomake | endif
 augroup END
-autocmd FileType javascript nnoremap <buffer>{ /function\s*\w*(.*{/e<cr>
 " autocmd FileType javascript nnoremap <buffer>} /^\s*}.\?$/e<cr>
 "j0 -               start from next line
 "/^\s*}.\?$/e<cr> - e.g: }, or }; or }
 "0/}/e<cr>        - place cursor over } to highlight its opening {
 autocmd FileType javascript nnoremap <buffer>} :set nohlsearch<cr>j0/^\s*}.\?$/e<cr>0/}/e<cr>
+autocmd FileType javascript nnoremap <buffer>{ /function\s*\w*(.*{/e<cr>zz
 function! SetQuit()
   if &ft =~ '\vhelp|text|qf'
     return
