@@ -43,7 +43,7 @@ else
 endif
 function! OnInsertLeave()
     if(g:normal_cursor_line_column)
-        set cursorline cursorcolumn
+        set cursorline nocursorcolumn
     else
         set nocursorline nocursorcolumn
     endif
@@ -286,6 +286,7 @@ nnoremap ,v :call ToggleForceVerticalResize()<cr>
 let g:ack_use_dispatch = 1
 " remap esc
 inoremap jk <esc>
+inoremap jj <esc>
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
