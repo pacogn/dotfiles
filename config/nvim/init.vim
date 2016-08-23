@@ -1,4 +1,7 @@
+" vim: foldmethod=marker
 autocmd!
+" Load startup files{{{1--------------------------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------------------------------------------------
 source $DOTFILES/config/nvim/startup/plugins.vim
 source $DOTFILES/config/nvim/startup/tmp_stuff.vim
 source $DOTFILES/config/nvim/startup/gitstatus.vim
@@ -11,9 +14,10 @@ source $DOTFILES/config/nvim/startup/leader_mappings.vim
 source $DOTFILES/config/nvim/startup/terminal_settings.vim
 source $DOTFILES/config/nvim/startup/abbrev.vim
 source $DOTFILES/config/nvim/startup/limelight.vim
-" save all files on focus lost, ignoring warnings about untitled buffers
-" autocmd FocusLost,WinLeave * silent! wa
-" au FocusGained,BufEnter,CursorHold * :silent! !
+"}}}----------------------------------------------------------------------------------------------------------------------
+
+"Disk File Sync {{{1------------------------------------------------------------------------------------------------------
+"}}}----------------------------------------------------------------------------------------------------------------------
 if has('nvim')
     au TextYankPost * let @*=@"
     if (has("termguicolors"))
