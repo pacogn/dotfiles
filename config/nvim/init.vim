@@ -17,7 +17,14 @@ source $DOTFILES/config/nvim/startup/limelight.vim
 "}}}----------------------------------------------------------------------------------------------------------------------
 
 "Disk File Sync {{{1------------------------------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------------------------------------------------
+" Save whenever switching windows or leaving vim.
+au FocusLost,WinLeave * :silent! wa
+
+" Trigger autoread when changing buffers or coming back to vim.
+au FocusGained,BufEnter * :silent! !
 "}}}----------------------------------------------------------------------------------------------------------------------
+
 if has('nvim')
     au TextYankPost * let @*=@"
     if (has("termguicolors"))
@@ -102,7 +109,7 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-
+set noswapfile
 set laststatus=2 " show the satus line all the time
 
 " }}}
