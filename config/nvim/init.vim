@@ -10,7 +10,7 @@ source $DOTFILES/config/nvim/startup/tab_titles.vim
 source $DOTFILES/config/nvim/startup/leader_mappings.vim
 source $DOTFILES/config/nvim/startup/terminal_settings.vim
 source $DOTFILES/config/nvim/startup/abbrev.vim
-" autocmd BufNewFile,BufRead .git/index execute 'source $DOTFILES/vim/startup/gitstatus'."\r" 
+source $DOTFILES/config/nvim/startup/limelight.vim
 " save all files on focus lost, ignoring warnings about untitled buffers
 " autocmd FocusLost,WinLeave * silent! wa
 " au FocusGained,BufEnter,CursorHold * :silent! !
@@ -107,7 +107,7 @@ set laststatus=2 " show the satus line all the time
 " file type specific settings
 augroup configgroup
     autocmd!
-    autocmd FileType javascript call LimeLightExtremeties()
+    autocmd FileType javascript silent! call LimeLightExtremeties()
     autocmd InsertEnter * set cursorline nocursorcolumn
     autocmd InsertLeave * call OnInsertLeave()
     autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab indentkeys-=*<return>
@@ -454,13 +454,6 @@ function! BufOnly()
   if curr < last | silent! execute (curr+1).",".last."bd" | endif
 endfunction
 command! BufOnly call BufOnly()
-
-" LimeLight
-"""""""""""""""""""""""""""""""""""""
-function! LimeLightExtremeties()
-    let g:limelight_eop='^\s\{0,5\}}\|^\s\{0,5\}function\|\w*:\s*function\s*('
-    let g:limelight_bop='^\s\{0,5\}function\|\w*:\s*function'
-endfunction
 
 " FZF
 """""""""""""""""""""""""""""""""""""

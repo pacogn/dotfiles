@@ -87,11 +87,17 @@ nmap <silent> ,n :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
 nmap <silent> ,N :NERDTreeFind<cr>
 nmap s <Nop>
-"set limelight end/begin/default
-nnoremap ,sle :let g:limelight_eop='^'.getline('.').'$'<cr>
-nnoremap ,slo :let g:limelight_bop='^'.getline('.').'$'<cr>
+"set limelight
+"begin
 nnoremap ,slb :let g:limelight_bop='^'.getline('.').'$'<cr>
-nnoremap ,sld :call LimeLightExtremeties()
+"decrement
+nnoremap ,sld :call IncrementLimeLightIndent(g:limelightindent - 4)<cr>
+"end
+nnoremap ,sle :let g:limelight_eop='^'.getline('.').'$'<cr>
+"increment
+nnoremap ,sli :call IncrementLimeLightIndent(g:limelightindent + 4)<cr>
+"reset indent to default 4
+nnoremap ,slr :call IncrementLimeLightIndent(4)<cr>
 nmap ,s <Plug>(easymotion-s)
 nmap ,ss <Plug>(easymotion-s)
 nmap ,/ <Plug>(easymotion-sn)
