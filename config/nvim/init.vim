@@ -224,8 +224,6 @@ function! ToggleForceVerticalResize()
     " let g:forcehorizontalresize = 0
 endfunction
 " increase decrease vertica split by +,_
-nmap / /\v
-vmap / /\v
 nnoremap + :call WinSize('+')<cr>
 nnoremap _ :call WinSize('-')<cr>
 let g:forcehorizontalresize = 0
@@ -452,7 +450,6 @@ command! FZFMru call fzf#run({
 command! FZFFiles call fzf#run({
 \  'source': 'find . | egrep -v \.git',
 \  'sink':    'e',
-\  'options': '-m -x +s',
-\  'down':    '40%'})
-" let g:fzf_layout = { 'up': '~40%' }
+\  'options': '--reverse -m -x +s'})
+
 call ApplyLocalSettings(expand('.'))
