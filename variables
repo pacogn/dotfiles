@@ -1,5 +1,5 @@
 export VIMTMP=$HOME/.vim-tmp
-LOG="(LOG:)|(✓)"
+LOG="(LOG:)|(✓)|(✔)|(✔)"
 nicethemes=(
 ' darktooth ==> yellowinsh\n'
 'chalk\n'
