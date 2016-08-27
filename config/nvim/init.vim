@@ -140,8 +140,8 @@ augroup END
 autocmd FileType javascript nnoremap <buffer>{ :set nohlsearch<cr>0?function\s*\w*(.*{?e<cr>zt
 autocmd FileType javascript nnoremap <buffer>} :set nohlsearch<cr>/function\s*\w*(.*{/e<cr>zt
 " find next/prev end of function by ,}/,{
-autocmd FileType javascript nnoremap <buffer>,} :set nohlsearch<cr>/function\s*\w*(.*{/e<cr>%zz
-autocmd FileType javascript nnoremap <buffer>,{ :set nohlsearch<cr>j?function\s*\w*(.*{?e<cr>k?function\s*\w*(.*{?e<cr>zz%
+autocmd FileType javascript nnoremap <buffer>,} :set nohlsearch<cr>/function\s*\w*(.*{/e<cr>zt%
+autocmd FileType javascript nnoremap <buffer>,{ :set nohlsearch<cr>j?function\s*\w*(.*{?e<cr>k?function\s*\w*(.*{?e<cr>zt%
 function! SetQuit()
   if &ft =~ '\vhelp|text|qf'
     return
