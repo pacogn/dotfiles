@@ -38,15 +38,26 @@ function! ToggleCurrsorLineColumn()
 endfunction
 
 function! FindFunctionUnderCursor()
-    let wordUnderCursor = expand("<cword>")
-    exec 'Ag function\s+'.wordUnderCursor.'|'.wordUnderCursor.'\s*:'
-    "fyiw:let @g='function\s+'.@f.'|'.@f.'\s*:'|Ag <c-r>g<cr>
+    " (?<=...) positive lookbehind: must constain
+    " (?=...) positive lookahead: must contain
+    let agcmd = '''(?<=function\s)'.a:functionName.'(?=\()|'.a:functionName.'\s*:'''
+    call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
+    call fzf#vim#ag_raw(agcmd)
 endfunction
 
-" switch between current and last buffer
+function! FindAssignment(variableName)
+    " (?<=...) positive lookbehind: must constain
+    " (?=...) positive lookahead: must contai
+    let agcmd = '''(=|:).*\b'.a:variableName.'\b'' | ag -v ''\('''
+    " call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
+    call fzf#vim#ag_raw(agcmd)
+endfunction
 nmap ,. <c-^>
 
-map <silent> ,a :call WinMove('h')<cr>
+nnoremap <silent> ,aa :call FindAssignment(expand("<cword>"))<cr>
+nnoremap <silent> ,af :call FindFunctionUnderCursor(expand("<cword>"))<cr>
+nnoremap <silent> ,au :call fzf#vim#ag_raw('''(?<!function\s)\b'.expand("<cword>").'(?=\()''')<cr>
+nnoremap <silent> ,aw "fyaw:Ag<C-r>f<cr>
 " http://unix.stackexchange.com/questions/88714/vim-how-can-i-do-a-change-word-using-the-current-paste-buffer
 " delete without changing registers
 nnoremap ,c "_c
@@ -69,7 +80,6 @@ nmap <silent> ,fc :BLines<cr>
 " find file tracked by git
 nmap <silent> ,ff :GFiles<cr>
 " find function definition accross the project
-nmap <silent> ,FF :call FindFunctionUnderCursor()<cr>
 " '(function\s+' <c-r>f ')|('<c-r>f'\s*:)'
 
 " find file tracked by git
