@@ -135,12 +135,13 @@ augroup configgroup
 
     autocmd! BufWritePost * if &ft =~ 'javascript' | Neomake | endif
 augroup END
-" autocmd FileType javascript nnoremap <buffer>} /^\s*}.\?$/e<cr>
-"j0 -               start from next line
-"/^\s*}.\?$/e<cr> - e.g: }, or }; or }
-"0/}/e<cr>        - place cursor over } to highlight its opening {
-autocmd FileType javascript nnoremap <buffer>} :set nohlsearch<cr>j0/^\s*}.\?$/e<cr>0/}/e<cr>
-autocmd FileType javascript nnoremap <buffer>{ /function\s*\w*(.*{/e<cr>zz
+
+" find next/prev function by }/{
+autocmd FileType javascript nnoremap <buffer>{ :set nohlsearch<cr>0?function\s*\w*(.*{?e<cr>zt
+autocmd FileType javascript nnoremap <buffer>} :set nohlsearch<cr>/function\s*\w*(.*{/e<cr>zt
+" find next/prev end of function by ,}/,{
+autocmd FileType javascript nnoremap <buffer>,} :set nohlsearch<cr>/function\s*\w*(.*{/e<cr>%zz
+autocmd FileType javascript nnoremap <buffer>,{ :set nohlsearch<cr>j?function\s*\w*(.*{?e<cr>k?function\s*\w*(.*{?e<cr>zz%
 function! SetQuit()
   if &ft =~ '\vhelp|text|qf'
     return
