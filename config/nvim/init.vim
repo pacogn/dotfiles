@@ -224,8 +224,8 @@ function! ToggleForceVerticalResize()
     " let g:forcehorizontalresize = 0
 endfunction
 " increase decrease vertica split by +,_
-" nnoremap + 5<C-w>>
-" nnoremap _ 5<C-w><
+nmap / /\v
+vmap / /\v
 nnoremap + :call WinSize('+')<cr>
 nnoremap _ :call WinSize('-')<cr>
 let g:forcehorizontalresize = 0
