@@ -34,7 +34,7 @@ function! ToggleCurrsorLineColumn()
 		return
 	endif
 	let g:normal_cursor_line_column = 1
-	set cursorline cursorcolumn
+	set cursorline nocursorcolumn
 endfunction
 
 function! FindFunctionUnderCursor()
@@ -86,6 +86,7 @@ nmap <silent>,gd :Gdiff<cr>
 nmap ,ge :Gedit<cr>
 nmap <silent>,gr :Gread<cr>
 nmap <silent>,gs :Gstatus<cr>
+nmap ,gt :Buffers<cr>term://
 "map ,fs FoldSearch
 map <silent> ,h :call WinMove('h')<cr>
 " toggle cursor line
@@ -98,7 +99,6 @@ map <silent> ,l :call WinMove('l')<cr>
 nmap <silent> ,n :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
 nmap <silent> ,N :NERDTreeFind<cr>
-nmap s <Nop>
 "set limelight
 "begin
 nnoremap ,slb :let g:limelight_bop='^'.getline('.').'$'<cr>
@@ -117,7 +117,7 @@ nmap ,/ <Plug>(easymotion-sn)
 " 'quick git status' give status with fzf
 map ,qgs :GFiles?<cr>
 map ,qa :qa<cr>
-map <silent> ,sl :so Session.vim<cr> 
+map <silent> ,sl <Nop>
 map ,tc :tabclose<cr>
 map ,te :tabedit %<cr>
 "same as :quit
@@ -130,4 +130,3 @@ inoremap ,, <Esc>:w<cr>
 nmap <silent> ,m :GFiles<cr>
 nmap <silent> ,M :Buffers<cr>
 nmap <silent> ,<Space>m :GFiles?<cr>
-
