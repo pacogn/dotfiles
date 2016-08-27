@@ -266,7 +266,7 @@ nnoremap <silent> <C-l> >>
 "map <leader>v :set paste!<cr>
 
 " clear highlighted search
-noremap <space> :set hlsearch! hlsearch?<cr>
+noremap <silent><space> :silent! set hlsearch! hlsearch?<cr>
 
 " toggle invisible characters
 highlight SpecialKey ctermbg=none ctermfg=8 " make the highlighting of tabs less annoying
@@ -346,12 +346,6 @@ highlight CursorLine ctermfg=NONE ctermbg=24
 highlight CursorColumn ctermfg=NONE ctermbg=24
 hi MatchParen cterm=bold ctermbg=197 ctermfg=232
 highlight Visual ctermfg=NONE ctermbg=24
-let g:airline_theme_patch_func = 'AirlineThemePatch'
-function! AirlineThemePatch(palette)
-        for colors in values(a:palette.inactive)
-            let colors[3] = 58
-        endfor
-endfunction
 
 nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
 nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
