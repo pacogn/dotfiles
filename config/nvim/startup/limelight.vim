@@ -7,14 +7,15 @@ function! LimeLightExtremeties()
     let limelight_start_stop='^\s\{0,'.g:limelightindent.'\}\S'
     let g:limelight_eop=limelight_start_stop
     let g:limelight_bop=limelight_start_stop
-	Limelight!!
-	Limelight!!
-	echo 'limelightindent = '.g:limelightindent
+    Limelight!!
+    Limelight!!
+    echo 'limelightindent = '.g:limelightindent
 endfunction
-function! IncrementLimeLightIndent(count)
+function! SetLimeLightIndent(count)
     let g:limelightindent = a:count
-	if(g:limelightindent < 0)
-		g:limelightindent = 0
-	endif
+    if(g:limelightindent < 0)
+        g:limelightindent = 0
+    endif
     call LimeLightExtremeties()
 endfunction
+command! -nargs=*  SetLimeLightIndent call SetLimeLightIndent(<args>)

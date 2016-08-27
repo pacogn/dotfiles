@@ -14,30 +14,30 @@ endfunction
 " Window movement shortcuts
 " move to the window in the direction shown, or create a new window
 function! WinMove(key)
-	let t:curwin = winnr()
-	echo 'windMove'
-	exec "wincmd ".a:key
-	if (t:curwin == winnr())
-		if (match(a:key,'[jk]'))
-			wincmd v
-		else
-			wincmd s
-		endif
-		exec "wincmd ".a:key
-	endif
+    let t:curwin = winnr()
+    echo 'windMove'
+    exec "wincmd ".a:key
+    if (t:curwin == winnr())
+        if (match(a:key,'[jk]'))
+            wincmd v
+        else
+            wincmd s
+        endif
+        exec "wincmd ".a:key
+    endif
 endfunction
 
 function! ToggleCurrsorLineColumn()
-	if(&cursorline)
-		set nocursorline nocursorcolumn
-		let g:normal_cursor_line_column = 0
-		return
-	endif
-	let g:normal_cursor_line_column = 1
-	set cursorline nocursorcolumn
+    if(&cursorline)
+        set nocursorline nocursorcolumn
+        let g:normal_cursor_line_column = 0
+        return
+    endif
+    let g:normal_cursor_line_column = 1
+    set cursorline nocursorcolumn
 endfunction
 
-function! FindFunctionUnderCursor()
+function! FindFunctionUnderCursor(functionName)
     " (?<=...) positive lookbehind: must constain
     " (?=...) positive lookahead: must contain
     let agcmd = '''(?<=function\s)'.a:functionName.'(?=\()|'.a:functionName.'\s*:'''
@@ -113,13 +113,16 @@ nmap <silent> ,N :NERDTreeFind<cr>
 "begin
 nnoremap ,slb :let g:limelight_bop='^'.getline('.').'$'<cr>
 "decrement
-nnoremap ,sld :call IncrementLimeLightIndent(g:limelightindent - 4)<cr>
+nnoremap ,sld :call SetLimeLightIndent(g:limelightindent - 4)<cr>
 "end
 nnoremap ,sle :let g:limelight_eop='^'.getline('.').'$'<cr>
 "increment
-nnoremap ,sli :call IncrementLimeLightIndent(g:limelightindent + 4)<cr>
+nnoremap ,sli :call SetLimeLightIndent(g:limelightindent + 4)<cr>
 "reset indent to default 4
-nnoremap ,slr :call IncrementLimeLightIndent(4)<cr>
+nnoremap ,slr :call SetLimeLightIndent(4)<cr>
+" set limelight toggle
+nnoremap ,sls :call SetLimeLightIndent 
+nnoremap ,slt :Limelight!!<cr>
 nmap ,s <Plug>(easymotion-s)
 nmap ,ss <Plug>(easymotion-s)
 nmap ,/ <Plug>(easymotion-sn)
