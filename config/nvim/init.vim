@@ -63,10 +63,6 @@ endif
 
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js"
 
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-let g:ack_default_options = " --group "
 
 " let g:ack_autofold_results = 1
 " make backspace behave in a sane manner
