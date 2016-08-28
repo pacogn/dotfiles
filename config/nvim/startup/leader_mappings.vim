@@ -52,11 +52,20 @@ function! FindAssignment(variableName)
     " call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
     call fzf#vim#ag_raw(agcmd)
 endfunction
-nmap ,. <c-^>
 
+function! FindUsage(variableName, ...)
+    let aditionalParams = ( a:0 > 0 ) ? a:1 : ''
+    let agcmd = '''(?<!function\s)\b'.a:variableName.'(?=\()'' '.aditionalParams
+    call histadd("cmd", agcmd)
+    " call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
+    call fzf#vim#ag_raw(agcmd)
+endfunction
+nmap ,. <c-^>
+nmap ,a <Nop>
 nnoremap <silent> ,aa :call FindAssignment(expand("<cword>"))<cr>
 nnoremap <silent> ,af :call FindFunctionUnderCursor(expand("<cword>"))<cr>
-nnoremap <silent> ,au :call fzf#vim#ag_raw('''(?<!function\s)\b'.expand("<cword>").'(?=\()''')<cr>
+nnoremap <silent> ,au :call FindUsage(expand("<cword>"))<cr>
+nnoremap <silent> ,antu :call FindUsage(expand("<cword>"), '--ignore *.spec.js --ignore *.unit.js')<cr>
 nnoremap <silent> ,aw "fyaw:Ag<C-r>f<cr>
 " http://unix.stackexchange.com/questions/88714/vim-how-can-i-do-a-change-word-using-the-current-paste-buffer
 " delete without changing registers
