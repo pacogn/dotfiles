@@ -3,13 +3,14 @@
 if has('nvim')
     " Mappings {{{1
     tnoremap \\ <C-\><C-n>
+	tnoremap ,, <C-\><C-n>
     tnoremap ,k <C-\><C-n>:wincmd k<cr>
     tnoremap ,j <C-\><C-n>:wincmd j<cr>
     tnoremap ,h <C-\><C-n>:wincmd h<cr>
     tnoremap ,l <C-\><C-n>:wincmd l<cr>
     tnoremap ]b <C-\><C-n>:bnext<cr>
     tnoremap [b <C-\><C-n>:bprevious<cr>
-    tnoremap ,c fg[blue]='\033[38;5;111m'<cr>source $DOTFILES/prompt<cr>
+    tnoremap ,c loadall<cr>reload<cr>fg[blue]='\033[38;5;111m'<cr>source $DOTFILES/prompt<cr>clear<cr>
     tnoremap ,. <C-\><C-n><c-^>
     tnoremap ,ev <C-\><C\n>:source ~/.dotfiles/config/nvim/init.vim<cr> 
     tnoremap <silent>,n <C-\><C-n>:NERDTreeToggle<cr>
