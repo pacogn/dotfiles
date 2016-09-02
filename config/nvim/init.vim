@@ -16,6 +16,7 @@ source $DOTFILES/config/nvim/startup/abbrev.vim
 source $DOTFILES/config/nvim/startup/limelight.vim
 source $DOTFILES/config/nvim/startup/options.vim
 source $DOTFILES/config/nvim/startup/ag-helpers.vim
+source $DOTFILES/config/nvim/startup/deoplete.vim
 "}}}----------------------------------------------------------------------------------------------------------------------
 
 "Disk File Sync {{{1------------------------------------------------------------------------------------------------------
