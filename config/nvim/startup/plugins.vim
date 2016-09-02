@@ -4,6 +4,7 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'felixhummel/setcolors.vim'
 " Plug 'scrooloose/syntastic' "allow for eslint checking
 " Plug 'Valloric/YouCompleteMe'
+Plug 'powerman/vim-plugin-AnsiEsc'
 Plug 'blueyed/vim-diminactive'
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 " Plug 'majutsushi/tagbar'
