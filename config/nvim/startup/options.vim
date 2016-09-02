@@ -39,7 +39,7 @@ set ignorecase " case insensitive searching
 set smartcase " case-sensitive if expresson contains a capital letter
 set hlsearch
 set incsearch " set incremental search, like modern browsers
-set nolazyredraw " don't redraw while executing macros
+set lazyredraw " don't redraw while executing macros
 set magic " Set magic on, for regex
 set noerrorbells
 set visualbell
