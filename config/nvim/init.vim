@@ -240,19 +240,13 @@ nnoremap Y y$
 " markdown to html
 " nmap <leader>md :%!markdown --html4tags <cr>
 
-" shortcut to save
-nmap <leader>, :w<cr>
-
 " qq to record, Q to replay (recursive map due to peekaboo)
 nmap Q @q
 
-" ----------------------------------------------------------------------------
-" Moving lines
-" ----------------------------------------------------------------------------
-nnoremap <silent> <C-k> :move-2<cr>
-nnoremap <silent> <C-j> :move+<cr>
-nnoremap <silent> <C-h> <<
-nnoremap <silent> <C-l> >>
+nnoremap <silent> <C-j> :call WinMove('j')<cr>
+nnoremap <silent> <C-k> :call WinMove('k')<cr>
+nnoremap <silent> <C-l> :call WinMove('l')<cr>
+nnoremap <silent> <C-h> :call WinMove('h')<cr>
 
 " set paste toggle
 "???david
