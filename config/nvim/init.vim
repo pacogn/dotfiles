@@ -164,10 +164,14 @@ endfunction
 syntax on
 
 let base16colorspace=256  " Access colors present in 256 colorspace"
-if ( $THEME =~ 'base16' )
-    execute "colorscheme ".$THEME
+if has('nvim')
+    if ( $THEME =~ 'base16' )
+      execute "colorscheme ".$THEME
+    else
+      colorscheme base16-chalk
+    endif
 else
-    colorscheme base16-chalk
+    colorscheme PaperColor
 endif
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic
