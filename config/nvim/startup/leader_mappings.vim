@@ -43,7 +43,7 @@ nnoremap <silent> ,aa :call FindAssignment(expand("<cword>"))<cr>
 nnoremap <silent> ,af :call FindFunction(expand("<cword>"))<cr>
 nnoremap <silent> ,at "fyaw:FindText '<C-r>f'<cr>
 nnoremap <silent> ,au :call FindUsage(expand("<cword>"))<cr>
-nnoremap <silent> ,aw "fyaw:FindText <C-r>f<cr>
+nnoremap <silent> ,aw "fyaw:FindText '<C-r>f'<cr>
 nnoremap <silent> ,anta :FindNoTestAssignment expand("<cword>")<cr>
 nnoremap <silent> ,antf :FindNoTestFunction expand("<cword>")<cr>
 nnoremap <silent> ,antt "fyaw:FindNoTestText '<C-r>f'<cr>
