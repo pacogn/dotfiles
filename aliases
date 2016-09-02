@@ -63,3 +63,15 @@ alias gmdc='git merge --no-commit --no-ff'
 alias open8080='open http://localhost:8080'
 alias npmprivate='npm config set registry http://repo.dev.wix/artifactory/api/npm/npm-repos'
 alias npmpublic='npm config set registry https://registry.npmjs.org/'
+function spectrum_escape(){
+    for COLOR in {0..255}
+    do
+        for STYLE in "38;5"
+        do
+            TAG="\033[${STYLE};${COLOR}m"
+            STR="${STYLE};${COLOR}"
+            echo -n "${TAG}${STR}${NONE}  "
+        done
+        echo
+    done
+}
