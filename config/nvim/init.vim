@@ -15,6 +15,7 @@ source $DOTFILES/config/nvim/startup/terminal_settings.vim
 source $DOTFILES/config/nvim/startup/abbrev.vim
 source $DOTFILES/config/nvim/startup/limelight.vim
 source $DOTFILES/config/nvim/startup/options.vim
+source $DOTFILES/config/nvim/startup/ag-helpers.vim
 "}}}----------------------------------------------------------------------------------------------------------------------
 
 "Disk File Sync {{{1------------------------------------------------------------------------------------------------------
@@ -112,7 +113,6 @@ augroup configgroup
     autocmd BufNewFile,BufRead .eslintrc set filetype=json
     autocmd BufNewFile,BufRead *.es6 set filetype=javascript
     autocmd BufNewFile,BufRead *.rt set filetype=html
-
     " close help files on 'q'
         
     autocmd FileType help nnoremap <buffer>q :bd<cr>

@@ -36,37 +36,24 @@ function! ToggleCurrsorLineColumn()
     let g:normal_cursor_line_column = 1
     set cursorline nocursorcolumn
 endfunction
-
-function! FindFunctionUnderCursor(functionName)
-    " (?<=...) positive lookbehind: must constain
-    " (?=...) positive lookahead: must contain
-    let agcmd = '''(?<=function\s)'.a:functionName.'(?=\()|'.a:functionName.'\s*:'''
-    call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
-    call fzf#vim#ag_raw(agcmd)
-endfunction
-
-function! FindAssignment(variableName)
-    " (?<=...) positive lookbehind: must constain
-    " (?=...) positive lookahead: must contai
-    let agcmd = '''(=|:).*\b'.a:variableName.'\b'' | ag -v ''\('''
-    " call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
-    call fzf#vim#ag_raw(agcmd)
-endfunction
-
-function! FindUsage(variableName, ...)
-    let aditionalParams = ( a:0 > 0 ) ? a:1 : ''
-    let agcmd = '''(?<!function\s)\b'.a:variableName.'(?=\()'' '.aditionalParams
-    call histadd("cmd", agcmd)
-    " call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
-    call fzf#vim#ag_raw(agcmd)
-endfunction
 nmap ,. <c-^>
 nmap ,a <Nop>
+nmap ,ao <Nop>
 nnoremap <silent> ,aa :call FindAssignment(expand("<cword>"))<cr>
-nnoremap <silent> ,af :call FindFunctionUnderCursor(expand("<cword>"))<cr>
+nnoremap <silent> ,af :call FindFunction(expand("<cword>"))<cr>
+nnoremap <silent> ,at "fyaw:FindText '<C-r>f'<cr>
 nnoremap <silent> ,au :call FindUsage(expand("<cword>"))<cr>
-nnoremap <silent> ,antu :call FindUsage(expand("<cword>"), '--ignore *.spec.js --ignore *.unit.js')<cr>
-nnoremap <silent> ,aw "fyaw:Ag<C-r>f<cr>
+nnoremap <silent> ,aw "fyaw:FindText <C-r>f<cr>
+nnoremap <silent> ,anta :FindNoTestAssignment expand("<cword>")<cr>
+nnoremap <silent> ,antf :FindNoTestFunction expand("<cword>")<cr>
+nnoremap <silent> ,antt "fyaw:FindNoTestText '<C-r>f'<cr>
+nnoremap <silent> ,antw "fyaw:FindNoTestText '<C-r>f'<cr>
+nnoremap <silent> ,antu :FindNoTestUsage expand("<cword>")<cr>
+nnoremap <silent> ,aota :FindOnlyTestAssignment expand("<cword>")<cr>
+nnoremap <silent> ,aotf :FindOnlyTestFunction expand("<cword>")<cr>
+nnoremap <silent> ,aott "fyaw:FindOnlyTestText '<C-r>f'<cr>
+nnoremap <silent> ,aotw "fyaw:FindOnlyTestText '<C-r>f'<cr>
+nnoremap <silent> ,aotu :FindOnlyTestUsage expand("<cword>")<cr>
 " http://unix.stackexchange.com/questions/88714/vim-how-can-i-do-a-change-word-using-the-current-paste-buffer
 " delete without changing registers
 nnoremap ,c "_c
