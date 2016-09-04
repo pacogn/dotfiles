@@ -18,7 +18,10 @@ alias cvim='chalk && vim '
 # git status in vim. Due to our vim setup, "map ,d" opens diff in webstorm. also all vim-fugitive stuff work
 alias -g ME='--author=davidsu'
 alias -g NO='--name-only'
-alias -g M='--max-count=100'
+alias -g MC='--max-count=100'
+alias -g MC100='--max-count=100'
+alias -g MC50='--max-count=50'
+alias -g MC20='--max-count=20'
 alias -g S='-S Session.vim -c '\''au VimEnter * silent! Obsession<cr>'\'
 alias gsv='vim -c '\''source $DOTFILES/config/nvim/startup/gitstatus.vim'\'' $(git rev-parse --show-toplevel)/.git/index'
 # git log in vim. Limit to last 500 commits otherwise its pretty slow.
