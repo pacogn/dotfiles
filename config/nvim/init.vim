@@ -9,7 +9,8 @@ source $DOTFILES/config/nvim/startup/custom_fold.vim
 source $DOTFILES/config/nvim/startup/NERDTree.vim
 source $DOTFILES/config/nvim/startup/airline.vim
 source $DOTFILES/config/nvim/startup/syntastic_config.vim
-source $DOTFILES/config/nvim/startup/tab_titles.vim
+source $DOTFILES/config/nvim/startup/tabname.vim
+" source $DOTFILES/config/nvim/startup/tab_titles.vim
 source $DOTFILES/config/nvim/startup/leader_mappings.vim
 source $DOTFILES/config/nvim/startup/terminal_settings.vim
 source $DOTFILES/config/nvim/startup/abbrev.vim
