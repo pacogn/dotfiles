@@ -61,6 +61,8 @@ nnoremap ,d "_d
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
 xnoremap ,p "_dP
 nmap ,b :bn<cr>:bd #<cr>
+nmap ,bd :bn<cr>:bd #<cr>
+nmap ,bw :bn<cr>:bw #<cr>
 nmap ,ee :!
 "end diff --- clean close diff window
 nmap ,ed <C-w><C-h><C-w><C-c>
