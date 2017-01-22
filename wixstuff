@@ -2,11 +2,13 @@
 export CK="$HOME/projects/wix-ck-editor/"
 export SV="$HOME/projects/santa/"
 export SE="$HOME/projects/santa-editor/"
+export WR="$HOME/projects/wix-richtext/"
 export CODE_SDK="$HOME/projects/js-wixcode-sdk/"
 
 alias whokilledsanta='open http://santa.wixpress.com'
-alias openteamcitysantaeditor='open http://ci.dev.wix/viewType.html?buildTypeId=Santa_SantaEditor'
-alias openteamcitysantaviewer='open http://ci.dev.wix/viewType.html?buildTypeId=HtmlClient_Reactum'
+alias openteamcitysantaeditor='open http://tc.dev.wixpress.com/viewType.html?buildTypeId=Santa_SantaEditor'
+alias openteamcitysantaviewer='open http://tc.dev.wixpress.com/viewType.html?buildTypeId=HtmlClient_Reactum'
+alias openteamcitywixrichtext='open http://tc.dev.wixpress.com/viewType.html?buildTypeId=WixRichtext_WixRichtext&tab=buildTypeStatusDiv'
 function startdynamic(){
     (#parentheses causes code to be run in subshell
         trap "kill $(jobs -p)" SIGINT SIGTERM EXIT
@@ -16,10 +18,17 @@ function startdynamic(){
     )
    wait
 }
+function startwixrichtextday(){
+   {
+      cd $WR &&
+      git pull &&
+      npm i
+   }
+}
 function startsantaday(){
     {
         cd $SV &&
-        git pull &&
+        git pull --rebase &&
         npm  i &&
         grunt all --force &&
         node tern_proj_generator `pwd`/packages > .tern-project
@@ -28,26 +37,30 @@ function startsantaday(){
 function startsantaeditorday(){
     {
         cd ~/projects/santa-editor &&
-        git pull &&
+        git pull --rebase &&
         npm i &&
+        bower install --force &&
         grunt all --force &&
         node tern_proj_generator `pwd`/packages > .tern-project
     } | egrep -v $LOG
 }
 function startckday(){
     cd ~/projects/wix-ck-editor &&
-    git pull &&
+    git pull --rebase &&
     bower update &&
     grunt all
 }
 function startwixcodeday(){
     cd ~/projects/js-wixcode-sdk &&
-    git pull &&
+    git pull --rebase &&
     npm i &&
     grunt all &&
     npm run build &&
     cd ~/projects/santa/static/wixcode &&
+    grunt &&
+    cd ~/projects/santa/static/platform &&
     grunt
+
 }
 function startwixday(){
 #command inside ( parenthesis ) will be run in a subshell
@@ -55,6 +68,7 @@ function startwixday(){
     ( startsantaday ) &
     ( startsantaeditorday ) &
     ( startckday ) &
+    ( startwixrichtextday ) &
     ( startwixcodeday )
 }
 function notonmaster(){

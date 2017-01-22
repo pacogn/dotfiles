@@ -1,2 +1,2 @@
 #!/bin/sh
-cd ~/Developer/selenium/hilanet/selenium && jasmine spec/escola.spec.js gabi
+cd ~/Developer/selenium/hilanet/selenium && jasmine spec/hilanet.spec.js gabi

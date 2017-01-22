@@ -45,8 +45,7 @@ function! TabCaptionLabel(number)
 	let buf_name = bufname(buflist[winnr - 1])
 
     if tab_name == ''
-        let caption .= ' %{MyTabLabel(' . (a:number + 1) . ')} '
-        " let caption .= pathshorten(buf_name)
+        let caption .= pathshorten(buf_name)
     else
         let caption .= tab_name
     endif
@@ -122,13 +121,6 @@ function! TabGuiCaptionLabel()
     return caption
 endfunction
 
-function! MyTabLabel(n)
-  let buflist = tabpagebuflist(a:n)
-  let winnr = tabpagewinnr(a:n)
-  let label =  bufname(buflist[winnr - 1]) 
-  return fnamemodify(label, ":t") 
-  " return '['.substitute(execute('pwd'),'.*/','','').']'.fnamemodify(label, ":t") 
-endfunction
 
 function! s:TabWinEnter()
     if exists('t:tab_name')

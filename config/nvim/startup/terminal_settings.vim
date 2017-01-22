@@ -16,6 +16,7 @@ if has('nvim')
     tnoremap <silent>,n <C-\><C-n>:NERDTreeToggle<cr>
     tnoremap ,nt  !'spec.js !'unit.js !'it.js
     tnoremap ,ot 'spec.js \| 'unit.js \| 'it.js
+    tnoremap ,ds '/documentServices/
     " AutoCommands {{{1
     autocmd BufWinEnter,WinEnter term://* if &buftype == 'terminal' | startinsert | endif
     " autocmd TermOpen * :let @a='fg[blue]="\033[38;5;1m"' | put a | normal <cr>

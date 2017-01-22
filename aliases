@@ -24,6 +24,7 @@ alias -g MC50='--max-count=50'
 alias -g MC20='--max-count=20'
 alias -g S='-S Session.vim -c '\''au VimEnter * silent! Obsession<cr>'\'
 alias gsv='vim -c '\''source $DOTFILES/config/nvim/startup/gitstatus.vim'\'' $(git rev-parse --show-toplevel)/.git/index'
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security --user-data-dir'
 # git log in vim. Limit to last 500 commits otherwise its pretty slow.
 alias glv='git log --max-count=500 --name-only V'
 function specialchars(){echo '⇧ ⌘ ⌥ ⇥ ⌫  ⌦  ⎋  ⌃ '}
@@ -48,7 +49,9 @@ alias reload='. ~/.zshrc'
 # alias grep='egrep'
 alias ls='ls -GF1'
 alias updatedb='sudo /usr/libexec/locate.updatedb' #for locate's sake
-alias opengabi='cd ~/Developer/selenium/criancas/selenium && jasmine spec/escola.spec.js gabi'
+# alias opengabi='cd ~/Developer/selenium/criancas/selenium && jasmine spec/escola.spec.js gabi'
+alias openescola='cd ~/Developer/selenium/hilanet/selenium && jasmine spec/escola.spec.js'
+alias openshammat='{ cd ~/Documents/www.mathstar.biz/sfarim/math_7A_zameret/ && serve } & open http://localhost:3000'
 alias hidden='ls -d .*'
 alias restart='sudo shutdown -r now'
 alias textedit='open -a TextEdit'

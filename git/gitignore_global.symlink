@@ -1,3 +1,4 @@
+.nvmrc
 config/nvim/.init.vim-rplugin~
 config/nvim/.netrwhist
 s.vim
