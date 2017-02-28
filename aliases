@@ -24,7 +24,10 @@ alias -g MC50='--max-count=50'
 alias -g MC20='--max-count=20'
 alias -g S='-S Session.vim -c '\''au VimEnter * silent! Obsession<cr>'\'
 alias gsv='vim -c '\''source $DOTFILES/config/nvim/startup/gitstatus.vim'\'' $(git rev-parse --show-toplevel)/.git/index'
-alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security --user-data-dir'
+# alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security --user-data-dir'
+# alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir --no-default-browser-check --no-first-run --disable-default-apps --disable-popup-blocking --disable-translate --disable-background-timer-throttling --disable-device-discovery-notifications'
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --user-data-dir=/var/folders/bf/r173r07s4j5dw_64tvw4t885dv04wg/T/karma-75791437 --no-default-browser-check --no-first-run --disable-default-apps --disable-popup-blocking --disable-translate --disable-background-timer-throttling --disable-device-discovery-notifications'
+alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
 # git log in vim. Limit to last 500 commits otherwise its pretty slow.
 alias glv='git log --max-count=500 --name-only V'
 function specialchars(){echo '⇧ ⌘ ⌥ ⇥ ⌫  ⌦  ⎋  ⌃ '}
