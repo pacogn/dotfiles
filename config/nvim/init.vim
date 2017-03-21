@@ -23,6 +23,7 @@ source $DOTFILES/config/nvim/startup/deoplete.vim
 "Disk File Sync {{{1------------------------------------------------------------------------------------------------------
 "-------------------------------------------------------------------------------------------------------------------------
 " Save whenever switching windows or leaving vim.
+language en_US
 au FocusLost,WinLeave * :silent! wa
 
 " Trigger autoread when changing buffers or coming back to vim.
