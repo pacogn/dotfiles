@@ -6,6 +6,7 @@ export WR="$HOME/projects/wix-richtext/"
 export CODE_SDK="$HOME/projects/js-wixcode-sdk/"
 
 alias whokilledsanta='open http://santa.wixpress.com'
+#teamcity uses same username+password as in your computer
 alias openteamcitysantaeditor='open http://tc.dev.wixpress.com/viewType.html?buildTypeId=Santa_SantaEditor'
 alias openteamcitysantaviewer='open http://tc.dev.wixpress.com/viewType.html?buildTypeId=HtmlClient_Reactum'
 alias openteamcitywixrichtext='open http://tc.dev.wixpress.com/viewType.html?buildTypeId=WixRichtext_WixRichtext&tab=buildTypeStatusDiv'
