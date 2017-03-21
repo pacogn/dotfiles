@@ -1,4 +1,42 @@
 #!/bin/sh
+function encrypt(){
+	if [ -f $1 ]; then
+		openssl des -k ohencrypted -in $1 -out $1.enc && rm $1
+	else
+		echo no such file $1
+	fi
+}
+function decrypt(){
+	if [ -f $1 ]; then
+		decfilename=${1%.enc}
+        openssl des -d -k ohencrypted -in $decfilename.enc -out $decfilename && rm $1
+    else
+		echo no such file $1
+	fi
+}
+
+function encryptdir(){
+	if [ -d $1 ]; then
+		for f in $1*; do
+			encrypt $f
+		done
+	else
+		echo no such directory $1
+	fi
+
+}
+
+function decryptdir(){
+	if [ -d $1 ]; then
+		for f in $1*; do
+			decrypt $f
+		done
+	else
+		echo no such directory $1
+	fi
+
+}
+
 function cheat(){
 	if [[ -e $DOTFILES/cheatSheets/$1 ]]; then
 		cat $DOTFILES/cheatSheets/$1 | less
