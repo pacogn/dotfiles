@@ -4,7 +4,9 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'felixhummel/setcolors.vim'
 " Plug 'scrooloose/syntastic' "allow for eslint checking
 " Plug 'Valloric/YouCompleteMe'
+" type :AnsiEsc to get colors as terminal
 Plug 'powerman/vim-plugin-AnsiEsc'
+" allow different background for buffer without focus on split window
 Plug 'blueyed/vim-diminactive'
 Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
 " Plug 'majutsushi/tagbar'

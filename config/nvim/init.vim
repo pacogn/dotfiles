@@ -450,4 +450,19 @@ command! FZFFiles call fzf#run({
 \  'sink':    'e',
 \  'options': '--reverse -m -x +s'})
 
+
+function! ResetCwd()
+    echom 'into ResetCwd' 
+    if exists("g:cwd") && strlen(g:cwd)>0
+        cd `=g:cwd`
+        let g:cwd = ""
+    endif
+endfunction
+autocmd FileType help call ResetCwd()
+function! LetterCommands()
+    let g:cwd = getcwd()  
+    cd /usr/local/Cellar/vim/8.0.0271/share/vim/vim80/doc
+    :Agraw '--nobreak --noheading ''^\|(CTRL-)?\w\w?\w?\w?\|'''
+endfunction
+command! LetterCommands call LetterCommands()
 call ApplyLocalSettings(expand('.'))
