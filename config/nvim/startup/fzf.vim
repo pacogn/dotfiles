@@ -5,12 +5,12 @@ autocmd VimEnter * command! -nargs=* -bang Agraw call fzf#vim#ag_raw(<args>)
 let g:fzf_layout = { 'down': '~40%' }
 
 " Mapping selecting mappings
-nmap <silent> <leader>t :GFiles<cr>
-nmap <silent> <leader>r :Buffers<cr>
-nmap <silent> <leader>e :GFiles?<cr>
-nmap <leader><tab> <plug>(fzf-maps-n)
-xmap <leader><tab> <plug>(fzf-maps-x)
-omap <leader><tab> <plug>(fzf-maps-o)
+nmap <silent> ,t :GFiles<cr>
+nmap <silent> ,r :Buffers<cr>
+nmap <silent> ,e :GFiles?<cr>
+nmap ,<tab> <plug>(fzf-maps-n)
+xmap ,<tab> <plug>(fzf-maps-x)
+omap ,<tab> <plug>(fzf-maps-o)
 
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -49,17 +49,18 @@ command! FZFFiles call fzf#run({
 \  'options': '--reverse -m -x +s'})
 
 
-function! ResetCwd()
-	echom 'into ResetCwd' 
-	if exists("g:cwd") && strlen(g:cwd)>0
-		cd `=g:cwd`
-		let g:cwd = ""
-	endif
-endfunction
-autocmd FileType help call ResetCwd()
+autocmd! FileType help call ResetCwd()
+autocmd! FileType vim call ResetCwd()
 function! LetterCommands()
-	let g:cwd = getcwd()  
-	cd /usr/local/Cellar/vim/8.0.0271/share/vim/vim80/doc
-	:Agraw '--nobreak --noheading ''^\|(CTRL-)?\w\w?\w?\w?\|'''
+    let g:cwd = getcwd()  
+    let g:currentfile = @%
+    cd /usr/local/Cellar/vim/8.0.0271/share/vim/vim80/doc
+    :Agraw '--nobreak --noheading --ignore ''howto*'' --ignore ''intro*'' --ignore ''edit*'' --ignore ''help*'' --ignore ''if_*'' --ignore ''ft_*'' --ignore autoc* --ignore change* --ignore ''gui_*'' --ignore ''eval'' ''^\|[^-:0-9](\|?|[^:]{0,6}[^)])\|'''
 endfunction
 command! LetterCommands call LetterCommands()
+
+function DeclaredLeaderMappings()
+    let g:cwd = getcwd()
+    cd $DOTFILES/config/nvim/startup
+    :Agraw '(.*)?map ,[^ ]*'
+endfunction

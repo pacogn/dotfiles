@@ -18,12 +18,7 @@ call SourceMyScripts()
 
 "Disk File Sync {{{1------------------------------------------------------------------------------------------------------
 "-------------------------------------------------------------------------------------------------------------------------
-" Save whenever switching windows or leaving vim.
 language en_US
-au FocusLost,WinLeave * :silent! wa
-
-" Trigger autoread when changing buffers or coming back to vim.
-au FocusGained,BufEnter * :silent! !
 "}}}----------------------------------------------------------------------------------------------------------------------
 
 if has('nvim')
@@ -94,7 +89,6 @@ match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 " file type specific settings
 augroup configgroup
     autocmd!
-    autocmd FileType javascript silent! call LimeLightExtremeties()
     autocmd InsertEnter * set cursorline nocursorcolumn
     autocmd InsertLeave * call OnInsertLeave()
     autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab indentkeys-=*<return>
@@ -110,7 +104,6 @@ augroup configgroup
     autocmd BufNewFile,BufRead *.svg set filetype=xml
     autocmd BufNewFile,BufRead .babelrc set filetype=json
     autocmd BufNewFile,BufRead .eslintrc set filetype=json
-    autocmd BufNewFile,BufRead *.es6 set filetype=javascript
     autocmd BufNewFile,BufRead *.rt set filetype=html
     " close help files on 'q'
         
@@ -122,23 +115,18 @@ augroup configgroup
     autocmd FileType qf wincmd J
 
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-    let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html']
 
     " autocmd! BufEnter * call ApplyLocalSettings(expand('<afile>:p:h'))
 
     autocmd BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
+    " Save whenever switching windows or leaving vim.
+    au FocusLost,WinLeave * :silent! wa
 
-    autocmd! BufWritePost * if &ft =~ 'javascript' | Neomake | endif
+    " Trigger autoread when changing buffers or coming back to vim.
+    au FocusGained,BufEnter * :silent! !
+
 augroup END
 
-" find next/prev function by }/{
-" \(function\s*\w*(.*{\)\|\(.*\)\s*=>
-autocmd FileType javascript nnoremap <buffer>{ :set nohlsearch<cr>0?\(function\s*\w*(.*{\)\\|\(.*\)\s*=>?e<cr>zt
-" autocmd FileType javascript nnoremap <buffer>{ :set nohlsearch<cr>0?function\s*\w*(.*{?e<cr>zt
-autocmd FileType javascript nnoremap <buffer>} :set nohlsearch<cr>/\(function\s*\w*(.*{\)\\|\(.*\)\s*=>/e<cr>zt
-" find next/prev end of function by ,}/,{
-autocmd FileType javascript nnoremap <buffer>,} :set nohlsearch<cr>/function\s*\w*(.*{/e<cr>zt%
-autocmd FileType javascript nnoremap <buffer>,{ :set nohlsearch<cr>j?function\s*\w*(.*{?e<cr>k?function\s*\w*(.*{?e<cr>zt%
 function! SetQuit()
   if &ft =~ '\vhelp|text|qf'
     return
@@ -181,55 +169,6 @@ highlight htmlArg cterm=italic
 
 
 
-function! HorizontalResize(key)
-    let l:winheight = winheight(0)
-    if(a:key == '+')
-        exec '5wincmd +'
-    else
-        exec '5wincmd -'
-    endif
-    if(l:winheight == winheight(0))
-        let g:forcehorizontalresize = 0
-    endif
-endfunction
-function! WinSize(key)
-    if(g:forcehorizontalresize)
-        call HorizontalResize(a:key)
-        return
-    endif
-    let t:curwin = winnr()
-    exec "wincmd l"
-    if (t:curwin == winnr())
-        exec "wincmd h"
-        if (t:curwin == winnr())
-            call HorizontalResize(a:key)
-            return
-        endif
-        exec "wincmd l"
-    else
-        exec "wincmd h"
-    endif
-    if(a:key == '+')
-        exec '5wincmd >'
-    else
-        exec '5wincmd <'
-    endif
-endfunction
-
-function! ToggleForceVerticalResize()
-    if(g:forcehorizontalresize)
-        let g:forcehorizontalresize = 0
-    else
-        let g:forcehorizontalresize = 1
-    endif
-    " sleep 800m
-    " let g:forcehorizontalresize = 0
-endfunction
-" increase decrease vertica split by +,_
-nnoremap + :call WinSize('+')<cr>
-nnoremap _ :call WinSize('-')<cr>
-let g:forcehorizontalresize = 0
-nnoremap ,v :call ToggleForceVerticalResize()<cr>
 let g:ack_use_dispatch = 1
 " remap esc
 inoremap jk <esc>
@@ -248,10 +187,6 @@ nnoremap Y y$
 " qq to record, Q to replay (recursive map due to peekaboo)
 nmap Q @q
 
-nnoremap <silent> <C-j> :call WinMove('j')<cr>
-nnoremap <silent> <C-k> :call WinMove('k')<cr>
-nnoremap <silent> <C-l> :call WinMove('l')<cr>
-nnoremap <silent> <C-h> :call WinMove('h')<cr>
 
 " set paste toggle
 "???david
@@ -354,13 +289,6 @@ hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
 hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
 hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 
-function! HtmlUnEscape()
-  silent s/&lt;/</eg
-  silent s/&gt;/>/eg
-  silent s/&amp;/\&/eg
-endfunction
-
-nnoremap <silent> <leader>u :call HtmlUnEscape()<cr>
 
 " }}}
 

@@ -1,5 +1,15 @@
-
+function! ResetCwd()
+  if exists("g:cwd") && strlen(g:cwd)>0
+    cd `=g:cwd`
+    let g:cwd = ""
+  endif
+endfunction
 " vim: foldmethod=marker
+function! BnextIfFZF()
+    if &filetype == 'fzf'
+	:bn
+    endif
+endfunction
 if has('nvim')
     " Mappings {{{1
     tnoremap \\ <C-\><C-n>
@@ -17,6 +27,7 @@ if has('nvim')
     tnoremap ,nt  !'spec.js !'unit.js !'it.js
     tnoremap ,ot 'spec.js \| 'unit.js \| 'it.js
     tnoremap ,ds '/documentServices/
+    tnoremap <silent><Esc> <C-\><c-n>:call ResetCwd()<cr>:call BnextIfFZF()<cr>
     " AutoCommands {{{1
     autocmd BufWinEnter,WinEnter term://* if &buftype == 'terminal' | startinsert | endif
     " autocmd TermOpen * :let @a='fg[blue]="\033[38;5;1m"' | put a | normal <cr>
