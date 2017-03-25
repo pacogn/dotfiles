@@ -7,7 +7,14 @@ endfunction
 " vim: foldmethod=marker
 function! BnextIfFZF()
     if &filetype == 'fzf'
-	:bn
+	:bp
+	if exists("g:currentfile")
+	    :e `=g:currentfile`
+	    :bp
+	    :bn
+	else
+	    :bn
+	endif
     endif
 endfunction
 if has('nvim')
@@ -27,9 +34,9 @@ if has('nvim')
     tnoremap ,nt  !'spec.js !'unit.js !'it.js
     tnoremap ,ot 'spec.js \| 'unit.js \| 'it.js
     tnoremap ,ds '/documentServices/
-    tnoremap <silent><Esc> <C-\><c-n>:call ResetCwd()<cr>:call BnextIfFZF()<cr>
+    tmap <silent><Esc> <esc><C-\><c-n>:call ResetCwd()<cr>
     " AutoCommands {{{1
-    autocmd BufWinEnter,WinEnter term://* if &buftype == 'terminal' | startinsert | endif
+    autocmd! BufWinEnter,WinEnter term://* if &buftype == 'terminal' | startinsert | endif
     " autocmd TermOpen * :let @a='fg[blue]="\033[38;5;1m"' | put a | normal <cr>
     " autocmd TermOpen * ,c
     " }}}

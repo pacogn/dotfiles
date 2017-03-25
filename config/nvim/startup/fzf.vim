@@ -1,9 +1,8 @@
 " FZF
 """""""""""""""""""""""""""""""""""""
-autocmd VimEnter * command! -nargs=* -bang Agraw call fzf#vim#ag_raw(<args>)
 
 let g:fzf_layout = { 'down': '~40%' }
-
+" let g:fzf_command_prefix = 'Fzf'
 " Mapping selecting mappings
 nmap <silent> ,t :GFiles<cr>
 nmap <silent> ,r :Buffers<cr>
@@ -49,8 +48,12 @@ command! FZFFiles call fzf#run({
 \  'options': '--reverse -m -x +s'})
 
 
-autocmd! FileType help call ResetCwd()
-autocmd! FileType vim call ResetCwd()
+augroup myfzfgroup
+	autocmd!
+	autocmd VimEnter * command! -nargs=* -bang Agraw call fzf#vim#ag_raw(<args>)
+	autocmd FileType help call ResetCwd()
+	autocmd FileType vim call ResetCwd()
+augroup END
 function! LetterCommands()
     let g:cwd = getcwd()  
     let g:currentfile = @%
@@ -59,8 +62,10 @@ function! LetterCommands()
 endfunction
 command! LetterCommands call LetterCommands()
 
-function DeclaredLeaderMappings()
+function! LeaderMappingsDeclaration()
     let g:cwd = getcwd()
+    let g:currentfile = @%
     cd $DOTFILES/config/nvim/startup
-    :Agraw '(.*)?map ,[^ ]*'
+    :Ag ^\s*[^"\s]*map.*,[!-~]*
 endfunction
+command! LeaderMappingsDeclaration call LeaderMappingsDeclaration()

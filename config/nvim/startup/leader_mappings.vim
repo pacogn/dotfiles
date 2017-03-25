@@ -85,7 +85,7 @@ nmap <silent> ,fg :GFiles<cr>
 " find help tag
 nmap <silent> ,fh :Helptags<cr>
 " find line in open buffers
-nmap <silent> ,fl :Lines<cr>
+nnoremap <silent> ,fl :Lines<cr>
 " find uncommited file
 nmap <silent> ,fu :GFiles?<cr>
 "fugitive
