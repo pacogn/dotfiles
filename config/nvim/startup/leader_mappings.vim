@@ -72,7 +72,7 @@ nnoremap ,d "_d
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
 xnoremap ,p "_dP
 nmap ,b :bn<cr>:bd #<cr>
-nmap ,bd :bn<cr>:bd #<cr>
+nmap ,bd :bn<cr>:bd! #<cr>
 nmap ,bw :bn<cr>:bw #<cr>
 nmap ,ee :!
 "end diff --- clean close diff window
@@ -148,6 +148,8 @@ map ,, :w<cr>
 nnoremap <silent> ,zj :call NextClosedFold('j')<cr>
 nnoremap <silent> ,zk :call NextClosedFold('k')<cr>
 inoremap ,, <Esc>:w<cr>
+imap <C-s>  <Esc>:w<cr>
+map <C-s>  <Esc>:w<cr>
 
 nmap <silent> ,m :GFiles<cr>
 nmap <silent> ,M :Buffers<cr>
