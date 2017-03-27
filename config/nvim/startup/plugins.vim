@@ -4,6 +4,9 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'felixhummel/setcolors.vim'
 " Plug 'scrooloose/syntastic' "allow for eslint checking
 " Plug 'Valloric/YouCompleteMe'
+" show registers on " and @
+Plug 'junegunn/vim-peekaboo'
+
 " type :AnsiEsc to get colors as terminal
 Plug 'powerman/vim-plugin-AnsiEsc'
 " allow different background for buffer without focus on split window
