@@ -55,6 +55,6 @@ set showbreak=… " show ellipsis at breaking
 set autoindent " automatically set indent of new line
 set smartindent
 set pastetoggle=<F6>
-set list
+set nolist
 set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set showbreak=↪
