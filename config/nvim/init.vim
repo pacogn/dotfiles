@@ -108,6 +108,7 @@ augroup configgroup
     " close help files on 'q'
         
     autocmd FileType help nnoremap <buffer>q :bd<cr>
+    autocmd FileType nerdtree nnoremap <buffer><Esc> :NERDTreeToggle<cr>
     autocmd BufEnter * call SetQuit() 
 
     " make quickfix windows take all the lower section of the screen
@@ -309,13 +310,6 @@ if (has("gui_running"))
     let g:airline_powerline_fonts=0
     let g:airline_theme='solarized'
 endif
-
-function! CursorPing()
-    set cursorline cursorcolumn
-    redraw
-    sleep 350m
-    set nocursorline nocursorcolumn
-endfunction
 
 function! BufOnly()
   let curr = bufnr("%")

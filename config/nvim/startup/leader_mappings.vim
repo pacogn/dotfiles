@@ -36,6 +36,17 @@ function! ToggleCurrsorLineColumn()
     let g:normal_cursor_line_column = 1
     set cursorline nocursorcolumn
 endfunction
+
+function! CursorPing()
+    let _cursorline = &cursorline
+    let _cursorcolumn = &cursorcolumn
+    set cursorline cursorcolumn
+    redraw
+    sleep 350m
+    let &cursorline = _cursorline
+    let &cursorcolumn = _cursorcolumn
+endfunction
+
 nmap ,. <c-^>
 nmap ,a <Nop>
 nmap ,ao <Nop>
