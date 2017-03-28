@@ -1,22 +1,3 @@
-function! ResetCwd()
-  if exists("g:cwd") && strlen(g:cwd)>0
-    cd `=g:cwd`
-    let g:cwd = ""
-  endif
-endfunction
-" vim: foldmethod=marker
-function! BnextIfFZF()
-    if &filetype == 'fzf'
-	:bp
-	if exists("g:currentfile")
-	    :e `=g:currentfile`
-	    :bp
-	    :bn
-	else
-	    :bn
-	endif
-    endif
-endfunction
 if has('nvim')
     " Mappings {{{1
     tnoremap \\ <C-\><C-n>
@@ -27,14 +8,15 @@ if has('nvim')
     tnoremap ,l <C-\><C-n>:wincmd l<cr>
     tnoremap ]b <C-\><C-n>:bnext<cr>
     tnoremap [b <C-\><C-n>:bprevious<cr>
-    tnoremap ,c loadall<cr>reload<cr>fg[blue]='\033[38;5;111m'<cr>source $DOTFILES/prompt<cr>clear<cr>
+    "¬ = alt+l
+    tnoremap ¬ loadall<cr>reload<cr>fg[blue]='\033[38;5;111m'<cr>source $DOTFILES/prompt<cr>clear<cr> 
     tnoremap ,. <C-\><C-n><c-^>
     tnoremap ,ev <C-\><C\n>:source ~/.dotfiles/config/nvim/init.vim<cr> 
     tnoremap <silent>,n <C-\><C-n>:NERDTreeToggle<cr>
     tnoremap ,nt  !'spec.js !'unit.js !'it.js
     tnoremap ,ot 'spec.js \| 'unit.js \| 'it.js
     tnoremap ,ds '/documentServices/
-    tmap <silent><Esc> <esc><C-\><c-n>:call ResetCwd()<cr>
+    tmap <silent><Esc> <esc><C-\><c-n>
     " AutoCommands {{{1
     autocmd! BufWinEnter,WinEnter term://* if &buftype == 'terminal' | startinsert | endif
     " autocmd TermOpen * :let @a='fg[blue]="\033[38;5;1m"' | put a | normal <cr>
