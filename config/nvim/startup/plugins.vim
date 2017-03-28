@@ -1,9 +1,17 @@
  " Section Plugins {{{
-"boo
+"todo bring latest ternjs into the scene
 call plug#begin('~/.config/nvim/plugged')
 "Plug 'felixhummel/setcolors.vim'
 " Plug 'scrooloose/syntastic' "allow for eslint checking
-" Plug 'Valloric/YouCompleteMe'
+
+
+Plug 'airblade/vim-rooter' " cd into root of project
+Plug 'kshenoy/vim-signature' " help for working with marks
+"
+" markdown
+Plug 'plasticboy/vim-markdown'
+Plug 'godlygeek/tabular' "related to vim-markdown
+
 " show registers on " and @
 Plug 'junegunn/vim-peekaboo'
 
@@ -79,7 +87,7 @@ Plug 'garbas/vim-snipmate' " snippet manager
 Plug 'editorconfig/editorconfig-vim' " .editorconfig support
 Plug 'MarcWeber/vim-addon-mw-utils' " interpret a file by function and cache file automatically
 Plug 'tomtom/tlib_vim' " utility functions for vim
-Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
+" Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
 " Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
 Plug 'tpope/vim-dispatch' " asynchronous build and test dispatcher
 " Plug 'mtth/scratch.vim'
@@ -116,90 +124,6 @@ Plug 'hail2u/vim-css3-syntax', { 'for': 'css' } " CSS3 syntax support
 Plug 'itspriddle/vim-marked', { 'for': 'markdown', 'on': 'MarkedOpen' } " Open markdown files in Marked.app - mapped to <leader>m
 " :TableModeToggle
 Plug 'dhruvasagar/vim-table-mode'
-Plug 'godlygeek/tabular'
 
 
 call plug#end()
-let g:EasyMotion_do_mapping=0
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    " return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-    " For no inserting <CR> key.
-    return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-" Enable omni completion.
-augroup whatAMess
-    autocmd!
-    autocmd FileType javascript nnoremap <buffer><C-]> :TernDef<cr>
-    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-augroup END
-
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-if has('nvim')
-    let g:tern_request_timeout = 1
-    let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
-
-    " if !exists('g:tern#command')
-    "   let g:tern#command = ["/Users/davidsu/.nvm/versions/node/v4.2.1/bin/node", expand('<sfile>:h') . '/../node_modules/tern/bin/tern', '--no-port-file']
-    " endif
-    let g:tern#arguments = ["--persistent"]
-else
-
-    "Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
-    " Disable AutoComplPop.
-    let g:acp_enableAtStartup = 0
-    " Use neocomplete.
-    let g:neocomplete#enable_at_startup = 1
-    " Use smartcase.
-    let g:neocomplete#enable_smart_case = 1
-    " Set minimum syntax keyword length.
-    let g:neocomplete#sources#syntax#min_keyword_length = 3
-    let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-
-    " Define dictionary.
-    let g:neocomplete#sources#dictionary#dictionaries = {
-                \ 'default' : '',
-                \ 'vimshell' : $HOME.'/.vimshell_hist',
-                \ 'scheme' : $HOME.'/.gosh_completions'
-                \ }
-
-    " Define keyword.
-    if !exists('g:neocomplete#keyword_patterns')
-        let g:neocomplete#keyword_patterns = {}
-    endif
-    let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-
-    " Plugin key-mappings.
-    inoremap <expr><C-g>     neocomplete#undo_completion()
-    inoremap <expr><C-l>     neocomplete#complete_common_string()
-
-    " Recommended key-mappings.
-    " <CR>: close popup and save indent.
-    " <TAB>: completion.
-    " inoremap <expr><Esc>  pumvisible() ? neocomplete#smart_close_popup() : "\<Esc>\<Esc>"
-    " <C-h>, <BS>: close popup and delete backword char.
-    " inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-    " inoremap <expr><silent><BS> neocomplete#smart_close_popup()."\<C-h>"
-    " Close popup by <Space>.
-    "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
-
-    " AutoComplPop like behavior.
-    "let g:neocomplete#enable_auto_select = 1
-
-    " Shell like behavior(not recommended).
-    "set completeopt+=longest
-    "let g:neocomplete#enable_auto_select = 1
-    " let g:neocomplete#disable_auto_complete = 1
-" inoremap <expr><Tab>  neocomplete#start_manual_complete()
-
-    "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
-    " Enable heavy omni completion.
-    if !exists('g:neocomplete#sources#omni#input_patterns')
-        let g:neocomplete#sources#omni#input_patterns = {}
-    endif
-endif
