@@ -4,6 +4,7 @@ alias vim='nvim'
 alias ag='ag --color-match="1;031"'
 alias agd='cd $DOTFILES && ag --ignore ''plugged*'' --ignore-dir ''forkedProjects'' --ignore ''autoload*'''
 alias -g E=' | egrep '
+alias -g F=' | fzf --preview ''preview.rb {}'''
 alias -g G=' | grep -i '
 alias -g NOLOG=' | egrep -v $LOG '
 alias -g NOTEST="--ignore '*.unit.js' --ignore '*.spec.js'"
