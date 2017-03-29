@@ -31,6 +31,7 @@ let g:fzf_action = {
 "FUNCTIONS                                                                    {{{ 
 "--------------------------------------------------------------------------------
 
+let s:defaultPreview = fzf#vim#with_preview('right:50%:hidden', 'π')
 function! Noop(...)
 endfunction
 function! FzfLet()
@@ -61,36 +62,64 @@ function! FzfSet()
 endfunction
 
 function! FindText(text, ...)
-        let additionalParams = ( a:0 > 0 ) ? a:1 : ''
-        let agcmd = ''''.a:text.''' '.additionalParams
-        call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
+    let additionalParams = ( a:0 > 0 ) ? a:1 : ''
+    let agcmd = ''''.a:text.''' '.additionalParams
+    call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
 endfunction
 
 function! FindFunction(functionName, ...)
-        let additionalParams = ( a:0 > 0 ) ? a:1 : ''
-        " (?<=...) positive lookbehind: must constain
-        " (?=...) positive lookahead: must contain
-        let agcmd = '''(?<=function\s)'.a:functionName.'(?=\()|'.a:functionName.'\s*:'' '.additionalParams
-        call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
+    let additionalParams = ( a:0 > 0 ) ? a:1 : ''
+    " (?<=...) positive lookbehind: must constain
+    " (?=...) positive lookahead: must contain
+    let agcmd = '''(?<=function\s)'.a:functionName.'(?=\()|'.a:functionName.'\s*:'' '.additionalParams
+    call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
 endfunction
 
 function! FindAssignment(variableName, ...)
-        let additionalParams = ( a:0 > 0 ) ? a:1 : ''
-        " (?<=...) positive lookbehind: must constain
-        " (?=...) positive lookahead: must contai
-        let agcmd = '''(=|:).*\b'.a:variableName.'\b'' | ag -v ''\('' '.additionalParams
-        " call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
-        call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
+    let additionalParams = ( a:0 > 0 ) ? a:1 : ''
+    " (?<=...) positive lookbehind: must constain
+    " (?=...) positive lookahead: must contai
+    let agcmd = '''(=|:).*\b'.a:variableName.'\b'' | ag -v ''\('' '.additionalParams
+    " call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
+    call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
 endfunction
 
 function! FindUsage(variableName, ...)
-        let additionalParams = ( a:0 > 0 ) ? a:1 : ''
-        let agcmd = '''(?<!function\s)\b'.a:variableName.'(?=\()'' '.additionalParams
-        " call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
-        call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
+    let additionalParams = ( a:0 > 0 ) ? a:1 : ''
+    let agcmd = '''(?<!function\s)\b'.a:variableName.'(?=\()'' '.additionalParams
+    " call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
+    call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
 endfunction
 
-
+function! GoToDeclaration()
+    let l:pos = getpos('.')
+    let l:currFileName = expand('%')
+    let l:lineFromCursorPosition = strpart(getline('.'), getpos('.')[2])
+    let l:wordUnderCursor = expand('<cword>')
+    let l:isFunction = match(l:lineFromCursorPosition , '^\(\w\|\s\)*(') + 1
+    silent TernDef
+    if join(l:pos) == join(getpos('.'))
+        if l:isFunction
+            FindNoTestFunction(l:wordUnderCursor)
+        else
+            call fzf#vim#ag(expand('<cword>'), s:defaultPreview ) 
+        endif
+    else
+        let l:newCursorLine = getline('.')
+        let l:newCurrFileName = expand('%')
+        let l:regex = '^\s*' . l:wordUnderCursor . '\s*\(,\?\|\(:\s*' . l:wordUnderCursor . ',\?\)\)\s*$'
+        echom l:regex
+        if l:newCurrFileName != l:currFileName && match(l:newCursorLine, '\((\|=\)') < 0 && match(getline('.'), regex ) + 1
+            echom 'the line: ' . getline('.')
+            call search(l:wordUnderCursor . '\s*\((\|=\)')
+            " note that i changed this function tin python to allow `add_jump_position` argument
+            py3 tern_lookupDefinition("edit", add_jump_position=False)
+        endif
+        normal zz
+        call CursorPing()
+    endif
+endfunction
+nnoremap <buffer><C-]> :call GoToDeclaration()<cr>
 "-----------------------------------------------------------------------------}}}
 "COMMANDS                                                                     {{{
 "--------------------------------------------------------------------------------
@@ -128,7 +157,7 @@ command! FZFMru call fzf#run({
 command! FZFFiles call fzf#run({
     \  'source': 'find . | egrep -v \.git',
     \  'sink':    'e',
-    \  'options': '--reverse -m -x +s'})
+    \  'options': '-m -x +s'})
 
 let onlyTest=' | ag ''(unit|spec).js'''
 
@@ -160,7 +189,6 @@ command! FzfLet call FzfLet()
 augroup myfzfgroup
     autocmd!
     autocmd VimEnter * command! -nargs=* -bang Agraw call fzf#vim#ag_raw(<args>)
-    autocmd FileType help call ResetCwd()
-    autocmd FileType vim call ResetCwd()
+	autocmd FileType javascript nnoremap <buffer><C-]> :call GoToDeclaration()<cr>
 augroup END
 "-----------------------------------------------------------------------------}}}
