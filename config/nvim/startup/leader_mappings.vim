@@ -47,7 +47,23 @@ function! CursorPing()
     let &cursorcolumn = _cursorcolumn
 endfunction
 
-nmapemap <silent> ,au :call FindUsage(expand("<cword>"))<cr>
+function! InsertBeforeLastCharacterOfLine(count)
+    normal $
+    let l:_count = a:count
+    while l:_count > 0
+        normal! h
+        let l:_count = l:_count-1
+    endwhile
+endfunction
+nmap ,. <c-^>
+"<C-U> is needed for properly capturing the count, I don't understand why
+nmap ,,a :<C-U>call InsertBeforeLastCharacterOfLine(v:count)<cr>
+nmap ,a <Nop>
+nmap ,ao <Nop>
+nnoremap <silent> ,aa :call FindAssignment(expand("<cword>"))<cr>
+nnoremap <silent> ,af :call FindFunction(expand("<cword>"))<cr>
+nnoremap <silent> ,at "fyaw:FindText '<C-r>f'<cr>
+nnoremap <silent> ,au :call FindUsage(expand("<cword>"))<cr>
 nnoremap <silent> ,aw "fyaw:FindText '<C-r>f'<cr>
 nnoremap <silent> ,anta :FindNoTestAssignment expand("<cword>")<cr>
 nnoremap <silent> ,antf :FindNoTestFunction expand("<cword>")<cr>
