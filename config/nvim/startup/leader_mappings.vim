@@ -47,13 +47,7 @@ function! CursorPing()
     let &cursorcolumn = _cursorcolumn
 endfunction
 
-nmap ,. <c-^>
-nmap ,a <Nop>
-nmap ,ao <Nop>
-nnoremap <silent> ,aa :call FindAssignment(expand("<cword>"))<cr>
-nnoremap <silent> ,af :call FindFunction(expand("<cword>"))<cr>
-nnoremap <silent> ,at "fyaw:FindText '<C-r>f'<cr>
-nnoremap <silent> ,au :call FindUsage(expand("<cword>"))<cr>
+nmapemap <silent> ,au :call FindUsage(expand("<cword>"))<cr>
 nnoremap <silent> ,aw "fyaw:FindText '<C-r>f'<cr>
 nnoremap <silent> ,anta :FindNoTestAssignment expand("<cword>")<cr>
 nnoremap <silent> ,antf :FindNoTestFunction expand("<cword>")<cr>

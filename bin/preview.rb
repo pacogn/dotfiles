@@ -19,13 +19,16 @@ end
 usage if ARGV.empty?
 
 file, center = ARGV.first.split(':')
-# doesn't work :(
-# file = file.gsub(/\e\[([;\d]+)?m/, '')
+# davidsu modified to remove ansiescape - very brute but I don't know better
+file = file.gsub(/\e\[([;\d]+)?m/, '')
+file = file.gsub(/\e.*$/, '')
+# enddavidsu
 usage unless file
 
 path = File.expand_path(file)
 unless File.readable? path
   puts "File not found: #{file}"
+  puts "File not found: #{path}"
   exit 1
 end
 
