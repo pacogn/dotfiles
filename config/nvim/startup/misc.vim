@@ -4,7 +4,7 @@ let g:rooter_manual_only = 1
 let g:EasyMotion_do_mapping=0
 
 function! ListDotFiles()
-call fzf#run({'dir': '$DOTFILES/config/nvim/',
+    call fzf#run({'dir': '$DOTFILES/config/nvim/',
 		\'source': 'find -E . -regex ''(./init.vim|.*startup.+)''',
 		\'sink': 'e'})
 endfunction
@@ -12,6 +12,9 @@ command! ListDotFiles call ListDotFiles()
 command! CDR Rooter
 command! CDC cd %:p:h
 
+function! ClearMessages()
+    for n in range(200) | echom "" | endfor
+endfunction
 language en_US
 
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
@@ -23,12 +26,13 @@ endfunction
 " Enable omni completion.
 augroup whatAMess
     autocmd!
-    autocmd FileType javascript nnoremap <buffer><C-]> :TernDef<cr>
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    " au VimEnter * Obsession " this is a terrible idea cuz you delete a real session when opening an empty vim
+    autocmd FileType vim set shiftwidth=4
 augroup END
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
