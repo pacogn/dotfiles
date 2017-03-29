@@ -1,3 +1,4 @@
+" //todo: how to automatic open fold when jumping into it?
 " vim: foldmethod=marker
 autocmd!
 " Load startup files{{{1--------------------------------------------------------------------------------------------------
