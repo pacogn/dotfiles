@@ -15,8 +15,9 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-nnoremap <buffer><C-]> :call GoToDeclaration()<cr>
-"
+
+nmap q<Tab> :LeaderMappingsDeclaration<cr>
+
 "-----------------------------------------------------------------------------}}}
 "GLOBALS                                                                      {{{ 
 "--------------------------------------------------------------------------------
@@ -33,7 +34,7 @@ let g:fzf_action = {
 "FUNCTIONS                                                                    {{{ 
 "--------------------------------------------------------------------------------
 
-let s:defaultPreview = fzf#vim#with_preview('right:50%:hidden', 'π')
+let s:defaultPreview = fzf#vim#with_preview('up:50%:hidden', 'π')
 function! Noop(...)
 endfunction
 function! FzfLet()
@@ -66,7 +67,7 @@ endfunction
 function! FindText(text, ...)
     let additionalParams = ( a:0 > 0 ) ? a:1 : ''
     let agcmd = ''''.a:text.''' '.additionalParams
-    call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
+    call fzf#vim#ag_raw(agcmd, s:defaultPreview)
 endfunction
 
 function! FindFunction(functionName, ...)
@@ -74,7 +75,7 @@ function! FindFunction(functionName, ...)
     " (?<=...) positive lookbehind: must constain
     " (?=...) positive lookahead: must contain
     let agcmd = '''(?<=function\s)'.a:functionName.'(?=\()|'.a:functionName.'\s*:'' '.additionalParams
-    call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
+    call fzf#vim#ag_raw(agcmd, s:defaultPreview)
 endfunction
 
 function! FindAssignment(variableName, ...)
@@ -83,14 +84,14 @@ function! FindAssignment(variableName, ...)
     " (?=...) positive lookahead: must contai
     let agcmd = '''(=|:).*\b'.a:variableName.'\b'' | ag -v ''\('' '.additionalParams
     " call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
-    call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
+    call fzf#vim#ag_raw(agcmd, s:defaultPreview)
 endfunction
 
 function! FindUsage(variableName, ...)
     let additionalParams = ( a:0 > 0 ) ? a:1 : ''
     let agcmd = '''(?<!function\s)\b'.a:variableName.'(?=\()'' '.additionalParams
     " call histadd('cmd', 'Agraw '''''.agcmd.''' -A 0 -B 0''')
-    call fzf#vim#ag_raw(agcmd, fzf#vim#with_preview('right:50%:hidden', 'π'))
+    call fzf#vim#ag_raw(agcmd, s:defaultPreview)
 endfunction
 
 function! GoToDeclaration()
@@ -194,7 +195,7 @@ command! ChangeColorScheme :call fzf#run({
 command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>,
     \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-    \                         : fzf#vim#with_preview('right:50%:hidden', 'π'),
+    \                         : s:defaultPreview,
     \                 <bang>0)
 command! FZFMru call fzf#run({
     \  'source':  v:oldfiles,
@@ -223,7 +224,7 @@ command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \'''^\|[^-:0-9](\|?|[^:]{0,6}[^)])\|''', 
             \{'dir':'/usr/local/Cellar/vim/8.0.0271/share/vim/vim80/doc',
             \'options': ' --preview-window right:50%:hidden --preview "''/Users/davidsu/.dotfiles/config/nvim/plugged/fzf.vim/bin/preview.rb''"\ \ {} --bind ''π:toggle-preview'''})
-let s:leaderOrAltChars = '[,`¡™£¢∞§¶•ªº≠œ∑´®†¥¨ˆøπ“‘«åß∂ƒ©˙∆˚¬…æΩ≈ç√∫˜µ≤≥÷`]'
+let s:leaderOrAltChars = '[,`¡™£¢∞§¶•ªº≠œ∑´®†¥¨ˆøπ“‘«åß∂ƒ©˙∆˚¬…æΩ≈ç√∫˜µ≤≥÷q]'
 command! LeaderMappingsDeclaration call fzf#vim#ag('^\s*[^"\s]*map.*' . s:leaderOrAltChars . '[!-~]*', 
             \fzf#vim#with_preview({'dir':'$DOTFILES/config/nvim/startup'},'right:50%:hidden', 'π'))
             " \{'dir':'$DOTFILES/config/nvim/startup',
