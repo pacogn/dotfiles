@@ -17,10 +17,5 @@ if has('nvim')
     tnoremap ,ot 'spec.js \| 'unit.js \| 'it.js
     tnoremap ,ds '/documentServices/
     tmap <silent><Esc> <esc><C-\><c-n>
-    " AutoCommands {{{1
-    autocmd! BufWinEnter,WinEnter term://* if &buftype == 'terminal' | startinsert | endif
-    " autocmd TermOpen * :let @a='fg[blue]="\033[38;5;1m"' | put a | normal <cr>
-    " autocmd TermOpen * ,c
-    " }}}
 
 endif
