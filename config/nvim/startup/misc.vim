@@ -2,13 +2,24 @@ let g:peekaboo_window='vert bo 60new'
 let g:diminactive_buftype_blacklist = ['nowrite', 'acwrite']
 let g:rooter_manual_only = 1
 let g:EasyMotion_do_mapping=0
+let g:table_mode_corner = '|'
+let g:table_mode_separator = '|'
 
-function! ListDotFiles()
-    call fzf#run({'dir': '$DOTFILES/config/nvim/',
-		\'source': 'find -E . -regex ''(./init.vim|.*startup.+)''',
+
+" function! ListDotFiles()
+"     call fzf#run({'dir': '$DOTFILES/config/nvim/',
+" 		\'source': 'find -E . -regex ''(./init.vim|.*startup.+)''',
+" 		\'sink': 'e'})
+" endfunction
+function! ListDotFiles(dir, command)
+    call fzf#run({'dir': a:dir,
+		\'source': a:command,
 		\'sink': 'e'})
 endfunction
-command! ListDotFiles call ListDotFiles()
+command! ListDotFiles call ListDotFiles('$DOTFILES/',  'git ls-files')
+command! DotFiles call ListDotFiles('$DOTFILES',  'git ls-files')
+command! DotVim call ListDotFiles('$DOTFILES/config/nvim/',  'git ls-files')
+command! DotPlugged call ListDotFiles('$DOTFILES/config/nvim/plugged',  'find . | grep -vF .git')
 command! CDR Rooter
 command! CDC cd %:p:h
 
