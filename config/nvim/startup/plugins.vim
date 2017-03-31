@@ -1,6 +1,10 @@
 call plug#begin('~/.config/nvim/plugged')
 " Plug 'felixhummel/setcolors.vim'
 " Plug 'scrooloose/syntastic' "allow for eslint checking
+Plug 'sbdchd/neoformat', { 'for':                           
+            \['javascript', 'css', 'scss', 
+            \'sh', 'zsh', 'vim', 'html'] }                  " A (Neo)vim plugin for formatting code. - you will need jsbeautifier globally installed
+Plug 'junegunn/vim-xmark' , { 'do': 'make' }                " ❌ Markdown preview on OS X
 Plug 'junegunn/vim-easy-align'                              " A Vim alignment plugin
 Plug 'junegunn/vim-slash'                                   " Enhancing in-buffer search experience
 Plug 'airblade/vim-rooter'                                  " cd into root of project
