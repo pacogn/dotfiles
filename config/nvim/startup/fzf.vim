@@ -107,6 +107,7 @@ function! GoToDeclaration()
         else
             call fzf#vim#ag(expand('<cword>'), s:defaultPreview ) 
         endif
+        call feedkeys(l:wordUnderCursor)
     else
         let l:newCursorLine = getline('.')
         let l:newCurrFileName = expand('%')
@@ -128,7 +129,7 @@ function! FzfNerdTreeMappings()
                 \'o       Open files, directories and bookmarks                    |NERDTree-o|' ,
                 \'go      Open selected file, but leave cursor in the NERDTree     |NERDTree-go|' ,
                 \'t       Open selected node/bookmark in a new tab                 |NERDTree-t|' ,
-                \'T       Same as ''t'' but keep the focus on the current tab        |NERDTree-T|' ,
+                \'T       Same as ''t'' but keep the focus on the current tab      |NERDTree-T|' ,
                 \'i       Open selected file in a split window                     |NERDTree-i|' ,
                 \'gi      Same as i, but leave the cursor on the NERDTree          |NERDTree-gi|',
                 \'s       Open selected file in a new vsplit                       |NERDTree-s|' ,
@@ -146,7 +147,7 @@ function! FzfNerdTreeMappings()
                 \'<C-K>   Jump up to the previous sibling of the current directory |NERDTree-C-K|' ,
                 \'C       Change the tree root to the selected dir                 |NERDTree-C|' ,
                 \'u       Move the tree root up one directory                      |NERDTree-u|' ,
-                \'U       Same as ''u'' except the old root node is left open        |NERDTree-U|' ,
+                \'U       Same as ''u'' except the old root node is left open      |NERDTree-U|' ,
                 \'r       Recursively refresh the current directory                |NERDTree-r|' ,
                 \'R       Recursively refresh the current root                     |NERDTree-R|' ,
                 \'m       Display the NERD tree menu                               |NERDTree-m|' ,
@@ -164,6 +165,42 @@ function! FzfNerdTreeMappings()
                 \'sink': function('ExecMapping'),
                 \'right': '60%'
                 \})
+endfunction
+
+function! FugitiveMappings()
+   let l:mappings = [
+                \'g?    show this help',
+                \'<C-N> next file',
+                \'<C-P> previous file',
+                \'<CR>  |:Gedit|',
+                \'-     |:Git| add',
+                \'-     |:Git| reset (staged files)',
+                \'cA    |:Gcommit| --amend --reuse-message=HEAD',
+                \'ca    |:Gcommit| --amend',
+                \'cc    |:Gcommit|',
+                \'cva   |:Gcommit| --amend --verbose',
+                \'cvc   |:Gcommit| --verbose',
+                \'D     |:Gdiff|',
+                \'ds    |:Gsdiff|',
+                \'dp    |:Git!| diff (p for patch; use :Gw to apply)',
+                \'dp    |:Git| add --intent-to-add (untracked files)',
+                \'dv    |:Gvdiff|',
+                \'O     |:Gtabedit|',
+                \'o     |:Gsplit|',
+                \'p     |:Git| add --patch',
+                \'p     |:Git| reset --patch (staged files)',
+                \'q     close status',
+                \'r     reload status',
+                \'S     |:Gvsplit|',
+                \'U     |:Git| checkout',
+                \'U     |:Git| checkout HEAD (staged files)',
+                \'U     |:Git| clean (untracked files)',
+                \'U     |:Git| rm (unmerged files)'] 
+  call fzf#run({
+              \'source': l:mappings,
+              \'sink': function('ExecMapping'),
+              \'right': '60%'
+              \})
 endfunction
 function! ExecMapping(line)
     let l:mapping = matchstr(a:line, '^\S*')
@@ -240,5 +277,6 @@ augroup myfzfgroup
     autocmd VimEnter * command! -nargs=* -bang Agraw call fzf#vim#ag_raw(<args>)
     autocmd FileType javascript nnoremap <buffer><C-]> :call GoToDeclaration()<cr>
     autocmd FileType nerdtree nnoremap <buffer>,<Tab> :call  FzfNerdTreeMappings()<cr>
+    autocmd FileType gitcommit nnoremap <buffer>,<Tab> :call FugitiveMappings()<cr>
 augroup END
 "-----------------------------------------------------------------------------}}}
