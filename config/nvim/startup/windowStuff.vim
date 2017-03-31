@@ -43,10 +43,19 @@ function! ToggleForceVerticalResize()
 	" let g:forcehorizontalresize = 0
 endfunction
 " increase decrease vertica split by +,_
-nnoremap + :call WinSize('+')<cr>
-nnoremap _ :call WinSize('-')<cr>
 let g:forcehorizontalresize = 0
+nnoremap + :call WinSize('+')<cr><esc>
+nnoremap _ :call WinSize('-')<cr>
 nnoremap ,v :call ToggleForceVerticalResize()<cr>
+"'≠' == 'alt+=', '–' == 'alt+-', º == 'alt+0'
+nnoremap ≠ :call WinSize('+')<cr>
+nnoremap – :call WinSize('-')<cr>
+nnoremap º :call ToggleForceVerticalResize()<cr>
+if has('nvim')
+  tnoremap ≠ <C-\><C-n>:call WinSize('+')<cr>i
+  tnoremap – <C-\><C-n>:call WinSize('-')<cr>i
+  tnoremap º <C-\><C-n>:call ToggleForceVerticalResize()<cr>i
+endif
 
 nnoremap <silent> <C-j> :call WinMove('j')<cr>
 nnoremap <silent> <C-k> :call WinMove('k')<cr>
