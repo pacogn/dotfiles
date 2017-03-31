@@ -1,4 +1,5 @@
 export IGNORE_TESTS=" --ignore '*.spec.js' --ignore '*.unit.js' --ignore '*.it.js' --ignore '*.*.spec.js' --ignore '*.*.*unit.js' --ignore '*.*.*it.js' "
+export IGNORE_IN_DOTFILES=" --ignore 'forkedProjects' --ignore 'autoload' --ignore 'plugged' --ignore 'snippets' "
 function FindFunction(){
     echo ag '(?<=function\s)'$1'(?=\()|'$1'\s*:' ${@:2}
     ag '(?<=function\s)'$1'(?=\()|'$1'\s*:' ${@:2}
