@@ -1,6 +1,5 @@
 "MAPPINGS{{{
 "--------------------------------------------------------------------------------
-
 " Mapping selecting mappings
 nmap <silent> ,t :GFiles<cr>
 nmap <silent> ,r :Buffers<cr>
@@ -16,7 +15,7 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 
-nmap q<Tab> :LeaderMappingsDeclaration<cr>
+nmap 1m :LeaderMappingsDeclaration<cr>
 
 "-----------------------------------------------------------------------------}}}
 "GLOBALS                                                                      {{{ 
@@ -102,6 +101,7 @@ function! GoToDeclaration()
     let l:isFunction = match(l:lineFromCursorPosition , '^\(\w\|\s\)*(') + 1
     silent TernDef
     if join(l:pos) == join(getpos('.'))
+        "can't jump to definition with tern, do a search with ag + fzf
         if l:isFunction
             FindNoTestFunction(l:wordUnderCursor)
         else
@@ -114,9 +114,10 @@ function! GoToDeclaration()
         let l:regex = '^\s*' . l:wordUnderCursor . '\s*\(,\?\|\(:\s*' . l:wordUnderCursor . ',\?\)\)\s*$'
         echom l:regex
         if l:newCurrFileName != l:currFileName && match(l:newCursorLine, '\((\|=\)') < 0 && match(getline('.'), regex ) + 1
+            "we are inside a module.exports, maybe we can get to the line where the function is declared
             echom 'the line: ' . getline('.')
             call search(l:wordUnderCursor . '\s*\((\|=\)')
-            " note that i changed this function tin python to allow `add_jump_position` argument
+            " note that i changed this function in python to allow `add_jump_position` argument
             py3 tern_lookupDefinition("edit", add_jump_position=False)
         endif
         normal zz
@@ -202,9 +203,23 @@ function! FugitiveMappings()
               \'right': '60%'
               \})
 endfunction
+
 function! ExecMapping(line)
     let l:mapping = matchstr(a:line, '^\S*')
     call feedkeys(substitute(l:mapping, '<[^ >]\+>', '\=eval("\"\\".submatch(0)."\"")', 'g'))
+endfunction
+
+function! FZFYankRingSink(val)
+    let @@=a:val
+    let @0=a:val
+    put a:val
+endfunction
+function! FZFYankRing()
+    call fzf#run({
+          \'dir': g:yankring_history_dir,
+          \'source': 'cat ' . g:yankring_history_file . '_v2.txt',
+          \'sink': function('FZFYankRingSink')
+          \})
 endfunction
 "-----------------------------------------------------------------------------}}}
 "COMMANDS                                                                     {{{
@@ -221,6 +236,7 @@ command! -nargs=+ FindOnlyTestFunction call FindFunction(<args>, onlyTest)
 command! -nargs=+ FindOnlyTestAssignment call FindAssignment(<args>, onlyTest)
 command! -nargs=+ FindOnlyTestUsage call FindUsage(<args>, onlyTest)
 command! -nargs=+ FindOnlyTestText call FindText(<args>, onlyTest)
+
 command! ChangeColorScheme :call fzf#run({
     \   'source':
     \     map(split(globpath(&rtp, "colors/*.vim"), "\n"),
@@ -229,16 +245,19 @@ command! ChangeColorScheme :call fzf#run({
     \   'options': '+m',
     \   'left':    30
     \ })<CR>
+
 command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>,
     \                 <bang>0 ? fzf#vim#with_preview('up:60%')
     \                         : s:defaultPreview,
     \                 <bang>0)
+
 command! FZFMru call fzf#run({
     \  'source':  v:oldfiles,
     \  'sink':    'e',
     \  'options': '-m -x +s',
     \  'down':    '40%'})
+
 
 command! FZFFiles call fzf#run({
     \  'source': 'find . | egrep -v \.git',
@@ -263,9 +282,7 @@ command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \'options': ' --preview-window right:50%:hidden --preview "''/Users/davidsu/.dotfiles/config/nvim/plugged/fzf.vim/bin/preview.rb''"\ \ {} --bind ''π:toggle-preview'''})
 let s:leaderOrAltChars = '[,`¡™£¢∞§¶•ªº≠œ∑´®†¥¨ˆøπ“‘«åß∂ƒ©˙∆˚¬…æΩ≈ç√∫˜µ≤≥÷q]'
 command! LeaderMappingsDeclaration call fzf#vim#ag('^\s*[^"\s]*map.*' . s:leaderOrAltChars . '[!-~]*', 
-            \fzf#vim#with_preview({'dir':'$DOTFILES/config/nvim/startup'},'right:50%:hidden', 'π'))
-            " \{'dir':'$DOTFILES/config/nvim/startup',
-            " \'options': ' --preview-window right:50%:hidden --preview "''/Users/davidsu/.dotfiles/config/nvim/plugged/fzf.vim/bin/preview.rb''"\ \ {} --bind ''π:toggle-preview'''})
+            \fzf#vim#with_preview({'dir':'$DOTFILES/config/nvim/startup', 'down': '100%'},'up:30%', 'π'))
 command! FzfSet call FzfSet()
 command! FzfLet call FzfLet()
 
