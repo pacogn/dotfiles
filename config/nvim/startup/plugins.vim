@@ -57,15 +57,15 @@ Plug '$HOME/.dotfiles/forkedProjects/base16-vim'
 " Plug 'sudavid4/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 " Plug 'flazz/vim-colorschemes'
-Plug 'dracula/vim'
+" Plug 'dracula/vim'
 " utilities
 Plug 'scrooloose/nerdtree', 
             \{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] } |
             \Plug 'Xuyuanp/nerdtree-git-plugin'           |
             \Plug 'ryanoasis/vim-devicons'                  " file drawer
-Plug 'mileszs/ack.vim'                                      " search inside files using ack. Same as command line ack utility, but use :Ack
+" Plug 'mileszs/ack.vim'                                      " search inside files using ack. Same as command line ack utility, but use :Ack
 " david: disabled this plugin, is it worth somrthing?
-Plug 'Raimondi/delimitMate'                                 " automatic closing of quotes, parenthesis, brackets, etc.
+" Plug 'Raimondi/delimitMate'                                 " automatic closing of quotes, parenthesis, brackets, etc.
                                                             " this is awesome!!!
 Plug 'tpope/vim-commentary'                                 " comment stuff out
 Plug 'tpope/vim-unimpaired'                                 " mappings which are simply short normal mode aliases for commonly used ex commands
