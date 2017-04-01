@@ -4,7 +4,8 @@ let g:rooter_manual_only = 1
 let g:EasyMotion_do_mapping=0
 let g:table_mode_corner = '|'
 let g:table_mode_separator = '|'
-
+let g:yankring_history_dir = '$HOME'
+let g:yankring_history_file = '.yankring_vim_history'
 
 " function! ListDotFiles()
 "     call fzf#run({'dir': '$DOTFILES/config/nvim/',
@@ -24,7 +25,7 @@ command! Vimrc call fzf#vim#ag_raw(
 	    \'--ignore ''autoload''  ' .
 	    \'--ignore ''plugged'' '.
 	    \'^', 
-	    \fzf#vim#with_preview({'dir': '$DOTFILES/config/nvim/', 'up': '100%'}, 'up:30%', 'π'))
+	    \fzf#vim#with_preview({'dir': '$DOTFILES/config/nvim/', 'up': '100%'}, 'up:40%', 'π'))
 command! CDR Rooter
 command! CDC cd %:p:h
 
@@ -220,7 +221,6 @@ augroup configgroup
 
 	" Trigger autoread when changing buffers or coming back to vim.
 	au FocusGained,BufEnter * :silent! !
-
 augroup END
 
 function! SetQuit()
@@ -229,21 +229,6 @@ function! SetQuit()
   endif
   map <buffer>quit :qa<cr>
 endfunction
-
-" code folding settings
-" set foldmethod=manual " fold based on indent
-
-
-
-
-" Searching
-
-
-"set showmatch " show matching braces
-"set mat=2 " how many tenths of a second to blink
-
-" error bells
-"????david
 
 " switch syntax highlighting on
 syntax on
@@ -394,16 +379,6 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
-
-if (has("gui_running"))
-	set guioptions=egmrt
-	set background=light
-	colorscheme solarized
-	let g:airline_left_sep=''
-	let g:airline_right_sep=''
-	let g:airline_powerline_fonts=0
-	let g:airline_theme='solarized'
-endif
 
 function! BufOnly()
   let curr = bufnr("%")
