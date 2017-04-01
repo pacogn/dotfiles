@@ -261,6 +261,7 @@ cnoremap jk <C-c>
 cnoremap ,, <C-c>
 " Make Y behave like other capitals
 nnoremap Y y$
+let g:yankring_n_keys='D x X'
 " markdown to html
 " nmap <leader>md :%!markdown --html4tags <cr>
 
