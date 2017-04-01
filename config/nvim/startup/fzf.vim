@@ -16,6 +16,8 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 
 
 nmap 1m :LeaderMappingsDeclaration<cr>
+nmap 1v :Vimrc<cr>
+nmap 1<Tab> :LeaderMappingsDeclaration<cr>
 
 "-----------------------------------------------------------------------------}}}
 "GLOBALS                                                                      {{{ 

@@ -1,8 +1,9 @@
 function! FixPowerlineFontsAndSave()
+    " can't load powerline fonts on startup, it looks terrible. This is a hacky workaround
     execute('source '.expand('$DOTFILES/config/nvim/startup/airline.vim'))
     execute('source '.expand('$DOTFILES/config/nvim/startup/options.vim'))
     unmap ,,
-    :w! %<cr>
+    :w
     map ,, :w<cr>
 endfunction
 map ,, :call FixPowerlineFontsAndSave()<cr>
@@ -94,6 +95,7 @@ nnoremap ,d "_d
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
 xnoremap ,p "_dP
 nmap ,b :bn<cr>:bd #<cr>
+nmap ,bl :BLines<cr>
 nmap ,bd :bn<cr>:bd! #<cr>
 nmap ,bw :bn<cr>:bw #<cr>
 nmap ,ee :!
