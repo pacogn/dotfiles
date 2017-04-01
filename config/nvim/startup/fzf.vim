@@ -292,7 +292,7 @@ command! FzfLet call FzfLet()
 augroup myfzfgroup
     autocmd!
     autocmd VimEnter * command! -nargs=* -bang Agraw call fzf#vim#ag_raw(<args>)
-    autocmd FileType javascript nnoremap <buffer><C-]> :call GoToDeclaration()<cr>
+    autocmd FileType javascript nnoremap <buffer>gd :call GoToDeclaration()<cr>
     autocmd FileType nerdtree nnoremap <buffer>,<Tab> :call  FzfNerdTreeMappings()<cr>
     autocmd FileType gitcommit nnoremap <buffer>,<Tab> :call FugitiveMappings()<cr>
 augroup END
