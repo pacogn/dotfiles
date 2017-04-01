@@ -78,9 +78,9 @@ nnoremap <silent> ,aotu :FindOnlyTestUsage expand("<cword>")<cr>
 " http://unix.stackexchange.com/questions/88714/vim-how-can-i-do-a-change-word-using-the-current-paste-buffer
 " delete without changing registers
 nnoremap ,c :Commands<cr>
-nnoremap qc :Commands<cr>
-nnoremap q: :History:<cr>
-nnoremap q/ :History/<cr>
+nnoremap 1c :Commands<cr>
+nnoremap 1: :History:<cr>
+nnoremap 1/ :History/<cr>
 nnoremap ,d "_d
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
 xnoremap ,p "_dP
@@ -129,11 +129,10 @@ map <silent> ,k :call WinMove('k')<cr>
 map <silent> ,l :call WinMove('l')<cr>
 " Toggle NERDTree
 nmap <silent> ,n :NERDTreeToggle<cr>
-nmap <silent> q1 :NERDTreeToggle<cr>
 nmap <silent> <C-1> :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
 nmap <silent> ,N :NERDTreeFind<cr>
-nmap <silent> qn :NERDTreeFind<cr>
+nmap <silent> 1n :NERDTreeFind<cr>
 "set limelight
 "begin
 nnoremap ,slb :let g:limelight_bop='^'.getline('.').'$'<cr>
@@ -168,9 +167,9 @@ imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 
 nmap <silent> ,m :GFiles<cr>
-nmap <silent> qf :GFiles<cr>
+nmap <silent> 1f :GFiles<cr>
 nmap <silent> ,M :Buffers<cr>
-nmap <silent> qb :Buffers<cr>
+nmap <silent> 1b :Buffers<cr>
 nmap <silent> ,<Space>m :GFiles?<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -178,3 +177,6 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+nmap 1fp :call FZFYankRing()<cr>
+nmap 1p :YRShow<cr>
+nmap 1l :LetterCommands<cr>
