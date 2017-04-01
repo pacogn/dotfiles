@@ -1,3 +1,12 @@
+function! FixPowerlineFontsAndSave()
+    execute('source '.expand('$DOTFILES/config/nvim/startup/airline.vim'))
+    execute('source '.expand('$DOTFILES/config/nvim/startup/options.vim'))
+    unmap ,,
+    :w! %<cr>
+    map ,, :w<cr>
+endfunction
+map ,, :call FixPowerlineFontsAndSave()<cr>
+
 function! NextClosedFold(dir)
     let cmd = 'norm!z' . a:dir
     let view = winsaveview()
@@ -159,7 +168,7 @@ map ,tc :tabclose<cr>
 map ,te :tabedit %<cr>
 "same as :quit
 nmap ,w :wincmd q<cr>
-map ,, :w<cr>
+" map ,, :w<cr>
 nnoremap <silent> ,zj :call NextClosedFold('j')<cr>
 nnoremap <silent> ,zk :call NextClosedFold('k')<cr>
 inoremap ,, <Esc>:w<cr>

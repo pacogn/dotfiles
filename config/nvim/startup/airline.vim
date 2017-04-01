@@ -1,9 +1,8 @@
 
 " airline options
+" powerline fonts only work after manually loading startup/options.vim!! WTF!!
 let g:airline_powerline_fonts=1
 " let g:airline#extensions#disable_rtp_load = 0
-let g:airline_left_sep=''
-let g:airline_right_sep=''
 let g:airline_theme='kolor'
 " let g:airline_theme='PaperColor'
 let g:airline#extensions#whitespace#checks = []
@@ -13,6 +12,7 @@ let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''[ session
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
+
 if exists('g:isfirstload')
     " this symbols work... but only on second load :(
     let g:airline_symbols.branch = ''
@@ -23,6 +23,9 @@ if exists('g:isfirstload')
     let g:airline_left_alt_sep = ''
     let g:airline_right_sep = ''
     let g:airline_right_alt_sep = ''
+else
+    let g:airline_left_sep=''
+    let g:airline_right_sep=''
 endif
 let g:isfirstload = 1
 " https://github.com/vim-airline/vim-airline/wiki/Configuration-Examples-and-Snippets
