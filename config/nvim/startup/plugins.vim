@@ -1,6 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
 " Plug 'felixhummel/setcolors.vim'
 " Plug 'scrooloose/syntastic' "allow for eslint checking
+Plug 'vim-scripts/YankRing.vim'                             "Maintains a history of previous yanks, changes and deletes
 Plug 'sbdchd/neoformat', { 'for':                           
             \['javascript', 'css', 'scss', 
             \'sh', 'zsh', 'vim', 'html'] }                  " A (Neo)vim plugin for formatting code. - you will need jsbeautifier globally installed
@@ -14,8 +15,11 @@ Plug 'godlygeek/tabular'                                    " related to vim-mar
 Plug 'junegunn/vim-peekaboo'                                " show registers on " and @
 Plug 'powerman/vim-plugin-AnsiEsc'                          " type :AnsiEsc to get colors as terminal 
 Plug 'blueyed/vim-diminactive'                              " allow different background for buffer without focus on split window 
-Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
-                                                            " Plug 'majutsushi/tagbar'
+Plug 'sudavid4/tern_for_vim', {                             
+            \'for': 'javascript',
+            \'do': 'npm i' }                                " intellijent navigation and refactor for javascript 
+" Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
+" Plug 'majutsushi/tagbar'
 if(has('nvim'))
     Plug 'Shougo/deoplete.nvim', 
                 \{ 'for': ['javascript', 'css', 'scss', 'sh', 'zsh', 'vim', 'html'] }
@@ -113,8 +117,8 @@ Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] } " markdown support
                                                             " Plug 'groenewege/vim-less', { 'for': 'less' } " less support
 Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }             " CSS3 syntax support
-Plug 'itspriddle/vim-marked', 
-            \{ 'for': 'markdown', 'on': 'MarkedOpen' }      " Open markdown files in Marked.app - mapped to <leader>m
+" Plug 'itspriddle/vim-marked', 
+"             \{ 'for': 'markdown', 'on': 'MarkedOpen' }      " Open markdown files in Marked.app - mapped to <leader>m
                                                             " :TableModeToggle
 Plug 'dhruvasagar/vim-table-mode'
 
