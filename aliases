@@ -1,6 +1,7 @@
 #!/bin/zsh
 setopt COMPLETE_ALIASES
 alias vim='nvim'
+alias vimrc='vim $DOTFILES/config/nvim/init.vim -c '\''cd $DOTFILES/config/nvim'\'
 alias ag='ag --color-match="1;031"'
 alias agd='cd $DOTFILES && ag --ignore ''plugged*'' --ignore-dir ''forkedProjects'' --ignore ''autoload*'''
 alias -g E=' | egrep '
@@ -46,15 +47,18 @@ function findalias(){
     done
 }
 function go(){
-    #cd into directory containing symlink
-    cd $(dirname $(which $1)) && cd $(dirname $(readlink $(which $1)))
+    #dirname removes the filename from path
+    #realpath gives the path to the file, if symlinked it gives the path to the actual file, not the link
+    cd $(dirname $(realpath $(which $1)))
 }
+
 function showPackage(){
     #${1:-scripts} -> http://stackoverflow.com/questions/9332802/how-to-write-a-bash-script-that-takes-optional-input-arguments
     #{ -> curly brace has no special meaning for regular sed BRE -> http://stackoverflow.com/questions/9205669/sed-find-and-replace-with-curly-braces
     sed -En '/".*'${1:-scripts}'.*\{/,/}/p' package.json E '(".*"\s*:)|}'
     # sed -n '/'${1:-scripts}'.*{/,/}/p' package.json E '(".*"\s*:)|}'
 }
+
 alias resetnpm='rm -rf ~/.npm && rm -rf node_modules && npm cache clear && npm i'
 alias egrep='egrep --color=auto'
 alias setbash='chsh -s /bin/bash'
