@@ -17,15 +17,24 @@ function! ListDotFiles(dir, command)
 		\'source': a:command,
 		\'sink': 'e'})
 endfunction
+
+function! Vimrc(...)
+  let query = get(a:000, 0, '^')
+  if !len(query)
+    let query = '^'
+  endif
+  call fzf#vim#ag_raw(
+	    \'--ignore ''autoload''  ' .
+	    \'--ignore ''plugged'' '.
+	    \query, 
+	    \fzf#vim#with_preview({'dir': '$DOTFILES/config/nvim/', 'up': '100%'}, 'up:40%', 'ctrl-g'))
+endfunction
+
 command! ListDotFiles call ListDotFiles('$DOTFILES/',  'git ls-files')
 command! DotFiles call ListDotFiles('$DOTFILES',  'git ls-files')
 command! DotVim call ListDotFiles('$DOTFILES/config/nvim/',  'git ls-files')
 command! DotPlugged call ListDotFiles('$DOTFILES/config/nvim/plugged',  'find . | grep -vF .git')
-command! Vimrc call fzf#vim#ag_raw(
-	    \'--ignore ''autoload''  ' .
-	    \'--ignore ''plugged'' '.
-	    \'^', 
-	    \fzf#vim#with_preview({'dir': '$DOTFILES/config/nvim/', 'up': '100%'}, 'up:40%', 'π'))
+command! -nargs=? Vimrc call Vimrc(<q-args>)
 command! CDR Rooter
 command! CDC cd %:p:h
 
