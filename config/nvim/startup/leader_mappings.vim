@@ -1,3 +1,20 @@
+function! BufDeleteCurrent()
+    let l:bufname=bufname('#')
+    if len(l:bufname)
+        " there is an alternate file, make sure it's the one that's comming up on screen
+        execute('buffer '.l:bufname)
+    else
+        " there is no 'alternate file' go to whatever other file possible
+        bn
+    endif
+    " delete the alternate buffer ( the one we just exited ).
+    " if there was only one buffer then # doesn't exist so this won't do anything. It's hacky but works
+    bd! #
+    "now we don't want the alternate file to remain the one of the buffer we just deleted
+    bn
+    bp
+    " execute('bd! #')
+endfunction
 function! FixPowerlineFontsAndSave()
     " can't load powerline fonts on startup, it looks terrible. This is a hacky workaround
     execute('source '.expand('$DOTFILES/config/nvim/startup/airline.vim'))
@@ -66,6 +83,8 @@ function! InsertBeforeLastCharacterOfLine(count)
     endwhile
 endfunction
 nmap ,. <c-^>
+"execute current line
+"Y:@"<CR>
 "<C-U> is needed for properly capturing the count, I don't understand why
 nmap ,,a :<C-U>call InsertBeforeLastCharacterOfLine(v:count)<cr>
 nmap ,a <Nop>
@@ -89,6 +108,7 @@ nnoremap <silent> ,aotu :FindOnlyTestUsage expand("<cword>")<cr>
 " delete without changing registers
 nnoremap ,c :Commands<cr>
 nnoremap 1c :Commands<cr>
+nnoremap \c :Commands<cr>
 nnoremap 1: :History:<cr>
 nnoremap 1/ :History/<cr>
 nnoremap ,d "_d
@@ -96,7 +116,7 @@ nnoremap ,d "_d
 xnoremap ,p "_dP
 nmap ,b :bn<cr>:bd #<cr>
 nmap ,bl :BLines<cr>
-nmap ,bd :bn<cr>:bd! #<cr>
+nmap ,bd :call BufDeleteCurrent()<cr>
 nmap ,bw :bn<cr>:bw #<cr>
 nmap ,ee :!
 "end diff --- clean close diff window
@@ -129,6 +149,7 @@ nmap <silent>,gd :Gdiff<cr>
 nmap ,ge :Gedit<cr>
 nmap <silent>,gr :Gread<cr>
 nmap <silent>,gs :Gstatus<cr>
+nmap <silent>gs :Gstatus<cr>
 nmap ,gt :Buffers<cr>term://
 "map ,fs FoldSearch
 " toggle cursor line
@@ -168,6 +189,8 @@ map ,qa :qa<cr>
 map <silent> ,sl <Nop>
 map ,tc :tabclose<cr>
 map ,te :tabedit %<cr>
+map ]t :tabnext<cr>
+map [t :tabprev<cr>
 "same as :quit
 nmap ,w :wincmd q<cr>
 " map ,, :w<cr>
@@ -179,8 +202,10 @@ map <C-s>  <Esc>:w<cr>
 
 nmap <silent> ,m :GFiles<cr>
 nmap <silent> 1f :GFiles<cr>
+nmap <silent> \f :GFiles<cr>
 nmap <silent> ,M :Buffers<cr>
 nmap <silent> 1b :Buffers<cr>
+nmap <silent> \b :Buffers<cr>
 nmap <silent> ,<Space>m :GFiles?<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
