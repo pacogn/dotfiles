@@ -6,8 +6,14 @@ if has('nvim')
     tnoremap ,j <C-\><C-n>:wincmd j<cr>
     tnoremap ,h <C-\><C-n>:wincmd h<cr>
     tnoremap ,l <C-\><C-n>:wincmd l<cr>
+    tnoremap <silent> <C-j> <C-\><C-n>:call WinMove('j')<cr>
+    tnoremap <silent> <C-k> <C-\><C-n>:call WinMove('k')<cr>
+    tnoremap <silent> <C-l> <C-\><C-n>:call WinMove('l')<cr>
+    tnoremap <silent> <C-h> <C-\><C-n>:call WinMove('h')<cr>
     tnoremap ]b <C-\><C-n>:bnext<cr>
     tnoremap [b <C-\><C-n>:bprevious<cr>
+    tnoremap ]t <C-\><C-n>:tabnext<cr>
+    tnoremap [t <C-\><C-n>:tabprevious<cr>
     "¬ = alt+l
     tnoremap ¬ loadall<cr>reload<cr>fg[blue]='\033[38;5;111m'<cr>source $DOTFILES/prompt<cr>clear<cr> 
     tnoremap ,. <C-\><C-n><c-^>
@@ -17,5 +23,4 @@ if has('nvim')
     tnoremap ,ot 'spec.js \| 'unit.js \| 'it.js
     tnoremap ,ds '/documentServices/
     tmap <silent><Esc> <esc><C-\><c-n>
-
 endif
