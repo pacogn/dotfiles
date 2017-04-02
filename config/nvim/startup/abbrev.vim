@@ -3,7 +3,4 @@ cnoreabbrev <expr> h getcmdtype() == ":" && getcmdline() == 'h' ? 'tab help' : '
 cnoreabbrev <expr> ag getcmdtype() == ":" && getcmdline() == 'ag' ? 'Ag ' : 'ag'
 cnoreabbrev <expr> agr getcmdtype() == ":" && getcmdline() == 'agr' ? 'Agraw ''' : 'agr'
 cnoreabbrev <expr> bc getcmdtype() == ":" && getcmdline() == 'bc' ? 'BCommits' : 'bc'
-"todo run trough each tab and set its name to directory on settname
-"substitute(execute('pwd'),'.*/','','')
-cnoreabbrev <expr> settname getcmdtype() == ":" ? 'so $DOTFILES/config/nvim/startup/tabname.vim<cr>' : 'settname'
 
