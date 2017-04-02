@@ -1,6 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
 " Plug 'felixhummel/setcolors.vim'
 " Plug 'scrooloose/syntastic' "allow for eslint checking
+Plug 'sudavid4/Buffet.vim'                                  " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for
 Plug 'vim-scripts/YankRing.vim'                             "Maintains a history of previous yanks, changes and deletes
 Plug 'sbdchd/neoformat', { 'for':                           
             \['javascript', 'css', 'scss', 
@@ -68,7 +69,7 @@ Plug 'scrooloose/nerdtree',
 " Plug 'Raimondi/delimitMate'                                 " automatic closing of quotes, parenthesis, brackets, etc.
                                                             " this is awesome!!!
 Plug 'tpope/vim-commentary'                                 " comment stuff out
-Plug 'tpope/vim-unimpaired'                                 " mappings which are simply short normal mode aliases for commonly used ex commands
+Plug 'sudavid4/vim-unimpaired'                                 " mappings which are simply short normal mode aliases for commonly used ex commands
 " Plug 'tpope/vim-endwise' " automatically add end in ruby
 Plug 'tpope/vim-ragtag'                                     " endings for html, xml, etc. - ehances surround
 Plug 'tpope/vim-surround'                                   " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
