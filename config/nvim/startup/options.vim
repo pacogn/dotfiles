@@ -1,4 +1,3 @@
-                          " vim: foldmethod=marker
 set nocompatible          " not compatible with vi
 set autoread              " detect when a file is changed
 set autowriteall          " just :w implicitly, allways
@@ -58,3 +57,4 @@ set pastetoggle=<F6>
 set nolist
 set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
 set showbreak=↪
+set nospell
