@@ -5,7 +5,7 @@ set grepprg=ag\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 set backspace=indent,eol,start
 set history=1000          " change history to 1000
-set textwidth=120
+set textwidth=1000        " don't automatic insert newlines on me!!!
 set expandtab             " insert tabs rather than spaces for <Tab>
 set smarttab              " tab respects 'tabstop', 'shiftwidth', and 'softtabstop'
 set tabstop=4             " the visible width of tabs
