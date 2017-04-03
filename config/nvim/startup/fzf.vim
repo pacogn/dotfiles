@@ -1,9 +1,6 @@
 "MAPPINGS{{{
 "--------------------------------------------------------------------------------
 " Mapping selecting mappings
-nmap <silent> ,t :GFiles<cr>
-nmap <silent> ,r :Buffers<cr>
-nmap <silent> ,e :GFiles?<cr>
 nmap ,<tab> <plug>(fzf-maps-n)
 xmap ,<tab> <plug>(fzf-maps-x)
 omap ,<tab> <plug>(fzf-maps-o)
@@ -15,7 +12,7 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 
-nmap 1m :LeaderMappingsDeclaration<cr>
+nmap 1m :Marks<cr>
 nmap 1v :Vimrc<cr>
 nmap \v :Vimrc<cr>
 nmap 1<Tab> :LeaderMappingsDeclaration<cr>
