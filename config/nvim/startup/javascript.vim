@@ -1,6 +1,6 @@
 augroup javascript
 	function! RunNeomakeEslint()
-		if exists("b:neomake_javascript_eslint_exe") && b:neomake_javascript_eslint_exe !~ 'eslint not found' && &ft =~ javascript 
+		if exists("b:neomake_javascript_eslint_exe") && b:neomake_javascript_eslint_exe !~ 'eslint not found' && &ft =~ 'javascript' 
 			Neomake
 		endif
 	endfunction
