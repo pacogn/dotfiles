@@ -19,11 +19,17 @@ function! FixPowerlineFontsAndSave()
     " can't load powerline fonts on startup, it looks terrible. This is a hacky workaround
     execute('source '.expand('$DOTFILES/config/nvim/startup/airline.vim'))
     execute('source '.expand('$DOTFILES/config/nvim/startup/options.vim'))
-    unmap ,,
+    iunmap ,,
+    vunmap ,,
+    nunmap ,,
     :w
-    map ,, :w<cr>
+    inoremap ,, <esc>:w<cr>
+    nmap ,, :w<cr>
+    vmap ,, :w<cr>
 endfunction
-map ,, :call FixPowerlineFontsAndSave()<cr>
+inoremap ,, <esc>:call FixPowerlineFontsAndSave()<cr>
+nmap ,, :call FixPowerlineFontsAndSave()<cr>
+vmap ,, :call FixPowerlineFontsAndSave()<cr>
 
 function! NextClosedFold(dir)
     let cmd = 'norm!z' . a:dir
@@ -106,43 +112,32 @@ nnoremap <silent> ,aotw "fyaw:FindOnlyTestText '<C-r>f'<cr>
 nnoremap <silent> ,aotu :FindOnlyTestUsage expand("<cword>")<cr>
 " http://unix.stackexchange.com/questions/88714/vim-how-can-i-do-a-change-word-using-the-current-paste-buffer
 " delete without changing registers
-nnoremap ,c :Commands<cr>
-nnoremap 1c :Commands<cr>
 nnoremap \c :Commands<cr>
 nnoremap 1: :History:<cr>
 nnoremap 1/ :History/<cr>
-nnoremap ,d "_d
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
-xnoremap ,p "_dP
-nmap ,b :bn<cr>:bd #<cr>
 nmap ,bl :BLines<cr>
+nmap <space>bl :BLines<cr>
 nmap ,bd :call BufDeleteCurrent()<cr>
-nmap ,bw :bn<cr>:bw #<cr>
-nmap ,ee :!
+nmap <space>bd :call BufDeleteCurrent()<cr>
 "end diff --- clean close diff window
 nmap ,ed <C-w><C-h><C-w><C-c>
 map ,ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
+nmap <space>ed <C-w><C-h><C-w><C-c>
+map <space>ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
 " toggle Limelight
 nmap ,f :Limelight!!<cr>
 " find any file
 nmap <silent> ,fa :FZFFiles<cr>
-" find open buffer
-nmap <silent> ,fb :Buffers<cr>
+nmap <silent><space>fa :FZFFiles<cr>
 "find line in current buffer
 nmap <silent> ,fc :BLines<cr>
-" find file tracked by git
-nmap <silent> ,ff :GFiles<cr>
-" find function definition accross the project
-" '(function\s+' <c-r>f ')|('<c-r>f'\s*:)'
-
-" find file tracked by git
-nmap <silent> ,fg :GFiles<cr>
 " find help tag
 nmap <silent> ,fh :Helptags<cr>
+nmap <silent><space>fh :Helptags<cr>
 " find line in open buffers
 nnoremap <silent> ,fl :Lines<cr>
-" find uncommited file
-nmap <silent> ,fu :GFiles?<cr>
+nnoremap <silent><space>fl :Lines<cr>
 "fugitive
 nmap <silent>,gb :Gblame<cr>
 nmap <silent>,gd :Gdiff<cr>
@@ -151,6 +146,13 @@ nmap <silent>,gr :Gread<cr>
 nmap <silent>,gs :Gstatus<cr>
 nmap <silent>gs :Gstatus<cr>
 nmap ,gt :Buffers<cr>term://
+nmap <silent><space>gb :Gblame<cr>
+nmap <silent><space>gd :Gdiff<cr>
+nmap <space>ge :Gedit<cr>
+nmap <silent><space>gr :Gread<cr>
+nmap <silent><space>gs :Gstatus<cr>
+nmap <silent>gs :Gstatus<cr>
+nmap <space>gt :Buffers<cr>term://
 "map ,fs FoldSearch
 " toggle cursor line
 nnoremap ,I :call ToggleCurrsorLineColumn()<cr> 
@@ -159,12 +161,17 @@ map <silent> ,h :call WinMove('h')<cr>
 map <silent> ,j :call WinMove('j')<cr>
 map <silent> ,k :call WinMove('k')<cr>
 map <silent> ,l :call WinMove('l')<cr>
+map <silent> 1h :call WinMove('h')<cr>
+map <silent> 1j :call WinMove('j')<cr>
+map <silent> 1k :call WinMove('k')<cr>
+map <silent> 1l :call WinMove('l')<cr>
 " Toggle NERDTree
 nmap <silent> ,n :NERDTreeToggle<cr>
 nmap <silent> <C-1> :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
 nmap <silent> ,N :NERDTreeFind<cr>
 nmap <silent> 1n :NERDTreeFind<cr>
+nmap <silent> 1N :NERDToggle<cr>
 "set limelight
 "begin
 nnoremap ,slb :let g:limelight_bop='^'.getline('.').'$'<cr>
@@ -180,6 +187,7 @@ nnoremap ,slr :call SetLimeLightIndent(4)<cr>
 nnoremap ,sls :call SetLimeLightIndent 
 nnoremap ,slt :Limelight!!<cr>
 nmap ,s <Plug>(easymotion-s)
+nmap \g <Plug>(easymotion-s)
 nmap ,ss <Plug>(easymotion-s)
 nmap ,/ <Plug>(easymotion-sn)
 
@@ -189,30 +197,30 @@ map ,qa :qa<cr>
 map <silent> ,sl <Nop>
 map ,tc :tabclose<cr>
 map ,te :tabedit %<cr>
+map <space>tc :tabclose<cr>
+map <space>te :tabedit %<cr>
 map ]t :tabnext<cr>
 map [t :tabprev<cr>
 "same as :quit
 nmap ,w :wincmd q<cr>
+nmap <space>w :wincmd q<cr>
 " map ,, :w<cr>
 nnoremap <silent> ,zj :call NextClosedFold('j')<cr>
 nnoremap <silent> ,zk :call NextClosedFold('k')<cr>
-inoremap ,, <Esc>:w<cr>
 imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 
 nmap <silent> ,m :GFiles<cr>
-nmap <silent> 1f :GFiles<cr>
 nmap <silent> \f :GFiles<cr>
 nmap <silent> ,M :Buffers<cr>
 nmap <silent> 1b :Buffers<cr>
 nmap <silent> \b :Buffers<cr>
-nmap <silent> ,<Space>m :GFiles?<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-nmap 1fp :call FZFYankRing()<cr>
 nmap 1p :YRShow<cr>
-nmap 1l :LetterCommands<cr>
+nmap ,lc :LetterCommands<cr>
+nmap <space>lc :LetterCommands<cr>
