@@ -59,6 +59,8 @@ augroup whatAMess
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     " au VimEnter * Obsession " this is a terrible idea cuz you delete a real session when opening an empty vim
     autocmd FileType vim set shiftwidth=4
+    "source current file
+    autocmd FileType vim map <space>sc :source %<cr>
 augroup END
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -267,9 +269,12 @@ inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
 cnoremap jk <C-c>
-cnoremap ,, <C-c>
 " Make Y behave like other capitals
-nnoremap Y y$
+" see YankRing documentation line 520 - map Y to y$ and insert it into yankring
+function! YRRunAfterMaps()
+    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
+endfunction
+" nnoremap Y y$
 let g:yankring_n_keys='D x X'
 " markdown to html
 " nmap <leader>md :%!markdown --html4tags <cr>
