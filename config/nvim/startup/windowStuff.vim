@@ -47,6 +47,7 @@ let g:forcehorizontalresize = 0
 nnoremap + :call WinSize('+')<cr><esc>
 nnoremap _ :call WinSize('-')<cr>
 nnoremap ,v :call ToggleForceVerticalResize()<cr>
+nnoremap <space>v :call ToggleForceVerticalResize()<cr>
 "'≠' == 'alt+=', '–' == 'alt+-', º == 'alt+0'
 nnoremap ≠ :call WinSize('+')<cr>
 nnoremap – :call WinSize('-')<cr>
@@ -57,10 +58,10 @@ if has('nvim')
   tnoremap º <C-\><C-n>:call ToggleForceVerticalResize()<cr>i
 endif
 
-nnoremap <silent> <C-j> :call WinMove('j')<cr>
-nnoremap <silent> <C-k> :call WinMove('k')<cr>
-nnoremap <silent> <C-l> :call WinMove('l')<cr>
-nnoremap <silent> <C-h> :call WinMove('h')<cr>
+nnoremap <silent><C-j> :wincmd j<cr>
+nnoremap <silent><C-k> :wincmd k<cr>
+nnoremap <silent><C-l> :wincmd l<cr>
+nnoremap <silent><C-h> :wincmd h<cr>
 
 function! HtmlUnEscape()
   silent s/&lt;/</eg
