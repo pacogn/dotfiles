@@ -6,10 +6,10 @@ if has('nvim')
     tnoremap ,j <C-\><C-n>:wincmd j<cr>
     tnoremap ,h <C-\><C-n>:wincmd h<cr>
     tnoremap ,l <C-\><C-n>:wincmd l<cr>
-    tnoremap <silent> <C-j> <C-\><C-n>:call WinMove('j')<cr>
-    tnoremap <silent> <C-k> <C-\><C-n>:call WinMove('k')<cr>
-    tnoremap <silent> <C-l> <C-\><C-n>:call WinMove('l')<cr>
-    tnoremap <silent> <C-h> <C-\><C-n>:call WinMove('h')<cr>
+    tnoremap <silent><C-j> <C-\><C-n>:wincmd j<cr>
+    tnoremap <silent><C-k> <C-\><C-n>:wincmd k<cr>
+    tnoremap <silent><C-l> <C-\><C-n>:wincmd l<cr>
+    tnoremap <silent><C-h> <C-\><C-n>:wincmd l<cr>
     tnoremap ]b <C-\><C-n>:bnext<cr>
     tnoremap [b <C-\><C-n>:bprevious<cr>
     tnoremap ]t <C-\><C-n>:tabnext<cr>
