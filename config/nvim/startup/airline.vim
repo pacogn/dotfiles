@@ -11,15 +11,19 @@ let g:airline_section_y='%{ShrinkedFilePath()}'
 let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''[ session ]'', '''')}', 'windowswap', '%3p%% ', 'linenr', ':%3v '])
 
 function! ShrinkedFilePath()
-    let filePath = expand('%:p:h')
-    let withoutHome = substitute(filePath, $HOME, '', '')
+    let cwd = getcwd()
+    let withoutHome = substitute(cwd, $HOME, '', '')
+    if len(withoutHome) > 20
+      let path = split(withoutHome, '/')
+      let withoutHome = join([path[0], path[len(path)-1]], '/.../')
+    endif
     if len(withoutHome) > 20
       let withoutHome=strpart(withoutHome, 0, 20) . '...'
-    elseif filePath =~ 'santa/'
+    elseif cwd =~ 'santa/'
       return 'SANTA VIEWER'
-    elseif filePath =~ 'santa-editor'
+    elseif cwd =~ 'santa-editor'
       return 'SANTA-EDITOR'
-    elseif filePath =~ 'nvim/startup'
+    elseif cwd =~ 'nvim/startup'
       return 'NVIM/STARTUP' 
   endif
     return withoutHome
