@@ -1,4 +1,5 @@
 set nocompatible          " not compatible with vi
+" set maxmemtot=2000000     " give vim some memory - it get's stuck when working with very large files
 set autoread              " detect when a file is changed
 set autowriteall          " just :w implicitly, allways
 set grepprg=ag\ --vimgrep\ $*
@@ -36,7 +37,7 @@ set cmdheight=1           " command bar height
 set title                 " set terminal title
 set ignorecase            " case insensitive searching
 set smartcase             " case-sensitive if expresson contains a capital letter
-set hlsearch
+" set hlsearch
 set incsearch             " set incremental search, like modern browsers
 set lazyredraw            " don't redraw while executing macros
 set magic                 " Set magic on, for regex
