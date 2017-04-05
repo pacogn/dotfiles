@@ -1,7 +1,7 @@
 let g:peekaboo_window='vert bo 60new'
 let g:diminactive_buftype_blacklist = ['nowrite', 'acwrite']
 let g:rooter_manual_only = 1
-let g:EasyMotion_do_mapping=0
+let g:EasyMotion_do_mapping=1
 let g:table_mode_corner = '|'
 let g:table_mode_separator = '|'
 let g:yankring_history_dir = '$HOME'
@@ -290,7 +290,8 @@ nmap Q @q
 "map <leader>v :set paste!<cr>
 
 " clear highlighted search
-noremap <silent><space> :silent! set hlsearch! hlsearch?<cr>
+" noremap <silent><space> :silent! set hlsearch! hlsearch?<cr>
+noremap <silent><space>hl :silent! set hlsearch! hlsearch?<cr>
 
 " toggle invisible characters
 highlight SpecialKey ctermbg=none ctermfg=8 " make the highlighting of tabs less annoying
