@@ -22,15 +22,20 @@ function! FixPowerlineFontsAndSave()
     iunmap ,,
     vunmap ,,
     nunmap ,,
-    :w
+    vunmap <space><space>
+    nunmap <space><space>
+    silent! w
     inoremap ,, <esc>:w<cr>
     nmap ,, :w<cr>
     vmap ,, :w<cr>
+    nmap <space><space> :w<cr>
+    vmap <space><space> :w<cr>
 endfunction
 inoremap ,, <esc>:call FixPowerlineFontsAndSave()<cr>
 nmap ,, :call FixPowerlineFontsAndSave()<cr>
 vmap ,, :call FixPowerlineFontsAndSave()<cr>
-
+nmap <space><space> :call FixPowerlineFontsAndSave()<cr>
+vmap <space><space> :call FixPowerlineFontsAndSave()<cr>
 function! NextClosedFold(dir)
     let cmd = 'norm!z' . a:dir
     let view = winsaveview()
@@ -110,8 +115,43 @@ nnoremap <silent> ,aotf :FindOnlyTestFunction expand("<cword>")<cr>
 nnoremap <silent> ,aott "fyaw:FindOnlyTestText '<C-r>f'<cr>
 nnoremap <silent> ,aotw "fyaw:FindOnlyTestText '<C-r>f'<cr>
 nnoremap <silent> ,aotu :FindOnlyTestUsage expand("<cword>")<cr>
-" http://unix.stackexchange.com/questions/88714/vim-how-can-i-do-a-change-word-using-the-current-paste-buffer
-" delete without changing registers
+
+
+
+nnoremap <silent> <space>aa :call FindAssignment(expand("<cword>"))<cr>
+nnoremap <silent> <space>af :call FindFunction(expand("<cword>"))<cr>
+nnoremap <silent> <space>at "fyaw:FindText '<C-r>f'<cr>
+nnoremap <silent> <space>au :call FindUsage(expand("<cword>"))<cr>
+nnoremap <silent> <space>aw "fyaw:FindText '<C-r>f'<cr>
+nnoremap <silent> <space>anta :FindNoTestAssignment expand("<cword>")<cr>
+nnoremap <silent> <space>antf :FindNoTestFunction expand("<cword>")<cr>
+nnoremap <silent> <space>antt "fyaw:FindNoTestText '<C-r>f'<cr>
+nnoremap <silent> <space>antw "fyaw:FindNoTestText '<C-r>f'<cr>
+nnoremap <silent> <space>antu :FindNoTestUsage expand("<cword>")<cr>
+nnoremap <silent> <space>aota :FindOnlyTestAssignment expand("<cword>")<cr>
+nnoremap <silent> <space>aotf :FindOnlyTestFunction expand("<cword>")<cr>
+nnoremap <silent> <space>aott "fyaw:FindOnlyTestText '<C-r>f'<cr>
+nnoremap <silent> <space>aotw "fyaw:FindOnlyTestText '<C-r>f'<cr>
+nnoremap <silent> <space>aotu :FindOnlyTestUsage expand("<cword>")<cr>
+"find variable assignment - `a=b` or `a:b` - fails for es6
+nnoremap <silent> <space>fva :call FindAssignment(expand("<cword>"))<cr>
+nnoremap <silent> <space>ff :call FindFunction(expand("<cword>"))<cr>
+nnoremap <silent> <space>ft "fyaw:FindText '<C-r>f'<cr>
+nnoremap <silent> <space>fu :call FindUsage(expand("<cword>"))<cr>
+" find word - we spoil the f register which is ... unescessary
+nnoremap <silent> <space>fw "fyaw:FindText '<C-r>f'<cr>
+" find not test hast fnt prefix
+nnoremap <silent> <space>fnta :FindNoTestAssignment expand("<cword>")<cr>
+nnoremap <silent> <space>fntf :FindNoTestFunction expand("<cword>")<cr>
+nnoremap <silent> <space>fntt "fyaw:FindNoTestText '<C-r>f'<cr>
+nnoremap <silent> <space>fntw "fyaw:FindNoTestText '<C-r>f'<cr>
+nnoremap <silent> <space>fntu :FindNoTestUsage expand("<cword>")<cr>
+"find only test has fot prefix
+nnoremap <silent> <space>fota :FindOnlyTestAssignment expand("<cword>")<cr>
+nnoremap <silent> <space>fotf :FindOnlyTestFunction expand("<cword>")<cr>
+nnoremap <silent> <space>fott "fyaw:FindOnlyTestText '<C-r>f'<cr>
+nnoremap <silent> <space>fotw "fyaw:FindOnlyTestText '<C-r>f'<cr>
+nnoremap <silent> <space>fotu :FindOnlyTestUsage expand("<cword>")<cr>
 nnoremap \c :Commands<cr>
 nnoremap 1: :History:<cr>
 nnoremap 1/ :History/<cr>
@@ -141,16 +181,24 @@ nmap <silent><space>fh :Helptags<cr>
 nnoremap <silent> ,fl :Lines<cr>
 nnoremap <silent><space>fl :Lines<cr>
 "fugitive
-nmap <silent>,gb :Gblame<cr>
-nmap <silent>,gd :Gdiff<cr>
-nmap ,ge :Gedit<cr>
+nmap <silent><space>gb :Gblame<cr>nmap <silent>,gd :Gdiff<cr>
 nmap <silent>,gr :Gread<cr>
 nmap <silent>,gs :Gstatus<cr>
 nmap <silent>gs :Gstatus<cr>
 nmap ,gt :Buffers<cr>term://
 nmap <silent><space>gb :Gblame<cr>
+
 nmap <silent><space>gd :Gdiff<cr>
 nmap <space>ge :Gedit<cr>
+
+"git preview
+nmap <space>gp :GitGutterPreviewHunk<cr>
+"hunk prev
+nmap <space>hp :GitGutterPrevHunk<cr>
+"hunk next
+nmap <space>hn :GitGutterNextHunk<cr>
+"highlight hunks
+nmap <space>hh :GitGutterLineHighlightsToggle<cr>
 nmap <silent><space>gr :Gread<cr>
 nmap <silent><space>gs :Gstatus<cr>
 nmap <silent>gs :Gstatus<cr>
@@ -167,32 +215,29 @@ map <silent> 1h :call WinMove('h')<cr>
 map <silent> 1j :call WinMove('j')<cr>
 map <silent> 1k :call WinMove('k')<cr>
 map <silent> 1l :call WinMove('l')<cr>
+nmap 1w :wincmd q<cr>
+nmap \w :wincmd q<cr>
 " Toggle NERDTree
 nmap <silent> ,n :NERDTreeToggle<cr>
 nmap <silent> <C-1> :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
 nmap <silent> ,N :NERDTreeFind<cr>
 nmap <silent> 1n :NERDTreeFind<cr>
-nmap <silent> 1N :NERDToggle<cr>
-"set limelight
-"begin
-nnoremap ,slb :let g:limelight_bop='^'.getline('.').'$'<cr>
-"decrement
-nnoremap ,sld :call SetLimeLightIndent(g:limelightindent - 4)<cr>
-"end
-nnoremap ,sle :let g:limelight_eop='^'.getline('.').'$'<cr>
-"increment
-nnoremap ,sli :call SetLimeLightIndent(g:limelightindent + 4)<cr>
-"reset indent to default 4
-nnoremap ,slr :call SetLimeLightIndent(4)<cr>
-" set limelight toggle
-nnoremap ,sls :call SetLimeLightIndent 
-nnoremap ,slt :Limelight!!<cr>
+nmap <silent> 1N :NERDTreeToggle<cr>
+nmap <silent> <space>nn :NERDTreeToggle<cr>
+
+
+let g:EasyMotion_keys='abcdefghijklmnopqrstuvwxyz'
+map <space>e <Plug>(easymotion-prefix)
 nmap ,s <Plug>(easymotion-s)
 nmap \g <Plug>(easymotion-s)
 nmap ,ss <Plug>(easymotion-s)
 nmap ,/ <Plug>(easymotion-sn)
-
+nmap 1u <Plug>(easymotion-s)
+nmap 1y <Plug>(easymotion-sn)
+"easy motion word
+nmap <space>eW <Plug>(easymotion-w)
+nmap <space>ew <Plug>(easymotion-w)
 " 'quick git status' give status with fzf
 map ,qgs :GFiles?<cr>
 map ,qa :qa<cr>
@@ -206,6 +251,7 @@ map [t :tabprev<cr>
 "same as :quit
 nmap ,w :wincmd q<cr>
 nmap <space>w :wincmd q<cr>
+nmap \w :wincmd q<cr>
 " map ,, :w<cr>
 nnoremap <silent> ,zj :call NextClosedFold('j')<cr>
 nnoremap <silent> ,zk :call NextClosedFold('k')<cr>
@@ -226,3 +272,6 @@ nmap ga <Plug>(EasyAlign)
 nmap 1p :YRShow<cr>
 nmap ,lc :LetterCommands<cr>
 nmap <space>lc :LetterCommands<cr>
+" i don't like the unimpaired ]l, [l commands, it's too much little finger
+nmap <space>lj :lnext<cr>
+nmap <space>lk :lprev<cr>
