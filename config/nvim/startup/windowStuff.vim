@@ -48,6 +48,9 @@ nnoremap + :call WinSize('+')<cr><esc>
 nnoremap _ :call WinSize('-')<cr>
 nnoremap ,v :call ToggleForceVerticalResize()<cr>
 nnoremap <space>v :call ToggleForceVerticalResize()<cr>
+"invert split resizing
+nnoremap <space>is :call ToggleForceVerticalResize()<cr>
+nnoremap \x :call ToggleForceVerticalResize()<cr>
 "'≠' == 'alt+=', '–' == 'alt+-', º == 'alt+0'
 nnoremap ≠ :call WinSize('+')<cr>
 nnoremap – :call WinSize('-')<cr>
