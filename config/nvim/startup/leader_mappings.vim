@@ -118,6 +118,8 @@ nnoremap 1/ :History/<cr>
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
 nmap ,bl :BLines<cr>
 nmap <space>bl :BLines<cr>
+nmap <space>abl :AgBLines<cr>
+nmap <space>agb :AgBLines<cr>
 nmap ,bd :call BufDeleteCurrent()<cr>
 nmap <space>bd :call BufDeleteCurrent()<cr>
 "end diff --- clean close diff window

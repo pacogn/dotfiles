@@ -54,6 +54,17 @@ function! FzfLet()
     \  'sink':    function('Noop') })
 endfunction
 
+function! AgBLines(...)
+    let query = get(a:000, 0, '^')
+    if !len(query)
+      let query = '^'
+    endif
+    let query = '-G '.expand('%:t').' '.query
+   call fzf#vim#ag_raw(query, 
+            \fzf#vim#with_preview({'dir':expand('%:p:h'), 'down': '100%'},'up:50%', 'ctrl-g'))
+
+endfunction
+
 function! FzfSet()
     redir => cout
         silent execute 'set'
@@ -109,7 +120,8 @@ function! GoToDeclaration()
         else
             call fzf#vim#ag(expand('<cword>'), s:defaultPreview() ) 
         endif
-        call feedkeys(l:wordUnderCursor)
+        let g:searchedKeyword=l:wordUnderCursor
+        " echom 'search keyword: ' . l:wordUnderCursor
     else
         let l:newCursorLine = getline('.')
         let l:newCurrFileName = expand('%')
@@ -282,6 +294,7 @@ command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \{'dir':'/usr/local/Cellar/vim/8.0.0271/share/vim/vim80/doc',
             \'options': ' --preview-window right:50%:hidden --preview "''/Users/davidsu/.dotfiles/config/nvim/plugged/fzf.vim/bin/preview.rb''"\ \ {} --bind ''ctrl-g:toggle-preview'''})
 let s:leaderOrAltChars = '[,`¡™£¢∞§¶•ªº≠œ∑´®†¥¨ˆøπ“‘«åß∂ƒ©˙∆˚¬…æΩ≈ç√∫˜µ≤≥÷q]'
+command! -nargs=? AgBLines call AgBLines(<q-args>)
 command! LeaderMappingsDeclaration call fzf#vim#ag('^\s*[^"\s]*map.*' . s:leaderOrAltChars . '[!-~]*', 
             \fzf#vim#with_preview({'dir':'$DOTFILES/config/nvim/startup', 'down': '100%'},'up:30%', 'ctrl-g'))
 command! FzfSet call FzfSet()

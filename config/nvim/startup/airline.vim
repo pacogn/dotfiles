@@ -7,8 +7,26 @@ let g:airline_theme='kolor'
 " let g:airline_theme='PaperColor'
 let g:airline#extensions#whitespace#checks = []
 "I dont care about the file encoding!
-let g:airline_section_y=''
+let g:airline_section_y='%{ShrinkedFilePath()}'
 let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''[ session ]'', '''')}', 'windowswap', '%3p%% ', 'linenr', ':%3v '])
+
+function! ShrinkedFilePath()
+    let filePath = expand('%:p:h')
+    let withoutHome = substitute(filePath, $HOME, '', '')
+    if len(withoutHome) > 20
+      let withoutHome=strpart(withoutHome, 0, 20) . '...'
+    elseif filePath =~ 'santa/'
+      return 'SANTA VIEWER'
+    elseif filePath =~ 'santa-editor'
+      return 'SANTA-EDITOR'
+    elseif filePath =~ 'nvim/startup'
+      return 'NVIM/STARTUP' 
+  endif
+    return withoutHome
+
+endfunction
+
+
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
 endif
