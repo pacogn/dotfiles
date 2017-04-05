@@ -5,15 +5,16 @@ Plug 'sudavid4/Buffet.vim'                                  " easy visually dele
 Plug 'vim-scripts/YankRing.vim'                             "Maintains a history of previous yanks, changes and deletes
 Plug 'sbdchd/neoformat', { 'for':                           
             \['javascript', 'css', 'scss', 
-            \'sh', 'zsh', 'vim', 'html'] }                  " A (Neo)vim plugin for formatting code. - you will need jsbeautifier globally installed
+            \'sh', 'zsh', 'vim', 'html'] , 
+            \'do': 'npm -g install js-beautify'}            " A (Neo)vim plugin for formatting code. - you will need jsbeautifier globally installed
 Plug 'junegunn/vim-xmark' , { 'do': 'make' }                " ❌ Markdown preview on OS X
 Plug 'junegunn/vim-easy-align'                              " A Vim alignment plugin
-Plug 'junegunn/vim-slash'                                   " Enhancing in-buffer search experience
+" Plug 'junegunn/vim-slash'                                   " Enhancing in-buffer search experience
 Plug 'airblade/vim-rooter'                                  " cd into root of project
 Plug 'kshenoy/vim-signature'                                " help for working with marks
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}         " markdown 
 Plug 'godlygeek/tabular'                                    " related to vim-markdown
-Plug 'junegunn/vim-peekaboo'                                " show registers on " and @
+" Plug 'junegunn/vim-peekaboo'                                " show registers on " and @
 Plug 'powerman/vim-plugin-AnsiEsc'                          " type :AnsiEsc to get colors as terminal 
 Plug 'blueyed/vim-diminactive'                              " allow different background for buffer without focus on split window 
 Plug 'sudavid4/tern_for_vim', {                             
@@ -40,7 +41,7 @@ Plug 'benjie/neomake-local-eslint.vim',
 Plug 'benekastah/neomake', 
             \{ 'for': 'javascript' }                        " neovim replacement for syntastic using neovim's job control functonality
 Plug 'dahu/vim-fanfingtastic'                               " improved f F t T commands
-Plug 'gioele/vim-autoswap'
+" Plug 'gioele/vim-autoswap'                                " we have a `set noswapfile` in options so... no need for this 
 Plug 'tpope/vim-obsession'                                  " session management
 Plug 'airblade/vim-gitgutter'                               " add git status for each modified line
 " in doubt if its worth the trouble, seems like it is though
@@ -82,8 +83,14 @@ Plug 'tpope/vim-fugitive'                                   " amazing git wrappe
 Plug 'tpope/vim-repeat'                                     " enables repeating other supported plugins with the . command
 Plug 'garbas/vim-snipmate'                                  " snippet manager
 Plug 'editorconfig/editorconfig-vim'                        " .editorconfig support
+
+
+"todo do we use these following two plugins at all??------------------------------------------------------------
 Plug 'MarcWeber/vim-addon-mw-utils'                         " interpret a file by function and cache file automatically
 Plug 'tomtom/tlib_vim'                                      " utility functions for vim
+"end todo-------------------------------------------------------------------------------------------------------
+
+
 " Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
 " Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
 Plug 'tpope/vim-dispatch'                                   " asynchronous build and test dispatcher
