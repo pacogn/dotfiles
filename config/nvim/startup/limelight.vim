@@ -1,5 +1,23 @@
-" LimeLight
-"""""""""""""""""""""""""""""""""""""
+"--------------------------------------------------------------------------------
+"MAPPINGS{{{
+"--------------------------------------------------------------------------------
+" limelight works on ranges. Declare limelight to bein on content of current line
+nnoremap <space>lb :let g:limelight_bop='^'.getline('.').'$'<cr>
+" limelight works on ranges. Declare limelight to end on contents of current line
+nnoremap <space>le :let g:limelight_eop='^'.getline('.').'$'<cr>
+"decrement
+nnoremap <space>ld :call SetLimeLightIndent(g:limelightindent - 4)<cr>
+"increment
+nnoremap <space>li :call SetLimeLightIndent(g:limelightindent + 4)<cr>
+"reset indent to default 4
+nnoremap <space>lr :call SetLimeLightIndent(4)<cr>
+" set limelight toggle
+noremap <space>ls :call SetLimeLightIndent(8) 
+nnoremap <space>lt :Limelight!!<cr>
+
+"-----------------------------------------------------------------------------}}}
+"FUNCTIONS{{{
+"--------------------------------------------------------------------------------
 let g:limelightindent=4
 function! LimeLightExtremeties()
     " let g:limelight_eop='^\s\{0,'.g:limelightindent.'\}}\|^\s\{0,'.g:limelightindent.'\}function\|\w*:\s*function\s*('
@@ -18,4 +36,5 @@ function! SetLimeLightIndent(count)
     endif
     call LimeLightExtremeties()
 endfunction
+"-----------------------------------------------------------------------------}}}
 command! -nargs=*  SetLimeLightIndent call SetLimeLightIndent(<args>)
