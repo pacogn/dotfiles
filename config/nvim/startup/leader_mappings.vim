@@ -248,6 +248,7 @@ nmap <space>eW <Plug>(easymotion-w)
 nmap <space>ew <Plug>(easymotion-w)
 " 'quick git status' give status with fzf
 map ,qgs :GFiles?<cr>
+nnoremap <space>gs :GFiles?<cr>
 map ,qa :qa<cr>
 map <silent> ,sl <Nop>
 map ,tc :tabclose<cr>
