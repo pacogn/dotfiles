@@ -158,7 +158,8 @@ nnoremap 1/ :History/<cr>
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
 nmap ,bl :BLines<cr>
 nmap <space>bl :BLines<cr>
-nmap <space>abl :AgBLines<cr>
+"view buffer lines
+nmap <space>vb :AgBLines<cr>
 nmap <space>agb :AgBLines<cr>
 nmap ,bd :call BufDeleteCurrent()<cr>
 nmap <space>bd :call BufDeleteCurrent()<cr>
@@ -180,6 +181,8 @@ nmap <silent><space>fh :Helptags<cr>
 " find line in open buffers
 nnoremap <silent> ,fl :Lines<cr>
 nnoremap <silent><space>fl :Lines<cr>
+"view loaded(all) buffer lines
+nnoremap <silent><space>vl :AgAllBLines<cr>
 "fugitive
 nmap <silent><space>gb :Gblame<cr>nmap <silent>,gd :Gdiff<cr>
 nmap <silent>,gr :Gread<cr>

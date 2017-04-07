@@ -13,10 +13,8 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 
 
 nmap 1m :Marks<cr>
-nmap 1v :Vimrc<cr>
 nmap \v :Vimrc<cr>
-nmap 1<Tab> :LeaderMappingsDeclaration<cr>
-
+nmap \a :Ag 
 "-----------------------------------------------------------------------------}}}
 "GLOBALS                                                                      {{{ 
 "--------------------------------------------------------------------------------
@@ -54,6 +52,19 @@ function! FzfLet()
     \  'sink':    function('Noop') })
 endfunction
 
+
+
+function! AgAllBLines(...)
+    let bufs = map(s:buflisted(), 'bufname(v:val)')
+    let agfiles = '-G '''.join(bufs, '|').''''
+    let query = get(a:000, 0, '^')
+    if !len(query)
+      let query = '^'
+    endif
+    let query = agfiles.' '''.query.''''
+    call fzf#vim#ag_raw(query, 
+             \fzf#vim#with_preview({'dir':expand('%:p:h'), 'down': '100%'},'up:50%', 'ctrl-g'))
+endfunction
 function! AgBLines(...)
     let query = get(a:000, 0, '^')
     if !len(query)
@@ -295,6 +306,7 @@ command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \'options': ' --preview-window right:50%:hidden --preview "''/Users/davidsu/.dotfiles/config/nvim/plugged/fzf.vim/bin/preview.rb''"\ \ {} --bind ''ctrl-g:toggle-preview'''})
 let s:leaderOrAltChars = '[,`¡™£¢∞§¶•ªº≠œ∑´®†¥¨ˆøπ“‘«åß∂ƒ©˙∆˚¬…æΩ≈ç√∫˜µ≤≥÷q]'
 command! -nargs=? AgBLines call AgBLines(<q-args>)
+command! -nargs=? AgAllBLines call AgAllBLines(<q-args>)
 command! LeaderMappingsDeclaration call fzf#vim#ag('^\s*[^"\s]*map.*' . s:leaderOrAltChars . '[!-~]*', 
             \fzf#vim#with_preview({'dir':'$DOTFILES/config/nvim/startup', 'down': '100%'},'up:30%', 'ctrl-g'))
 command! FzfSet call FzfSet()
