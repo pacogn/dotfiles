@@ -5,6 +5,12 @@ let NERDTreeShowBookmarks=1
 let NERDTreeShowHidden=1
 " remove some files by extension
 let NERDTreeIgnore = ['\.js.map$', '.DS_Store']
+let NERDTreeWinSize = 40
+
+if isdirectory(expand(".git"))
+    let g:NERDTreeBookmarksFile = '.git/.NERDTreeBookmarks'
+endif
+
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✭",
     \ "Staged"    : "✚",
