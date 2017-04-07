@@ -243,9 +243,7 @@ nmap ,ss <Plug>(easymotion-s)
 nmap ,/ <Plug>(easymotion-sn)
 nmap 1u <Plug>(easymotion-s)
 nmap 1y <Plug>(easymotion-sn)
-"easy motion word
-nmap <space>eW <Plug>(easymotion-w)
-nmap <space>ew <Plug>(easymotion-w)
+nmap <space>es <Plug>(easymotion-sn)
 " 'quick git status' give status with fzf
 map ,qgs :GFiles?<cr>
 nnoremap <space>gs :GFiles?<cr>
