@@ -188,6 +188,8 @@ nmap <silent><space>gb :Gblame<cr>nmap <silent>,gd :Gdiff<cr>
 nmap <silent>,gr :Gread<cr>
 nmap <silent>,gs :Gstatus<cr>
 nmap <silent>gs :Gstatus<cr>
+nmap <silent><space>wd :call DiffInWebstorm()<cr>
+nmap <silent><space>ws :call OpenInWebstorm()<cr>
 nmap ,gt :Buffers<cr>term://
 nmap <silent><space>gb :Gblame<cr>
 

@@ -30,6 +30,10 @@ function! Vimrc(...)
 	    \fzf#vim#with_preview({'dir': '$DOTFILES/config/nvim/', 'up': '100%'}, 'up:40%', 'ctrl-g'))
 endfunction
 
+function! OpenInWebstorm()
+    :call system('webstorm --line '.getpos('.')[1].' '.expand('%:p')) 
+endfunction
+command! OpenInWebstorm call OpenInWebstorm()
 command! ListDotFiles call ListDotFiles('$DOTFILES/',  'git ls-files')
 command! DotFiles call ListDotFiles('$DOTFILES',  'git ls-files')
 command! DotVim call ListDotFiles('$DOTFILES/config/nvim/',  'git ls-files')

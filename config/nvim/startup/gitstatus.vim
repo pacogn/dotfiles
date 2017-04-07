@@ -1,20 +1,28 @@
-function! DiffWebstorm()
-	" set cursor to start of line
-	execute 'silent normal! ?^.'."\r"
-
-	" find file name with path
-	execute 'silent normal! /\v(\w*(\/|$)(\w|-)*)+'."\r"
-
-	" copy file name to register x
-	"execute 
-	normal "xy$
-	let b:boo=@x
-	" open diff in webstorm
-	execute '!git difftool -t=webstorm '.b:boo
+function! DiffInWebstorm()
+    if &ft =~ 'gitcommit'
+        if getline('.') !~ ':'
+            echom 'which file to diff?'
+            return
+        endif
+        " set cursor to start of line
+        call feedkeys('0')
+        " find file name with path
+        execute 'silent normal! /\v(\w*(\/|$)(\w|-)*)+'."\r"
+        " copy file name to register f
+        "execute 
+        normal "fy$
+        let filename=@f
+        " open diff in webstorm
+        if len(filename)
+            execute '!git difftool -t=webstorm '.filename
+        endif
+    else
+        !git difftool -t=webstorm %
+    endif
 endfunction
+
 augroup gitstatus
 	autocmd!
 	autocmd BufEnter *.git/index nmap <buffer> <silent>q :q<cr>
-	autocmd BufEnter *.git/index map <buffer> <silent> <leader>d :call DiffWebstorm()<cr>
 augroup END
-command! Gdiffw !git difftool -t=webstorm %
+command! DiffInWebstorm !git difftool -t=webstorm %
