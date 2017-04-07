@@ -56,6 +56,3 @@ function! DefaultTernHandler(lines)
     call fzf#run(opts)
 endfunction
 
-function! s:buflisted()
-    return filter(range(1, bufnr('$')), 'buflisted(v:val) && getbufvar(v:val, "&filetype") != "qf"')
-endfunction
