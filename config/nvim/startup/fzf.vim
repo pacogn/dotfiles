@@ -72,7 +72,12 @@ function! AgBLines(...)
     if !len(query)
       let query = '^'
     endif
-    let query = '-G '.expand('%:t').' '.query
+    let filename = expand('%:t')
+    if len(filename) == 0
+        execute('BLines')
+        return
+    endif
+    let query = '-G '.filename.' '.query
    call fzf#vim#ag_raw(query, 
             \fzf#vim#with_preview({'dir':expand('%:p:h'), 'down': '100%'},'up:50%', 'ctrl-g'))
 
