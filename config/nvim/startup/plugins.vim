@@ -53,7 +53,7 @@ Plug 'embear/vim-foldsearch'                                " fold based on sear
 " the following two are probably going to be deleted once we learn tmux
 " Plug 'dhruvasagar/vim-prosession'
 " tpope/vim-obsession
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 " colorschemes
 Plug '$HOME/.dotfiles/forkedProjects/base16-vim'
 " Plug 'sudavid4/base16-vim'
@@ -81,7 +81,9 @@ Plug 'sudavid4/vim-airline-themes'                          " themes for vim-air
 " Plug 'scrooloose/syntastic' " syntax checking for vim
 Plug 'tpope/vim-fugitive'                                   " amazing git wrapper for vim
 Plug 'tpope/vim-repeat'                                     " enables repeating other supported plugins with the . command
-Plug 'garbas/vim-snipmate'                                  " snippet manager
+Plug 'garbas/vim-snipmate' |                                
+            \Plug 'MarcWeber/vim-addon-mw-utils'            " snippet manager
+                         
 Plug 'editorconfig/editorconfig-vim'                        " .editorconfig support
 
 
