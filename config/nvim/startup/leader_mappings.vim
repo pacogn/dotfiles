@@ -194,14 +194,17 @@ nmap <silent><space>gb :Gblame<cr>
 nmap <silent><space>gd :Gdiff<cr>
 nmap <space>ge :Gedit<cr>
 
-"git preview
-nmap <space>gp :GitGutterPreviewHunk<cr>
-"hunk prev
-nmap <space>hp :GitGutterPrevHunk<cr>
-"hunk next
-nmap <space>hn :GitGutterNextHunk<cr>
+"hunk stage
+nmap <space>hs :GitGutterStageHunk<cr>
+"hunk before = hunk prev
+nmap <space>hb :GitGutterPrevHunk<cr>
+nmap <space>hN :GitGutterPrevHunk<cr>
 "highlight hunks
 nmap <space>hh :GitGutterLineHighlightsToggle<cr>
+"hunk next
+nmap <space>hn :GitGutterNextHunk<cr>
+"hunk preview
+nmap <space>hp :GitGutterPreviewHunk<cr>
 nmap <silent><space>gr :Gread<cr>
 nmap <silent><space>gs :Gstatus<cr>
 nmap <silent>gs :Gstatus<cr>
