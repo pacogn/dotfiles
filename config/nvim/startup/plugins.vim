@@ -86,8 +86,7 @@ Plug 'editorconfig/editorconfig-vim'                        " .editorconfig supp
 
 
 "todo do we use these following two plugins at all??------------------------------------------------------------
-Plug 'MarcWeber/vim-addon-mw-utils'                         " interpret a file by function and cache file automatically
-Plug 'tomtom/tlib_vim'                                      " utility functions for vim
+" Plug 'tomtom/tlib_vim'                                      " utility functions for vim
 "end todo-------------------------------------------------------------------------------------------------------
 
 
@@ -112,17 +111,17 @@ Plug 'othree/html5.vim', { 'for': 'html' }                  " html5 support
                                                             " Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
 Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }     " JavaScript indent support
 Plug 'moll/vim-node', { 'for': 'javascript' }               " node support
-                                                            " Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' } " JavaScript syntax plugin
+" Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' } " JavaScript syntax plugin
 Plug 'othree/yajs.vim', { 'for': 'javascript' }             " JavaScript syntax plugin
-                                                            " Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
+" Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
 Plug 'elzr/vim-json', { 'for': 'json' }                     " JSON support
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }   " ES6 and beyond syntax
-                                                            " Plug 'Quramy/tsuquyomi', { 'for': 'typescript', 'do': 'npm install' } " extended typescript support - works as a client for TSServer
-                                                            " Plug 'Shougo/vimproc.vim', { 'do': 'make' } " interactive command execution in vim
-                                                            " Plug 'leafgarland/typescript-vim', { 'for': 'typescript' } " typescript support
+" Plug 'Quramy/tsuquyomi', { 'for': 'typescript', 'do': 'npm install' } " extended typescript support - works as a client for TSServer
+" Plug 'Shougo/vimproc.vim', { 'do': 'make' } " interactive command execution in vim
+" Plug 'leafgarland/typescript-vim', { 'for': 'typescript' } " typescript support
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }         " sass scss syntax support
 Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] } " markdown support
-                                                            " Plug 'groenewege/vim-less', { 'for': 'less' } " less support
+" Plug 'groenewege/vim-less', { 'for': 'less' } " less support
 Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }             " CSS3 syntax support
 " Plug 'itspriddle/vim-marked', 
