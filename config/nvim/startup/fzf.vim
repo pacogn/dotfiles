@@ -52,7 +52,9 @@ function! FzfLet()
     \  'sink':    function('Noop') })
 endfunction
 
-
+function! s:buflisted()
+    return filter(range(1, bufnr('$')), 'buflisted(v:val) && getbufvar(v:val, "&filetype") != "qf"')
+endfunction
 
 function! AgAllBLines(...)
     let bufs = map(s:buflisted(), 'bufname(v:val)')
