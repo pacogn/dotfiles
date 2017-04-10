@@ -15,9 +15,29 @@ do
     # echo loading $f && \
     source $f
 done
-alias j='unalias j && source ~/.zgen/wting/autojump-master/bin/autojump.zsh && j'
+source ~/.zgen/wting/autojump-master/bin/autojump.zsh
 
+save_function() {
+    local ORIG_FUNC=$(declare -f $1)
+    local NEWNAME_FUNC="$2${ORIG_FUNC#$1}"
+    eval "$NEWNAME_FUNC"
+}
+save_function j originalJ
+#original autojump `j` function doesn't take hashed dir into account. fixing it
+j() {
+  if [ $(hash -d|cut -d= -f1|grep -c "^$1\$") = 0 ]; then
+    originalJ "$@"
+  else
+    cd ~$1
+  fi
+}
+l=`alias l`
+if [ -z $l ]; then; 
+    #here we cd ./ to give nvmrc a chance to kick in
+    alias l='loadall && reload && cd ./'
+fi
 function loadall(){
+  unalias l
   source $DOTFILES/theme
   # chthr 1
 
