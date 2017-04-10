@@ -4,7 +4,11 @@ export SV="$HOME/projects/santa/"
 export SE="$HOME/projects/santa-editor/"
 export WR="$HOME/projects/wix-richtext/"
 export CODE_SDK="$HOME/projects/js-wixcode-sdk/"
-
+#https://www.youtube.com/watch?v=FWIZhzy-RJs
+hash -d a=~/projects/santa/
+hash -d e=~/projects/santa-editor/
+hash -d c=~/projects/wix-ck-edito/
+hash -d r=~/projects/wix-richtext/
 alias whokilledsanta='open http://santa.wixpress.com'
 alias killsanta='echo you need to sudo something before this && sudo kill -9 `sudo lsof -i tcp:80 -t`'
 #teamcity uses same username+password as in your computer
