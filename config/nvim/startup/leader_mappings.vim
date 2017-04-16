@@ -220,6 +220,9 @@ nmap <space>gt :Buffers<cr>term://
 " toggle cursor line
 nnoremap ,I :call ToggleCurrsorLineColumn()<cr> 
 nnoremap  ,i :call CursorPing()<CR>
+" moving up and down work as you would expect
+nnoremap <silent> j gj
+nnoremap <silent> k gk
 map <silent> ,h :call WinMove('h')<cr>
 map <silent> ,j :call WinMove('j')<cr>
 map <silent> ,k :call WinMove('k')<cr>
@@ -228,6 +231,10 @@ map <silent> 1h :call WinMove('h')<cr>
 map <silent> 1j :call WinMove('j')<cr>
 map <silent> 1k :call WinMove('k')<cr>
 map <silent> 1l :call WinMove('l')<cr>
+map <silent> gh :call WinMove('h')<cr>
+map <silent> gj :call WinMove('j')<cr>
+map <silent> gk :call WinMove('k')<cr>
+map <silent> gl :call WinMove('l')<cr>
 nmap 1w :wincmd q<cr>
 nmap \w :wincmd q<cr>
 " Toggle NERDTree
@@ -258,8 +265,9 @@ map ,tc :tabclose<cr>
 map ,te :tabedit %<cr>
 map <space>tc :tabclose<cr>
 map <space>te :tabedit %<cr>
-map ]t :tabnext<cr>
-map [t :tabprev<cr>
+
+"visual mode on pasted text
+nnoremap <space>vp `[v`]
 "same as :quit
 nmap ,w :wincmd q<cr>
 nmap <space>w :wincmd q<cr>
@@ -284,6 +292,8 @@ nmap ga <Plug>(EasyAlign)
 nmap 1p :YRShow<cr>
 nmap ,lc :LetterCommands<cr>
 nmap <space>lc :LetterCommands<cr>
+nmap <space>cl :LetterCommands<cr>
+nmap <space>cc :CommandLineCommands<cr>
 " i don't like the unimpaired ]l, [l commands, it's too much little finger
 nmap <space>lj :lnext<cr>
 nmap <space>lk :lprev<cr>
