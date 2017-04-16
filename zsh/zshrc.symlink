@@ -34,7 +34,7 @@ j() {
 l=`alias l`
 if [ -z $l ]; then; 
     #here we cd ./ to give nvmrc a chance to kick in
-    alias l='loadall && reload && cd ./'
+    alias l='loadall; reload; cd ./'
 fi
 function loadall(){
   unalias l
@@ -49,7 +49,7 @@ function loadall(){
     zgen load zsh-users/zsh-syntax-highlighting
     zgen load zsh-users/zsh-history-substring-search
     zgen oh-my-zsh plugins/git
-    zgen oh-my-zsh plugins/vi-mode
+    # zgen oh-my-zsh plugins/vi-mode
     # zgen load wting/autojump
   fi
 
@@ -119,6 +119,13 @@ function loadall(){
       # echo loading $f && \
       source $f
   done
-  useViKeys
+  # useViKeys
   ###########################################################################################################################
 }
+# Go development
+export GOPATH="${HOME}/.go"
+export GOROOT="$(brew --prefix golang)/libexec"
+export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+
+test -d "${GOPATH}" || mkdir "${GOPATH}"
+test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
