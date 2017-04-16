@@ -71,7 +71,7 @@ Plug 'haya14busa/incsearch.vim'                             "  Improved incremen
 
 "todo do we use these following two plugins at all??------------------------------------------------------------
 "end todo-------------------------------------------------------------------------------------------------------
-
+Plug 'junegunn/gv.vim'                                      " :GV browse commits like a pro 
 
 " Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
 " Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
@@ -82,8 +82,8 @@ Plug 'tpope/vim-dispatch'                                   " asynchronous build
 Plug 'AndrewRadev/splitjoin.vim'                            " single/multi line code handler: gS - split one line into multiple, gJ - combine multiple lines into one
 Plug 'vim-scripts/matchit.zip'                              " extended % matching
 Plug 'tpope/vim-sleuth'                                     " detect indent style (tabs vs. spaces)
-Plug 'sickill/vim-pasta'                                    " context-aware pasting
-                                                            " Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " distraction-free writing
+Plug 'sickill/vim-pasta'                                    " fix indentation when pasting
+" Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " distraction-free writing
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }        " focus tool. Good for presentating with vim
 
                                                             " language-specific plugins
