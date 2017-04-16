@@ -16,7 +16,8 @@ Plug 'plasticboy/vim-markdown', {'for': 'markdown'}         " markdown
 Plug 'godlygeek/tabular'                                    " related to vim-markdown
 " Plug 'junegunn/vim-peekaboo'                                " show registers on " and @
 Plug 'powerman/vim-plugin-AnsiEsc'                          " type :AnsiEsc to get colors as terminal 
-Plug 'blueyed/vim-diminactive'                              " allow different background for buffer without focus on split window 
+Plug 'blueyed/vim-diminactive' |
+            \ Plug 'tmux-plugins/vim-tmux-focus-events'     " allow different background for buffer without focus on split window 
 Plug 'sudavid4/tern_for_vim', {                             
             \'for': 'javascript',
             \'do': 'npm i' }                                " intellijent navigation and refactor for javascript 
@@ -62,10 +63,10 @@ Plug 'sudavid4/vim-airline-themes'                          " themes for vim-air
 Plug 'tpope/vim-fugitive'                                   " amazing git wrapper for vim
 Plug 'tpope/vim-repeat'                                     " enables repeating other supported plugins with the . command
 Plug 'garbas/vim-snipmate' |                                
-            \Plug 'MarcWeber/vim-addon-mw-utils'            " snippet manager
-                         
-Plug 'editorconfig/editorconfig-vim'                        " .editorconfig support
-
+            \Plug 'MarcWeber/vim-addon-mw-utils' |
+            \Plug 'tomtom/tlib_vim'                         " snippet manager
+Plug 'christoomey/vim-tmux-navigator'                       " seemless pane navigation for vim <-> tmux                         
+" Plug 'wincent/loupe'                                        " enhances Vim's `search-commands`
 Plug 'haya14busa/incsearch.vim'                             "  Improved incremental searching for Vim
 
 "todo do we use these following two plugins at all??------------------------------------------------------------
