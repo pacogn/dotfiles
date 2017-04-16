@@ -1,5 +1,6 @@
 let g:peekaboo_window='vert bo 60new'
 let g:diminactive_buftype_blacklist = ['nowrite', 'acwrite']
+let g:diminactive_enable_focus = 1
 let g:rooter_manual_only = 1
 let g:EasyMotion_do_mapping=1
 let g:table_mode_corner = '|'
@@ -29,6 +30,17 @@ function! Vimrc(...)
 	    \query, 
 	    \fzf#vim#with_preview({'dir': '$DOTFILES/config/nvim/', 'up': '100%'}, 'up:40%', 'ctrl-g'))
 endfunction
+
+" Zoom - from https://github.com/junegunn/dotfiles/blob/master/vimrc<Paste>
+function! s:zoom()
+  if winnr('$') > 1
+    tab split
+  elseif len(filter(map(range(tabpagenr('$')), 'tabpagebuflist(v:val + 1)'),
+		  \ 'index(v:val, '.bufnr('').') >= 0')) > 1
+    tabclose
+  endif
+endfunction
+nnoremap <silent> \z :call <sid>zoom()<cr>
 
 function! OpenInWebstorm()
     :call system('webstorm --line '.getpos('.')[1].' '.expand('%:p')) 
@@ -260,6 +272,7 @@ else
 endif
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic
+execute 'highlight link EndOfBuffer ColorColumn'
 "set relativenumber " show relative line numbers
 
 
@@ -312,11 +325,6 @@ nnoremap <C-d> :call smooth_scroll#down(9, 0, 6)<CR>
 nnoremap <C-u>  :call smooth_scroll#up(9, 0, 6)<CR>
 nnoremap <c-e>  3<c-e>
 nnoremap <c-y>  3<c-y>
-" moving up and down work as you would expect
-nnoremap <silent> j gj
-nnoremap <silent> k gk
-nnoremap <silent> ^ g^
-nnoremap <silent> $ g$
 
 " recursively search up from dirname, sourcing all .vimrc.local files along the way
 function! ApplyLocalSettings(dirname)
