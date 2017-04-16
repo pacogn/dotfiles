@@ -1,6 +1,4 @@
 call plug#begin('~/.config/nvim/plugged')
-" Plug 'felixhummel/setcolors.vim'
-" Plug 'scrooloose/syntastic' "allow for eslint checking
 Plug 'sudavid4/Buffet.vim'                                  " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for
 Plug 'vim-scripts/YankRing.vim'                             "Maintains a history of previous yanks, changes and deletes
 Plug 'sbdchd/neoformat', { 'for':                           
@@ -8,21 +6,18 @@ Plug 'sbdchd/neoformat', { 'for':
             \'sh', 'zsh', 'vim', 'html'] , 
             \'do': 'npm -g install js-beautify'}            " A (Neo)vim plugin for formatting code. - you will need jsbeautifier globally installed
 Plug 'junegunn/vim-xmark' , { 'do': 'make' }                " ❌ Markdown preview on OS X
+" I don't know how to use this.... need to learn
 Plug 'junegunn/vim-easy-align'                              " A Vim alignment plugin
-" Plug 'junegunn/vim-slash'                                   " Enhancing in-buffer search experience
 Plug 'airblade/vim-rooter'                                  " cd into root of project
 Plug 'kshenoy/vim-signature'                                " help for working with marks
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}         " markdown 
 Plug 'godlygeek/tabular'                                    " related to vim-markdown
-" Plug 'junegunn/vim-peekaboo'                                " show registers on " and @
 Plug 'powerman/vim-plugin-AnsiEsc'                          " type :AnsiEsc to get colors as terminal 
 Plug 'blueyed/vim-diminactive' |
             \ Plug 'tmux-plugins/vim-tmux-focus-events'     " allow different background for buffer without focus on split window 
 Plug 'sudavid4/tern_for_vim', {                             
             \'for': 'javascript',
             \'do': 'npm i' }                                " intellijent navigation and refactor for javascript 
-" Plug 'ternjs/tern_for_vim', { 'for': 'javascript' }
-" Plug 'majutsushi/tagbar'
 if(has('nvim'))
     Plug 'Shougo/deoplete.nvim', 
                 \{ 'for': ['javascript', 'css', 'scss', 'sh', 'zsh', 'vim', 'html'] }
@@ -45,17 +40,15 @@ Plug 'airblade/vim-gitgutter'                               " add git status for
 Plug 'terryma/vim-smooth-scroll'                            " makes scrolling not jumpy!
 Plug 'easymotion/vim-easymotion'
 Plug 'embear/vim-foldsearch'                                " fold based on searched keyword
-" this is actually addade with the nerdtree plugin !?
-" Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug '$HOME/.dotfiles/forkedProjects/base16-vim'
-" Plug 'sudavid4/base16-vim'
+" Plug '$HOME/.dotfiles/forkedProjects/base16-vim'
+Plug 'sudavid4/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'scrooloose/nerdtree', 
-            \{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] } |
+            " \{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] } |
             \Plug 'Xuyuanp/nerdtree-git-plugin'           |
             \Plug 'ryanoasis/vim-devicons'                  " file drawer
 Plug 'tpope/vim-commentary'                                 " comment stuff out
-Plug 'sudavid4/vim-unimpaired'                                 " mappings which are simply short normal mode aliases for commonly used ex commands
+Plug 'sudavid4/vim-unimpaired'                              " mappings which are simply short normal mode aliases for commonly used ex commands
 Plug 'tpope/vim-ragtag'                                     " endings for html, xml, etc. - ehances surround
 Plug 'tpope/vim-surround'                                   " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
 Plug 'vim-airline/vim-airline'                              " fancy statusline
@@ -68,19 +61,20 @@ Plug 'garbas/vim-snipmate' |
 Plug 'christoomey/vim-tmux-navigator'                       " seemless pane navigation for vim <-> tmux                         
 " Plug 'wincent/loupe'                                        " enhances Vim's `search-commands`
 Plug 'haya14busa/incsearch.vim'                             "  Improved incremental searching for Vim
-
+"https://github.com/osyo-manga/vim-over -- you really want to check this out!!!
 "todo do we use these following two plugins at all??------------------------------------------------------------
+Plug 'editorconfig/editorconfig-vim'                        " .editorconfig support
+Plug 'tpope/vim-dispatch'                                   " asynchronous build and test dispatcher
+" Plug 'AndrewRadev/splitjoin.vim'                            " single/multi line code handler: gS - split one line into multiple, gJ - combine multiple lines into one
+" Plug 'vim-scripts/matchit.zip'                              " extended % matching
 "end todo-------------------------------------------------------------------------------------------------------
 Plug 'junegunn/gv.vim'                                      " :GV browse commits like a pro 
 
 " Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
 " Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
-Plug 'tpope/vim-dispatch'                                   " asynchronous build and test dispatcher
 " Plug 'mtth/scratch.vim'
 " Plug 'tpope/vim-vinegar'
 " Plug 'tpope/vim-abolish'
-Plug 'AndrewRadev/splitjoin.vim'                            " single/multi line code handler: gS - split one line into multiple, gJ - combine multiple lines into one
-Plug 'vim-scripts/matchit.zip'                              " extended % matching
 Plug 'tpope/vim-sleuth'                                     " detect indent style (tabs vs. spaces)
 Plug 'sickill/vim-pasta'                                    " fix indentation when pasting
 " Plug 'junegunn/goyo.vim', { 'on': 'Goyo' } " distraction-free writing
@@ -91,12 +85,11 @@ Plug 'mattn/emmet-vim', { 'for': 'html' }                   " emmet support for 
                                                             " Plug 'gregsexton/MatchTag', { 'for': 'html' } " match tags in html, similar to paren support
 Plug 'alvan/vim-closetag'
 Plug 'othree/html5.vim', { 'for': 'html' }                  " html5 support
-                                                            " Plug 'pangloss/vim-javascript', { 'for': 'javascript' } " JavaScript support
 Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }     " JavaScript indent support
 Plug 'moll/vim-node', { 'for': 'javascript' }               " node support
 " Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' } " JavaScript syntax plugin
-Plug 'othree/yajs.vim', { 'for': 'javascript' }             " JavaScript syntax plugin
-" Plug 'mxw/vim-jsx', { 'for': 'jsx' } " JSX support
+" Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] } " JSX support
+Plug 'othree/yajs.vim', { 'for': ['javascript', 'jsx'] }             " JavaScript syntax plugin
 Plug 'elzr/vim-json', { 'for': 'json' }                     " JSON support
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }   " ES6 and beyond syntax
 " Plug 'Quramy/tsuquyomi', { 'for': 'typescript', 'do': 'npm install' } " extended typescript support - works as a client for TSServer
