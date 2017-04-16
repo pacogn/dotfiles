@@ -39,7 +39,10 @@ function! GoToNextFunction(originalLineIndentation, recurseCount, searchBackward
     if (GetCurrLineIndentation() > originalLineIndentation) && (originalLineIndentation > 0)
         call GoToNextFunction(originalLineIndentation, a:recurseCount + 1, a:searchBackward)
     else
-        call feedkeys("zz\<c-e>\<c-e>\<c-e>")
+        call feedkeys("zz")
+	if getpos('.')[1] > 20
+	    call feedkeys("\<c-e>\<c-e>\<c-e>")
+	endif
     endif
 endfunction
 
