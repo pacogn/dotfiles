@@ -152,6 +152,11 @@ nnoremap <silent> <space>fotf :FindOnlyTestFunction expand("<cword>")<cr>
 nnoremap <silent> <space>fott "fyaw:FindOnlyTestText '<C-r>f'<cr>
 nnoremap <silent> <space>fotw "fyaw:FindOnlyTestText '<C-r>f'<cr>
 nnoremap <silent> <space>fotu :FindOnlyTestUsage expand("<cword>")<cr>
+"real incsearch with plugin
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
+
 nnoremap \c :Commands<cr>
 nnoremap 1: :History:<cr>
 nnoremap 1/ :History/<cr>

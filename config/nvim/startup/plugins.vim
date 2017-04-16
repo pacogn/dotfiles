@@ -31,8 +31,6 @@ else
     Plug 'Shougo/neocomplete.vim', 
                 \{ 'for': ['javascript', 'css', 'scss', 'sh', 'vim', 'html'] }
 endif
-" Plug 'xolox/vim-easytags'
-" Plug 'xolox/vim-misc'
 Plug 'Konfekt/FastFold'                                     " fold zyntax is too heavy for vim, makes neocomplete very slow. this plugin solves it
 Plug 'henrik/vim-indexed-search'                            " Match 123 of 456 /search term/ in Vim searches
 Plug '/usr/local/opt/fzf' | Plug 'sudavid4/fzf.vim'         " fuzzy file finder and so much more
@@ -41,44 +39,26 @@ Plug 'benjie/neomake-local-eslint.vim',
 Plug 'benekastah/neomake', 
             \{ 'for': 'javascript' }                        " neovim replacement for syntastic using neovim's job control functonality
 Plug 'dahu/vim-fanfingtastic'                               " improved f F t T commands
-" Plug 'gioele/vim-autoswap'                                " we have a `set noswapfile` in options so... no need for this 
 Plug 'tpope/vim-obsession'                                  " session management
 Plug 'airblade/vim-gitgutter'                               " add git status for each modified line
-" in doubt if its worth the trouble, seems like it is though
 Plug 'terryma/vim-smooth-scroll'                            " makes scrolling not jumpy!
 Plug 'easymotion/vim-easymotion'
 Plug 'embear/vim-foldsearch'                                " fold based on searched keyword
 " this is actually addade with the nerdtree plugin !?
 " Plug 'Xuyuanp/nerdtree-git-plugin'
-" the following two are probably going to be deleted once we learn tmux
-" Plug 'dhruvasagar/vim-prosession'
-" tpope/vim-obsession
-" Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-" colorschemes
 Plug '$HOME/.dotfiles/forkedProjects/base16-vim'
 " Plug 'sudavid4/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
-" Plug 'flazz/vim-colorschemes'
-" Plug 'dracula/vim'
-" utilities
 Plug 'scrooloose/nerdtree', 
             \{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] } |
             \Plug 'Xuyuanp/nerdtree-git-plugin'           |
             \Plug 'ryanoasis/vim-devicons'                  " file drawer
-" Plug 'mileszs/ack.vim'                                      " search inside files using ack. Same as command line ack utility, but use :Ack
-" david: disabled this plugin, is it worth somrthing?
-" Plug 'Raimondi/delimitMate'                                 " automatic closing of quotes, parenthesis, brackets, etc.
-                                                            " this is awesome!!!
 Plug 'tpope/vim-commentary'                                 " comment stuff out
 Plug 'sudavid4/vim-unimpaired'                                 " mappings which are simply short normal mode aliases for commonly used ex commands
-" Plug 'tpope/vim-endwise' " automatically add end in ruby
 Plug 'tpope/vim-ragtag'                                     " endings for html, xml, etc. - ehances surround
 Plug 'tpope/vim-surround'                                   " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
-" Plug 'benmills/vimux' " tmux integration for vim
 Plug 'vim-airline/vim-airline'                              " fancy statusline
 Plug 'sudavid4/vim-airline-themes'                          " themes for vim-airline
-" Plug 'vim-airline/vim-airline-themes' " themes for vim-airline
-" Plug 'scrooloose/syntastic' " syntax checking for vim
 Plug 'tpope/vim-fugitive'                                   " amazing git wrapper for vim
 Plug 'tpope/vim-repeat'                                     " enables repeating other supported plugins with the . command
 Plug 'garbas/vim-snipmate' |                                
@@ -86,9 +66,9 @@ Plug 'garbas/vim-snipmate' |
                          
 Plug 'editorconfig/editorconfig-vim'                        " .editorconfig support
 
+Plug 'haya14busa/incsearch.vim'                             "  Improved incremental searching for Vim
 
 "todo do we use these following two plugins at all??------------------------------------------------------------
-" Plug 'tomtom/tlib_vim'                                      " utility functions for vim
 "end todo-------------------------------------------------------------------------------------------------------
 
 
