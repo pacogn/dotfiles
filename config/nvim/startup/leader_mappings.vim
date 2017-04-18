@@ -85,54 +85,11 @@ function! CursorPing()
     let &cursorcolumn = _cursorcolumn
 endfunction
 
-function! InsertBeforeLastCharacterOfLine(count)
-    normal $
-    let l:_count = a:count
-    while l:_count > 0
-        normal! h
-        let l:_count = l:_count-1
-    endwhile
-endfunction
 nmap ,. <c-^>
 "execute current line
 "Y:@"<CR>
 "<C-U> is needed for properly capturing the count, I don't understand why
-nmap ,,a :<C-U>call InsertBeforeLastCharacterOfLine(v:count)<cr>
-nmap ,a <Nop>
-nmap ,ao <Nop>
-nnoremap <silent> ,aa :call FindAssignment(expand("<cword>"))<cr>
-nnoremap <silent> ,af :call FindFunction(expand("<cword>"))<cr>
-nnoremap <silent> ,at "fyaw:FindText '<C-r>f'<cr>
-nnoremap <silent> ,au :call FindUsage(expand("<cword>"))<cr>
-nnoremap <silent> ,aw "fyaw:FindText '<C-r>f'<cr>
-nnoremap <silent> ,anta :FindNoTestAssignment expand("<cword>")<cr>
-nnoremap <silent> ,antf :FindNoTestFunction expand("<cword>")<cr>
-nnoremap <silent> ,antt "fyaw:FindNoTestText '<C-r>f'<cr>
-nnoremap <silent> ,antw "fyaw:FindNoTestText '<C-r>f'<cr>
-nnoremap <silent> ,antu :FindNoTestUsage expand("<cword>")<cr>
-nnoremap <silent> ,aota :FindOnlyTestAssignment expand("<cword>")<cr>
-nnoremap <silent> ,aotf :FindOnlyTestFunction expand("<cword>")<cr>
-nnoremap <silent> ,aott "fyaw:FindOnlyTestText '<C-r>f'<cr>
-nnoremap <silent> ,aotw "fyaw:FindOnlyTestText '<C-r>f'<cr>
-nnoremap <silent> ,aotu :FindOnlyTestUsage expand("<cword>")<cr>
 
-
-
-nnoremap <silent> <space>aa :call FindAssignment(expand("<cword>"))<cr>
-nnoremap <silent> <space>af :call FindFunction(expand("<cword>"))<cr>
-nnoremap <silent> <space>at "fyaw:FindText '<C-r>f'<cr>
-nnoremap <silent> <space>au :call FindUsage(expand("<cword>"))<cr>
-nnoremap <silent> <space>aw "fyaw:FindText '<C-r>f'<cr>
-nnoremap <silent> <space>anta :FindNoTestAssignment expand("<cword>")<cr>
-nnoremap <silent> <space>antf :FindNoTestFunction expand("<cword>")<cr>
-nnoremap <silent> <space>antt "fyaw:FindNoTestText '<C-r>f'<cr>
-nnoremap <silent> <space>antw "fyaw:FindNoTestText '<C-r>f'<cr>
-nnoremap <silent> <space>antu :FindNoTestUsage expand("<cword>")<cr>
-nnoremap <silent> <space>aota :FindOnlyTestAssignment expand("<cword>")<cr>
-nnoremap <silent> <space>aotf :FindOnlyTestFunction expand("<cword>")<cr>
-nnoremap <silent> <space>aott "fyaw:FindOnlyTestText '<C-r>f'<cr>
-nnoremap <silent> <space>aotw "fyaw:FindOnlyTestText '<C-r>f'<cr>
-nnoremap <silent> <space>aotu :FindOnlyTestUsage expand("<cword>")<cr>
 "find variable assignment - `a=b` or `a:b` - fails for es6
 nnoremap <silent> <space>fva :call FindAssignment(expand("<cword>"))<cr>
 nnoremap <silent> <space>ff :call FindFunction(expand("<cword>"))<cr>
@@ -161,30 +118,18 @@ nnoremap \c :Commands<cr>
 nnoremap 1: :History:<cr>
 nnoremap 1/ :History/<cr>
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
-nmap ,bl :BLines<cr>
 nmap <space>bl :BLines<cr>
 "view buffer lines
 nmap <space>vb :AgBLines<cr>
 nmap <space>agb :AgBLines<cr>
-nmap ,bd :call BufDeleteCurrent()<cr>
 nmap <space>bd :call BufDeleteCurrent()<cr>
 "end diff --- clean close diff window
-nmap ,ed <C-w><C-h><C-w><C-c>
-map ,ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
 nmap <space>ed <C-w><C-h><C-w><C-c>
 map <space>ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
-" toggle Limelight
-nmap ,f :Limelight!!<cr>
 " find any file
-nmap <silent> ,fa :FZFFiles<cr>
 nmap <silent><space>fa :FZFFiles<cr>
-"find line in current buffer
-nmap <silent> ,fc :BLines<cr>
-" find help tag
-nmap <silent> ,fh :Helptags<cr>
 nmap <silent><space>fh :Helptags<cr>
 " find line in open buffers
-nnoremap <silent> ,fl :Lines<cr>
 nnoremap <silent><space>fl :Lines<cr>
 "view loaded(all) buffer lines
 nnoremap <silent><space>vl :AgAllBLines<cr>
@@ -238,24 +183,49 @@ map <silent> gl :call WinMove('l')<cr>
 nmap 1w :wincmd q<cr>
 nmap \w :wincmd q<cr>
 " Toggle NERDTree
-nmap <silent> ,n :NERDTreeToggle<cr>
 nmap <silent> <C-1> :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
-nmap <silent> ,N :NERDTreeFind<cr>
 nmap <silent> 1n :NERDTreeFind<cr>
 nmap <silent> 1N :NERDTreeToggle<cr>
+nmap <silent> \t :NERDTreeToggle<cr>
 nmap <silent> <space>nn :NERDTreeToggle<cr>
 
+"disable automatic mappings for surround.vim and write the here cuz I want `ds{motion}` and `cs{motion}` to use easymotion instead
+let g:surround_no_mappings = 1
+"delete surrounding
+nmap <space>ds  <Plug>Dsurround
+"change surrounding
+nmap <space>cs  <Plug>Csurround
+"??
+nmap <space>cS  <Plug>CSurround
+"motion + surrounding
+nmap <space>ys  <Plug>Ysurround
+"put created surrounding in its own line
+nmap <space>yS  <Plug>YSurround
+"surround entire line
+nmap <space>yss <Plug>Yssurround
+"surrond {start}\n{currentline}\n{end}
+nmap <space>ySs <Plug>YSsurround
+"same as ySs
+nmap <space>ySS <Plug>YSsurround
+"surround visual selection
+xmap S <Plug>VSurround
+"surround visual selection
+xmap <space>s <Plug>VSurround
+"surroung visual into it's own line
+xmap gS  <Plug>VgSurround
 
+"using map from <Plug>(easymotion...) is cool, the plugin worries to do the right thing with my mappings
 let g:EasyMotion_keys='abcdefghijklmnopqrstuvwxyz'
-map <space>e <Plug>(easymotion-prefix)
-nmap ,s <Plug>(easymotion-s)
-nmap \g <Plug>(easymotion-s)
-nmap ,ss <Plug>(easymotion-s)
-nmap ,/ <Plug>(easymotion-sn)
-nmap 1u <Plug>(easymotion-s)
-nmap 1y <Plug>(easymotion-sn)
-nmap <space>es <Plug>(easymotion-sn)
+map s <Plug>(easymotion-prefix)
+map ss <Plug>(easymotion-s)
+map sn <Plug>(easymotion-sn)
+map sa <Plug>(easymotion-jumptoanywhere)
+map s; <Plug>(easymotion-next)
+map s, <Plug>(easymotion-prev)
+map s. <Plug>(easymotion-repeat)
+map sd <Plug>(easymotion-s2)
+
 " 'quick git status' give status with fzf
 map ,qgs :GFiles?<cr>
 nnoremap <space>gs :GFiles?<cr>
@@ -273,15 +243,14 @@ nmap ,w :wincmd q<cr>
 nmap <space>w :wincmd q<cr>
 nmap \w :wincmd q<cr>
 " map ,, :w<cr>
-nnoremap <silent> ,zj :call NextClosedFold('j')<cr>
-nnoremap <silent> ,zk :call NextClosedFold('k')<cr>
+nnoremap <silent> <space>zj :call NextClosedFold('j')<cr>
+nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
 imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 
 nmap <silent> ,m :GFiles<cr>
 nmap <silent> \f :GFiles<cr>
 nmap <silent> ,M :Buffers<cr>
-nmap <silent> 1b :Buffers<cr>
 nmap <silent> \b :Buffers<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -297,3 +266,9 @@ nmap <space>cc :CommandLineCommands<cr>
 " i don't like the unimpaired ]l, [l commands, it's too much little finger
 nmap <space>lj :lnext<cr>
 nmap <space>lk :lprev<cr>
+
+"<c-l> complete to longest possible
+"<c-d> list all possibilities
+cnoremap <c-space> <C-l><C-d>
+cnoremap <c-p> <up>
+cnoremap <c-n> <down>
