@@ -1,0 +1,19 @@
+#!/bin/zsh
+function mru(){
+    mrufile=${1:-.mru}
+    if [[ ! -f $HOME/$mrufile ]]; then
+        echo $HOME/$mrufile does not exist
+        return
+    fi
+    filename=$(tail -r $HOME/$mrufile | fzf)
+    if [[ -f $filename ]]; then
+        #open selected file in vim AND cd into git's root folder for project of selected file
+        vim $filename -c 'silent :Rooter'
+    fi
+}
+function mrw(){
+    mru '.mrw'
+}
+function mrv(){
+    mru '.mru'
+}
