@@ -26,5 +26,5 @@ augroup myNerdTreeGroup
 	autocmd!
 	autocmd FileType nerdtree map <buffer><C-s> i 
 	autocmd FileType nerdtree map <buffer><C-v> s 
-	autocmd FileType nerdtree map <buffer>,o o:NERDTreeClose<cr>
+	autocmd FileType nerdtree map <buffer>1o o:NERDTreeClose<cr>
 augroup END
