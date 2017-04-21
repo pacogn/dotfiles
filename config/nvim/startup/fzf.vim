@@ -199,8 +199,18 @@ command! -bang -nargs=* Ag
     \                 s:defaultPreview(),
     \                 <bang>0)
 
-command! FZFMru call fzf#run({
-    \  'source':  v:oldfiles,
+command! Mru call fzf#run({
+      \  'source': 'cat $HOME/.mru', 
+    \  'sink':    'e',
+    \  'options': '-m -x +s',
+    \  'down':    '40%'})
+command! Mrw call fzf#run({
+      \  'source': 'cat $HOME/.mrw', 
+    \  'sink':    'e',
+    \  'options': '-m -x +s',
+    \  'down':    '40%'})
+command! Mrv call fzf#run({
+      \  'source': 'cat $HOME/.mru', 
     \  'sink':    'e',
     \  'options': '-m -x +s',
     \  'down':    '40%'})
