@@ -66,7 +66,7 @@ function! s:my_cr_function()
     return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 
-function s:mruIgnore()
+function! s:mruIgnore()
     if &ft =~? 'git' || &ft =~? 'nerdtree' || expand('%') =~ 'nvim.runtime' || expand('%') =~? 'yankring'
       return 1
     endif
