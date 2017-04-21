@@ -110,9 +110,9 @@ nnoremap <silent> <space>fott "fyaw:FindOnlyTestText '<C-r>f'<cr>
 nnoremap <silent> <space>fotw "fyaw:FindOnlyTestText '<C-r>f'<cr>
 nnoremap <silent> <space>fotu :FindOnlyTestUsage expand("<cword>")<cr>
 "real incsearch with plugin
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+nmap /  <Plug>(incsearch-forward)
+nmap ?  <Plug>(incsearch-backward)
+nmap g/ <Plug>(incsearch-stay)
 
 " integration of incsearch with indexed_search -- https://github.com/haya14busa/incsearch.vim/issues/21
 let g:indexed_search_mappings = 0
@@ -124,6 +124,11 @@ augroup END
 let g:incsearch#auto_nohlsearch = 1
 map <silent>n  <Plug>(incsearch-nohl-n)zv:ShowSearchIndex<CR>
 map <silent>N  <Plug>(incsearch-nohl-N)zv:ShowSearchIndex<CR>
+nmap *  <Plug>(incsearch-nohl-*)
+nmap #  <Plug>(incsearch-nohl-#)
+nmap g* <Plug>(incsearch-nohl-g*)
+nmap g# <Plug>(incsearch-nohl-g#)
+
 nnoremap \c :Commands<cr>
 nnoremap 1: :History:<cr>
 nnoremap 1/ :History/<cr>
