@@ -149,10 +149,12 @@ nnoremap <silent><space>fl :Lines<cr>
 "view loaded(all) buffer lines
 nnoremap <silent><space>vl :AgAllBLines<cr>
 "fugitive
-nmap <silent><space>gb :Gblame<cr>nmap <silent>,gd :Gdiff<cr>
 nmap <silent><space>wd :call DiffInWebstorm()<cr>
 nmap <silent><space>ws :call OpenInWebstorm()<cr>
+nmap <silent><space>gb :Gblame<cr>nmap <silent>,gd :Gdiff<cr>
 nmap <silent><space>gb :Gblame<cr>
+nmap <silent><space>gr :Gread<cr>
+nmap <silent><space>gs :Gstatus<cr>
 nmap <silent>gs :Gstatus<cr><C-n>
 
 nmap <silent><space>gd :Gdiff<cr>
@@ -169,8 +171,6 @@ nmap <space>hh :GitGutterLineHighlightsToggle<cr>
 nmap <space>hn :GitGutterNextHunk<cr>
 "hunk preview
 nmap <space>hp :GitGutterPreviewHunk<cr>
-nmap <silent><space>gr :Gread<cr>
-nmap <silent><space>gs :Gstatus<cr>
 nmap <space>gt :Buffers<cr>term://
 "map ,fs FoldSearch
 " toggle cursor line
