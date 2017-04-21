@@ -21,8 +21,9 @@ function! DiffInWebstorm()
     endif
 endfunction
 
-augroup gitstatus
+augroup fugitiveautocmd
 	autocmd!
 	autocmd BufEnter *.git/index nmap <buffer> <silent>q :q<cr>
+        autocmd BufEnter *.git/COMMIT_EDITMSG normal zMGzogg
 augroup END
 command! DiffInWebstorm !git difftool -t=webstorm %
