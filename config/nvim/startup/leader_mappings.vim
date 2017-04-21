@@ -155,6 +155,7 @@ nmap <silent><space>gb :Gblame<cr>nmap <silent>,gd :Gdiff<cr>
 nmap <silent><space>gb :Gblame<cr>
 nmap <silent><space>gr :Gread<cr>
 nmap <silent><space>gs :Gstatus<cr>
+nmap <silent><space>gc :Gcommit -v<cr>
 nmap <silent>gs :Gstatus<cr><C-n>
 
 nmap <silent><space>gd :Gdiff<cr>
