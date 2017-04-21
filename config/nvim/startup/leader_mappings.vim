@@ -152,6 +152,7 @@ nmap <silent><space>wd :call DiffInWebstorm()<cr>
 nmap <silent><space>ws :call OpenInWebstorm()<cr>
 nmap ,gt :Buffers<cr>term://
 nmap <silent><space>gb :Gblame<cr>
+nmap <silent>gs :Gstatus<cr><C-n>
 
 nmap <silent><space>gd :Gdiff<cr>
 nmap <space>ge :Gedit<cr>
