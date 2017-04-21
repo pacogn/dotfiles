@@ -169,21 +169,25 @@ function! FZFYankRing()
           \'sink': function('FZFYankRingSink')
           \})
 endfunction
+function! Ag(...)
+     call fzf#vim#ag_raw(' '.join(a:000), s:defaultPreview())
+endfunction
 "-----------------------------------------------------------------------------}}}
 "COMMANDS                                                                     {{{
 "--------------------------------------------------------------------------------
-command! -nargs=+ FindFunction call FindFunction(<args>)
-command! -nargs=+ FindAssignment call FindAssignment(<args>)
-command! -nargs=+ FindUsage call FindUsage(<args>)
-command! -nargs=+ FindText call FindText(<args>)
-command! -nargs=+ FindNoTestFunction call FindFunction(<args>, $IGNORE_TESTS)
-command! -nargs=+ FindNoTestAssignment call FindAssignment(<args>, $IGNORE_TESTS)
-command! -nargs=+ FindNoTestUsage call FindUsage(<args>, $IGNORE_TESTS)
-command! -nargs=+ FindNoTestText call FindText(<args>, $IGNORE_TESTS)
-command! -nargs=+ FindOnlyTestFunction call FindFunction(<args>, onlyTest)
-command! -nargs=+ FindOnlyTestAssignment call FindAssignment(<args>, onlyTest)
-command! -nargs=+ FindOnlyTestUsage call FindUsage(<args>, onlyTest)
-command! -nargs=+ FindOnlyTestText call FindText(<args>, onlyTest)
+command! -nargs=+ FindFunction call FindFunction(<q-args>)
+command! -nargs=+ FindAssignment call FindAssignment(<q-args>)
+command! -nargs=+ FindUsage call FindUsage(<q-args>)
+command! -nargs=+ FindText call FindText(<q-args>)
+command! -nargs=+ FindNoTestFunction call FindFunction(<q-args>, $IGNORE_TESTS)
+command! -nargs=+ FindNoTestAssignment call FindAssignment(<q-args>, $IGNORE_TESTS)
+command! -nargs=+ FindNoTestUsage call FindUsage(<q-args>, $IGNORE_TESTS)
+command! -nargs=+ FindNoTestText call FindText(<q-args>, $IGNORE_TESTS)
+command! -nargs=+ FindOnlyTestFunction call FindFunction(<q-args>, onlyTest)
+command! -nargs=+ FindOnlyTestAssignment call FindAssignment(<q-args>, onlyTest)
+command! -nargs=+ FindOnlyTestUsage call FindUsage(<q-args>, onlyTest)
+command! -nargs=+ FindOnlyTestText call FindText(<q-args>, onlyTest)
+command! -nargs=+ Agraw call Ag(<q-args>)
 
 command! ChangeColorScheme :call fzf#run({
     \   'source':
@@ -265,7 +269,6 @@ command! FzfLet call FzfLet()
 "--------------------------------------------------------------------------------
 augroup myfzfgroup
     autocmd!
-    autocmd VimEnter * command! -nargs=* -bang Agraw call fzf#vim#ag_raw(<args>)
     autocmd FileType javascript nnoremap <buffer>gd :call GoToDeclaration()<cr>
     autocmd FileType nerdtree nnoremap <buffer>,<Tab> :call  FzfNerdTreeMappings()<cr>
     autocmd FileType gitcommit nnoremap <buffer>,<Tab> :call FugitiveMappings()<cr>
