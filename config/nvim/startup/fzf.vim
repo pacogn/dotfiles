@@ -4,6 +4,9 @@
 nmap ,<tab> <plug>(fzf-maps-n)
 xmap ,<tab> <plug>(fzf-maps-x)
 omap ,<tab> <plug>(fzf-maps-o)
+nmap \<tab> <plug>(fzf-maps-n)
+xmap \<tab> <plug>(fzf-maps-x)
+omap \<tab> <plug>(fzf-maps-o)
 
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -204,17 +207,17 @@ command! -bang -nargs=* Ag
     \                 <bang>0)
 
 command! Mru call fzf#run({
-      \  'source': 'cat $HOME/.mru', 
+      \  'source': 'tail -r $HOME/.mru', 
     \  'sink':    'e',
     \  'options': '-m -x +s',
     \  'down':    '40%'})
 command! Mrw call fzf#run({
-      \  'source': 'cat $HOME/.mrw', 
+      \  'source': 'tail -r $HOME/.mrw', 
     \  'sink':    'e',
     \  'options': '-m -x +s',
     \  'down':    '40%'})
 command! Mrv call fzf#run({
-      \  'source': 'cat $HOME/.mru', 
+      \  'source': 'tail -r $HOME/.mru', 
     \  'sink':    'e',
     \  'options': '-m -x +s',
     \  'down':    '40%'})
@@ -272,5 +275,7 @@ augroup myfzfgroup
     autocmd FileType javascript nnoremap <buffer>gd :call GoToDeclaration()<cr>
     autocmd FileType nerdtree nnoremap <buffer>,<Tab> :call  FzfNerdTreeMappings()<cr>
     autocmd FileType gitcommit nnoremap <buffer>,<Tab> :call FugitiveMappings()<cr>
+    autocmd FileType nerdtree nnoremap <buffer>\<Tab> :call  FzfNerdTreeMappings()<cr>
+    autocmd FileType gitcommit nnoremap <buffer>\<Tab> :call FugitiveMappings()<cr>
 augroup END
 "-----------------------------------------------------------------------------}}}
