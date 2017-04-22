@@ -90,6 +90,7 @@ nmap ,. <c-^>
 "Y:@"<CR>
 "<C-U> is needed for properly capturing the count, I don't understand why
 
+nnoremap - :NERDTreeFind<cr>:only<cr>
 "find variable assignment - `a=b` or `a:b` - fails for es6
 nnoremap <silent> <space>fva :call FindAssignment(expand("<cword>"))<cr>
 nnoremap <silent> <space>ff :call FindFunction(expand("<cword>"))<cr>
