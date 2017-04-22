@@ -204,6 +204,7 @@ nmap <silent> 1n :NERDTreeFind<cr>
 nmap <silent> 1N :NERDTreeToggle<cr>
 nmap <silent> \t :NERDTreeToggle<cr>
 nmap <silent> <space>nn :NERDTreeToggle<cr>
+nmap 1o :only<cr>
 
 "disable automatic mappings for surround.vim and write the here cuz I want `ds{motion}` and `cs{motion}` to use easymotion instead
 let g:surround_no_mappings = 1
@@ -254,10 +255,8 @@ map <space>te :tabedit %<cr>
 "visual mode on pasted text
 nnoremap <space>vp `[v`]
 "same as :quit
-nmap ,w :wincmd q<cr>
-nmap <space>w :wincmd q<cr>
 nmap \w :wincmd q<cr>
-" map ,, :w<cr>
+nmap \q :wincmd q<cr>
 nnoremap <silent> <space>zj :call NextClosedFold('j')<cr>
 nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
 imap <C-s>  <Esc>:w<cr>
