@@ -170,6 +170,7 @@ nmap <space>hb :GitGutterPrevHunk<cr>
 nmap <space>hN :GitGutterPrevHunk<cr>
 "highlight hunks
 nmap <space>hh :GitGutterLineHighlightsToggle<cr>
+nmap <space>ht :GitGutterLineHighlightsToggle<cr>
 "hunk next
 nmap <space>hn :GitGutterNextHunk<cr>
 "hunk preview
