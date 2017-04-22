@@ -24,12 +24,13 @@ function! FixPowerlineFontsAndSave()
     nunmap ,,
     vunmap <space><space>
     nunmap <space><space>
-    silent! w
-    inoremap ,, <esc>:w<cr>
-    nmap ,, :w<cr>
-    vmap ,, :w<cr>
-    nmap <space><space> :w<cr>
-    vmap <space><space> :w<cr>
+    silent! update
+    "there is an issue with airline not updating when `:update` writes, running twice `:update` solves it
+    inoremap ,, <esc>:update<cr>:update<cr>
+    nmap ,, :update<cr>:update<cr>
+    vmap ,, :update<cr>:update<cr>
+    nmap <space><space> :update<cr>:update<cr>
+    vmap <space><space> :update<cr>:update<cr>
 endfunction
 inoremap ,, <esc>:call FixPowerlineFontsAndSave()<cr>
 nmap ,, :call FixPowerlineFontsAndSave()<cr>
@@ -138,7 +139,7 @@ nmap <space>bl :BLines<cr>
 "view buffer lines
 nmap <space>vb :AgBLines<cr>
 nmap <space>agb :AgBLines<cr>
-nmap <space>bd :call BufDeleteCurrent()<cr>
+nmap <space>bd :silent call BufDeleteCurrent()<cr>
 "end diff --- clean close diff window
 nmap <space>ed <C-w><C-h><C-w><C-c>
 map <space>ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
