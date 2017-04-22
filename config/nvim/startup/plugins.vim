@@ -49,7 +49,7 @@ Plug 'scrooloose/nerdtree',
             \Plug 'ryanoasis/vim-devicons'                  " file drawer
 Plug 'tpope/vim-commentary'                                 " comment stuff out
 Plug 'sudavid4/vim-unimpaired'                              " mappings which are simply short normal mode aliases for commonly used ex commands
-Plug 'tpope/vim-ragtag'                                     " endings for html, xml, etc. - ehances surround
+Plug 'tpope/vim-ragtag', {'for': ['html', 'jsx', 'xml']}      " endings for html, xml, etc. - ehances surround
 Plug 'tpope/vim-surround'                                   " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
 Plug 'vim-airline/vim-airline'                              " fancy statusline
 Plug 'sudavid4/vim-airline-themes'                          " themes for vim-airline
