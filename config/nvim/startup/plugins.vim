@@ -1,5 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
-Plug 'sudavid4/Buffet.vim'                                  " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for
+Plug 'schickling/vim-bufonly'                               " delete all buffers but current
+" Plug 'sudavid4/Buffet.vim'                                  " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for
+Plug 'jlanzarotta/bufexplorer'
 Plug 'vim-scripts/YankRing.vim'                             "Maintains a history of previous yanks, changes and deletes
 Plug 'sbdchd/neoformat', { 'for':                           
             \['javascript', 'css', 'scss', 
@@ -43,7 +45,7 @@ Plug 'embear/vim-foldsearch'                                " fold based on sear
 " Plug '$HOME/.dotfiles/forkedProjects/base16-vim'
 Plug 'sudavid4/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'scrooloose/nerdtree', 
+Plug 'sudavid4/nerdtree', 
             " \{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] } |
             \Plug 'Xuyuanp/nerdtree-git-plugin'           |
             \Plug 'ryanoasis/vim-devicons'                  " file drawer

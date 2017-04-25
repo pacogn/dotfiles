@@ -1,6 +1,6 @@
 let g:peekaboo_window='vert bo 60new'
 let g:diminactive_buftype_blacklist = ['nowrite', 'acwrite']
-let g:diminactive_enable_focus = 1
+" let g:diminactive_enable_focus = 1
 let g:rooter_manual_only = 1
 let g:EasyMotion_do_mapping=1
 let g:table_mode_corner = '|'
@@ -67,7 +67,12 @@ function! s:my_cr_function()
 endfunction
 
 function! s:mruIgnore()
-    if &ft =~? 'git' || &ft =~? 'nerdtree' || expand('%') =~ 'nvim.runtime' || expand('%') =~? 'yankring'
+    if &ft =~? 'git' ||
+	  \ &ft =~? 'nerdtree' ||
+	  \ expand('%') =~ 'nvim.runtime' ||
+	  \ expand('%') =~? 'yankring]' ||
+	  \ expand('%') =~? 'fugitiveblame' ||
+	  \ expand('%') =~? '/var/folders/.*nvim'
       return 1
     endif
     return 0
@@ -312,7 +317,7 @@ else
 endif
 highlight Comment cterm=italic
 highlight htmlArg cterm=italic
-execute 'highlight link EndOfBuffer ColorColumn'
+" execute 'highlight link EndOfBuffer ColorColumn'
 "set relativenumber " show relative line numbers
 
 
@@ -449,14 +454,5 @@ hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
 
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
-
-function! BufOnly()
-  let curr = bufnr("%")
-  let last = bufnr("$")
-
-  if curr > 1    | silent! execute "1,".(curr-1)."bd"     | endif
-  if curr < last | silent! execute (curr+1).",".last."bd" | endif
-endfunction
-command! BufOnly call BufOnly()
 
 call ApplyLocalSettings(expand('.'))

@@ -1,19 +1,40 @@
+function! Buflisted()
+    return filter(range(1, bufnr('$')), 'buflisted(v:val) && getbufvar(v:val, "&filetype") != "qf"')
+endfunction
+function! Sort_buffers(...)
+    let [b1, b2] = map(copy(a:000), 'get(g:fzf#vim#buffers, v:val, v:val)')
+    " Using minus between a float and a number in a sort function causes an error
+    return b1 < b2 ? 1 : -1
+endfunction
+function! ListBuffers(...)
+    let bufs = sort(Buflisted(), 'Sort_buffers')
+    return bufs
+endfunction
+
 function! BufDeleteCurrent()
-    let l:bufname=bufname('#')
-    if len(l:bufname)
-        " there is an alternate file, make sure it's the one that's comming up on screen
-        execute('buffer '.l:bufname)
-    else
-        " there is no 'alternate file' go to whatever other file possible
-        bn
+    let listedbuffers=ListBuffers()
+    let bufnextnr = 1
+    let currbuffname = expand('%')
+    if(bufname('%') =~? 'NERD_tree')
+        let bufnextnr = 0
+        " buffer! #
     endif
-    " delete the alternate buffer ( the one we just exited ).
-    " if there was only one buffer then # doesn't exist so this won't do anything. It's hacky but works
-    bd! #
-    "now we don't want the alternate file to remain the one of the buffer we just deleted
-    bn
-    bp
-    " execute('bd! #')
+    if(len(listedbuffers) > bufnextnr)
+        let l:bufnext = listedbuffers[bufnextnr]
+        let alternate = listedbuffers[bufnextnr]
+    endif
+    if(len(listedbuffers) > bufnextnr + 1)
+        let alternate = listedbuffers[bufnextnr + 1]
+    endif
+    if exists('l:bufnext')
+        if bufnextnr
+            bd
+        endif
+        execute 'buffer '.l:bufnext
+        let @#=bufname(alternate)
+    else
+        echom 'last buffer'
+    endif
 endfunction
 function! FixPowerlineFontsAndSave()
     " can't load powerline fonts on startup, it looks terrible. This is a hacky workaround
@@ -86,12 +107,30 @@ function! CursorPing()
     let &cursorcolumn = _cursorcolumn
 endfunction
 
+function! ToggleWindowToNerdTree()
+    let w:dontsavescreenstate = 1
+    let currfile = expand('%:p:t')
+    
+    if has_key(g:NERDTree, 'IsOpen') && g:NERDTree.IsOpen()
+        echom 'inside isopen'
+        edit %:p:h
+        redraw
+        call search(currfile)
+        " edit .
+        " let t:NERDTreeBufName = bufname('%')
+        " NERDTreeFind
+    else
+        NERDTreeFind
+        NERDTreeClose
+        execute 'buffer '.t:NERDTreeBufName
+    endif
+endfunction
 nmap ,. <c-^>
 "execute current line
 "Y:@"<CR>
 "<C-U> is needed for properly capturing the count, I don't understand why
 
-nnoremap - :NERDTreeFind<cr>:only<cr>
+nnoremap - :silent call ToggleWindowToNerdTree()<cr>
 "find variable assignment - `a=b` or `a:b` - fails for es6
 nnoremap <silent> <space>fva :call FindAssignment(expand("<cword>"))<cr>
 nnoremap <silent> <space>ff :call FindFunction(expand("<cword>"))<cr>
@@ -139,9 +178,9 @@ nmap <space>bl :BLines<cr>
 "view buffer lines
 nmap <space>vb :AgBLines<cr>
 nmap <space>agb :AgBLines<cr>
-nmap <space>bd :silent call BufDeleteCurrent()<cr>
+nmap <space>bd :call BufDeleteCurrent()<cr>
 "end diff --- clean close diff window
-nmap <space>ed <C-w><C-h><C-w><C-c>
+nmap <space>ed <C-w><C-l><C-w><C-o>
 map <space>ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
 " find any file
 nmap <silent><space>fa :FZFFiles<cr>
@@ -168,11 +207,13 @@ nmap <space>hs :GitGutterStageHunk<cr>
 "hunk before = hunk prev
 nmap <space>hb :GitGutterPrevHunk<cr>
 nmap <space>hN :GitGutterPrevHunk<cr>
+nmap 1H :GitGutterPrevHunk<cr>
 "highlight hunks
 nmap <space>hh :GitGutterLineHighlightsToggle<cr>
 nmap <space>ht :GitGutterLineHighlightsToggle<cr>
 "hunk next
 nmap <space>hn :GitGutterNextHunk<cr>
+nmap 1h :GitGutterNextHunk<cr>
 "hunk preview
 nmap <space>hp :GitGutterPreviewHunk<cr>
 nmap <space>gt :Buffers<cr>term://
@@ -183,14 +224,6 @@ nnoremap  ,i :call CursorPing()<CR>
 " moving up and down work as you would expect
 nnoremap <silent> j gj
 nnoremap <silent> k gk
-map <silent> ,h :call WinMove('h')<cr>
-map <silent> ,j :call WinMove('j')<cr>
-map <silent> ,k :call WinMove('k')<cr>
-map <silent> ,l :call WinMove('l')<cr>
-map <silent> 1h :call WinMove('h')<cr>
-map <silent> 1j :call WinMove('j')<cr>
-map <silent> 1k :call WinMove('k')<cr>
-map <silent> 1l :call WinMove('l')<cr>
 map <silent> gh :call WinMove('h')<cr>
 map <silent> gj :call WinMove('j')<cr>
 map <silent> gk :call WinMove('k')<cr>

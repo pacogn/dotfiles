@@ -27,7 +27,7 @@ function! s:setUpNerdMappings()
     map <buffer><C-s> i 
     map <buffer><C-v> s 
     map <buffer>1o o:NERDTreeClose<cr>
-    map <buffer>- :silent call BufDeleteCurrent()<cr>
+    map <buffer>- :call BufDeleteCurrent()<cr>
 endfunction
 augroup myNerdTreeGroup
 	autocmd!
