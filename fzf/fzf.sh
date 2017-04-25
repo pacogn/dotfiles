@@ -14,6 +14,8 @@ chromehistory() {
   fzf --ansi --multi | sed 's#.*\(https*://\)#''\1''#' | xargs open
 }
 
+alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {})'\'
+
 # fshow - git commit browser
 # copied from https://junegunn.kr/2015/03/browsing-git-commits-with-fzf/
 fshow() {
