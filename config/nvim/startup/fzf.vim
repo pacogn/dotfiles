@@ -18,6 +18,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 nmap 1m :Marks<cr>
 nmap \v :Vimrc<cr>
 nmap \a :Ag 
+nmap \r :Agraw
 "-----------------------------------------------------------------------------}}}
 "GLOBALS                                                                      {{{ 
 "--------------------------------------------------------------------------------
@@ -36,6 +37,7 @@ let g:fzf_action = {
 
 function! s:defaultPreview()
     return fzf#vim#with_preview({'down': '100%'}, 'up:50%', 'ctrl-g')
+    " return fzf#vim#with_preview({'down': '100%'}, 'up:50%', 'ctrl-g:execute:($DOTFILES/fzf/fhelp.rb),ctrl-e')
 endfunction
 function! Noop(...)
 endfunction
@@ -178,18 +180,18 @@ endfunction
 "-----------------------------------------------------------------------------}}}
 "COMMANDS                                                                     {{{
 "--------------------------------------------------------------------------------
-command! -nargs=+ FindFunction call FindFunction(<q-args>)
-command! -nargs=+ FindAssignment call FindAssignment(<q-args>)
-command! -nargs=+ FindUsage call FindUsage(<q-args>)
-command! -nargs=+ FindText call FindText(<q-args>)
-command! -nargs=+ FindNoTestFunction call FindFunction(<q-args>, $IGNORE_TESTS)
-command! -nargs=+ FindNoTestAssignment call FindAssignment(<q-args>, $IGNORE_TESTS)
-command! -nargs=+ FindNoTestUsage call FindUsage(<q-args>, $IGNORE_TESTS)
-command! -nargs=+ FindNoTestText call FindText(<q-args>, $IGNORE_TESTS)
-command! -nargs=+ FindOnlyTestFunction call FindFunction(<q-args>, onlyTest)
-command! -nargs=+ FindOnlyTestAssignment call FindAssignment(<q-args>, onlyTest)
-command! -nargs=+ FindOnlyTestUsage call FindUsage(<q-args>, onlyTest)
-command! -nargs=+ FindOnlyTestText call FindText(<q-args>, onlyTest)
+command! -nargs=+ FindFunction call FindFunction(<args>)
+command! -nargs=+ FindAssignment call FindAssignment(<args>)
+command! -nargs=+ FindUsage call FindUsage(<args>)
+command! -nargs=+ FindText call FindText(<args>)
+command! -nargs=+ FindNoTestFunction call FindFunction(<args>, $IGNORE_TESTS)
+command! -nargs=+ FindNoTestAssignment call FindAssignment(<args>, $IGNORE_TESTS)
+command! -nargs=+ FindNoTestUsage call FindUsage(<args>, $IGNORE_TESTS)
+command! -nargs=+ FindNoTestText call FindText(<args>, $IGNORE_TESTS)
+command! -nargs=+ FindOnlyTestFunction call FindFunction(<args>, onlyTest)
+command! -nargs=+ FindOnlyTestAssignment call FindAssignment(<args>, onlyTest)
+command! -nargs=+ FindOnlyTestUsage call FindUsage(<args>, onlyTest)
+command! -nargs=+ FindOnlyTestText call FindText(<args>, onlyTest)
 command! -nargs=+ Agraw call Ag(<q-args>)
 
 command! ChangeColorScheme :call fzf#run({
@@ -206,19 +208,18 @@ command! -bang -nargs=* Ag
     \                 s:defaultPreview(),
     \                 <bang>0)
 
+function! s:sinkMru(selectedFiles)
+    echom substitute(a:selectedFiles, '^[^/]*/', '/', '')
+    execute 'edit '.substitute(a:selectedFiles, '^[^/]*/', '/', '')
+endfunction
 command! Mru call fzf#run({
-      \  'source': 'tail -r $HOME/.mru', 
-    \  'sink':    'e',
+      \  'source': 'tail -r $HOME/.mru | nl', 
+    \  'sink':    function('s:sinkMru'),
     \  'options': '-m -x +s',
     \  'down':    '40%'})
 command! Mrw call fzf#run({
-      \  'source': 'tail -r $HOME/.mrw', 
-    \  'sink':    'e',
-    \  'options': '-m -x +s',
-    \  'down':    '40%'})
-command! Mrv call fzf#run({
-      \  'source': 'tail -r $HOME/.mru', 
-    \  'sink':    'e',
+      \  'source': 'tail -r $HOME/.mrw | nl', 
+    \  'sink':  function('s:sinkMru'),
     \  'options': '-m -x +s',
     \  'down':    '40%'})
 
