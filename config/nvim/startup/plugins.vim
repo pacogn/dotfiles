@@ -35,7 +35,7 @@ Plug '/usr/local/opt/fzf' | Plug 'sudavid4/fzf.vim'         " fuzzy file finder 
 Plug 'benjie/neomake-local-eslint.vim', 
             \{ 'for': 'javascript' }                        " let neomake know how to find local eslint
 Plug 'benekastah/neomake', 
-            \{ 'for': 'javascript' }                        " neovim replacement for syntastic using neovim's job control functonality
+            \{ 'for': ['javascript', 'rt', 'html'] }                        " neovim replacement for syntastic using neovim's job control functonality
 Plug 'dahu/vim-fanfingtastic'                               " improved f F t T commands
 Plug 'tpope/vim-obsession'                                  " session management
 Plug 'airblade/vim-gitgutter'                               " add git status for each modified line
