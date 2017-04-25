@@ -1,4 +1,9 @@
-autocmd! FileType javascript let g:neomake_javascript_enabled_makers = ['eslint']
+augroup neomake_runners
+    autocmd!
+    autocmd FileType javascript let g:neomake_javascript_enabled_makers = ['eslint']
+    autocmd BufWritePost *.rt :! grunt rt
+augroup end
+
 "
 " this is eslint fallback version.  'benjie/neomake-local-eslint.vim' will find local eslint for us
 let g:neomake_javascript_eslint_exe='/Users/davidsu/.nvm/versions/node/v4.2.1/bin/eslint'
