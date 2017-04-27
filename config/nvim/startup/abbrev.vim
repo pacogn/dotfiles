@@ -5,4 +5,5 @@ cnoreabbrev <expr> agb getcmdtype() == ":" && getcmdline() == 'agb' ? 'AgBLines 
 cnoreabbrev <expr> agr getcmdtype() == ":" && getcmdline() == 'agr' ? 'Agraw ''' : 'agr'
 cnoreabbrev <expr> bc getcmdtype() == ":" && getcmdline() == 'bc' ? 'BCommits' : 'bc'
 cnoreabbrev <expr> mru getcmdtype() == ":" && getcmdline() == 'mru' ? 'Mru' : 'mru'
+cnoreabbrev <expr> mrw getcmdtype() == ":" && getcmdline() == 'mrw' ? 'Mrw' : 'mrw'
 
