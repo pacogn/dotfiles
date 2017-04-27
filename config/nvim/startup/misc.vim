@@ -116,6 +116,7 @@ augroup whatAMess
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     " au VimEnter * Obsession " this is a terrible idea cuz you delete a real session when opening an empty vim
+    au VimEnter * call histdel(':', '^qa\?$')
     autocmd FileType vim set shiftwidth=4
     "source current file
     autocmd FileType vim map <space>sc :source %<cr>
