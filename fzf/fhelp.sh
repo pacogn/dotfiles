@@ -1,5 +1,4 @@
 #!/bin/zsh
-echo running script
 linenum=$(echo $1 | sed -E "s/[^:]*:([^:]*).*/\1/")
 filename=$(echo $1 | sed -E "s/([^:]*):.*/\1/")
 if [[ $linenum -gt 30 ]]; then

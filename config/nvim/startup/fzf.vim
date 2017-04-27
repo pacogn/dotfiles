@@ -34,10 +34,15 @@ let g:fzf_action = {
 "-----------------------------------------------------------------------------}}}
 "FUNCTIONS                                                                    {{{ 
 "--------------------------------------------------------------------------------
-
 function! s:defaultPreview()
-    return fzf#vim#with_preview({'down': '100%'}, 'up:50%', 'ctrl-g')
-    " return fzf#vim#with_preview({'down': '100%'}, 'up:50%', 'ctrl-g:execute:($DOTFILES/fzf/fhelp.rb),ctrl-e')
+    " return fzf#vim#with_preview({'down': '100%'}, 'up:70%', 'ctrl-g')
+    " return fzf#vim#with_preview({'down': '100%'}, 'up:50%', 'ctrl-e:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty,ctrl-g')
+    return {'options': ' --preview-window up:50% '.
+                \'--preview "''/Users/davidsu/.dotfiles/config/nvim/plugged/fzf.vim/bin/preview.rb''"\ -v\ {} '.
+                \'--bind ''ctrl-g:toggle-preview,'.
+                \'ctrl-e:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty''', 
+                \'down': '100%'}
+
 endfunction
 function! Noop(...)
 endfunction

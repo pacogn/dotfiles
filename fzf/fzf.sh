@@ -1,6 +1,8 @@
 # c - browse chrome history
 # copied from https://junegunn.kr/2015/04/browsing-chrome-history-with-fzf/
 chromehistory() {
+    esc=$(printf '\033')
+
   local cols sep
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
@@ -11,10 +13,11 @@ chromehistory() {
     "select substr(title, 1, $cols), url
      from urls order by last_visit_time desc" |
   awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-  fzf --ansi --multi | sed 's#.*\(https*://\)#''\1''#' | xargs open
+  fzf --ansi --multi --preview 'echo {} | sed -E "s#(.*)(http.*)#\1$(tput setaf 6)\2$(tput sgr0)#"' --preview-window 'up:3:wrap' --bind 'ctrl-g:toggle-preview' | sed 's#.*\(https*://\)#''\1''#' | xargs open
 }
 
 alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {})'\'
+# alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/fzf/fhelp.sh {+10}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {})'\'
 
 # fshow - git commit browser
 # copied from https://junegunn.kr/2015/03/browsing-git-commits-with-fzf/
