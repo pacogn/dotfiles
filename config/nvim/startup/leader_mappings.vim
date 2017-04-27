@@ -180,7 +180,7 @@ nmap <space>vb :AgBLines<cr>
 nmap <space>agb :AgBLines<cr>
 nmap <space>bd :call BufDeleteCurrent()<cr>
 "end diff --- clean close diff window
-nmap <space>ed <C-w><C-l><C-w><C-o>
+nmap <space>ed <C-w><C-l><C-w><C-j><C-w><C-o>
 map <space>ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
 " find any file
 nmap <silent><space>fa :FZFFiles<cr>
