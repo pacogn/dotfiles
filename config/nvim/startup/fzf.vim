@@ -220,12 +220,12 @@ endfunction
 command! Mru call fzf#run({
       \  'source': 'tail -r $HOME/.mru | nl', 
     \  'sink':    function('s:sinkMru'),
-    \  'options': '-m -x +s',
+    \  'options': '--no-sort --exact',
     \  'down':    '40%'})
 command! Mrw call fzf#run({
       \  'source': 'tail -r $HOME/.mrw | nl', 
     \  'sink':  function('s:sinkMru'),
-    \  'options': '-m -x +s',
+    \  'options': '--no-sort --exact',
     \  'down':    '40%'})
 
 
