@@ -17,8 +17,26 @@ chromehistory() {
 }
 
 alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {})'\'
-# alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/fzf/fhelp.sh {+10}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {})'\'
 
+function fag(){
+    fzfretval=$(ag --color $@ | fzf  --ansi --preview '$DOTFILES/bin/preview.rb {}' --preview-window 'top:50%' --bind 'ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {})')
+    #note the `< <` here has the same effect as <<. not obvious what could be the difference. see `man zshexpn` +228 for more. here the `<<` fucks up syntax highlight
+    #for more on `<<<` see `here string` on `man bash`
+    IFS=: read filename linenum ignorerest< <(sed -E 's/([^:]*:[[:digit:]]+)/\1:/' <<< $fzfretval)
+    if [[ -f $filename ]]; then
+        vim +$linenum $filename
+    fi
+}
+
+function fman(){
+    fzfretval=$(findmanpage --color $@ | fzf --ansi --preview '$DOTFILES/bin/preview.rb {}' --preview-window 'top:50%' --bind 'ctrl-g:toggle-preview')
+    if [[ -n fzfretval ]]; then
+        manpage=$(sed -E 's#^[^[:space:]:]*/([[:alnum:]]*)\..*#\1#' <<< $fzfretval)
+        #`${@: -1}` get the last argument to the function
+        #-j12: tells less to put 12lines above search result as opposed to search result on top of screen
+        man $manpage | less -j12 -p ${@: -1}
+    fi
+}
 # fshow - git commit browser
 # copied from https://junegunn.kr/2015/03/browsing-git-commits-with-fzf/
 fshow() {
