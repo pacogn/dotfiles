@@ -77,7 +77,9 @@ function! FzfNerdTreeMappings()
 		\'B       Toggle whether the bookmark table is displayed           |NERDTree-B|' ,
 		\'q       Close the NERDTree window                                |NERDTree-q|' ,
 		\'A       Zoom (maximize/minimize) the NERDTree window             |NERDTree-A|' ,
-		\'?       Toggle the display of the quick help                     |NERDTree-?|' ]
+		\'?       Toggle the display of the quick help                     |NERDTree-?|' ,
+		\'<C-s>   Open selected file in a split window (same as i)         |NERDTree-?|' ,
+		\'<C-v>   Open selected file in a new vsplit   (same as s)         |NERDTree-?|' ]
     call fzf#run({
 		\'source': l:mappings,
 		\'sink': function('ExecMapping'),
