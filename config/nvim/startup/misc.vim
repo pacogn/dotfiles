@@ -72,7 +72,8 @@ function! s:mruIgnore()
 	  \ expand('%') =~ 'nvim.runtime' ||
 	  \ expand('%') =~? 'yankring]' ||
 	  \ expand('%') =~? 'fugitiveblame' ||
-	  \ expand('%') =~? '/var/folders/.*nvim'
+	  \ expand('%') =~? '/var/folders/.*nvim' ||
+	  \ expand('%') =~? '\.git/index'
       return 1
     endif
     return 0
