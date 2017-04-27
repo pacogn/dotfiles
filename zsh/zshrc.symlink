@@ -9,13 +9,17 @@ export FZF_DEFAULT_OPTS='--reverse'
 
 export THEME
 source ~/.zgen/wting/autojump-master/bin/autojump.zsh
-for f in ~/.dotFiles/* #foreach file in directory
-do
-  #if its a normal file (-f) then log and source it
-  [[ -f $f && $f != *'xterm'* && $f != *'Session.vim' ]] && \
-    # echo loading $f && \
-    source $f
-done
+function reload(){
+  for f in ~/.dotFiles/* #foreach file in directory
+  do
+    #if its a normal file (-f) then log and source it
+    if [[ -f $f && $f != *'xterm'* && $f != *'Session.vim' ]]; then
+        # { time ( source $f; printf $f ) } 2>&1 
+        source $f
+    fi
+  done
+}
+reload
 
 # Go development
 export GOPATH="${HOME}/.go"
