@@ -15,8 +15,8 @@ Plug 'kshenoy/vim-signature'                                " help for working w
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}         " markdown 
 Plug 'godlygeek/tabular'                                    " related to vim-markdown
 Plug 'powerman/vim-plugin-AnsiEsc'                          " type :AnsiEsc to get colors as terminal 
-Plug 'blueyed/vim-diminactive' |
-            \ Plug 'tmux-plugins/vim-tmux-focus-events'     " allow different background for buffer without focus on split window 
+Plug 'blueyed/vim-diminactive' 
+            " \ Plug 'tmux-plugins/vim-tmux-focus-events'     " allow different background for buffer without focus on split window 
 Plug 'sudavid4/tern_for_vim', {                             
             \'for': 'javascript',
             \'do': 'npm i' }                                " intellijent navigation and refactor for javascript 
@@ -71,7 +71,8 @@ Plug 'tpope/vim-dispatch'                                   " asynchronous build
 " Plug 'vim-scripts/matchit.zip'                              " extended % matching
 "end todo-------------------------------------------------------------------------------------------------------
 Plug 'junegunn/gv.vim'                                      " :GV browse commits like a pro 
-
+" see https://github.com/normenmueller/vim-iterm2-navigator/commit/58ca1e3e2ac24689fb1312e7fcf4384acdbe1e33 for how to make the following work
+" Plug 'zephod/vim-iterm2-navigator'                          " Seamlessly navigate vim split panes inside iterm2 split panes
 " Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
 " Plug 'ervandew/supertab' " Perform all your vim insert mode completions with Tab
 " Plug 'mtth/scratch.vim'
