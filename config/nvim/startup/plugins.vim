@@ -45,16 +45,18 @@ Plug 'embear/vim-foldsearch'                                " fold based on sear
 " Plug '$HOME/.dotfiles/forkedProjects/base16-vim'
 Plug 'sudavid4/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
+Plug 'vim-airline/vim-airline'                              " fancy statusline
+Plug 'sudavid4/vim-airline-themes'                          " themes for vim-airline
 Plug 'sudavid4/nerdtree', 
-            " \{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] } |
-            \Plug 'Xuyuanp/nerdtree-git-plugin'           |
+            \{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] } |
             \Plug 'ryanoasis/vim-devicons'                  " file drawer
+            " \Plug 'Xuyuanp/nerdtree-git-plugin'           |
+
+set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete
 Plug 'tpope/vim-commentary'                                 " comment stuff out
 Plug 'sudavid4/vim-unimpaired'                              " mappings which are simply short normal mode aliases for commonly used ex commands
 Plug 'tpope/vim-ragtag', {'for': ['html', 'jsx', 'xml']}      " endings for html, xml, etc. - ehances surround
 Plug 'tpope/vim-surround'                                   " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
-Plug 'vim-airline/vim-airline'                              " fancy statusline
-Plug 'sudavid4/vim-airline-themes'                          " themes for vim-airline
 Plug 'tpope/vim-fugitive'                                   " amazing git wrapper for vim
 Plug 'tpope/vim-repeat'                                     " enables repeating other supported plugins with the . command
 Plug 'garbas/vim-snipmate' |                                
