@@ -108,22 +108,17 @@ function! CursorPing()
 endfunction
 
 function! ToggleWindowToNerdTree()
+    "need to commit change in nerdtree and relate to it for this commit
+    " see sudavid4/nerdtree commit 909cf25722f206f82128554c7c6dd1ed34a95949 is needed for this to work properly
+    if ! exists('t:NERDTreeBuffName')
+        NERDTreeToggle
+        NERDTreeToggle
+    endif
+    "this is likely useless since sudavid4/nerdtree commit 909cf25722f206f82128554c7c6dd1ed34a95949 
     let w:dontsavescreenstate = 1
     let currfile = expand('%:p:t')
-    
-    if has_key(g:NERDTree, 'IsOpen') && g:NERDTree.IsOpen()
-        echom 'inside isopen'
-        edit %:p:h
-        redraw
-        call search(currfile)
-        " edit .
-        " let t:NERDTreeBufName = bufname('%')
-        " NERDTreeFind
-    else
-        NERDTreeFind
-        NERDTreeClose
-        execute 'buffer '.t:NERDTreeBufName
-    endif
+    edit %:p:h
+    call search(currfile)
 endfunction
 nmap ,. <c-^>
 "execute current line
