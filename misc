@@ -37,11 +37,6 @@ function decryptdir(){
 
 }
 
-function cheat(){
-	if [[ -e $DOTFILES/cheatSheets/$1 ]]; then
-		cat $DOTFILES/cheatSheets/$1 | less
-	fi
-} 
 for f in $DOTFILES/cheatSheets/*
 do
     if [[ -f $f ]]; then
