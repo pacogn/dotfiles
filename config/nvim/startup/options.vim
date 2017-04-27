@@ -45,7 +45,6 @@ set lazyredraw            " don't redraw while executing macros
 set magic                 " Set magic on, for regex
 set noerrorbells
 set visualbell
-set shada=!,'100,<50,s10,h
 set t_vb=
 set tm=500
 set t_Co=256              " Explicitly tell vim that the terminal supports 256 colors"
