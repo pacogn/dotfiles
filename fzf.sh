@@ -33,7 +33,9 @@ function fman(){
         manpage=$(sed -E 's#^[^[:space:]:]*/([[:alnum:]]*)\..*#\1#' <<< $fzfretval)
         #`${@: -1}` get the last argument to the function
         #-j12: tells less to put 12lines above search result as opposed to search result on top of screen
-        man $manpage | less -j12 -p ${@: -1}
+
+        searchpattern=$(sed 's/\\b//g' <<< ${@: -1})
+        man $manpage | less -j12 -p $searchpattern
     fi
 }
 # fshow - git commit browser
