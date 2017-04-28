@@ -22,7 +22,7 @@ if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
       fi
      }
 
-    local ret_status="%(?:%{$fg[green]%}➜ :%{$fg_bold[red]%}➜%s)"
+    ret_status="%(?:%{$fg[green]%}➜ :%{$fg_bold[red]%}➜%s)"
     PROMPT='${ret_status}%{$fg_bold[green]%}%p $(color_for_most_used_dirs)%3~ $(my_git_prompt_info)%{$fg_bold[blue]%} % %{$reset_color%}'
 
     # this blue looks damn ugly on vim embeded terminal gui colors. using something more decent!
