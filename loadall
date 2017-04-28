@@ -15,6 +15,8 @@ function loadzgen(){
     #the custom in ~/.dotFiles/prompt
     SET_CUSTOM_PROMPT=true
     source $DOTFILES/prompt
+    #we need to re-source fzf here otherwise oh-my-zsh overwrites its bindings!!!
+    [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
 function loadrvm(){
     export PATH="$PATH:$HOME/.rvm/bin:$HOME/.bin" # Add RVM to PATH for scripting
