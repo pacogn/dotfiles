@@ -11,8 +11,13 @@ chromehistory() {
     "select substr(title, 1, $cols), url
      from urls order by last_visit_time desc" |
   awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\x1b[m\n", $1, $2}' |
-  fzf --ansi --multi --preview 'echo $(tput setaf 12){-1} | sed -E '\''s#([&?])#'$(tput setaf 8)'\1\
-'$(tput setaf 10)'#g'\' --preview-window 'up:35%:wrap' --bind 'ctrl-g:toggle-preview' | sed 's#.*\(https*://\)#''\1''#' | xargs open
+  fzf --ansi --multi \
+      --preview 'echo {..-2}; echo $(tput setaf 12){-1} | sed -E '\''s#([&?])#'$(tput setaf 8)'\1\
+'$(tput setaf 10)'#g'\' \
+        --preview-window 'up:35%:wrap' \
+        --header 'CTRL-e - open without abort :: CTRL-s - toggle sort :: CTRL-g - toggle preview window' \
+        --prompt 'Chrome History>' \
+        --bind 'ctrl-g:toggle-preview,ctrl-s:toggle-sort,ctrl-e:execute:open {-1}' | sed 's#.*\(https*://\)#''\1''#' | xargs open
 }
 
 alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {})'\'
