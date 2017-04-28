@@ -167,6 +167,7 @@ nmap g# <Plug>(incsearch-nohl-g#)
 
 nnoremap \c :Commands<cr>
 nnoremap 1: :History:<cr>
+nnoremap 1; :History:<cr>
 nnoremap 1/ :History/<cr>
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
 nmap <space>bl :BLines<cr>
