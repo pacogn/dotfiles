@@ -2,6 +2,7 @@
 " airline options
 " powerline fonts only work after manually loading startup/options.vim!! WTF!!
 let g:airline_powerline_fonts=1
+let g:webdevicons_enable_airline_statusline=0
 " let g:airline#extensions#disable_rtp_load = 0
 let g:airline_theme='kolor'
 " let g:airline_theme='PaperColor'
