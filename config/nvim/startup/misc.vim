@@ -49,7 +49,8 @@ command! OpenInWebstorm call OpenInWebstorm()
 command! ListDotFiles call ListDotFiles('$DOTFILES/',  'git ls-files')
 command! DotFiles call ListDotFiles('$DOTFILES',  'git ls-files')
 command! DotVim call ListDotFiles('$DOTFILES/config/nvim/',  'git ls-files')
-command! DotPlugged call ListDotFiles('$DOTFILES/config/nvim/plugged',  'find . | grep -vF .git')
+command! DotPlugged call ListDotFiles('$DOTFILES/config/nvim/plugged',  'find . -type f | grep -vF .git ')
+command! DotPluggedDirectories call ListDotFiles('$DOTFILES/config/nvim/plugged',  'ls | grep -vF .git ')
 command! -nargs=? Vimrc call Vimrc(<q-args>)
 command! CDR Rooter
 command! CDC cd %:p:h
