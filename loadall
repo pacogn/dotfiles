@@ -14,7 +14,8 @@ function loadzgen(){
     #unset SET_CUSTOM_PROMPT value if you want to test other prompt than
     #the custom in ~/.dotFiles/prompt
     SET_CUSTOM_PROMPT=true
-    source $DOTFILES/prompt
+    #fix prompt but also fix back my options that oh-my-zsh fucks up, e.g:ls output style
+    reload
     #we need to re-source fzf here otherwise oh-my-zsh overwrites its bindings!!!
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
