@@ -302,6 +302,7 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 nmap 1p :YRShow<cr>
+vmap 1p :<C-u>YRShow<cr>
 nmap ,lc :LetterCommands<cr>
 nmap <space>lc :LetterCommands<cr>
 nmap <space>cl :LetterCommands<cr>
