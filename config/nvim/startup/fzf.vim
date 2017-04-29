@@ -28,7 +28,6 @@ let g:fzf_layout = { 'down': '~60%' }
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-x': 'split',
-  \ 'ctrl-s': 'split',
   \ 'ctrl-v': 'vsplit' }
 
 "-----------------------------------------------------------------------------}}}
@@ -90,7 +89,7 @@ function! AgBLines(...)
     let query = '-G '.filename.' '.query
     "todo bind ctrl-s isn't working here, looks like someone binds it later on to 'select'
    call fzf#vim#ag_raw(query, 
-            \fzf#vim#with_preview({'dir':expand('%:p:h'), 'down': '100%', 'options': ' --bind ctrl-s:toggle-sort,ctrl-e:toggle-sort '},'up:50%', 'ctrl-g'))
+            \fzf#vim#with_preview({'dir':expand('%:p:h'), 'down': '100%', 'options': ' --header ''ctrl-t: toggleSort'' --bind ctrl-t:toggle-sort,ctrl-s:toggle-sort,ctrl-e:toggle-sort '},'up:50%', 'ctrl-g'))
 
 endfunction
 
