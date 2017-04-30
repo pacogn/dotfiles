@@ -17,7 +17,7 @@ chromehistory() {
         --preview-window 'up:35%:wrap' \
         --header 'CTRL-e - open without abort :: CTRL-s - toggle sort :: CTRL-g - toggle preview window' \
         --prompt 'Chrome History>' \
-        --bind 'ctrl-g:toggle-preview,ctrl-s:toggle-sort,ctrl-e:execute:open {-1}' | sed 's#.*\(https*://\)#''\1''#' | xargs open
+        --bind 'ctrl-g:toggle-preview,ctrl-s:toggle-sort,ctrl-e:execute:open {-1}' | perl -pe 's|.*?(https*://.*?)|\1|' | xargs open
 }
 
 alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {})'\'
