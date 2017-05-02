@@ -49,19 +49,26 @@ Plug 'vim-airline/vim-airline'                              " fancy statusline
 Plug 'sudavid4/vim-airline-themes'                          " themes for vim-airline
 Plug 'sudavid4/nerdtree', 
             \{ 'on': ['NERDTreeToggle', 'NERDTreeFind'] } |
+            \Plug 'tiagofumo/vim-nerdtree-syntax-highlight' |
             \Plug 'ryanoasis/vim-devicons'                  " file drawer
             " \Plug 'Xuyuanp/nerdtree-git-plugin'           |
 
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete
 Plug 'tpope/vim-commentary'                                 " comment stuff out
 Plug 'sudavid4/vim-unimpaired'                              " mappings which are simply short normal mode aliases for commonly used ex commands
-Plug 'tpope/vim-ragtag', {'for': ['html', 'jsx', 'xml']}      " endings for html, xml, etc. - ehances surround
+" Plug 'tpope/vim-ragtag', {'for': ['html', 'jsx', 'xml']}      " endings for html, xml, etc. - ehances surround
 Plug 'tpope/vim-surround'                                   " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
 Plug 'tpope/vim-fugitive'                                   " amazing git wrapper for vim
 Plug 'tpope/vim-repeat'                                     " enables repeating other supported plugins with the . command
+" Plug 'SirVer/ultisnips'                                     " snippet manager
+" let g:UltiSnipsExpandTrigger='<c-space>'
+" inoremap <c-space> <c-r>=UltiSnips#ExpandSnippet()<cr>
+" let g:UltiSnipsSnippetsDir = 'UltiSnips'
+" let g:UltiSnipsSnippetsDirectories = ['$HOME/.config/nvim/ultisnippets']
 Plug 'garbas/vim-snipmate' |                                
             \Plug 'MarcWeber/vim-addon-mw-utils' |
             \Plug 'tomtom/tlib_vim'                         " snippet manager
+imap <expr> <c-space> pumvisible() ? '<c-y><Plug>snipMateNextOrTrigger' : '<Plug>snipMateNextOrTrigger'
 Plug 'christoomey/vim-tmux-navigator'                       " seemless pane navigation for vim <-> tmux                         
 " Plug 'wincent/loupe'                                        " enhances Vim's `search-commands`
 Plug 'haya14busa/incsearch.vim'                             "  Improved incremental searching for Vim

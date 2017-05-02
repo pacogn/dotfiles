@@ -11,6 +11,16 @@ if isdirectory(expand(".git"))
     let g:NERDTreeBookmarksFile = '.git/.NERDTreeBookmarks'
 endif
 
+"vim-nerdtree-syntax-highlight customization
+let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
+let g:NERDTreeExtensionHighlightColor['rt'] = '8FAA54' 
+let g:NERDTreeExtensionHighlightColor['html'] = '8FAA54' 
+let g:NERDTreeExtensionHighlightColor['htm'] = '8FAA54' 
+let g:NERDTreeExtensionHighlightColor['js'] = 'd1bf70' 
+"see help devicons 521
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rt'] = ''
+"git indication in nerdtree --- not in use
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✭",
     \ "Staged"    : "✚",
