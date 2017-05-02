@@ -52,8 +52,9 @@ command! DotVim call ListDotFiles('$DOTFILES/config/nvim/',  'git ls-files')
 command! DotPlugged call ListDotFiles('$DOTFILES/config/nvim/plugged',  'find . -type f | grep -vF .git ')
 command! DotPluggedDirectories call ListDotFiles('$DOTFILES/config/nvim/plugged',  'ls | grep -vF .git ')
 command! -nargs=? Vimrc call Vimrc(<q-args>)
-command! CDR Rooter
-command! CDC cd %:p:h
+"not good enough CDR for filetype nerdtree but will do it for now
+command! CDR if &filetype == 'nerdtree' | execute 'CDC' | else | execute 'Rooter' | endif
+command! CDC if &filetype == 'nerdtree' | execute 'cd /'.join(b:NERDTreeRoot.path.pathSegments, '/') | else | cd %:p:h | endif
 
 function! ClearMessages()
     for n in range(200) | echom "" | endfor
@@ -119,6 +120,9 @@ augroup whatAMess
     " au VimEnter * Obsession " this is a terrible idea cuz you delete a real session when opening an empty vim
     au VimEnter * call histdel(':', '^qa\?$')
     autocmd FileType vim set shiftwidth=4
+    autocmd FileType vim set foldmethod=indent
+    autocmd FileType vim set foldlevel=20
+
     "source current file
     autocmd FileType vim map <space>sc :source %<cr>
     "this is my way of disabling syntax highlight for very large files... A little clumsy but good enough for now
