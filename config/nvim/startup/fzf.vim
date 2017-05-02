@@ -230,7 +230,7 @@ command! Mrw call fzf#run({
 
 
 command! FZFFiles call fzf#run({
-    \  'source': 'find . | egrep -v \.git',
+    \  'source': 'find -L . | egrep -v \.git',
     \  'sink':    'e',
     \  'options': '-m -x +s'})
 
