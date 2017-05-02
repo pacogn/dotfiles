@@ -25,6 +25,6 @@ augroup fugitiveautocmd
 	autocmd!
 	autocmd BufEnter *.git/index nmap <buffer> <silent>q :q<cr>
         autocmd BufEnter *.git/index nmap <buffer> <space>gd <C-w><C-o>D
-        autocmd BufEnter *.git/COMMIT_EDITMSG normal zMGzogg
+        autocmd BufEnter *.git/COMMIT_EDITMSG silent! normal zMGzogg
 augroup END
 command! DiffInWebstorm !git difftool -t=webstorm %
