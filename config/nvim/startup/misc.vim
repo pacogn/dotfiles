@@ -19,6 +19,8 @@ function! ListDotFiles(dir, command)
 		\'sink': 'e'})
 endfunction
 
+" quick open snippets file for current filetype
+command! SnipEdit execute 'vsplit $DOTFILES/config/nvim/snippets/'.&filetype.'.snippets'
 function! Vimrc(...)
   let query = get(a:000, 0, '^')
   if !len(query)
