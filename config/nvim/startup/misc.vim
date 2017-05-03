@@ -30,6 +30,14 @@ function! Vimrc(...)
 	    \query, 
 	    \fzf#vim#with_preview({'dir': '$DOTFILES/config/nvim/', 'up': '100%'}, 'up:40%', 'ctrl-g'))
 endfunction
+" ----------------------------------------------------------------------------
+" HL | Find out syntax group -- stolen from https://github.com/junegunn/dotfiles/blob/master/vimrc
+" ----------------------------------------------------------------------------
+function! s:hl()
+  " echo synIDattr(synID(line('.'), col('.'), 0), 'name')
+  echo join(map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")'), '/')
+endfunction
+command! HL call <SID>hl()
 
 " Zoom - from https://github.com/junegunn/dotfiles/blob/master/vimrc<Paste>
 function! s:zoom()
