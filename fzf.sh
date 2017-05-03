@@ -24,7 +24,7 @@ alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --previ
 alias fch='chromehistory'  
 
 function fag(){
-    fzfretval=$(ag --color $@ | fzf  --ansi --preview '$DOTFILES/bin/preview.rb {}' --preview-window 'top:50%' --bind 'ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {})')
+    fzfretval=$(ag --color $@ | fzf  --ansi --preview '$DOTFILES/bin/preview.rb {}' --preview-window 'top:50%' --bind 'ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {}) > /dev/tty')
     #note the `< <` here has the same effect as <<. not obvious what could be the difference. see `man zshexpn` +228 for more. here the `<<` fucks up syntax highlight
     #for more on `<<<` see `here string` on `man bash`
     IFS=: read filename linenum ignorerest< <(sed -E 's/([^:]*:[[:digit:]]+)/\1:/' <<< $fzfretval)
@@ -34,14 +34,19 @@ function fag(){
 }
 
 function fman(){
+    if [[ $# -eq 0 ]]; then
+        echo 'need a search argument for this'
+        return
+    fi
     fzfretval=$(findmanpage --color $@ | fzf --ansi --preview '$DOTFILES/bin/preview.rb {}' --preview-window 'top:50%' --bind 'ctrl-g:toggle-preview')
-    if [[ -n fzfretval ]]; then
-        manpage=$(sed -E 's#^[^[:space:]:]*/([[:alnum:]]*)\..*#\1#' <<< $fzfretval)
+    if [[ -n $fzfretval ]]; then
+        manpage=$(sed -E 's#.*/(.*)\..*#\1#' <<< $( sed -E 's#([^[:space:]]*):[[:digit:]]+:.*#\1#' <<< $fzfretval))
+        # manpage=$(sed -E 's#^[^[:space:]:]*/([[:alnum:]]*)\..*#\1#' <<< $fzfretval)
         #`${@: -1}` get the last argument to the function
         #-j12: tells less to put 12lines above search result as opposed to search result on top of screen
 
         searchpattern=$(sed 's/\\b//g' <<< ${@: -1})
-        man $manpage | less -j12 -p $searchpattern
+        man $manpage | less -i -j12 -p $searchpattern
     fi
 }
 # fshow - git commit browser
@@ -66,6 +71,7 @@ function jfzf(){
   fi
 }
 alias jf='jfzf'
+alias fj='jfzf'
 # /Users/davidsu/Library/Application Support/Google/Chrome/Profile 1
 fzf-chth(){
   local selected
