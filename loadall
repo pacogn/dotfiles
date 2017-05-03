@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/zsh
 function loadzgen(){
     source $DOTFILES/theme
 
@@ -15,38 +15,57 @@ function loadzgen(){
     #the custom in ~/.dotFiles/prompt
     SET_CUSTOM_PROMPT=true
     #fix prompt but also fix back my options that oh-my-zsh fucks up, e.g:ls output style
-    reload
+    [[ -n $reloadforzgen ]] && reload
     #we need to re-source fzf here otherwise oh-my-zsh overwrites its bindings!!!
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 }
+reloadforzgen=1
 function loadrvm(){
     export PATH="$PATH:$HOME/.rvm/bin:$HOME/.bin" # Add RVM to PATH for scripting
     # echo "loading rvm"
     [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 }
-function loadnvm(){
-    l=`alias ln`
-    if [ -n $l ]; then; 
-        unalias ln
+function nvm_auto_switch {
+    #stolen from https://github.com/dijitalmunky/nvm-auto
+    unset NVM_RC_VERSION
+    CUR_VERSION=$(node -v |cut -c 2-)
+    nvm_rc_version > /dev/null 2>&1
+
+    if [ -z "${NVM_RC_VERSION}" ]
+    then
+        export NVM_RC_VERSION=$(nvm_version default | cut -c 2-)
     fi
+
+    if [ "v${NVM_RC_VERSION}" != "v${CUR_VERSION}" ]
+    then
+        echo running nvm use '||' nvm use default
+        nvm use >/dev/null 2>&1 || nvm use default >/dev/null 2>&1
+    fi
+}
+function loadnvm(){
     export NVM_DIR="$HOME/.nvm"
     [ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
     export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
 
     autoload -U add-zsh-hook
-    load-nvmrc() {
-      if [[ -f .nvmrc && -r .nvmrc ]]; then
-        nvm use
-      fi
-    }
-    add-zsh-hook chpwd load-nvmrc
+    add-zsh-hook chpwd nvm_auto_switch
+    #change node version iff .nvmrc in pwd
+    [[ -f .nvmrc ]] && nvm_auto_switch
 }
 function loadnvmAutocomplete(){
     [ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && . "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
 }
-function loadall(){
-    unalias l
+function load(){
+    reloadforzgen=''
     loadzgen
+    reloadforzgen=1
+    loadrvm
+    reload
+}
+function loadall(){
+    reloadforzgen=''
+    loadzgen
+    reloadforzgen=1
     loadrvm
     loadnvm
     loadnvmAutocomplete
@@ -54,16 +73,13 @@ function loadall(){
     PATH=$(echo $PATH | tr ':' '\n' | uniq | tr '\n' ':')
     reload
 }
-
-alias lz='loadzgen'
-alias lr='loadrvm'
-alias ln='loadnvm'
-l=`alias l`
-if [ -z $l ]; then; 
-    #here we cd ./ to give nvmrc a chance to kick in
-    alias l='loadall; reload; cd ./'
+if [[ -z $loadallsourced ]]; then
+    alias l='load'
+    alias l!='loadall'
+    alias lnvm='loadnvm && loadnvmAutocomplete && cd ./'
+    alias lall='loadall'
+    loadallsourced=1
 fi
-
 
 
 
