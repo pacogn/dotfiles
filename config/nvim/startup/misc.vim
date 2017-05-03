@@ -268,13 +268,9 @@ augroup configgroup
 	autocmd InsertLeave * call OnInsertLeave()
 	autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab indentkeys-=*<return>
 	autocmd FileType markdown,textile setlocal textwidth=0 wrapmargin=0 wrap spell
-	autocmd FileType .xml exe ":silent %!xmllint --format --recover - 2>/dev/null"
-	autocmd FileType crontab setlocal nobackup nowritebackup
 
 	" automatically resize panes on resize
 	autocmd VimResized * exe 'normal! \<c-w>='
-	autocmd BufWritePost .vimrc,.vimrc.local,init.vim silent! source %
-	autocmd BufWritePost .vimrc.local silent! source %
 
 	autocmd BufNewFile,BufRead *.svg set filetype=xml
 	autocmd BufNewFile,BufRead .babelrc set filetype=json
@@ -282,8 +278,6 @@ augroup configgroup
 	autocmd BufNewFile,BufRead *.rt set filetype=html
 	" close help files on 'q'
 		
-	autocmd FileType help nnoremap <buffer>q :bd<cr>
-	autocmd FileType nerdtree nnoremap <buffer><Esc> :NERDTreeToggle<cr>
 	autocmd BufEnter * call SetQuit() 
 
 	" make quickfix windows take all the lower section of the screen
