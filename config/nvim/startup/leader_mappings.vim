@@ -178,6 +178,9 @@ nmap <space>bd :call BufDeleteCurrent()<cr>
 "end diff --- clean close diff window
 nmap <space>ed <C-w><C-j><C-w><C-l><C-w><C-o>
 map <space>ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
+"add explanation inside code
+nnoremap <space>ex O<esc>120i-<esc>o-<cr><esc>120i-<esc>V2k:Commentary<cr>j$xA
+" nnoremap <space>ex O120i-o120i-VkkgcjgccA
 " find any file
 nmap <silent><space>fa :FZFFiles<cr>
 nmap <silent><space>fh :Helptags<cr>
