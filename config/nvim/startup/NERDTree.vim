@@ -54,9 +54,14 @@ function! s:wipeRememberedNerd()
         execute 'bwipeout '.g:nerdToWipe
         let g:nerdToWipe=''
         "when wiping nerdtree make sure you have an appropriate alternate file
-        if ! len(expand('#'))
+        if ! len(expand('#')) || expand('#') == expand('%')
             let listedbuffers=ListBuffers()
             if len(listedbuffers) > 1
+                if expand(bufname(listedbuffers[1])) == expand('%')
+                    "ListBuffers has not been updated yet
+                    let @#=bufname(listedbuffers[0])
+                    return
+                endif
                 let @#=bufname(listedbuffers[1])
             endif
         endif
