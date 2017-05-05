@@ -30,7 +30,7 @@ function! Vimrc(...)
 	    \'--ignore ''autoload''  ' .
 	    \'--ignore ''plugged'' '.
 	    \query, 
-	    \fzf#vim#with_preview({'dir': '$DOTFILES/config/nvim/', 'up': '100%'}, 'up:40%', 'ctrl-g'))
+	    \fzf#vim#with_preview({'dir': '$DOTFILES/config/nvim/', 'up': '100%', 'options': '--bind ctrl-s:toggle-sort'}, 'up:40%', 'ctrl-g'))
 endfunction
 " ----------------------------------------------------------------------------
 " HL | Find out syntax group -- stolen from https://github.com/junegunn/dotfiles/blob/master/vimrc
