@@ -53,7 +53,15 @@ function! s:wipeRememberedNerd()
     if strlen(g:nerdToWipe) > 0
         execute 'bwipeout '.g:nerdToWipe
         let g:nerdToWipe=''
+        "when wiping nerdtree make sure you have an appropriate alternate file
+        if ! len(expand('#'))
+            let listedbuffers=ListBuffers()
+            if len(listedbuffers) > 1
+                let @#=bufname(listedbuffers[1])
+            endif
+        endif
     endif
+
 endfunction
 augroup myNerdTreeGroup
 	autocmd!
