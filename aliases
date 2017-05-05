@@ -50,6 +50,10 @@ function findalias(){
     done
 }
 function findmanpage(){
+    if [[ $# -eq 0 ]]; then
+        echo 'need a search argument for this'
+        return
+    fi
     for dir in $(echo /usr/share/man && echo $manpath | tr ':' '\n' | grep '^/Users/' | grep -v '\.nvm')
     do
        ag -a $@ $dir #ack is like grep, recursive by default, great option
