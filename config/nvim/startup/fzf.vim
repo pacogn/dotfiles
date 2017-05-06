@@ -43,6 +43,11 @@ function! s:defaultPreview()
                 \'down': '100%'}
 
 endfunction
+
+function! DefaultPreviewForFzf()
+  return s:defaultPreview()
+endfunction
+
 function! Noop(...)
 endfunction
 function! FzfLet()
@@ -212,21 +217,6 @@ command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>,
     \                 s:defaultPreview(),
     \                 <bang>0)
-
-function! s:sinkMru(selectedFiles)
-    echom substitute(a:selectedFiles, '^[^/]*/', '/', '')
-    execute 'edit '.substitute(a:selectedFiles, '^[^/]*/', '/', '')
-endfunction
-command! Mru call fzf#run({
-      \  'source': 'tail -r $HOME/.mru | nl', 
-    \  'sink':    function('s:sinkMru'),
-    \  'options': '--no-sort --exact',
-    \  'down':    '40%'})
-command! Mrw call fzf#run({
-      \  'source': 'tail -r $HOME/.mrw | nl', 
-    \  'sink':  function('s:sinkMru'),
-    \  'options': '--no-sort --exact',
-    \  'down':    '40%'})
 
 
 command! FZFFiles call fzf#run({
