@@ -78,47 +78,6 @@ function! s:my_cr_function()
     return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 
-function! s:mruIgnore()
-    if &ft =~? 'git' ||
-	  \ &ft =~? 'nerdtree' ||
-	  \ expand('%') =~ 'nvim.runtime' ||
-	  \ expand('%') =~? 'yankring]' ||
-	  \ expand('%') =~? 'fugitiveblame' ||
-	  \ expand('%') =~? '/var/folders/.*nvim' ||
-	  \ expand('%') =~? '\.git/index'
-      return 1
-    endif
-    return 0
-endfunction
-
-function! Mru()
-    if s:mruIgnore()
-        return
-    endif
-    let filename = expand('%:p')
-    let shellcmd = 
-                \'if [[ -f '.filename.' ]]; then; '.
-                \'    [[ ! -f $HOME/.mru ]] && touch $HOME/.mru; '.
-                \'    grep -v '.filename.' $HOME/.mru > /tmp/tmpmru; '.
-                \'    echo '.filename.' >> /tmp/tmpmru; '.
-                \'    tail -n1000 /tmp/tmpmru > $HOME/.mru; '.
-                \'fi'
-    call system(shellcmd)
-endfunction
-function! Mrw()
-    if s:mruIgnore()
-        return
-    endif
-    let filename = expand('%:p')
-    let shellcmd = 
-                \'if [[ -f '.filename.' ]]; then; '.
-                \'[[ ! -f $HOME/.mrw ]] && touch $HOME/.mrw; '.
-                \'grep -v '.filename.' $HOME/.mrw > /tmp/tmpmrw; '.
-                \'echo '.filename.' >> /tmp/tmpmrw; '.
-                \'tail -n1000 /tmp/tmpmrw > $HOME/.mrw; '.
-                \'fi'
-    call system(shellcmd)
-endfunction
 " Enable omni completion.
 augroup whatAMess
     autocmd!
@@ -137,8 +96,6 @@ augroup whatAMess
     autocmd FileType vim map <space>sc :source %<cr>
     "this is my way of disabling syntax highlight for very large files... A little clumsy but good enough for now
     autocmd BufEnter * if line('$') > 10000 | set filetype=none | endif
-    autocmd BufReadPost * call Mru()
-    autocmd BufWritePost * call Mrw()
 augroup END
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"

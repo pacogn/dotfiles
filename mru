@@ -6,10 +6,14 @@ function mru(){
         return
     fi
     #print file inverse order(tail) | put line numbers (nl) | fzf with sorting | remove line number from selected file (sed)
-    filename=$(tail -r $HOME/$mrufile | nl | fzf --no-sort --exact --bind 'ctrl-s:toggle-sort' | sed -E 's#[^/]*(/.*$)#''\1''#')
+    fzfresult=$(tail -r $HOME/$mrufile | nl | fzf --no-sort --exact --bind 'ctrl-s:toggle-sort' | sed -E 's#[^/]*(/.*$)#''\1''#')
+    filename=$(sed -E 's#(^[^:]*).*#\1#' <<< $fzfresult)
     if [[ -f $filename ]]; then
+        if [[ $fzfresult =~ ':[[:digit:]]+$' ]]; then
+            linenum=$(sed 's#^[^:]*:#+#' <<< $fzfresult)
+        fi
         #open selected file in vim AND cd into git's root folder for project of selected file
-        vim $filename -c 'silent :Rooter'
+        vim $linenum $filename -c 'silent :Rooter'
     fi
 }
 function mrw(){
