@@ -1,7 +1,7 @@
 #!/bin/zsh
 setopt COMPLETE_ALIASES
-alias vim='nvim'
-alias vimrc='vim $DOTFILES/config/nvim/init.vim -c '\''cd $DOTFILES/config/nvim'\'
+#we wish to have rvm in vim for proper coloring in preview(fzf) for viml files
+alias vim='[[ -z $HAS_LOADED ]] && loadrvm; nvim'
 alias vimdiff='nvim -d'
 alias ag='ag --color-match="1;031"'
 alias agd='cd $DOTFILES && ag --ignore ''plugged*'' --ignore-dir ''forkedProjects'' --ignore ''autoload*'''

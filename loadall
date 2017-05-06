@@ -56,6 +56,7 @@ function loadnvmAutocomplete(){
     [ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && . "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
 }
 function load(){
+    export HAS_LOADED=1  
     reloadforzgen=''
     loadzgen
     reloadforzgen=1
