@@ -71,6 +71,7 @@ endfunction
 augroup myNerdTreeGroup
 	autocmd!
 	autocmd FileType nerdtree call s:setUpNerdMappings()
+        autocmd Filetype nerdtree nmap<buffer> 1n :NERDTreeClose<cr>
 	autocmd BufHidden * call RememberNerdToWipe(expand('<afile>'))
     autocmd BufWinEnter * call s:wipeRememberedNerd()
 augroup END
