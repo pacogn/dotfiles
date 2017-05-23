@@ -198,7 +198,7 @@ else
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
-let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js"
+let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 
 
 " let g:ack_autofold_results = 1
