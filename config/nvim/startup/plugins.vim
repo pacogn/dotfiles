@@ -1,4 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
+Plug 'sudavid4/mru.vim'
 Plug 'schickling/vim-bufonly'                               " delete all buffers but current
 " Plug 'sudavid4/Buffet.vim'                                  " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for
 Plug 'jlanzarotta/bufexplorer'
@@ -101,6 +102,7 @@ Plug 'moll/vim-node', { 'for': 'javascript' }               " node support
 " Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' } " JavaScript syntax plugin
 " Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] } " JSX support
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'jsx'] }             " JavaScript syntax plugin
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'elzr/vim-json', { 'for': 'json' }                     " JSON support
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }   " ES6 and beyond syntax
 " Plug 'Quramy/tsuquyomi', { 'for': 'typescript', 'do': 'npm install' } " extended typescript support - works as a client for TSServer
@@ -108,7 +110,6 @@ Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }   " ES6 and beyond syn
 " Plug 'leafgarland/typescript-vim', { 'for': 'typescript' } " typescript support
 Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }         " sass scss syntax support
 Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] } " markdown support
-" Plug 'groenewege/vim-less', { 'for': 'less' } " less support
 Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] } " set the background of hex color values to the color
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }             " CSS3 syntax support
 " Plug 'itspriddle/vim-marked', 
@@ -116,5 +117,7 @@ Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }             " CSS3 syntax suppor
                                                             " :TableModeToggle
 Plug 'dhruvasagar/vim-table-mode'
 
-
+highlight def link jsxCloseTag javascriptIdentifierName
+highlight def link jsxCloseString javascriptIdentifierName
+highlight def link jsxTag javascriptIdentifierName
 call plug#end()
