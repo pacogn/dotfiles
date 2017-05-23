@@ -15,16 +15,19 @@ chromehistory() {
       --preview 'echo {..-2}; echo $(tput setaf 12){-1} | sed -E '\''s#([&?])#'$(tput setaf 8)'\1\
 '$(tput setaf 10)'#g'\' \
         --preview-window 'up:35%:wrap' \
-        --header 'CTRL-e - open without abort :: CTRL-s - toggle sort :: CTRL-g - toggle preview window' \
+        --header 'CTRL-o - open without abort :: CTRL-s - toggle sort :: CTRL-g - toggle preview window' \
         --prompt 'Chrome History>' \
-        --bind 'ctrl-g:toggle-preview,ctrl-s:toggle-sort,ctrl-e:execute:open {-1}' | perl -pe 's|.*?(https*://.*?)|\1|' | xargs open
+        --bind 'ctrl-g:toggle-preview,ctrl-s:toggle-sort,ctrl-o:execute:open {-1}' | perl -pe 's|.*?(https*://.*?)|\1|' | xargs open
 }
 
-alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {})'\'
+alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-o:execute:($DOTFILES/fzf/fhelp.sh {})'\'
 alias fch='chromehistory'  
 
 function fag(){
-    fzfretval=$(ag --color $@ | fzf  --ansi --preview '$DOTFILES/bin/preview.rb {}' --preview-window 'top:50%' --bind 'ctrl-g:toggle-preview,ctrl-e:execute:($DOTFILES/fzf/fhelp.sh {}) > /dev/tty')
+    fzfretval=$(ag --color $@ | fzf  --ansi --preview '$DOTFILES/bin/preview.rb {}' \
+        --preview-window 'top:50%' \
+        --bind 'ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:($DOTFILES/fzf/fhelp.sh {}) > /dev/tty' \
+        --header 'CTRL-o - open without abort(LESS) :: CTRL-s - toggle sort :: CTRL-g - toggle preview window')
     #note the `< <` here has the same effect as <<. not obvious what could be the difference. see `man zshexpn` +228 for more. here the `<<` fucks up syntax highlight
     #for more on `<<<` see `here string` on `man bash`
     IFS=: read filename linenum ignorerest< <(sed -E 's/([^:]*:[[:digit:]]+)/\1:/' <<< $fzfretval)
