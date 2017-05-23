@@ -9,7 +9,8 @@ function mru(){
     fzfresult=$(tail -r $HOME/$mrufile | nl | fzf --no-sort --exact \
         --preview 'echo {} | sed -E '\''s#^[^/]*##'\'' | xargs $DOTFILES/bin/preview.rb -v' \
         --preview-window 'top:50%' \
-        --bind 'ctrl-s:toggle-sort,ctrl-g:toggle-preview' | sed -E 's#[^/]*(/.*$)#''\1''#')
+        --header 'CTRL-o - open without abort(LESS) :: CTRL-s - toggle sort :: CTRL-g - toggle preview window' \
+        --bind 'ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty' | sed -E 's#[^/]*(/.*$)#''\1''#')
     filename=$(sed -E 's#(^[^:]*).*#\1#' <<< $fzfresult)
     if [[ -f $filename ]]; then
         if [[ $fzfresult =~ ':[[:digit:]]+$' ]]; then
@@ -24,4 +25,21 @@ function mrw(){
 }
 function mrv(){
     mru '.mru'
+}
+
+function removeMruInvalidEntries(){
+    for f in $HOME/.mru $HOME/.mrw
+    do
+        cp $f /tmp/tmpmru; 
+        while read line; do
+            currFileName=$(sed -E 's/^([^:]*).*/\1/' <<< $line)
+            if [[ ! -f $currFileName ]]; then
+                echo removing $currFileName  
+                grep -v $line /tmp/tmpmru > /tmp/tmpmruhelp
+                rm /tmp/tmpmru
+                mv /tmp/tmpmruhelp /tmp/tmpmru
+            fi
+        done < $f
+        cp /tmp/tmpmru $f
+    done
 }

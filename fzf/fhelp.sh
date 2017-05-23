@@ -1,11 +1,14 @@
 #!/bin/zsh
-linenum=$(echo $1 | sed -E "s/[^:]*:([^:]*).*/\1/")
-filename=$(echo $1 | sed -E "s/([^:]*):.*/\1/")
+sanitized=$(sed -E 's/^[[:space:]]*[[:digit:]]+[[:space:]]+(.*)/\1/' <<< $1)
+linenum=$(echo $sanitized | sed -E "s/[^:]*:([^:]*).*/\1/")
+filename=$(echo $sanitized | sed -E "s/([^:]*):.*/\1/")
 if [[ $linenum -gt 30 ]]; then
-	linenum=$(expr $linenum - 20) 
+	gotolinenum=$(expr $linenum - 20) 
 elif [[ $linenum -gt 25 ]]; then
-	linenum=$(expr $linenum - 10)
+	gotolinenum=$(expr $linenum - 10)
 else
-	linenum=0
+	gotolinenum=0
 fi
-$DOTFILES/fzf/fhelp.rb $1 | less -N +${linenum}g
+
+$DOTFILES/fzf/fhelp.rb ${filename}:${linenum} | less -N +${gotolinenum}g
+
