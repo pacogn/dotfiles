@@ -1,9 +1,6 @@
 "MAPPINGS{{{
 "--------------------------------------------------------------------------------
 " Mapping selecting mappings
-nmap ,<tab> <plug>(fzf-maps-n)
-xmap ,<tab> <plug>(fzf-maps-x)
-omap ,<tab> <plug>(fzf-maps-o)
 nmap \<tab> <plug>(fzf-maps-n)
 xmap \<tab> <plug>(fzf-maps-x)
 omap \<tab> <plug>(fzf-maps-o)
@@ -15,7 +12,7 @@ imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
 
-nmap 1m :Marks<cr>
+nmap 1m :Mru<cr>
 nmap \v :Vimrc<cr>
 nmap \a :Ag 
 nmap \r :Agraw
@@ -38,8 +35,9 @@ function! s:defaultPreview()
     " return fzf#vim#with_preview({'down': '100%'}, 'up:50%', 'ctrl-e:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty,ctrl-g')
     return {'options': ' --preview-window up:50% '.
                 \'--preview "''/Users/davidsu/.dotfiles/config/nvim/plugged/fzf.vim/bin/preview.rb''"\ -v\ {} '.
+                \'--header ''CTRL-o - open without abort :: CTRL-s - toggle sort :: CTRL-g - toggle preview window'' '. 
                 \'--bind ''ctrl-g:toggle-preview,'.
-                \'ctrl-e:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty''', 
+                \'ctrl-o:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty''', 
                 \'down': '100%'}
 
 endfunction
@@ -94,7 +92,7 @@ function! AgBLines(...)
     let query = '-G '.filename.' '.query
     "todo bind ctrl-s isn't working here, looks like someone binds it later on to 'select'
    call fzf#vim#ag_raw(query, 
-            \fzf#vim#with_preview({'dir':expand('%:p:h'), 'down': '100%', 'options': ' --header ''ctrl-t: toggleSort'' --bind ctrl-t:toggle-sort,ctrl-s:toggle-sort,ctrl-e:toggle-sort '},'up:50%', 'ctrl-g'))
+            \fzf#vim#with_preview({'dir':expand('%:p:h'), 'down': '100%', 'options': ' --header ''ctrl-t: toggleSort'' --bind ctrl-t:toggle-sort,ctrl-s:toggle-sort '},'up:50%', 'ctrl-g'))
 
 endfunction
 
@@ -119,7 +117,7 @@ function! FindFunction(functionName, ...)
     let additionalParams = ( a:0 > 0 ) ? a:1 : ''
     " (?<=...) positive lookbehind: must constain
     " (?=...) positive lookahead: must contain
-    let agcmd = '''(?<=function\s)'.a:functionName.'(?=\()|'.a:functionName.'\s*:'' '.additionalParams
+    let agcmd = '''(?<=function\s)'.a:functionName.'(?=\()|'.a:functionName.'\s*:|(?<=prototype\.)'.a:functionName.'(?=\s*=\s*function)'' '.additionalParams
     call fzf#vim#ag_raw(agcmd, s:defaultPreview())
 endfunction
 
@@ -145,6 +143,7 @@ function! GoToDeclaration()
     let l:lineFromCursorPosition = strpart(getline('.'), getpos('.')[2])
     let l:wordUnderCursor = expand('<cword>')
     let l:isFunction = match(l:lineFromCursorPosition , '^\(\w\|\s\)*(') + 1
+    let @/=l:wordUnderCursor
     silent TernDef
     if join(l:pos) == join(getpos('.'))
         "can't jump to definition with tern, do a search with ag + fzf
