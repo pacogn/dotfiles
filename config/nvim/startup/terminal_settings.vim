@@ -22,5 +22,5 @@ if has('nvim')
     tnoremap ,nt  !'spec.js !'unit.js !'it.js
     tnoremap ,ot 'spec.js \| 'unit.js \| 'it.js
     tnoremap ,ds '/documentServices/
-    tmap <silent><Esc> <esc><C-\><c-n>
+    " tmap <silent><Esc> <esc><C-\><c-n>
 endif

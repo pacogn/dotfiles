@@ -170,7 +170,8 @@ nnoremap 1: :History:<cr>
 nnoremap 1; :History:<cr>
 nnoremap 1/ :History/<cr>
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
-nmap <space>bl :BLines<cr>
+nmap <space>bl :BLines!<cr>
+nmap <space>be :BufExplorer<cr>
 "view buffer lines
 nmap <space>vb :AgBLines<cr>
 nmap <space>agb :AgBLines<cr>
@@ -203,6 +204,7 @@ nmap <space>ge :Gedit<cr>
 
 "hunk stage
 nmap <space>hs :GitGutterStageHunk<cr>
+nmap <space>hu :GitGutterUndoHunk<cr>
 "hunk before = hunk prev
 nmap <space>hb :GitGutterPrevHunk<cr>
 nmap <space>hN :GitGutterPrevHunk<cr>
@@ -274,13 +276,7 @@ map s, <Plug>(easymotion-prev)
 map s. <Plug>(easymotion-repeat)
 map sd <Plug>(easymotion-s2)
 
-" 'quick git status' give status with fzf
-map ,qgs :GFiles?<cr>
 nnoremap <space>gs :GFiles?<cr>
-map ,qa :qa<cr>
-map <silent> ,sl <Nop>
-map ,tc :tabclose<cr>
-map ,te :tabedit %<cr>
 map <space>tc :tabclose<cr>
 map <space>te :tabedit %<cr>
 
@@ -294,9 +290,7 @@ nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
 imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 
-nmap <silent> ,m :GFiles<cr>
 nmap <silent> \f :GFiles<cr>
-nmap <silent> ,M :Buffers<cr>
 nmap <silent> \b :Buffers<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
