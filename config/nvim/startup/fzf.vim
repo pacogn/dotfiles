@@ -145,7 +145,11 @@ function! GoToDeclaration()
     let l:isFunction = match(l:lineFromCursorPosition , '^\(\w\|\s\)*(') + 1
     let @/=l:wordUnderCursor
     silent TernDef
-    if join(l:pos) == join(getpos('.'))
+    if l:currFileName =~ '.jsx$' && l:pos[1] == getpos('.')[1] && l:wordUnderCursor != expand('<cword>')
+        execute '?'.l:wordUnderCursor
+        set hlsearch
+        call CursorPing(1)
+    elseif join(l:pos) == join(getpos('.'))
         "can't jump to definition with tern, do a search with ag + fzf
         if l:isFunction
             FindNoTestFunction(l:wordUnderCursor)

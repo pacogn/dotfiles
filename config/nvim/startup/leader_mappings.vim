@@ -97,10 +97,13 @@ function! ToggleCurrsorLineColumn()
     set cursorline nocursorcolumn
 endfunction
 
-function! CursorPing()
+function! CursorPing(...)
     let _cursorline = &cursorline
     let _cursorcolumn = &cursorcolumn
-    set cursorline cursorcolumn
+    set cursorline 
+    if !a:0
+        set cursorcolumn
+    endif
     redraw
     sleep 350m
     let &cursorline = _cursorline
