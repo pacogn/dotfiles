@@ -50,7 +50,11 @@ function loadnvm(){
     autoload -U add-zsh-hook
     add-zsh-hook chpwd nvm_auto_switch
     #change node version iff .nvmrc in pwd
-    [[ -f .nvmrc ]] && nvm_auto_switch
+    if [[ -f .nvmrc ]]; then
+        nvm_auto_switch
+    else
+        nvm use 6
+    fi
 }
 function loadnvmAutocomplete(){
     [ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && . "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
