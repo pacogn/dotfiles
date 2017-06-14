@@ -1,4 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
+Plug 'idbrii/vim-mark'
 Plug 'sudavid4/mru.vim'
 Plug 'schickling/vim-bufonly'                               " delete all buffers but current
 " Plug 'sudavid4/Buffet.vim'                                  " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for
@@ -33,7 +34,7 @@ endif
 Plug 'Konfekt/FastFold'                                     " fold zyntax is too heavy for vim, makes neocomplete very slow. this plugin solves it
 Plug 'henrik/vim-indexed-search'                            " Match 123 of 456 /search term/ in Vim searches
 Plug '/usr/local/opt/fzf' | Plug 'sudavid4/fzf.vim'         " fuzzy file finder and so much more
-Plug 'benjie/neomake-local-eslint.vim', 
+Plug 'sudavid4/neomake-local-eslint.vim', 
             \{ 'for': 'javascript' }                        " let neomake know how to find local eslint
 Plug 'benekastah/neomake', 
             \{ 'for': ['javascript', 'rt', 'html'] }                        " neovim replacement for syntastic using neovim's job control functonality
@@ -120,4 +121,6 @@ Plug 'dhruvasagar/vim-table-mode'
 highlight def link jsxCloseTag javascriptIdentifierName
 highlight def link jsxCloseString javascriptIdentifierName
 highlight def link jsxTag javascriptIdentifierName
+hi link javascriptReserved javascriptVariable
+hi link javascriptReservedCase javascriptVariable
 call plug#end()
