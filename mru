@@ -1,6 +1,6 @@
 #!/bin/zsh
 function mru(){
-    mrufile=${1:-.mru}
+    mrufile=${2:-.mru}
     if [[ ! -f $HOME/$mrufile ]]; then
         echo $HOME/$mrufile does not exist
         return
@@ -16,17 +16,21 @@ function mru(){
         if [[ $fzfresult =~ ':[[:digit:]]+$' ]]; then
             linenum=$(sed 's#^[^:]*:#+#' <<< $fzfresult)
         fi
+        if [[ $1 -eq 0 ]]; then
+            cd $(sed -E 's#(.*)/[^/]+#\1#' <<< $filename)
+            echo $(sed -E 's#(.*)/[^/]+#\1#' <<< $filename)
+        fi
         #open selected file in vim AND cd into git's root folder for project of selected file
         vim $linenum $filename -c 'silent :Rooter'
     fi
 }
 function mrw(){
-    mru '.mrw'
+    mru 0 '.mrw'
 }
 function mrv(){
-    mru '.mru'
+    mru 0 '.mru'
 }
-
+alias 1m='mru 0'
 function removeMruInvalidEntries(){
     for f in $HOME/.mru $HOME/.mrw
     do
