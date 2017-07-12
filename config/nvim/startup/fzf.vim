@@ -143,13 +143,14 @@ function! GoToDeclaration()
     let l:lineFromCursorPosition = strpart(getline('.'), getpos('.')[2])
     let l:wordUnderCursor = expand('<cword>')
     let l:isFunction = match(l:lineFromCursorPosition , '^\(\w\|\s\)*(') + 1
-    let @/=l:wordUnderCursor
     silent TernDef
     if l:currFileName =~ '.jsx$' && l:pos[1] == getpos('.')[1] && l:wordUnderCursor != expand('<cword>')
+        let @/=l:wordUnderCursor
         execute '?'.l:wordUnderCursor
         set hlsearch
         call CursorPing(1)
     elseif join(l:pos) == join(getpos('.'))
+        let @/=l:wordUnderCursor
         "can't jump to definition with tern, do a search with ag + fzf
         if l:isFunction
             FindNoTestFunction(l:wordUnderCursor)
@@ -164,6 +165,7 @@ function! GoToDeclaration()
         let l:regex = '^\s*' . l:wordUnderCursor . '\s*\(,\?\|\(:\s*' . l:wordUnderCursor . ',\?\)\)\s*$'
         echom l:regex
         if l:newCurrFileName != l:currFileName && match(l:newCursorLine, '\((\|=\)') < 0 && match(getline('.'), regex ) + 1
+            let @/=l:wordUnderCursor
             "we are inside a module.exports, maybe we can get to the line where the function is declared
             echom 'the line: ' . getline('.')
             call search(l:wordUnderCursor . '\s*\((\|=\)')
