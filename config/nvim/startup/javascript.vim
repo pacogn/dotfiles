@@ -54,6 +54,10 @@ function! JSToggleFoldMethod()
     endif
 endfunction
 
+function! TernRestartServer()
+    py3 tern_killServers()
+endfunction
+command! TernRestartServer call TernRestartServer()
 "-----------------------------------------------------------------------------}}}
 "AUTOCOMMANDS                                                                 {{{
 "--------------------------------------------------------------------------------
