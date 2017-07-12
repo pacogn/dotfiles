@@ -234,6 +234,7 @@ map <silent> gk :call WinMove('k')<cr>
 map <silent> gl :call WinMove('l')<cr>
 nmap 1w :wincmd q<cr>
 nmap \w :wincmd q<cr>
+nmap \d :redraw!<cr>
 " Toggle NERDTree
 nmap <silent> <C-1> :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
