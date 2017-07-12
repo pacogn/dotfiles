@@ -16,12 +16,13 @@ function mru(){
         if [[ $fzfresult =~ ':[[:digit:]]+$' ]]; then
             linenum=$(sed 's#^[^:]*:#+#' <<< $fzfresult)
         fi
-        if [[ $1 -eq 0 ]]; then
+        #cd into directory of file (usage: "mru 1")
+        if [[ $1 -eq 1 ]]; then
             cd $(sed -E 's#(.*)/[^/]+#\1#' <<< $filename)
             echo $(sed -E 's#(.*)/[^/]+#\1#' <<< $filename)
         fi
         #open selected file in vim AND cd into git's root folder for project of selected file
-        vim $linenum $filename -c 'silent :Rooter'
+        vim $linenum $filename -c 'silent :CDR'
     fi
 }
 function mrw(){
@@ -30,7 +31,7 @@ function mrw(){
 function mrv(){
     mru 0 '.mru'
 }
-alias 1m='mru 0'
+alias 1m='mru 1'
 function removeMruInvalidEntries(){
     for f in $HOME/.mru $HOME/.mrw
     do
