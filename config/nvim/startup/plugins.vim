@@ -49,6 +49,7 @@ Plug 'sudavid4/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline'                              " fancy statusline
 Plug 'sudavid4/vim-airline-themes'                          " themes for vim-airline
+Plug 'sudavid4/vim-js-goToDeclaration'                      " better ternjs gotodeclaration
 Plug 'sudavid4/nerdtree' |
             \Plug 'tiagofumo/vim-nerdtree-syntax-highlight' |
             \Plug 'ryanoasis/vim-devicons'                  " file drawer
