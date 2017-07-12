@@ -52,6 +52,20 @@ function! s:zoom()
 endfunction
 nnoremap <silent> \z :call <sid>zoom()<cr>
 
+function! CdProjectRoot(dirname)
+    " convert windows paths to unix style
+    let l:curDir = substitute(a:dirname, '\\', '/', 'g')
+
+    if isdirectory(a:dirname.'/node_modules') 
+        execute 'cd '.a:dirname
+    else
+        " walk to the top of the dir tree
+        let l:parentDir = strpart(l:curDir, 0, strridx(l:curDir, '/'))
+        if isdirectory(l:parentDir)
+            call CdProjectRoot(l:parentDir)
+        endif
+    endif
+endfunction
 function! OpenInWebstorm()
     :call system('webstorm --line '.getpos('.')[1].' '.expand('%:p')) 
 endfunction
@@ -63,7 +77,8 @@ command! DotPlugged call ListDotFiles('$DOTFILES/config/nvim/plugged',  'find . 
 command! DotPluggedDirectories call ListDotFiles('$DOTFILES/config/nvim/plugged',  'ls | grep -vF .git ')
 command! -nargs=? Vimrc call Vimrc(<q-args>)
 "not good enough CDR for filetype nerdtree but will do it for now
-command! CDR if &filetype == 'nerdtree' | execute 'CDC' | else | execute 'Rooter' | endif
+command! CDG if &filetype == 'nerdtree' | execute 'CDC' | else | execute 'Rooter' | endif
+command! CDR if &filetype == 'nerdtree' | execute 'CDC' | else | call CdProjectRoot(expand('%:p:h')) | endif
 command! CDC if &filetype == 'nerdtree' | execute 'cd /'.join(b:NERDTreeRoot.path.pathSegments, '/') | else | cd %:p:h | endif
 
 function! ClearMessages()
