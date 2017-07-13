@@ -12,7 +12,7 @@ function reload(){
   for f in ~/.dotFiles/* #foreach file in directory
   do
     #if its a normal file (-f) then log and source it
-    if [[ -f $f && $f != *'xterm'* && $f != *'Session.vim' ]]; then
+    if [[ -f $f && $f != *'xterm'* && $f != *'Session.vim' && $f != *'README.md' ]]; then
         # { time ( source $f; printf $f ) } 2>&1 
         source $f
     fi
