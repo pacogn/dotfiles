@@ -21,7 +21,7 @@
 5. install [fzf](https://github.com/junegunn/fzf): `brew install fzf && /usr/local/opt/fzf/install`
 6. install nvm using homebrew: `brew install nvm`
 7. install [the-silver-searcher aka ag](https://github.com/ggreer/the_silver_searcher): `brew install the_silver_searcher`
-8. symlink all `.symlink` files to your home folder 
+8. symlink all `.symlink` files to your home folder `ln -s PATH_TO_SOURCE_FILE.symlink ~/.FILE_NAME`
 9. apply macos defaults: `sh ~/.dotfiles/macos/defaults`
 
 
