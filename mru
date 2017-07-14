@@ -1,5 +1,65 @@
 #!/bin/zsh
+mruselect='SELECT @rn:=@rn+1 AS rank, _file, linenum 
+    FROM (
+      SELECT *
+      FROM mru
+      ORDER BY ts DESC
+    ) t1, (SELECT @rn:=0) t2;'
+mrucmd='mysql -uroot --skip-column-names --batch -e "'${mruselect}'" mru_vim | xargs printf '\''%5s %s:%s\n'\'
+
+
+mrwselect='SELECT @rn:=@rn+1 AS rank, _file, linenum 
+    FROM (
+      SELECT *
+      FROM mrw
+      ORDER BY ts DESC
+    ) t1, (SELECT @rn:=0) t2;'
+mrwcmd='mysql -uroot --skip-column-names --batch -e "'${mrwselect}'" mru_vim | xargs printf '\''%5s %s:%s\n'\'
+dbschema='CREATE DATABASE IF NOT EXISTS mru_vim;
+use mru_vim;
+CREATE TABLE IF NOT EXISTS mru(
+    _file VARCHAR(255) NOT NULL,
+    linenum INT NOT NULL DEFAULT 1,
+    ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (_file)
+);
+
+
+CREATE TABLE IF NOT EXISTS mrw(
+    _file VARCHAR(255) NOT NULL,
+    linenum INT NOT NULL DEFAULT 1,
+    ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (_file)
+);'
+
+function startMySQLIfNeeded() {
+    mysql -uroot -e status || { mysql.server start && mysql -uroot -e ${dbschema} } 
+}
 function mru(){
+
+    startMySQLIfNeeded
+    _dbcmd=${2:-$mrucmd}
+    fzfresult=$( eval $_dbcmd | fzf --no-sort --exact \
+        --preview '$DOTFILES/bin/preview.rb -v {2}' \
+        --preview-window 'top:50%' \
+        --header 'CTRL-o - open without abort(LESS) :: CTRL-s - toggle sort :: CTRL-g - toggle preview window' \
+        --bind 'ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty' | sed -E 's#[^/]*(/.*$)#''\1''#' )
+    filename=$(sed -E 's#(^[^:]*).*#\1#' <<< $fzfresult)
+    echo fzfresult = $fzfresult
+    if [[ -f $filename ]]; then
+        if [[ $fzfresult =~ ':[[:digit:]]+$' ]]; then
+            linenum=$(sed 's#^[^:]*:#+#' <<< $fzfresult)
+        fi
+        #cd into directory of file (usage: "mru 1")
+        if [[ $1 -eq 1 ]]; then
+            cd $(sed -E 's#(.*)/[^/]+#\1#' <<< $filename)
+            echo $(sed -E 's#(.*)/[^/]+#\1#' <<< $filename)
+        fi
+        #open selected file in vim AND cd into git's root folder for project of selected file
+        vim $linenum $filename -c 'silent :CDR'
+    fi
+}
+function oldmru(){
     mrufile=${2:-.mru}
     if [[ ! -f $HOME/$mrufile ]]; then
         echo $HOME/$mrufile does not exist
@@ -26,10 +86,7 @@ function mru(){
     fi
 }
 function mrw(){
-    mru 0 '.mrw'
-}
-function mrv(){
-    mru 0 '.mru'
+    mru 0 $mrwcmd
 }
 alias 1m='mru 1'
 function removeMruInvalidEntries(){
