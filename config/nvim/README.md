@@ -13,3 +13,4 @@
 
 6. you'll need to symlink the config directory: `ln -s ~/.dotfiles/config ~/.config` - or from wherever you've downloaded these dotfiles to
 7. open nvim and run :PlugInstall<cr>
+8. being optimistic, supposing mysql mru worked: install mysql `brew install mysql`
