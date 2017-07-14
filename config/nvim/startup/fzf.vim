@@ -30,11 +30,12 @@ let g:fzf_action = {
 "-----------------------------------------------------------------------------}}}
 "FUNCTIONS                                                                    {{{ 
 "--------------------------------------------------------------------------------
+let s:previewrb = expand('%:h:h').'/plugged/fzf.vim/bin/preview.rb'
 function! s:defaultPreview()
     " return fzf#vim#with_preview({'down': '100%'}, 'up:70%', 'ctrl-g')
     " return fzf#vim#with_preview({'down': '100%'}, 'up:50%', 'ctrl-e:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty,ctrl-g')
     return {'options': ' --preview-window up:50% '.
-                \'--preview "''/Users/davidsu/.dotfiles/config/nvim/plugged/fzf.vim/bin/preview.rb''"\ -v\ {} '.
+                \'--preview "'''.s:previewrb.'''"\ -v\ {} '.
                 \'--header ''CTRL-o - open without abort :: CTRL-s - toggle sort :: CTRL-g - toggle preview window'' '. 
                 \'--bind ''ctrl-g:toggle-preview,'.
                 \'ctrl-o:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty''', 
@@ -244,7 +245,7 @@ command! CommandLineCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \'--ignore ''eval'' '.
             \'''^\s*\|:''', 
             \{'dir':'/usr/local/Cellar/vim/8.0.0271/share/vim/vim80/doc',
-            \'options': ' --preview-window up:50% --preview "''/Users/davidsu/.dotfiles/config/nvim/plugged/fzf.vim/bin/preview.rb''"\ \ {} --bind ''ctrl-g:toggle-preview'''})
+            \'options': ' --preview-window up:50% --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview'''})
 
 command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \'--ignore ''howto*'' '.
@@ -259,7 +260,7 @@ command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \'--ignore ''eval'' '.
             \'''^\|[^-:0-9](\|?|[^:]{0,6}[^)])\|''', 
             \{'dir':'/usr/local/Cellar/vim/8.0.0271/share/vim/vim80/doc',
-            \'options': ' --preview-window up:50%:hidden --preview "''/Users/davidsu/.dotfiles/config/nvim/plugged/fzf.vim/bin/preview.rb''"\ \ {} --bind ''ctrl-g:toggle-preview'''})
+            \'options': ' --preview-window up:50%:hidden --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview'''})
 let s:leaderOrAltChars = '[,`¡™£¢∞§¶•ªº≠œ∑´®†¥¨ˆøπ“‘«åß∂ƒ©˙∆˚¬…æΩ≈ç√∫˜µ≤≥÷q]'
 command! -nargs=? AgBLines call AgBLines(<q-args>)
 command! -nargs=? AgAllBLines call AgAllBLines(<q-args>)
