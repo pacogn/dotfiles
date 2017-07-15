@@ -27,6 +27,7 @@
 11. install [karabiner-elements](https://github.com/tekezo/Karabiner-Elements/blob/master/usage/README.md)
 12. install mysql for mru ( most recently used - vim plugin ): `brew install mysql`
 13. download and install [spactacle](https://www.spectacleapp.com/)
+14. do yourself a favor: `brew install htop` and stop using activity monitor
 
 
 - to push to github (https with two factor authentication) you will need to use a token instead of your password. [Instructions here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
