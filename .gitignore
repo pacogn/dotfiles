@@ -5,3 +5,4 @@ config/nvim/plugged/*
 quando_o_build_ta_shavur
 trash/
 *.xmark.*.html
+config/configstore
