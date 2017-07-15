@@ -2,7 +2,7 @@
 	name = David
 	email = davidsu@wix.com
 [core]
-	excludesfile = /Users/davidsu/.gitignore_global
+	excludesfile = $HOME/.gitignore_global
 	autocrlf = input
 	editor = /usr/local/bin/nvim
 [diff]
