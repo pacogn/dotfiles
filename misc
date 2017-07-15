@@ -45,7 +45,7 @@ function dirtyprojs(){
     function scan {
         curdir=$(pwd)
         for x in $*; do
-            [[ -d $x ]] && [[ -d ${x}/.git ]] && { cd $x &> /dev/null && printdirty "$x"; cd $curdir } &
+            [[ -d $x ]] && [[ -d ${x}/.git ]] && { cd $x &> /dev/null && printdirty "$x"; cd $curdir &> /dev/null } &
         done
     }
     scan * | grep -v 'running nvm'
