@@ -1,0 +1,18 @@
+
+{
+  "ecmaVersion": 6,
+  "libs": [
+      "browser",
+      "ecma6"
+  ],
+  "plugins": {
+    "node": {},
+    "modules": {},
+    "es_modules": {},
+    "node_resolve": {},
+    "CommonJS": {},
+    "doc_comment": {
+      "fullDocs": true
+    }
+  }
+}
