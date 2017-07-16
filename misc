@@ -45,10 +45,10 @@ function dirtyprojs(){
     function scan {
         curdir=$(pwd)
         for x in $*; do
-            [[ -d $x ]] && [[ -d ${x}/.git ]] && { cd $x &> /dev/null && printdirty "$x"; cd $curdir &> /dev/null } &
+            [[ -d $x ]] && [[ -d ${x}/.git ]] && { cd $x &> /dev/null && printdirty "$x" 2> /dev/null; cd $curdir &> /dev/null } &
         done
     }
-    scan * | grep -v 'running nvm'
+    scan * | grep -v 'running nvm' | grep '^/User.*'
 }
 function createTernProj(){
     echo '
