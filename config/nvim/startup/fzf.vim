@@ -30,7 +30,7 @@ let g:fzf_action = {
 "-----------------------------------------------------------------------------}}}
 "FUNCTIONS                                                                    {{{ 
 "--------------------------------------------------------------------------------
-let s:previewrb = expand('%:h:h').'/plugged/fzf.vim/bin/preview.rb'
+let s:previewrb = expand('<sfile>:h:h').'/plugged/fzf.vim/bin/preview.rb'
 function! s:defaultPreview()
     " return fzf#vim#with_preview({'down': '100%'}, 'up:70%', 'ctrl-g')
     " return fzf#vim#with_preview({'down': '100%'}, 'up:50%', 'ctrl-e:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty,ctrl-g')
@@ -139,6 +139,7 @@ function! FindUsage(variableName, ...)
 endfunction
 
 function! GoToDeclaration()
+  echom 'vimrc gotodeclaration'
     let l:pos = getpos('.')
     let l:currFileName = expand('%')
     let l:lineFromCursorPosition = strpart(getline('.'), getpos('.')[2])
