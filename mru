@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS mrw(
 );'
 
 function startMySQLIfNeeded() {
-    mysql -uroot -e status || { mysql.server start && mysql -uroot -e ${dbschema} } 
+    mysql -uroot -e status &> /dev/null || { mysql.server start && mysql -uroot -e ${dbschema} } 
 }
 function mru(){
 
@@ -45,7 +45,6 @@ function mru(){
         --header 'CTRL-o - open without abort(LESS) :: CTRL-s - toggle sort :: CTRL-g - toggle preview window' \
         --bind 'ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty' | sed -E 's#[^/]*(/.*$)#''\1''#' )
     filename=$(sed -E 's#(^[^:]*).*#\1#' <<< $fzfresult)
-    echo fzfresult = $fzfresult
     if [[ -f $filename ]]; then
         if [[ $fzfresult =~ ':[[:digit:]]+$' ]]; then
             linenum=$(sed 's#^[^:]*:#+#' <<< $fzfresult)
