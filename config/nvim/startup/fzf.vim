@@ -245,7 +245,7 @@ command! CommandLineCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \'--ignore ''gui_*'' '.
             \'--ignore ''eval'' '.
             \'''^\s*\|:''', 
-            \{'dir':'/usr/local/Cellar/vim/8.0.0271/share/vim/vim80/doc',
+            \{'dir':$VIMRUNTIME.'/doc',
             \'options': ' --preview-window up:50% --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview'''})
 
 command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
@@ -260,7 +260,7 @@ command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \'--ignore ''gui_*'' '.
             \'--ignore ''eval'' '.
             \'''^\|[^-:0-9](\|?|[^:]{0,6}[^)])\|''', 
-            \{'dir':'/usr/local/Cellar/vim/8.0.0271/share/vim/vim80/doc',
+            \{'dir':$VIMRUNTIME.'/doc',
             \'options': ' --preview-window up:50%:hidden --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview'''})
 let s:leaderOrAltChars = '[,`¡™£¢∞§¶•ªº≠œ∑´®†¥¨ˆøπ“‘«åß∂ƒ©˙∆˚¬…æΩ≈ç√∫˜µ≤≥÷q]'
 command! -nargs=? AgBLines call AgBLines(<q-args>)
