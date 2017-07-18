@@ -89,18 +89,16 @@ function mrw(){
 }
 alias 1m='mru 1'
 function removeMruInvalidEntries(){
-    for f in $HOME/.mru $HOME/.mrw
+    for f in mru mrw
     do
-        cp $f /tmp/tmpmru; 
+        mysql -uroot --skip-column-names --batch -e "select _file from "$f";" mru_vim > /tmp/tmpmru
         while read line; do
             currFileName=$(sed -E 's/^([^:]*).*/\1/' <<< $line)
             if [[ ! -f $currFileName ]]; then
-                echo removing $currFileName  
-                grep -v $line /tmp/tmpmru > /tmp/tmpmruhelp
-                rm /tmp/tmpmru
-                mv /tmp/tmpmruhelp /tmp/tmpmru
+                echo removing $currFileName  from $f
+                mysql -uroot -e "delete from "$f" where _file='"$currFileName"';" mru_vim
             fi
-        done < $f
-        cp /tmp/tmpmru $f
+        done < /tmp/tmpmru
+        rm /tmp/tmpmru
     done
 }
