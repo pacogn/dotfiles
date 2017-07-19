@@ -56,13 +56,15 @@ function! CdProjectRoot(dirname)
     " convert windows paths to unix style
     let l:curDir = substitute(a:dirname, '\\', '/', 'g')
 
-    if isdirectory(a:dirname.'/node_modules') 
+    if isdirectory(a:dirname.'/node_modules') && a:dirname != $HOME
         execute 'cd '.a:dirname
     else
         " walk to the top of the dir tree
         let l:parentDir = strpart(l:curDir, 0, strridx(l:curDir, '/'))
         if isdirectory(l:parentDir)
             call CdProjectRoot(l:parentDir)
+	  else
+	    execute 'Rooter'
         endif
     endif
 endfunction
