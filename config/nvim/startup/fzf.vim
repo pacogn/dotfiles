@@ -31,6 +31,7 @@ let g:fzf_action = {
 "FUNCTIONS                                                                    {{{ 
 "--------------------------------------------------------------------------------
 let s:previewrb = expand('<sfile>:h:h').'/plugged/fzf.vim/bin/preview.rb'
+let s:bin = expand('<sfile>:h:h').'/bin'
 function! s:defaultPreview()
     " return fzf#vim#with_preview({'down': '100%'}, 'up:70%', 'ctrl-g')
     " return fzf#vim#with_preview({'down': '100%'}, 'up:50%', 'ctrl-e:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty,ctrl-g')
@@ -41,6 +42,18 @@ function! s:defaultPreview()
                 \'ctrl-o:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty''', 
                 \'down': '100%'}
 
+endfunction
+function! s:defaultGitLogOptions(isBufferOnlyLog)
+    let l:header = 'CTRL-g - toggle preview window :: CTRL-o - open this commit in LESS'
+    if a:isBufferOnlyLog
+        let l:header = l:header.' :: CTRL-d - diff with current'
+    endif
+    return {'options': 
+                \" --preview  'sh ".s:bin."/fzfGitShowFilesForSha.zsh {}' --preview-window 'up:40%' ".
+                \"--header '".l:header."' ". 
+                \'--bind "ctrl-g:toggle-preview,'.
+                \'ctrl-o:execute:sh '.s:bin.'/fzfgitshow.sh {} > /dev/tty"' 
+                \  }
 endfunction
 
 function! DefaultPreviewForFzf()
@@ -96,7 +109,14 @@ function! AgBLines(...)
             \fzf#vim#with_preview({'dir':expand('%:p:h'), 'down': '100%', 'options': ' --header ''ctrl-t: toggleSort'' --bind ctrl-t:toggle-sort,ctrl-s:toggle-sort '},'up:50%', 'ctrl-g'))
 
 endfunction
-
+function! FzfGitCommits() 
+    "second parameter truthy for full screen
+    call fzf#vim#commits(s:defaultGitLogOptions(0), 1)
+endfunction
+  
+function! FzfBufferCommits()
+    call fzf#vim#buffer_commits(s:defaultGitLogOptions(1), 1)
+endfunction
 function! FzfSet()
     redir => cout
         silent execute 'set'

@@ -198,8 +198,12 @@ nmap <silent><space>ws :call OpenInWebstorm()<cr>
 nmap <silent><space>gb :Gblame<cr>nmap <silent>,gd :Gdiff<cr>
 nmap <silent><space>gb :Gblame<cr>
 nmap <silent><space>gr :Gread<cr>
-nmap <silent><space>gs :Gstatus<cr>
+nmap <silent><space>gs :Gstatus<cr><C-n>
 nmap <silent><space>gc :Gcommit -v<cr>
+nmap <silent><space>gl :call FzfGitCommits()<cr>
+"gf cuz the git command is 'git log --follow $FileName' 
+nmap <silent><space>gf :call FzfBufferCommits()<cr>
+nmap <silent><space>bc :call FzfBufferCommits()<cr>
 nmap <silent>gs :Gstatus<cr><C-n>
 
 nmap <silent><space>gd :Gdiff<cr>
@@ -280,7 +284,6 @@ map s, <Plug>(easymotion-prev)
 map s. <Plug>(easymotion-repeat)
 map sd <Plug>(easymotion-s2)
 
-nnoremap <space>gs :GFiles?<cr>
 map <space>tc :tabclose<cr>
 map <space>te :tabedit %<cr>
 
