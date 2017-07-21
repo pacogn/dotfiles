@@ -248,6 +248,8 @@ nmap <silent> \t :NERDTreeToggle<cr>
 nmap <silent> <space>nn :NERDTreeToggle<cr>
 nmap 1o :only<cr>
 
+nmap 1zDisableVimMarkStarMap <Plug>MarkSearchNext
+nmap 1zDisableVimMarkHashMap <Plug>MarkSearchPrev
 "disable automatic mappings for surround.vim and write the here cuz I want `ds{motion}` and `cs{motion}` to use easymotion instead
 let g:surround_no_mappings = 1
 "delete surrounding
