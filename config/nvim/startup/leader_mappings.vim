@@ -236,7 +236,6 @@ map <silent> gh :call WinMove('h')<cr>
 map <silent> gj :call WinMove('j')<cr>
 map <silent> gk :call WinMove('k')<cr>
 map <silent> gl :call WinMove('l')<cr>
-nmap 1w :wincmd q<cr>
 nmap \w :wincmd q<cr>
 nmap \d :redraw!<cr>
 " Toggle NERDTree
