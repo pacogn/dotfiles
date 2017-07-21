@@ -261,9 +261,8 @@ augroup configgroup
 	autocmd BufNewFile,BufRead .eslintrc set filetype=json
 	autocmd BufNewFile,BufRead *.rt set filetype=html
 	" close help files on 'q'
+	autocmd FileType help nnoremap <buffer>q :bd<cr>
 		
-	autocmd BufEnter * call SetQuit() 
-
 	" make quickfix windows take all the lower section of the screen
 	" when there are multiple windows open
 	autocmd FileType qf wincmd J
@@ -279,13 +278,6 @@ augroup configgroup
 	" Trigger autoread when changing buffers or coming back to vim.
 	au FocusGained,BufEnter * :silent! !
 augroup END
-
-function! SetQuit()
-  if &ft =~ '\vhelp|text|qf'
-	return
-  endif
-  map <buffer>quit :qa<cr>
-endfunction
 
 " switch syntax highlighting on
 syntax on
