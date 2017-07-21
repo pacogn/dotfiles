@@ -323,17 +323,6 @@ let g:yankring_max_element_length = 2548576
 " qq to record, Q to replay (recursive map due to peekaboo)
 nmap Q @q
 
-
-" set paste toggle
-"???david
-
-" toggle paste mode
-"map <leader>v :set paste!<cr>
-
-" clear highlighted search
-" noremap <silent><space> :silent! set hlsearch! hlsearch?<cr>
-noremap <silent><space>hl :silent! set hlsearch! hlsearch?<cr>
-
 " toggle invisible characters
 highlight SpecialKey ctermbg=none ctermfg=8 " make the highlighting of tabs less annoying
 highlight NonText ctermbg=none ctermfg=8
