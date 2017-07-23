@@ -168,6 +168,7 @@ nmap #  <Plug>(incsearch-nohl-#)
 nmap g* <Plug>(incsearch-nohl-g*)
 nmap g# <Plug>(incsearch-nohl-g#)
 
+
 nnoremap \c :Commands<cr>
 nnoremap 1: :History:<cr>
 nnoremap 1; :History:<cr>
@@ -250,7 +251,10 @@ nmap 1o :only<cr>
 "VIM-MARK: <space>hi for highlight interesting word
 nmap <space>hi ,m
 " <space>hc for "highlight clear" clear all "interesting words" highlighting
-nmap <space>hc ,n
+nmap <space>hc <Plug>MarkClear
+nmap ,n ,*
+nmap ,N ,#
+nmap <N ,#
 nmap 1zDisableVimMarkStarMap <Plug>MarkSearchNext
 nmap 1zDisableVimMarkHashMap <Plug>MarkSearchPrev
 
