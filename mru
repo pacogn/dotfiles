@@ -88,6 +88,12 @@ function mrw(){
     mru 0 $mrwcmd
 }
 alias 1m='mru 1'
+function 1m1() {
+    filepath=$(mysql -uroot --skip-column-names --batch -e "SELECT _file FROM mru ORDER BY ts DESC LIMIT 1;" mru_vim )
+    cd $(sed -E 's#(.*)/.+#\1#' <<< $filepath)
+    echo $(sed -E 's#(.*)/.+#\1#' <<< $filepath)
+}
+alias cdm='1m1'
 function removeMruInvalidEntries(){
     for f in mru mrw
     do
