@@ -4,6 +4,12 @@ augroup neomake_runners
     autocmd BufWritePost *.rt :Neomake! rt
 augroup end
 let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_fixlint_maker = {
+	    \'exe': 'eslint',
+	    \'args': '-f compact --fix',
+        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+        \   '%W%f: line %l\, col %c\, Warning - %m,%-G,%-G%*\d problems%#'
+	    \}
 let g:neomake_rt_maker = {
 	    \'exe': 'grunt',
 	    \'args': [ 'rt']
