@@ -3,8 +3,7 @@ Plug 'tpope/vim-scriptease'                                 " utilities for vim 
 Plug 'idbrii/vim-mark'                                      " highlighting of interesting words
 Plug 'sudavid4/mysql-mru.vim'
 Plug 'schickling/vim-bufonly'                               " delete all buffers but current
-" Plug 'sudavid4/Buffet.vim'                                  " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for
-Plug 'jlanzarotta/bufexplorer'
+Plug 'jlanzarotta/bufexplorer'                              " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for )
 Plug 'vim-scripts/YankRing.vim'                             "Maintains a history of previous yanks, changes and deletes
 Plug 'sbdchd/neoformat', { 'for':                           
             \['javascript', 'css', 'scss', 
@@ -77,12 +76,7 @@ Plug 'christoomey/vim-tmux-navigator'                       " seemless pane navi
 " Plug 'wincent/loupe'                                        " enhances Vim's `search-commands`
 Plug 'haya14busa/incsearch.vim'                             "  Improved incremental searching for Vim
 "https://github.com/osyo-manga/vim-over -- you really want to check this out!!!
-"todo do we use these following two plugins at all??------------------------------------------------------------
 Plug 'editorconfig/editorconfig-vim'                        " .editorconfig support
-Plug 'tpope/vim-dispatch'                                   " asynchronous build and test dispatcher
-" Plug 'AndrewRadev/splitjoin.vim'                            " single/multi line code handler: gS - split one line into multiple, gJ - combine multiple lines into one
-" Plug 'vim-scripts/matchit.zip'                              " extended % matching
-"end todo-------------------------------------------------------------------------------------------------------
 Plug 'junegunn/gv.vim'                                      " :GV browse commits like a pro 
 " see https://github.com/normenmueller/vim-iterm2-navigator/commit/58ca1e3e2ac24689fb1312e7fcf4384acdbe1e33 for how to make the following work
 " Plug 'zephod/vim-iterm2-navigator'                          " Seamlessly navigate vim split panes inside iterm2 split panes
