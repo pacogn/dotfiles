@@ -13,6 +13,15 @@ function! RunNeomakeEslint()
 	endif
 endfunction
 
+function! FixEslint()
+    if exists("b:neomake_javascript_eslint_exe") && b:neomake_javascript_eslint_exe !~ 'eslint not found' && &ft =~ 'javascript' && filereadable(b:neomake_javascript_eslint_exe)
+        silent! write
+        silent! execute ':! '.b:neomake_javascript_eslint_exe.' --fix '.expand('%') 
+        silent! edit % 
+        silent! Neomake
+    endif
+endfunction
+command! FixEslint call FixEslint()
 function! GetCurrLineIndentation()
     return len(substitute(getline('.'), '\(\s*\).*', '\1', '')) 
 endfunction
