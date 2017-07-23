@@ -173,11 +173,13 @@ nnoremap 1: :History:<cr>
 nnoremap 1; :History:<cr>
 nnoremap 1/ :History/<cr>
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
-nmap <space>bl :BLines!<cr>
 nmap <space>be :BufExplorer<cr>
 "view buffer lines
+nmap <space>bl :BLines!<cr>
 nmap <space>vb :AgBLines<cr>
 nmap <space>agb :AgBLines<cr>
+"view loaded(all) buffer lines
+nnoremap <silent><space>vl :AgAllBLines<cr>
 nmap <space>bd :call BufDeleteCurrent()<cr>
 "end diff --- clean close diff window
 nmap <space>ed <C-w><C-j><C-w><C-l><C-w><C-o>
@@ -190,8 +192,6 @@ nmap <silent><space>fa :FZFFiles<cr>
 nmap <silent><space>fh :Helptags<cr>
 " find line in open buffers
 nnoremap <silent><space>fl :Lines<cr>
-"view loaded(all) buffer lines
-nnoremap <silent><space>vl :AgAllBLines<cr>
 "fugitive
 nmap <silent><space>wd :call DiffInWebstorm()<cr>
 nmap <silent><space>ws :call OpenInWebstorm()<cr>
