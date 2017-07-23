@@ -8,9 +8,9 @@
 "--------------------------------------------------------------------------------
 
 function! RunNeomakeEslint()
-	if exists("b:neomake_javascript_eslint_exe") && b:neomake_javascript_eslint_exe !~ 'eslint not found' && &ft =~ 'javascript' && filereadable(b:neomake_javascript_eslint_exe)
-		Neomake
-	endif
+    if exists("b:neomake_javascript_eslint_exe") && b:neomake_javascript_eslint_exe !~ 'eslint not found' && &ft =~ 'javascript' && filereadable(b:neomake_javascript_eslint_exe)
+        Neomake
+    endif
 endfunction
 
 function! FixEslint()
