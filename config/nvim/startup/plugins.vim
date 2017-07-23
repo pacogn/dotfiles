@@ -62,6 +62,7 @@ Plug 'sudavid4/vim-unimpaired'                              " mappings which are
 " Plug 'tpope/vim-ragtag', {'for': ['html', 'jsx', 'xml']}      " endings for html, xml, etc. - ehances surround
 Plug 'tpope/vim-surround'                                   " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
 Plug 'tpope/vim-fugitive'                                   " amazing git wrapper for vim
+Plug 'tpope/vim-rhubarb'                                    " for `:Gbrowse`
 Plug 'tpope/vim-repeat'                                     " enables repeating other supported plugins with the . command
 " Plug 'SirVer/ultisnips'                                     " snippet manager
 " let g:UltiSnipsExpandTrigger='<c-space>'
