@@ -37,16 +37,23 @@ function! s:defaultPreview()
     " return fzf#vim#with_preview({'down': '100%'}, 'up:50%', 'ctrl-e:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty,ctrl-g')
     return {'options': ' --preview-window up:50% '.
                 \'--preview "'''.s:previewrb.'''"\ -v\ {} '.
-                \'--header ''CTRL-o - open without abort :: CTRL-s - toggle sort :: CTRL-g - toggle preview window'' '. 
+                \'--header '''.s:headerKeyCombinationColor('CTRL-o').' - open without abort :: '.
+                \s:headerKeyCombinationColor('CTRL-s').' - toggle sort :: '.
+                \s:headerKeyCombinationColor('CTRL-g').' - toggle preview window'' '. 
                 \'--bind ''ctrl-g:toggle-preview,'.
                 \'ctrl-o:execute:$DOTFILES/fzf/fhelp.sh {} > /dev/tty''', 
                 \'down': '100%'}
 
 endfunction
+function! s:headerKeyCombinationColor(keyCombination)
+    return printf("\e[38;5;43m%s \e[0m", a:keyCombination)
+endfunction
+    
 function! s:defaultGitLogOptions(isBufferOnlyLog)
-    let l:header = 'CTRL-g - toggle preview window :: CTRL-o - open this commit in LESS'
+    let l:header = s:headerKeyCombinationColor('CTRL-g').' - toggle preview window :: '.
+                \s:headerKeyCombinationColor('CTRL-o').' - open this commit in LESS'
     if a:isBufferOnlyLog
-        let l:header = l:header.' :: CTRL-d - diff with current'
+        let l:header = l:header.' :: '.s:headerKeyCombinationColor("CTRL-d").' - diff with current'
     endif
     return {'options': 
                 \" --preview  'sh ".s:bin."/fzfGitShowFilesForSha.zsh {}' --preview-window 'up:40%' ".
@@ -91,7 +98,7 @@ function! AgAllBLines(...)
     endif
     let query = agfiles.' '''.query.''''
     call fzf#vim#ag_raw(query, 
-             \fzf#vim#with_preview({'dir':expand('%:p:h'), 'down': '100%'},'up:50%', 'ctrl-g'))
+             \fzf#vim#with_preview({'dir':expand('%:p:h')},'up:50%', 'ctrl-g'), 1)
 endfunction
 function! AgBLines(...)
     let query = get(a:000, 0, '^')
@@ -106,8 +113,7 @@ function! AgBLines(...)
     let query = '-G '.filename.' '.query
     "todo bind ctrl-s isn't working here, looks like someone binds it later on to 'select'
    call fzf#vim#ag_raw(query, 
-            \fzf#vim#with_preview({'dir':expand('%:p:h'), 'down': '100%', 'options': ' --header ''ctrl-t: toggleSort'' --bind ctrl-t:toggle-sort,ctrl-s:toggle-sort '},'up:50%', 'ctrl-g'))
-
+            \fzf#vim#with_preview({'dir':expand('%:p:h'), 'options': ' --header ''ctrl-t: toggleSort'' --bind ctrl-t:toggle-sort,ctrl-s:toggle-sort '},'up:50%', 'ctrl-g'), 1)
 endfunction
 function! FzfGitCommits() 
     "second parameter truthy for full screen
@@ -212,7 +218,7 @@ function! FZFYankRing()
           \})
 endfunction
 function! Ag(...)
-     call fzf#vim#ag_raw(' '.join(a:000), s:defaultPreview())
+     call fzf#vim#ag_raw(' '.join(a:000), s:defaultPreview(), 1)
 endfunction
 "-----------------------------------------------------------------------------}}}
 "COMMANDS                                                                     {{{
@@ -243,7 +249,7 @@ command! ChangeColorScheme :call fzf#run({
 command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>,
     \                 s:defaultPreview(),
-    \                 <bang>0)
+    \                 1)
 
 
 command! FZFFiles call fzf#run({
