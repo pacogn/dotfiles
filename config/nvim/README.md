@@ -12,8 +12,8 @@
     ```
 
 6. you'll need to symlink the config directory: `ln -s ~/.dotfiles/config ~/.config` - or from wherever you've downloaded these dotfiles to
-7. open nvim and run :PlugInstall<cr>
-8. being optimistic, supposing mysql mru worked: install mysql `brew install mysql`
+7. open nvim and run `:PlugInstall<cr>` -- Note: you'll get a ton of errors on the first time you open nvim. Ignore them, `:PlugInstall<cr>` and restart nvim
+8. install mysql - needed for [mysql_mru.vim](https://github.com/sudavid4/mysql-mru.vim)  `brew install mysql`
 9. download and install a font compatible with nerdtree devicons:[nerd-fonts](https://github.com/ryanoasis/nerd-fonts#combinations). Once you've done that go to Iterm -> preferences -> profiles -> text -> change font -> choose "Droid Sans Mono for Powerline Nerd Font Complete.otf"
     ```
     cd ~/Library/Fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
