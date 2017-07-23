@@ -18,7 +18,6 @@ if has('nvim')
     tnoremap ¬ loadall<cr>reload<cr>fg[blue]='\033[38;5;111m'<cr>source $DOTFILES/prompt<cr>clear<cr> 
     tnoremap ,. <C-\><C-n><c-^>
     tnoremap ,ev <C-\><C\n>:source ~/.dotfiles/config/nvim/init.vim<cr> 
-    tnoremap <silent>,n <C-\><C-n>:NERDTreeToggle<cr>
     tnoremap ,nt  !'spec.js !'unit.js !'it.js
     tnoremap ,ot 'spec.js \| 'unit.js \| 'it.js
     tnoremap ,ds '/documentServices/
