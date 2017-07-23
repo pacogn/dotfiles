@@ -8,6 +8,7 @@ export FZF_DEFAULT_OPTS='--reverse'
 
 export THEME
 source ~/.zgen/wting/autojump-master/bin/autojump.zsh
+ssh-add -K &> /dev/null
 function reload(){
   for f in ~/.dotFiles/* #foreach file in directory
   do

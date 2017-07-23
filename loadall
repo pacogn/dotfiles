@@ -29,17 +29,21 @@ function loadrvm(){
 function nvm_auto_switch {
     #stolen from https://github.com/dijitalmunky/nvm-auto
     unset NVM_RC_VERSION
-    CUR_VERSION=$(node -v |cut -c 2-)
+    CUR_VERSION=$(node -v |cut -c 2)
     nvm_rc_version > /dev/null 2>&1
 
     if [ -z "${NVM_RC_VERSION}" ]
     then
-        export NVM_RC_VERSION=$(nvm_version default | cut -c 2-)
+        export NVM_RC_VERSION=$(nvm_version default | cut -c 2)
+    else
+        NVM_RC_VERSION=$( cut -c 1 <<< $NVM_RC_VERSION ) 
     fi
 
-    if [ "v${NVM_RC_VERSION}" != "v${CUR_VERSION}" ]
+    if [ $NVM_RC_VERSION != $CUR_VERSION ]
     then
-        echo running nvm use '||' nvm use default
+        echo nvmrcversion: $NVM_RC_VERSION
+        echo curversion: $CUR_VERSION
+        echo changing node version to $NVM_RC_VERSION
         nvm use >/dev/null 2>&1 || nvm use default >/dev/null 2>&1
     fi
 }

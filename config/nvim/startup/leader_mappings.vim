@@ -198,8 +198,12 @@ nmap <silent><space>ws :call OpenInWebstorm()<cr>
 nmap <silent><space>gb :Gblame<cr>nmap <silent>,gd :Gdiff<cr>
 nmap <silent><space>gb :Gblame<cr>
 nmap <silent><space>gr :Gread<cr>
-nmap <silent><space>gs :Gstatus<cr>
+nmap <silent><space>gs :Gstatus<cr><C-n>
 nmap <silent><space>gc :Gcommit -v<cr>
+nmap <silent><space>gl :call FzfGitCommits()<cr>
+"gf cuz the git command is 'git log --follow $FileName' 
+nmap <silent><space>gf :call FzfBufferCommits()<cr>
+nmap <silent><space>bc :call FzfBufferCommits()<cr>
 nmap <silent>gs :Gstatus<cr><C-n>
 
 nmap <silent><space>gd :Gdiff<cr>
@@ -232,7 +236,6 @@ map <silent> gh :call WinMove('h')<cr>
 map <silent> gj :call WinMove('j')<cr>
 map <silent> gk :call WinMove('k')<cr>
 map <silent> gl :call WinMove('l')<cr>
-nmap 1w :wincmd q<cr>
 nmap \w :wincmd q<cr>
 nmap \d :redraw!<cr>
 " Toggle NERDTree
@@ -244,6 +247,14 @@ nmap <silent> \t :NERDTreeToggle<cr>
 nmap <silent> <space>nn :NERDTreeToggle<cr>
 nmap 1o :only<cr>
 
+"VIM-MARK: <space>hi for highlight interesting word
+nmap <space>hi ,m
+" <space>hc for "highlight clear" clear all "interesting words" highlighting
+nmap <space>hc ,n
+nmap 1zDisableVimMarkStarMap <Plug>MarkSearchNext
+nmap 1zDisableVimMarkHashMap <Plug>MarkSearchPrev
+
+nmap <space>cp :call CursorPing()<cr>
 "disable automatic mappings for surround.vim and write the here cuz I want `ds{motion}` and `cs{motion}` to use easymotion instead
 let g:surround_no_mappings = 1
 "delete surrounding
@@ -280,7 +291,6 @@ map s, <Plug>(easymotion-prev)
 map s. <Plug>(easymotion-repeat)
 map sd <Plug>(easymotion-s2)
 
-nnoremap <space>gs :GFiles?<cr>
 map <space>tc :tabclose<cr>
 map <space>te :tabedit %<cr>
 

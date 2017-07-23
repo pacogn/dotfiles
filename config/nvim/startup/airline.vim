@@ -16,9 +16,9 @@ function! ShrinkedFilePath()
   let withoutHome = substitute(cwd, $HOME.'/', '', '')
   let withoutHome = substitute(withoutHome, 'projects/', '', '')
 
-  if len(withoutHome) > 20
-    let withoutHome=strpart(withoutHome, 0, 20) . '...'
-  endif
+  " if len(withoutHome) > 20
+  "   let withoutHome=strpart(withoutHome, 0, 20) . '...'
+  " endif
   if withoutHome == 'santa'
     return 'SANTA VIEWER'
   elseif withoutHome == 'santa-editor'
@@ -29,7 +29,9 @@ function! ShrinkedFilePath()
   if len(withoutHome) > 20
     let path = split(withoutHome, '/')
     if len(path) > 2
-      let withoutHome = join([path[0], path[len(path)-1]], '/.../')
+      " let withoutHome = '/.../'.path[len(path)-1]
+      "join([path[0], path[len(path)-1]], )
+      " let withoutHome = path[0].'/'.path[1].'..'
     endif
   endif
   return withoutHome

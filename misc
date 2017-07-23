@@ -50,6 +50,18 @@ function dirtyprojs(){
     }
     scan * | grep -v 'running nvm' | grep '^/User.*'
 }
+function escape_ls(){
+  for COLOR in {0..255}
+  do
+    for STYLE in "38;5"
+    do
+      TAG="\033[${STYLE};${COLOR}m"
+      STR="${STYLE};${COLOR}"
+      echo -n "${TAG}"'\\033['"${STR}"'m'"${NONE}  "
+    done
+    echo
+  done
+}
 function createTernProj(){
     echo '
 {

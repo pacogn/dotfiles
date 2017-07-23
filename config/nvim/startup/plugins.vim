@@ -1,5 +1,6 @@
 call plug#begin('~/.config/nvim/plugged')
-Plug 'idbrii/vim-mark'
+Plug 'tpope/vim-scriptease'                                 " utilities for vim script authoring. Installed to use ':PP'=pretty print dictionary
+Plug 'idbrii/vim-mark'                                      " highlighting of interesting words
 Plug 'sudavid4/mysql-mru.vim'
 Plug 'schickling/vim-bufonly'                               " delete all buffers but current
 " Plug 'sudavid4/Buffet.vim'                                  " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for

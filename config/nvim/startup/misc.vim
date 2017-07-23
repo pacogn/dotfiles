@@ -56,13 +56,15 @@ function! CdProjectRoot(dirname)
     " convert windows paths to unix style
     let l:curDir = substitute(a:dirname, '\\', '/', 'g')
 
-    if isdirectory(a:dirname.'/node_modules') 
+    if isdirectory(a:dirname.'/node_modules') && a:dirname != $HOME
         execute 'cd '.a:dirname
     else
         " walk to the top of the dir tree
         let l:parentDir = strpart(l:curDir, 0, strridx(l:curDir, '/'))
         if isdirectory(l:parentDir)
             call CdProjectRoot(l:parentDir)
+	  else
+	    execute 'Rooter'
         endif
     endif
 endfunction
@@ -259,9 +261,8 @@ augroup configgroup
 	autocmd BufNewFile,BufRead .eslintrc set filetype=json
 	autocmd BufNewFile,BufRead *.rt set filetype=html
 	" close help files on 'q'
+	autocmd FileType help nnoremap <buffer>q :bd<cr>
 		
-	autocmd BufEnter * call SetQuit() 
-
 	" make quickfix windows take all the lower section of the screen
 	" when there are multiple windows open
 	autocmd FileType qf wincmd J
@@ -277,13 +278,6 @@ augroup configgroup
 	" Trigger autoread when changing buffers or coming back to vim.
 	au FocusGained,BufEnter * :silent! !
 augroup END
-
-function! SetQuit()
-  if &ft =~ '\vhelp|text|qf'
-	return
-  endif
-  map <buffer>quit :qa<cr>
-endfunction
 
 " switch syntax highlighting on
 syntax on
@@ -329,17 +323,6 @@ let g:yankring_max_element_length = 2548576
 " qq to record, Q to replay (recursive map due to peekaboo)
 nmap Q @q
 
-
-" set paste toggle
-"???david
-
-" toggle paste mode
-"map <leader>v :set paste!<cr>
-
-" clear highlighted search
-" noremap <silent><space> :silent! set hlsearch! hlsearch?<cr>
-noremap <silent><space>hl :silent! set hlsearch! hlsearch?<cr>
-
 " toggle invisible characters
 highlight SpecialKey ctermbg=none ctermfg=8 " make the highlighting of tabs less annoying
 highlight NonText ctermbg=none ctermfg=8
@@ -378,29 +361,6 @@ function! TrimWhiteSpace()
 	%s/\s\+$//e
 endfunction
 
-function! HiInterestingWord(n)
-	" Save our location.
-	normal! mz
-
-	" Yank the current word into the z register.
-	normal! "zyiw
-
-	" Calculate an arbitrary match ID.  Hopefully nothing else is using it.
-	let mid = 86750 + a:n
-
-	" Clear existing matches, but don't worry if they don't exist.
-	silent! call matchdelete(mid)
-
-	" Construct a literal pattern that has to match at boundaries.
-	let pat = '\V\<' . escape(@z, '\') . '\>'
-
-	" Actually match the words.
-	call matchadd("InterestingWord" . a:n, pat, 1, mid)
-
-	" Move back to our original location.
-	normal! `z
-endfunction
-
 function! HiDiffDark()
 	highlight DiffAdd ctermfg=NONE ctermbg=22
 	highlight DiffChange ctermfg=NONE ctermbg=237
@@ -413,20 +373,6 @@ highlight CursorLine ctermfg=NONE ctermbg=24
 highlight CursorColumn ctermfg=NONE ctermbg=24
 hi MatchParen cterm=bold ctermbg=197 ctermfg=232
 highlight Visual ctermfg=NONE ctermbg=24
-
-nnoremap <silent> <leader>1 :call HiInterestingWord(1)<cr>
-nnoremap <silent> <leader>2 :call HiInterestingWord(2)<cr>
-nnoremap <silent> <leader>3 :call HiInterestingWord(3)<cr>
-nnoremap <silent> <leader>4 :call HiInterestingWord(4)<cr>
-nnoremap <silent> <leader>5 :call HiInterestingWord(5)<cr>
-nnoremap <silent> <leader>6 :call HiInterestingWord(6)<cr>
-hi def InterestingWord1 guifg=#000000 ctermfg=16 guibg=#ffa724 ctermbg=214
-hi def InterestingWord2 guifg=#000000 ctermfg=16 guibg=#aeee00 ctermbg=154
-hi def InterestingWord3 guifg=#000000 ctermfg=16 guibg=#8cffba ctermbg=121
-hi def InterestingWord4 guifg=#000000 ctermfg=16 guibg=#b88853 ctermbg=137
-hi def InterestingWord5 guifg=#000000 ctermfg=16 guibg=#ff9eb8 ctermbg=211
-hi def InterestingWord6 guifg=#000000 ctermfg=16 guibg=#ff2c4b ctermbg=195
-
 
 " }}}
 
