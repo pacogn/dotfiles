@@ -10,6 +10,7 @@ if has('nvim')
     " tnoremap <silent><C-k> <C-\><C-n>:wincmd k<cr>
     " tnoremap <silent><C-l> <C-\><C-n>:wincmd l<cr>
     " tnoremap <silent><C-h> <C-\><C-n>:wincmd l<cr>
+    tnoremap <silent><C-l> clear<cr><C-\><C-n>:set scrollback=1<cr>:sleep 100m<cr>:redraw<cr>:set scrollback=1000<cr>i
     tnoremap ]b <C-\><C-n>:bnext<cr>
     tnoremap [b <C-\><C-n>:bprevious<cr>
     tnoremap ]t <C-\><C-n>:tabnext<cr>
