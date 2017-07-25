@@ -38,4 +38,5 @@
 
 - powerfonts for nerdtree
 - change rouge to output with base16 
+- **_DO YOURSELF A FAVOUR AND START USING [fasd](https://github.com/clvv/fasd) INSTEAD OF AUTOJUMP_** [see somethings you may do with it + fzf](https://github.com/junegunn/fzf/wiki/Examples) and search for fasd 
 
