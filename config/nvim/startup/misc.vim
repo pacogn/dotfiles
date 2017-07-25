@@ -113,8 +113,6 @@ augroup whatAMess
     autocmd FileType vim map <space>sc :source %<cr>
     "this is my way of disabling syntax highlight for very large files... A little clumsy but good enough for now
     autocmd BufEnter * if line('$') > 10000 | set filetype=none | endif
-    "ajust foldlevel to the best value for the current buffer
-    autocmd BufEnter * normal zR
 augroup END
 
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
