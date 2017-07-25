@@ -307,6 +307,11 @@ inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
 inoremap <C-j> <C-o>j
 inoremap <C-k> <C-o>k
+nnoremap ,h <C-w>h
+nnoremap ,l <C-w>l
+nnoremap ,j <C-w>j
+nnoremap ,k <C-w>k
+
 cnoremap jk <C-c>
 " Make Y behave like other capitals
 " see YankRing documentation line 520 - map Y to y$ and insert it into yankring
