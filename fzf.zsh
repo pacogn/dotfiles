@@ -33,6 +33,16 @@ chromehistory() {
 alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-o:execute:($DOTFILES/fzf/fhelp.sh {})'\'
 alias fch='chromehistory'  
 
+fstash() {
+  git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+  fzf --ansi --no-sort \
+      --header 'CTRL-o - git diff without abort :: CTRL-s - toggle sort :: CTRL-g - toggle preview window' \
+      --preview-window 'up:55%:wrap' \
+      --preview 'git stash show {1} > /tmp/tmp; echo "" >> /tmp/tmp; git stash show -p --color {1} >> /tmp/tmp; cat /tmp/tmp' \
+      --bind 'ctrl-g:toggle-preview,ctrl-s:toggle-sort,ctrl-o:execute:git stash show -p {1}' | perl -pe 's#(.*?) .*#\1#' | pbcopy
+  rm /tmp/tmp
+}
+
 function fag(){
     fzfretval=$(ag --color $@ | fzf  --ansi --preview '$DOTFILES/bin/preview.rb {}' \
         --preview-window 'top:50%' \
