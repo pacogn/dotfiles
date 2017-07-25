@@ -47,6 +47,7 @@ function! FixPowerlineFontsAndSave()
     nunmap <space><space>
     silent! update
     "there is an issue with airline not updating when `:update` writes, running twice `:update` solves it
+    "nnn
     inoremap ,, <esc>:update<cr>:update<cr>
     nmap ,, :update<cr>:update<cr>
     vmap ,, :update<cr>:update<cr>
@@ -149,9 +150,11 @@ nnoremap <silent> <space>fott "fyaw:FindOnlyTestText '<C-r>f'<cr>
 nnoremap <silent> <space>fotw "fyaw:FindOnlyTestText '<C-r>f'<cr>
 nnoremap <silent> <space>fotu :FindOnlyTestUsage expand("<cword>")<cr>
 "real incsearch with plugin
-nmap /  <Plug>(incsearch-forward)
-nmap ?  <Plug>(incsearch-backward)
+nmap /  <Plug>(incsearch-forward)\v
+nmap ?  <Plug>(incsearch-backward)\v
 nmap g/ <Plug>(incsearch-stay)
+vmap / /\v
+vmap ? ?\v
 
 " integration of incsearch with indexed_search -- https://github.com/haya14busa/incsearch.vim/issues/21
 let g:indexed_search_mappings = 0
@@ -238,6 +241,8 @@ map <silent> gj :call WinMove('j')<cr>
 map <silent> gk :call WinMove('k')<cr>
 map <silent> gl :call WinMove('l')<cr>
 nmap \w :wincmd q<cr>
+nmap \s :%s/\v
+vmap \s :s/\v
 nmap \d :redraw!<cr>
 " Toggle NERDTree
 nmap <silent> <C-1> :NERDTreeToggle<cr>

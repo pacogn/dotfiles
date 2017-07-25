@@ -28,6 +28,8 @@ function loadrvm(){
 }
 function nvm_auto_switch {
     #stolen from https://github.com/dijitalmunky/nvm-auto
+
+    [[ $skipnvm -eq 1 ]] && return
     unset NVM_RC_VERSION
     CUR_VERSION=$(node -v |cut -c 2)
     nvm_rc_version > /dev/null 2>&1

@@ -37,6 +37,7 @@ function decryptdir(){
 
 }
 function dirtyprojs(){
+    skipnvm=1
     function printdirty {
         local d="$1"
         [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo $(pwd);
@@ -45,10 +46,12 @@ function dirtyprojs(){
     function scan {
         curdir=$(pwd)
         for x in $*; do
-            [[ -d $x ]] && [[ -d ${x}/.git ]] && { cd $x &> /dev/null && printdirty "$x" 2> /dev/null; cd $curdir &> /dev/null } &
+            [[ -d $x ]] && [[ -d ${x}/.git ]] && cd $x &> /dev/null && printdirty "$x" 2> /dev/null; cd $curdir &> /dev/null  
         done
     }
     scan * | grep -v 'running nvm' | grep '^/User.*'
+    wait
+    skipnvm=0
 }
 function escape_ls(){
   for COLOR in {0..255}
