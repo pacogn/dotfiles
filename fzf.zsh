@@ -1,11 +1,21 @@
 # c - browse chrome history
 # copied from https://junegunn.kr/2015/04/browsing-chrome-history-with-fzf/
 chromehistory() {
-  local cols sep
+  local cols sep 
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
 
-  cp -f ~/Library/Application\ Support/Google/Chrome/Profile\ 1/History /tmp/h
+
+  historyfile=~/Library/Application\ Support/Google/Chrome/Profile\ 1/History
+  if [[ ! -f $historyfile ]]; then
+      historyfile=~/Library/Application\ Support/Google/Chrome/Default/History
+      if [[ ! -f $historyfile ]]; then
+          echo 'cannot find history file'
+          return
+      fi
+  fi
+  # /Default/History
+  cp -f $historyfile /tmp/h
 
   sqlite3 -separator $sep /tmp/h \
     "select substr(title, 1, $cols), url
