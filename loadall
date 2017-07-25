@@ -87,7 +87,7 @@ function loadall(){
     reload
     # tabtab source for yarn package
     # uninstall by removing these lines or running `tabtab uninstall yarn`
-    [[ -f /Users/davidsu/.nvm/versions/node/v8.1.3/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/davidsu/.nvm/versions/node/v8.1.3/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh
+    [[ -f $HOME/.nvm/versions/node/v8.1.3/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh ]] && . $HOME/.nvm/versions/node/v8.1.3/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh
 }
 if [[ -z $loadallsourced ]]; then
     alias l='load'
