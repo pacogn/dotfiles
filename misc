@@ -1,4 +1,5 @@
 #!/bin/zsh
+hash -d d=~/.dotfiles/
 function encrypt(){
 	if [ -f $1 ]; then
 		openssl des -k ohencrypted -in $1 -out $1.enc && rm $1
