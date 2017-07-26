@@ -247,7 +247,7 @@ nmap \d :redraw!<cr>
 " Toggle NERDTree
 nmap <silent> <C-1> :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
-nmap <silent> 1n :NERDTreeFind<cr>
+nmap <silent> 1n :call NERDTreeFindOrClose()<cr>
 nmap <silent> 1N :NERDTreeToggle<cr>
 nmap <silent> \t :NERDTreeToggle<cr>
 nmap <silent> <space>nn :NERDTreeToggle<cr>

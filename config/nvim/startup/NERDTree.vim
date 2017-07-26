@@ -68,6 +68,13 @@ function! s:wipeRememberedNerd()
     endif
 
 endfunction
+function! NERDTreeFindOrClose()
+    if g:NERDTree.IsOpen()
+        NERDTreeClose
+    else
+        NERDTreeFind
+    endif
+endfunction
 augroup myNerdTreeGroup
 	autocmd!
 	autocmd FileType nerdtree call s:setUpNerdMappings()
