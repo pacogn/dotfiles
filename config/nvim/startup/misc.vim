@@ -319,7 +319,7 @@ function! YRRunAfterMaps()
     nnoremap Y :<C-U>YRYankCount 'y$'<CR>
 endfunction
 " nnoremap Y y$
-let g:yankring_n_keys='D x X'
+let g:yankring_n_keys='D'
 let g:yankring_zap_keys = 'f t F T'
 let g:yankring_max_element_length = 2548576
 " markdown to html
