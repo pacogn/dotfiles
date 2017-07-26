@@ -116,7 +116,11 @@ function! ToggleWindowToNerdTree()
     " see sudavid4/nerdtree commit 909cf25722f206f82128554c7c6dd1ed34a95949 is needed for this to work properly
     if ! exists('t:NERDTreeBuffName')
         NERDTreeToggle
-        NERDTreeToggle
+        sleep 100m
+    endif
+    if g:NERDTree.IsOpen()
+        NERDTreeClose
+        sleep 100m
     endif
     "this is likely useless since sudavid4/nerdtree commit 909cf25722f206f82128554c7c6dd1ed34a95949 
     let w:dontsavescreenstate = 1
