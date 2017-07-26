@@ -261,7 +261,7 @@ augroup configgroup
 	autocmd BufNewFile,BufRead .eslintrc set filetype=json
 	autocmd BufNewFile,BufRead *.rt set filetype=html
 	" close help files on 'q'
-	autocmd FileType help nnoremap <buffer>q :bd<cr>
+	autocmd FileType help,qf nnoremap <buffer>q :bd<cr>
 		
 	" make quickfix windows take all the lower section of the screen
 	" when there are multiple windows open
