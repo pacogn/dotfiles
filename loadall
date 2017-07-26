@@ -51,7 +51,7 @@ function nvm_auto_switch {
 }
 function loadnvm(){
     export NVM_DIR="$HOME/.nvm"
-    [ -s "$(brew --prefix nvm)/nvm.sh" ] && . "$(brew --prefix nvm)/nvm.sh"
+    [ -s "${NVM_BREW_PREFIX}/nvm.sh" ] && . "${NVM_BREW_PREFIX}/nvm.sh"
     export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
 
     autoload -U add-zsh-hook
@@ -64,7 +64,7 @@ function loadnvm(){
     fi
 }
 function loadnvmAutocomplete(){
-    [ -s "$(brew --prefix nvm)/etc/bash_completion.d/nvm" ] && . "$(brew --prefix nvm)/etc/bash_completion.d/nvm"
+    [ -s "${NVM_BREW_PREFIX}/etc/bash_completion.d/nvm" ] && . "${NVM_BREW_PREFIX}/etc/bash_completion.d/nvm"
 }
 function load(){
     export HAS_LOADED=1  
@@ -75,6 +75,7 @@ function load(){
     reload
 }
 function loadall(){
+    [[ $NVM_BREW_PREFIX == '' ]] && export NVM_BREW_PREFIX=$(brew --prefix nvm)
     reloadforzgen=''
     loadzgen
     reloadforzgen=1
@@ -86,7 +87,7 @@ function loadall(){
     reload
     # tabtab source for yarn package
     # uninstall by removing these lines or running `tabtab uninstall yarn`
-    [[ -f /Users/davidsu/.nvm/versions/node/v8.1.3/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/davidsu/.nvm/versions/node/v8.1.3/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh
+    [[ -f $HOME/.nvm/versions/node/v8.1.3/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh ]] && . $HOME/.nvm/versions/node/v8.1.3/lib/node_modules/yarn-completions/node_modules/tabtab/.completions/yarn.zsh
 }
 if [[ -z $loadallsourced ]]; then
     alias l='load'

@@ -1,4 +1,30 @@
 #!/bin/zsh
+hash -d d=~/.dotfiles/
+function pullMyProjects(){
+    skipnvm=1
+    pullIfMineAndNotDirty() {
+        if [[ $(git config --get remote.origin.url) =~ 'sudavid4' ]]; then
+	    echo "\033[38;5;6m"$(pwd)"\033[0m"
+            if [[ $(git diff --shortstat 2> /dev/null | tail -n1) == "" ]]; then
+                git pull
+            else
+                echo "\033[38;5;9m"---------------IS DIRTY--------------------------"\033[0m"
+            fi
+        fi
+    }
+    scan () {
+        curdir=$(pwd)
+        for x in $*
+        do
+            [[ -d $x ]] && [[ -d ${x}/.git ]] && cd $x &> /dev/null && pullIfMineAndNotDirty "$x" 2> /dev/null
+            cd $curdir &> /dev/null
+        done
+    }
+    scan * 
+    wait
+    skipnvm=0
+}
+
 function encrypt(){
 	if [ -f $1 ]; then
 		openssl des -k ohencrypted -in $1 -out $1.enc && rm $1

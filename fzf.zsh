@@ -1,11 +1,21 @@
 # c - browse chrome history
 # copied from https://junegunn.kr/2015/04/browsing-chrome-history-with-fzf/
 chromehistory() {
-  local cols sep
+  local cols sep 
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
 
-  cp -f ~/Library/Application\ Support/Google/Chrome/Profile\ 1/History /tmp/h
+
+  historyfile=~/Library/Application\ Support/Google/Chrome/Profile\ 1/History
+  if [[ ! -f $historyfile ]]; then
+      historyfile=~/Library/Application\ Support/Google/Chrome/Default/History
+      if [[ ! -f $historyfile ]]; then
+          echo 'cannot find history file'
+          return
+      fi
+  fi
+  # /Default/History
+  cp -f $historyfile /tmp/h
 
   sqlite3 -separator $sep /tmp/h \
     "select substr(title, 1, $cols), url
@@ -22,6 +32,16 @@ chromehistory() {
 
 alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-o:execute:($DOTFILES/fzf/fhelp.sh {})'\'
 alias fch='chromehistory'  
+
+fstash() {
+  git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+  fzf --ansi --no-sort \
+      --header 'CTRL-o - git diff without abort :: CTRL-s - toggle sort :: CTRL-g - toggle preview window' \
+      --preview-window 'up:55%:wrap' \
+      --preview 'git stash show {1} > /tmp/tmp; echo "" >> /tmp/tmp; git stash show -p --color {1} >> /tmp/tmp; cat /tmp/tmp' \
+      --bind 'ctrl-g:toggle-preview,ctrl-s:toggle-sort,ctrl-o:execute:git stash show -p {1}' | perl -pe 's#(.*?) .*#\1#' | pbcopy
+  rm /tmp/tmp
+}
 
 function fag(){
     fzfretval=$(ag --color $@ | fzf  --ansi --preview '$DOTFILES/bin/preview.rb {}' \
