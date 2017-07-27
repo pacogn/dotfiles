@@ -28,7 +28,7 @@ function! BufDeleteCurrent()
     endif
     if exists('l:bufnext')
         if bufnextnr
-            bd
+            :BD
         endif
         execute 'buffer '.l:bufnext
         let @#=bufname(alternate)

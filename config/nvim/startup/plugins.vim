@@ -1,4 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
+Plug 'qpkorr/vim-bufkill'                                   " wipe buffer without closing it's window
 Plug 'tpope/vim-scriptease'                                 " utilities for vim script authoring. Installed to use ':PP'=pretty print dictionary
 Plug 'idbrii/vim-mark'                                      " highlighting of interesting words
 Plug 'sudavid4/mysql-mru.vim'
