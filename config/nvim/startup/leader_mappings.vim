@@ -305,7 +305,7 @@ map s. <Plug>(easymotion-repeat)
 map sd <Plug>(easymotion-s2)
 
 map <space>tc :tabclose<cr>
-map <space>te :tabedit %<cr>
+map <space>te :call ToTerminal()<cr>
 
 "visual mode on pasted text
 nnoremap <space>vp `[v`]

@@ -86,11 +86,31 @@ function! FzfLet()
     \  'sink':    function('Noop') })
 endfunction
 
+function! s:buflistedReadableFile()
+    let buflisted = s:buflisted()
+    let readables = filter(buflisted, 'filereadable(v:val)')
+    return readables
+endfunction
 function! s:buflisted()
     let bufnumbers = filter(range(1, bufnr('$')), 'buflisted(v:val) && getbufvar(v:val, "&filetype") != "qf"')
     let bufnames = map(bufnumbers, 'bufname(v:val)')
-    let readables = filter(bufnames, 'filereadable(v:val)')
-    return readables
+    return bufnames
+endfunction
+
+function! s:isTerminalBufName(wierdnum, filename, ...)
+    return a:filename =~ '^term://'
+endfunction
+
+function! ToTerminal()
+    let bufs = range(1, bufnr('$'))
+    let bufnames = map(bufs, 'bufname(v:val)')
+    let term = filter(bufnames, function('s:isTerminalBufName'))
+    if get(term, 0, '') != ''
+        execute 'e '.term[0]
+    else
+        te
+    endif
+    startinsert
 endfunction
 
 function! s:noFullPath(wierdnum, fileName, ...)
@@ -103,7 +123,7 @@ endfunction
 function! AgAllBLines(...)
     " todo: make this work!!!
     " call fzf#vim#lines('function', {'options': ' --preview ''echo {}'' '}, 1)
-    let bufs = filter(s:buflisted(), function('s:noFullPath'))
+    let bufs = filter(s:buflistedReadableFile(), function('s:noFullPath'))
     let agfiles = '-G '''.join(bufs, '|').''''
     let query = get(a:000, 0, '^')
     if !len(query)
