@@ -114,6 +114,7 @@ function createTernProj(){
 for f in $DOTFILES/cheatSheets/*
 do
     if [[ -f $f ]]; then
-        alias cheat$(basename $f)='cat $f | fzf'
+        echo $f
+        alias cheat$(basename ${f} )='cat '$f' | fzf'
     fi
 done
