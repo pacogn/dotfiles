@@ -13,6 +13,7 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 
 
 nmap 1m :Mru<cr>
+nmap 1w :Mrw<cr>
 nmap \v :Vimrc<cr>
 nmap \a :Ag 
 nmap \r :Agraw
