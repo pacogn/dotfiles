@@ -60,7 +60,10 @@ function loadnvm(){
     if [[ -f .nvmrc ]]; then
         nvm_auto_switch
     else
-        nvm use 6
+        # use nvm node if not using it already
+        if [[ $(type node) =~ 'not found' ]] || [[ ! $(which node) =~ '/.nvm/' ]]; then
+            nvm use 6
+        fi
     fi
 }
 function loadnvmAutocomplete(){
@@ -75,7 +78,7 @@ function load(){
     reload
 }
 function loadall(){
-    [[ $NVM_BREW_PREFIX == '' ]] && export NVM_BREW_PREFIX=$(brew --prefix nvm)
+    [[ $NVM_BREW_PREFIX == '' ]] && export NVM_BREW_PREFIX=$(cat /tmp/brew_prefix_nvm)
     reloadforzgen=''
     loadzgen
     reloadforzgen=1
@@ -84,6 +87,7 @@ function loadall(){
     loadnvmAutocomplete
     # rvm complains about not being first in path
     PATH=$(echo $PATH | tr ':' '\n' | uniq | tr '\n' ':')
+    eval "$(fasd --init auto)"
     reload
     # tabtab source for yarn package
     # uninstall by removing these lines or running `tabtab uninstall yarn`
