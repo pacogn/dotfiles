@@ -86,19 +86,32 @@ function! FzfLet()
 endfunction
 
 function! s:buflisted()
-    return filter(range(1, bufnr('$')), 'buflisted(v:val) && getbufvar(v:val, "&filetype") != "qf"')
+    let bufnumbers = filter(range(1, bufnr('$')), 'buflisted(v:val) && getbufvar(v:val, "&filetype") != "qf"')
+    let bufnames = map(bufnumbers, 'bufname(v:val)')
+    let readables = filter(bufnames, 'filereadable(v:val)')
+    return readables
+endfunction
+
+function! s:noFullPath(wierdnum, fileName, ...)
+    if a:fileName =~ $HOME
+        return 0
+    endif
+    return 1
 endfunction
 
 function! AgAllBLines(...)
-    let bufs = map(s:buflisted(), 'bufname(v:val)')
+    " todo: make this work!!!
+    " call fzf#vim#lines('function', {'options': ' --preview ''echo {}'' '}, 1)
+    let bufs = filter(s:buflisted(), function('s:noFullPath'))
     let agfiles = '-G '''.join(bufs, '|').''''
     let query = get(a:000, 0, '^')
     if !len(query)
       let query = '^'
     endif
     let query = agfiles.' '''.query.''''
+    echom query
     call fzf#vim#ag_raw(query, 
-             \fzf#vim#with_preview({'dir':expand('%:p:h')},'up:50%', 'ctrl-g'), 1)
+             \fzf#vim#with_preview({'dir': getcwd()},'up:50%', 'ctrl-g'), 1)
 endfunction
 function! AgBLines(...)
     let query = get(a:000, 0, '^')
