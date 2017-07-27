@@ -252,6 +252,16 @@ nmap \d :redraw!<cr>
 nmap <silent> <C-1> :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
 nmap <silent> 1n :call NERDTreeFindOrClose()<cr>
+function! FixNerdSize()
+    if &ft == 'nerdtree' 
+        vertical resize 30
+    else
+        let width=&columns - 30
+        execute 'vertical resize '.width
+        execute "normal! \<c-w>="
+    endif
+endfunction
+nmap 1f :call FixNerdSize()<cr>
 nmap <silent> 1N :NERDTreeToggle<cr>
 nmap <silent> \t :NERDTreeToggle<cr>
 nmap <silent> <space>nn :NERDTreeToggle<cr>
@@ -327,7 +337,6 @@ xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 nmap 1p :YRShow<cr>
 vmap 1p :<C-u>YRShow<cr>
-nmap ,lc :LetterCommands<cr>
 nmap <space>lc :LetterCommands<cr>
 nmap <space>cl :LetterCommands<cr>
 nmap <space>cc :CommandLineCommands<cr>
