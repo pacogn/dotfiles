@@ -10,6 +10,7 @@ if has('nvim')
 	tnoremap ,, <C-\><C-n>
     tnoremap ,k <C-\><C-n>:wincmd k<cr>
     tnoremap ,j <C-\><C-n>:wincmd j<cr>
+    tnoremap <C-h> <C-\><C-n>:wincmd h<cr>
     tnoremap ,h <C-\><C-n>:wincmd h<cr>
     tnoremap ,l <C-\><C-n>:wincmd l<cr>
     " tnoremap <silent><C-j> <C-\><C-n>:wincmd j<cr>
@@ -29,5 +30,9 @@ if has('nvim')
     tnoremap ,ot 'spec.js \| 'unit.js \| 'it.js
     tnoremap ,ds '/documentServices/
     command! Clear call ClearTermScrollback()
+    augroup terminal_group
+	au!
+	au BufEnter term://* setlocal nobuflisted 
+    augroup END
     " tmap <silent><Esc> <esc><C-\><c-n>
 endif
