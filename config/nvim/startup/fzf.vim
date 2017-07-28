@@ -240,15 +240,20 @@ function! GoToDeclaration()
 endfunction
 
 function! FZFYankRingSink(val)
-    let @@=a:val
-    let @0=a:val
-    put a:val
+  let boo = substitute(a:val, '^.\{-\}\(\d\)', '\1', '')
+  let num = matchstr(boo, '^\S*')
+  YRShow
+  redraw
+  echo num
+  execute 'normal '.num
 endfunction
+
 function! FZFYankRing()
     call fzf#run({
           \'dir': g:yankring_history_dir,
-          \'source': 'cat ' . g:yankring_history_file . '_v2.txt',
-          \'sink': function('FZFYankRingSink')
+          \'source': 'cat -n ' . g:yankring_history_file . '_v2.txt',
+          \'sink': function('FZFYankRingSink'),
+          \'options': "--preview 'sh ".s:bin."/tr_002_newline.sh {}' "
           \})
 endfunction
 function! Ag(...)

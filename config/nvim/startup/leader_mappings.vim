@@ -335,7 +335,8 @@ xmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-nmap 1p :YRShow<cr>
+nmap \p :YRShow<cr>
+nmap 1p :call FZFYankRing()<cr>
 vmap 1p :<C-u>YRShow<cr>
 nmap <space>lc :LetterCommands<cr>
 nmap <space>cl :LetterCommands<cr>
