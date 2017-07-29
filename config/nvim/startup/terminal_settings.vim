@@ -13,10 +13,6 @@ if has('nvim')
     tnoremap <C-h> <C-\><C-n>:wincmd h<cr>
     tnoremap ,h <C-\><C-n>:wincmd h<cr>
     tnoremap ,l <C-\><C-n>:wincmd l<cr>
-    " tnoremap <silent><C-j> <C-\><C-n>:wincmd j<cr>
-    " tnoremap <silent><C-k> <C-\><C-n>:wincmd k<cr>
-    " tnoremap <silent><C-l> <C-\><C-n>:wincmd l<cr>
-    " tnoremap <silent><C-h> <C-\><C-n>:wincmd l<cr>
     tnoremap <silent><C-l> <C-l><C-\><C-n>:call ClearTermScrollback()<cr>i
     tnoremap ]b <C-\><C-n>:bnext<cr>
     tnoremap [b <C-\><C-n>:bprevious<cr>
@@ -29,10 +25,9 @@ if has('nvim')
     tnoremap ,nt  !'spec.js !'unit.js !'it.js
     tnoremap ,ot 'spec.js \| 'unit.js \| 'it.js
     tnoremap ,ds '/documentServices/
-    command! Clear call ClearTermScrollback()
     augroup terminal_group
 	au!
-	au BufEnter term://* setlocal nobuflisted 
+	au TermOpen *zsh setlocal nobuflisted 
     augroup END
     " tmap <silent><Esc> <esc><C-\><c-n>
 endif

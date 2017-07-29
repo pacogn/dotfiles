@@ -44,8 +44,6 @@ Plug 'tpope/vim-obsession'                                  " session management
 Plug 'airblade/vim-gitgutter'                               " add git status for each modified line
 Plug 'terryma/vim-smooth-scroll'                            " makes scrolling not jumpy!
 Plug 'easymotion/vim-easymotion'
-Plug 'embear/vim-foldsearch'                                " fold based on searched keyword
-" Plug '$HOME/.dotfiles/forkedProjects/base16-vim'
 Plug 'sudavid4/base16-vim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline'                              " fancy statusline
@@ -54,7 +52,6 @@ Plug 'sudavid4/vim-js-goToDeclaration'                      " better ternjs goto
 Plug 'sudavid4/nerdtree' |
             \Plug 'tiagofumo/vim-nerdtree-syntax-highlight' |
             \Plug 'ryanoasis/vim-devicons'                  " file drawer
-            " \Plug 'Xuyuanp/nerdtree-git-plugin'           |
 
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete
 Plug 'tpope/vim-commentary'                                 " comment stuff out

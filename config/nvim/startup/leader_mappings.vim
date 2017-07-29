@@ -1,41 +1,3 @@
-function! Buflisted()
-    return filter(range(1, bufnr('$')), 'buflisted(v:val) && getbufvar(v:val, "&filetype") != "qf"')
-endfunction
-function! Sort_buffers(...)
-    let [b1, b2] = map(copy(a:000), 'get(g:fzf#vim#buffers, v:val, v:val)')
-    " Using minus between a float and a number in a sort function causes an error
-    return b1 < b2 ? 1 : -1
-endfunction
-function! ListBuffers(...)
-    let bufs = sort(Buflisted(), 'Sort_buffers')
-    return bufs
-endfunction
-
-function! BufDeleteCurrent()
-    let listedbuffers=ListBuffers()
-    let bufnextnr = 1
-    let currbuffname = expand('%')
-    if(bufname('%') =~? 'NERD_tree')
-        let bufnextnr = 0
-        " buffer! #
-    endif
-    if(len(listedbuffers) > bufnextnr)
-        let l:bufnext = listedbuffers[bufnextnr]
-        let alternate = listedbuffers[bufnextnr]
-    endif
-    if(len(listedbuffers) > bufnextnr + 1)
-        let alternate = listedbuffers[bufnextnr + 1]
-    endif
-    if exists('l:bufnext')
-        if bufnextnr
-            :BD
-        endif
-        execute 'buffer '.l:bufnext
-        let @#=bufname(alternate)
-    else
-        echom 'last buffer'
-    endif
-endfunction
 function! FixPowerlineFontsAndSave()
     " can't load powerline fonts on startup, it looks terrible. This is a hacky workaround
     execute('source '.expand('$DOTFILES/config/nvim/startup/airline.vim'))
@@ -72,68 +34,22 @@ function! NextClosedFold(dir)
         call winrestview(view)
     endif
 endfunction
-" Window movement shortcuts
-" move to the window in the direction shown, or create a new window
-function! WinMove(key)
-    let t:curwin = winnr()
-    echo 'windMove'
-    exec "wincmd ".a:key
-    if (t:curwin == winnr())
-        if (match(a:key,'[jk]'))
-            wincmd v
-        else
-            wincmd s
-        endif
-        exec "wincmd ".a:key
-    endif
-endfunction
 
-function! ToggleCurrsorLineColumn()
-    if(&cursorline)
-        set nocursorline nocursorcolumn
-        let g:normal_cursor_line_column = 0
-        return
-    endif
-    let g:normal_cursor_line_column = 1
-    set cursorline nocursorcolumn
-endfunction
-
-function! CursorPing(...)
-    let _cursorline = &cursorline
-    let _cursorcolumn = &cursorcolumn
-    set cursorline 
-    if !a:0
-        set cursorcolumn
-    endif
-    redraw
-    sleep 350m
-    let &cursorline = _cursorline
-    let &cursorcolumn = _cursorcolumn
-endfunction
-
-function! ToggleWindowToNerdTree()
-    "need to commit change in nerdtree and relate to it for this commit
-    " see sudavid4/nerdtree commit 909cf25722f206f82128554c7c6dd1ed34a95949 is needed for this to work properly
-    if ! exists('t:NERDTreeBuffName')
-        NERDTreeToggle
-        sleep 100m
-    endif
-    if g:NERDTree.IsOpen()
-        NERDTreeClose
-        sleep 100m
-    endif
-    "this is likely useless since sudavid4/nerdtree commit 909cf25722f206f82128554c7c6dd1ed34a95949 
-    let w:dontsavescreenstate = 1
-    let currfile = expand('%:p:t')
-    edit %:p:h
-    call search(currfile)
-endfunction
-nmap ,. <c-^>
+nmap ,. :call utils#restoreAlternateFile()<cr><c-^>
+nmap sa :call utils#restoreAlternateFile()<cr><c-^>
 "execute current line
-"Y:@"<CR>
+" Y:@"<CR>
 "<C-U> is needed for properly capturing the count, I don't understand why
 
-nnoremap - :silent call ToggleWindowToNerdTree()<cr>
+nnoremap - :silent call utils#toggle_window_to_nerd_tree()<cr>
+nnoremap \\ "_
+
+noremap <space>fd :filetype detect<cr>
+noremap <space>co :copen<cr>
+noremap <space>lo :lopen<cr>
+noremap <space>cq :copen<cr>
+noremap <space>lq :lopen<cr>
+noremap <space>pq :pclose<cr>
 "find variable assignment - `a=b` or `a:b` - fails for es6
 nnoremap <silent> <space>fva :call FindAssignment(expand("<cword>"))<cr>
 nnoremap <silent> <space>ff :call FindFunction(expand("<cword>"))<cr>
@@ -188,7 +104,7 @@ nmap <space>vb :AgBLines<cr>
 nmap <space>agb :AgBLines<cr>
 "view loaded(all) buffer lines
 nnoremap <silent><space>vl :AgAllBLines<cr>
-nmap <space>bd :call BufDeleteCurrent()<cr>
+nmap <space>bd :call utils#buf_delete_current()<cr>
 "end diff --- clean close diff window
 nmap <space>ed <C-w><C-j><C-w><C-l><C-w><C-o>
 map <space>ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
@@ -208,10 +124,10 @@ nmap <silent><space>gb :Gblame<cr>
 nmap <silent><space>gr :Gread<cr>
 nmap <silent><space>gs :Gstatus<cr><C-n>
 nmap <silent><space>gc :Gcommit -v<cr>
-nmap <silent><space>gl :call FzfGitCommits()<cr>
+nmap <silent><space>gl :call hzf#git_log()<cr>
 "gf cuz the git command is 'git log --follow $FileName' 
-nmap <silent><space>gf :call FzfBufferCommits()<cr>
-nmap <silent><space>bc :call FzfBufferCommits()<cr>
+nmap <silent><space>gf :call hzf#git_log_follow()<cr>
+nmap <silent><space>bc :call hzf#git_log_follow()<cr>
 nmap <silent>gs :Gstatus<cr><C-n>
 
 nmap <silent><space>gd :Gdiff<cr>
@@ -233,17 +149,13 @@ nmap 1h :GitGutterNextHunk<cr>
 "hunk preview
 nmap <space>hp :GitGutterPreviewHunk<cr>
 nmap <space>gt :Buffers<cr>term://
-"map ,fs FoldSearch
-" toggle cursor line
-nnoremap ,I :call ToggleCurrsorLineColumn()<cr> 
-nnoremap  ,i :call CursorPing()<CR>
 " moving up and down work as you would expect
 nnoremap <silent> j gj
 nnoremap <silent> k gk
-map <silent> gh :call WinMove('h')<cr>
-map <silent> gj :call WinMove('j')<cr>
-map <silent> gk :call WinMove('k')<cr>
-map <silent> gl :call WinMove('l')<cr>
+map <silent> gh :call utils#win_move('h')<cr>
+map <silent> gj :call utils#win_move('j')<cr>
+map <silent> gk :call utils#win_move('k')<cr>
+map <silent> gl :call utils#win_move('l')<cr>
 nmap \w :wincmd q<cr>
 nmap \s :%s/\v
 vmap \s :s/\v
@@ -277,7 +189,7 @@ nmap <N ,#
 nmap 1zDisableVimMarkStarMap <Plug>MarkSearchNext
 nmap 1zDisableVimMarkHashMap <Plug>MarkSearchPrev
 
-nmap <space>cp :call CursorPing()<cr>
+nmap <space>cp :call utils#cursor_ping()<cr>
 "disable automatic mappings for surround.vim and write the here cuz I want `ds{motion}` and `cs{motion}` to use easymotion instead
 let g:surround_no_mappings = 1
 "delete surrounding
@@ -308,14 +220,15 @@ let g:EasyMotion_keys='abcdefghijklmnopqrstuvwxyz'
 map s <Plug>(easymotion-prefix)
 map ss <Plug>(easymotion-s)
 map sn <Plug>(easymotion-sn)
-map sa <Plug>(easymotion-jumptoanywhere)
 map s; <Plug>(easymotion-next)
 map s, <Plug>(easymotion-prev)
 map s. <Plug>(easymotion-repeat)
 map sd <Plug>(easymotion-s2)
 
 map <space>tc :tabclose<cr>
-map <space>te :call ToTerminal()<cr>
+map <space>te :call utils#toTerminal()<cr>
+map <space>sn :call utils#snipdefinition()<cr>
+map <space>st :Scripts<cr>
 
 "visual mode on pasted text
 nnoremap <space>vp `[v`]
@@ -336,7 +249,7 @@ xmap ga <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 nmap \p :YRShow<cr>
-nmap 1p :call FZFYankRing()<cr>
+nmap 1p :call hzf#yankRing()<cr>
 vmap 1p :<C-u>YRShow<cr>
 nmap <space>lc :LetterCommands<cr>
 nmap <space>cl :LetterCommands<cr>

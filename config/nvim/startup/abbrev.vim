@@ -9,4 +9,5 @@ cnoreabbrev <expr> mrw getcmdtype() == ":" && getcmdline() == 'mrw' ? 'Mrw' : 'm
 cnoreabbrev <expr> cdc getcmdtype() == ":" && getcmdline() == 'cdc' ? 'CDC' : 'cdc'
 cnoreabbrev <expr> cdr getcmdtype() == ":" && getcmdline() == 'cdr' ? 'CDR' : 'cdr'
 cnoreabbrev <expr> cdg getcmdtype() == ":" && getcmdline() == 'cdg' ? 'CDG' : 'cdg'
+cnoreabbrev <expr> pp getcmdtype() == ":" && getcmdline() == 'pp' ? 'PP' : 'pp'
 

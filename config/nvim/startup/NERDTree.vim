@@ -37,8 +37,8 @@ function! s:setUpNerdMappings()
     map <buffer><C-s> i 
     map <buffer><C-v> s 
     map <buffer>1o o:NERDTreeClose<cr>
-    "callling BufDeleteCurrent will reset properly the alternate file
-    map <buffer>- :call BufDeleteCurrent()<cr>
+    "callling utils#buf_delete_current will reset properly the alternate file
+    map <buffer>- :call utils#buf_delete_current()<cr>
 endfunction
 let g:nerdToWipe = ''
 function! RememberNerdToWipe(bname)
@@ -53,20 +53,7 @@ function! s:wipeRememberedNerd()
     if strlen(g:nerdToWipe) > 0
         execute 'bwipeout '.g:nerdToWipe
         let g:nerdToWipe=''
-        "when wiping nerdtree make sure you have an appropriate alternate file
-        if ! len(expand('#')) || expand('#') == expand('%')
-            let listedbuffers=ListBuffers()
-            if len(listedbuffers) > 1
-                if expand(bufname(listedbuffers[1])) == expand('%')
-                    "ListBuffers has not been updated yet
-                    let @#=bufname(listedbuffers[0])
-                    return
-                endif
-                let @#=bufname(listedbuffers[1])
-            endif
-        endif
     endif
-
 endfunction
 function! NERDTreeFindOrClose()
     if g:NERDTree.IsOpen()
