@@ -85,6 +85,28 @@ function! hzf#git_log_follow()
     call fzf#vim#buffer_commits(hzf#defaultGitLogOptions(1), 1)
 endfunction
 
+let s:fpath_start = ''
+function! s:sink_gfiles(fname)
+    execute 'edit '.s:fpath_start.a:fname[0]
+endfunction
+
+function! hzf#g_files()
+    let groot = utils#get_git_root_directory()
+    let args = ''
+    if groot == getcwd()
+        let s:fpath_start = ''
+         GFiles!
+         return
+    endif
+    let s:fpath_start = substitute(getcwd(), groot.'/', '', '').'/'
+    let args = ' | grep '''.s:fpath_start.''' | sed ''s#^'.s:fpath_start.'##'' '
+    call fzf#run({
+    \ 'source':  'git ls-files '.args,
+    \ 'dir':     groot,
+    \ 'options': '--prompt "GitFiles> "',
+    \ 'sink*': function('s:sink_gfiles')
+    \})
+endfunction
 "-----------------------------------------------------------------------------}}}
 "YANK-RING                                                                    {{{ 
 "--------------------------------------------------------------------------------

@@ -130,10 +130,7 @@ command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \'options': ' --preview-window up:50%:hidden --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview'''})
 
 "todo give this sink function (+ preview?)
-command! LeaderMappingsDeclaration call fzf#run({
-      \'source': 'cd $DOTFILES/config/nvim/startup; sh '.utils#get_bin_directory().'/leader_mappings_declaration.sh', 
-      \'sink': function('Noop'), 'options': '--ansi'
-      \})
+command! LeaderMappingsDeclaration call hzf#leader_mappings_declarations()
 let s:leaderOrAltChars = '[,`¡™£¢∞§¶•ªº≠œ∑´®†¥¨ˆøπ“‘«åß∂ƒ©˙∆˚¬…æΩ≈ç√∫˜µ≤≥÷q]'
 command! -nargs=? AgBLines call hzf#ag_bLines(<q-args>)
 command! -nargs=? AgAllBLines call hzf#ag_all_blines(<q-args>)
