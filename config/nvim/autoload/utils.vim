@@ -111,6 +111,7 @@ function! s:shell_cmd_completed(...)
     wincmd J
     setlocal nomodifiable
     nnoremap <buffer>q :bd<cr>
+    wincmd p
 endfunction
 
 function! utils#run_shell_command(cmdline)
