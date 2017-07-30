@@ -1,4 +1,18 @@
 "-----------------------------------------------------------------------------}}}
+"PRIVATES                                                                      {{{ 
+"--------------------------------------------------------------------------------
+function! s:get_git_root()
+  if exists('*fugitive#repo')
+    try
+      return fugitive#repo().tree()
+    catch
+    endtry
+  endif
+  let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
+  return v:shell_error ? '' : root
+endfunction
+
+"-----------------------------------------------------------------------------}}}
 "BUFFERS                                                                      {{{
 "--------------------------------------------------------------------------------
 let s:root = expand('<sfile>:p:h:h')
@@ -78,6 +92,10 @@ endfunction
 "--------------------------------------------------------------------------------
 function! utils#get_root_directory()
     return s:root
+endfunction
+
+function! utils#get_git_root_directory()
+    return s:get_git_root()
 endfunction
 
 function! utils#get_bin_directory()
