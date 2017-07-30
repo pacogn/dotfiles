@@ -18,7 +18,7 @@ function! hzf#defaultPreview()
                 \'down': '100%'}
 
 endfunction
-    
+
 function! hzf#defaultGitLogOptions(isBufferOnlyLog)
     let l:header = hzf#headerKeyCombinationColor('CTRL-g').' - toggle preview window :: '.
                 \hzf#headerKeyCombinationColor('CTRL-o').' - open this commit in LESS'
@@ -41,18 +41,18 @@ function! hzf#ag_all_blines(...)
     let agfiles = '-G '''.join(bufs, '|').''''
     let query = get(a:000, 0, '^')
     if !len(query)
-      let query = '^'
+        let query = '^'
     endif
     let query = agfiles.' '''.query.''''
     echom query
     call fzf#vim#ag_raw(query, 
-             \fzf#vim#with_preview({'dir': getcwd()},'up:50%', 'ctrl-g'), 1)
+                \fzf#vim#with_preview({'dir': getcwd()},'up:50%', 'ctrl-g'), 1)
 endfunction
 
 function! hzf#ag_bLines(...)
     let query = get(a:000, 0, '^')
     if !len(query)
-      let query = '^'
+        let query = '^'
     endif
     "We get filename without path, set working directory to dir of the file so filename will be sortest in fzf
     let filename = expand('%:t')
@@ -61,15 +61,14 @@ function! hzf#ag_bLines(...)
         return
     endif
     let query = '-G '.filename.' '.query
-    "todo bind ctrl-s isn't working here, looks like someone binds it later on to 'select'
-   call fzf#vim#ag_raw(query, 
-            \fzf#vim#with_preview({
-                                \'dir':expand('%:p:h'), 
-                                \'options': ' --header ''ctrl-t: toggleSort'' --bind ctrl-t:toggle-sort,ctrl-s:toggle-sort '},'up:50%', 'ctrl-g'), 1)
+    call fzf#vim#ag_raw(query, 
+                \fzf#vim#with_preview({
+                \'dir':expand('%:p:h'), 
+                \'options': ' --header ''ctrl-t: toggleSort'' --bind ctrl-t:toggle-sort,ctrl-s:toggle-sort '},'up:50%', 'ctrl-g'), 1)
 endfunction
 
 function! hzf#ag_raw(...)
-     call fzf#vim#ag_raw(' '.join(a:000), hzf#defaultPreview(), 1)
+    call fzf#vim#ag_raw(' '.join(a:000), hzf#defaultPreview(), 1)
 endfunction
 
 function! s:sink_leader_mapping(fzfretval)
@@ -80,12 +79,12 @@ function! s:sink_leader_mapping(fzfretval)
 endfunction
 
 function! hzf#leader_mappings_declarations()
-  call fzf#run({
-		\'source': 'cd $DOTFILES/config/nvim/startup; sh '.utils#get_bin_directory().'/leader_mappings_declaration.sh', 
-		\'sink': function('s:sink_leader_mapping'),
-		\'options': '--ansi --bind ''ctrl-s:toggle-sort'' '.
+    call fzf#run({
+                \'source': 'cd $DOTFILES/config/nvim/startup; sh '.utils#get_bin_directory().'/leader_mappings_declaration.sh', 
+                \'sink': function('s:sink_leader_mapping'),
+                \'options': '--ansi --bind ''ctrl-s:toggle-sort'' '.
                 \'--preview "'''.s:previewrb.'''"\ -v\ {2} '
-		\})
+                \})
 endfunction
 "-----------------------------------------------------------------------------}}}
 "GIT                                                                          {{{ 
@@ -94,7 +93,7 @@ function! hzf#git_log()
     "second parameter truthy for full screen
     call fzf#vim#commits(hzf#defaultGitLogOptions(0), 1)
 endfunction
- 
+
 function! hzf#git_log_follow()
     call fzf#vim#buffer_commits(hzf#defaultGitLogOptions(1), 1)
 endfunction
@@ -109,69 +108,69 @@ function! hzf#g_files()
     let args = ''
     if groot == getcwd()
         let s:fpath_start = ''
-         GFiles!
-         return
+        GFiles!
+        return
     endif
     let s:fpath_start = substitute(getcwd(), groot.'/', '', '').'/'
     let args = ' | grep '''.s:fpath_start.''' | sed ''s#^'.s:fpath_start.'##'' '
     call fzf#run({
-    \ 'source':  'git ls-files '.args,
-    \ 'dir':     groot,
-    \ 'options': '--prompt "GitFiles> "',
-    \ 'sink*': function('s:sink_gfiles')
-    \})
+                \ 'source':  'git ls-files '.args,
+                \ 'dir':     groot,
+                \ 'options': '--prompt "GitFiles> "',
+                \ 'sink*': function('s:sink_gfiles')
+                \})
 endfunction
 "-----------------------------------------------------------------------------}}}
 "YANK-RING                                                                    {{{ 
 "--------------------------------------------------------------------------------
 function! s:yankRingSink(val)
-  let boo = substitute(a:val, '^.\{-\}\(\d\)', '\1', '')
-  let num = matchstr(boo, '^\S*')
-  YRShow
-  redraw
-  echo num
-  execute 'normal '.num
+    let boo = substitute(a:val, '^.\{-\}\(\d\)', '\1', '')
+    let num = matchstr(boo, '^\S*')
+    YRShow
+    redraw
+    echo num
+    execute 'normal '.num
 endfunction
 
 function! hzf#yankRing()
-  "todo: set this up like GV instead
-  "you'll likely get away with binding you stuff straight to the yankring buffer
+    "todo: set this up like GV instead
+    "you'll likely get away with binding you stuff straight to the yankring buffer
     call fzf#run({
-          \'dir': g:yankring_history_dir,
-          \'source': 'cat -n ' . g:yankring_history_file . '_v2.txt | sed -E ''s#,[vV]$##g'' ',
-          \'sink': function('s:yankRingSink'),
-          \'options': "--preview 'sh ".utils#get_bin_directory()."/tr_002_newline.sh {}' ".
-          \'--header '''.hzf#headerKeyCombinationColor('CTRL-s').' - toggle sort :: '.
-          \hzf#headerKeyCombinationColor('CTRL-g').' - toggle preview window'' '. 
-          \'--preview-window 60%:right '.
-          \"--bind 'ctrl-g:toggle-preview,".
-          \"ctrl-s:toggle-sort'"
-          \})
+                \'dir': g:yankring_history_dir,
+                \'source': 'cat -n ' . g:yankring_history_file . '_v2.txt | sed -E ''s#,[vV]$##g'' ',
+                \'sink': function('s:yankRingSink'),
+                \'options': "--preview 'sh ".utils#get_bin_directory()."/tr_002_newline.sh {}' ".
+                \'--header '''.hzf#headerKeyCombinationColor('CTRL-s').' - toggle sort :: '.
+                \hzf#headerKeyCombinationColor('CTRL-g').' - toggle preview window'' '. 
+                \'--preview-window 60%:right '.
+                \"--bind 'ctrl-g:toggle-preview,".
+                \"ctrl-s:toggle-sort'"
+                \})
 endfunction
 
 "-----------------------------------------------------------------------------}}}
 "OPTIONS/VARIABLES                                                            {{{ 
 "--------------------------------------------------------------------------------
 function! hzf#variables()
-  "todo: need some working on this... the output is terrible
+    "todo: need some working on this... the output is terrible
     redir => cout
-        silent execute 'let g:'
-        silent execute 'let b:'
-        silent execute 'let w:'
-        silent execute 'let t:'
-        silent execute 'let s:'
-        silent execute 'let l:'
-        silent execute 'let v:'
+    silent execute 'let g:'
+    silent execute 'let b:'
+    silent execute 'let w:'
+    silent execute 'let t:'
+    silent execute 'let s:'
+    silent execute 'let l:'
+    silent execute 'let v:'
     redir END
     let list = sort(split(cout, '\n'))
     call fzf#run({
-    \  'source':  list,
-    \  'sink':    function('Noop') })
+                \  'source':  list,
+                \  'sink':    function('Noop') })
 endfunction
 
 function! hzf#options()
     redir => cout
-        silent execute 'set'
+    silent execute 'set'
     redir END
     call system('echo '.cout.' > /tmp/o')
     let list = split(substitute(escape(cout, '-'''), '\s\{3,\}', '\n', 'g'), '\n')
@@ -179,7 +178,7 @@ function! hzf#options()
     let list = map(list, 'substitute(v:val, ''^\W\+'', '''', '''')')
     let list = sort(list)
     call fzf#run({
-    \  'source':  list,
-    \  'sink':    function('Noop') })
+                \  'source':  list,
+                \  'sink':    function('Noop') })
 endfunction
 
