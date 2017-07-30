@@ -208,9 +208,10 @@ augroup configgroup
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     autocmd InsertEnter * set cursorline nocursorcolumn
     autocmd InsertLeave * call OnInsertLeave()
+    "THIS BACAME REDUNTANT SINCE `set clipboard+=unnamedplus`
     "keep clipboard synched to system
-    autocmd TextYankPost * let @*=@"
-    autocmd FocusGained * let @@=system('pbpaste')
+    " autocmd TextYankPost * let @*=@"
+    " autocmd FocusGained * let @@=system('pbpaste')
     " automatically resize panes on resize
     autocmd VimResized * exe 'normal! \<c-w>='
 augroup END

@@ -1,5 +1,7 @@
 set nocompatible          " not compatible with vi
 " set maxmemtot=2000000     " give vim some memory - it get's stuck when working with very large files
+set helpheight=39
+set clipboard+=unnamedplus
 set autoread              " detect when a file is changed
 set autowriteall          " just :w implicitly, allways
 set grepprg=ag\ --vimgrep\ $*
@@ -25,7 +27,6 @@ set foldmethod=syntax     " fold based on indent
 set foldnestmax=10        " deepest fold is 10 levels
 set nofoldenable          " don't fold by default
 set foldlevel=1
-set so=7                  " set 7 lines to the cursors - when moving vertical
 set wildmenu              " enhanced command line completion
 set hidden                " current buffer can be put into background
 set showcmd               " show incomplete commands
@@ -46,6 +47,7 @@ set magic                 " Set magic on, for regex
 set noerrorbells
 set visualbell
 set t_vb=
+
 set tm=500
 set t_Co=256              " Explicitly tell vim that the terminal supports 256 colors"
 set background=dark
