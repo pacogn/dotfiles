@@ -1,6 +1,8 @@
 "-----------------------------------------------------------------------------}}}
 "VARIABLES                                                                    {{{ 
 "--------------------------------------------------------------------------------
+"avoid paren error on continuation liine - https://groups.google.com/forum/#!topic/vim_use/ohVfm9Iodwg
+let g:vimsyn_noerror = 1
 let g:peekaboo_window='vert bo 60new'
 let g:diminactive_buftype_blacklist = ['nowrite', 'acwrite']
 " let g:diminactive_enable_focus = 1
