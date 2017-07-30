@@ -37,9 +37,9 @@ endfunction
 
 nmap ,. :call utils#restoreAlternateFile()<cr><c-^>
 nmap sa :call utils#restoreAlternateFile()<cr><c-^>
-"execute current line
-" Y:@"<CR>
-"<C-U> is needed for properly capturing the count, I don't understand why
+
+" execute current line
+nmap <space>gx m`0y$:@"<cr><c-o>
 
 nnoremap - :silent call utils#toggle_window_to_nerd_tree()<cr>
 nnoremap \\ "_
