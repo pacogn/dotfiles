@@ -127,7 +127,7 @@ command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \'--ignore ''eval'' '.
             \'''^\|[^-:0-9](\|?|[^:]{0,6}[^)])\|''', 
             \{'dir':$VIMRUNTIME.'/doc',
-            \'options': ' --preview-window up:50%:hidden --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview'''})
+            \'options': ' --preview-window up:50%:hidden --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview,ctrl-s:toggle-sort'''}, 1)
 
 "todo give this sink function (+ preview?)
 command! LeaderMappingsDeclaration call hzf#leader_mappings_declarations()
