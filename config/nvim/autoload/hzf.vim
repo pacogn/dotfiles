@@ -84,7 +84,7 @@ function! hzf#leader_mappings_declarations()
 		\'source': 'cd $DOTFILES/config/nvim/startup; sh '.utils#get_bin_directory().'/leader_mappings_declaration.sh', 
 		\'sink': function('s:sink_leader_mapping'),
 		\'options': '--ansi --bind ''ctrl-s:toggle-sort'' '.
-        \'--preview "'''.s:previewrb.'''"\ -v\ {2} '
+                \'--preview "'''.s:previewrb.'''"\ -v\ {2} '
 		\})
 endfunction
 "-----------------------------------------------------------------------------}}}
