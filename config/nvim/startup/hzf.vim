@@ -98,36 +98,29 @@ command! FZFFiles call fzf#run({
 
 let onlyTest=' | ag ''(unit|spec).js'''
 
+let vimhelpignores = 
+\'--ignore ''howto*'' '.
+\'--ignore ''intro*'' '.
+\'--ignore ''edit*'' '.
+\'--ignore ''help*'' '.
+\'--ignore ''if_*'' '.
+\'--ignore ''ft_*'' '.
+\'--ignore ''autoc*'' '.
+\'--ignore ''change*'' '.
+\'--ignore ''gui_*'' '.
+\'--ignore ''eval'' '
+let vimhelp_default_options = ' --preview-window up:50% --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview''' 
 command! CommandLineCommands call fzf#vim#ag_raw('--nobreak --noheading '.
-            \'--ignore ''howto*'' '.
-            \'--ignore ''intro*'' '.
-            \'--ignore ''edit*'' '.
-            \'--ignore ''help*'' '.
-            \'--ignore ''if_*'' '.
-            \'--ignore ''ft_*'' '.
-            \'--ignore ''autoc*'' '.
-            \'--ignore ''change*'' '.
-            \'--ignore ''gui_*'' '.
-            \'--ignore ''eval'' '.
+            \ vimhelpignores.
             \'''^\s*\|:''', 
             \{'dir':$VIMRUNTIME.'/doc',
-            \'options': ' --preview-window up:50% --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview'''})
-
+            \'options': vimhelp_default_options}, 1)
 
 command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
-            \'--ignore ''howto*'' '.
-            \'--ignore ''intro*'' '.
-            \'--ignore ''edit*'' '.
-            \'--ignore ''help*'' '.
-            \'--ignore ''if_*'' '.
-            \'--ignore ''ft_*'' '.
-            \'--ignore ''autoc*'' '.
-            \'--ignore ''change*'' '.
-            \'--ignore ''gui_*'' '.
-            \'--ignore ''eval'' '.
+            \ vimhelpignores.
             \'''^\|[^-:0-9](\|?|[^:]{0,6}[^)])\|''', 
             \{'dir':$VIMRUNTIME.'/doc',
-            \'options': ' --preview-window up:50%:hidden --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview,ctrl-s:toggle-sort'''}, 1)
+            \'options': vimhelp_default_options}, 1)
 
 "todo give this sink function (+ preview?)
 command! LeaderMappingsDeclaration call hzf#leader_mappings_declarations()
