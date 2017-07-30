@@ -40,6 +40,10 @@ nmap sa :call utils#restoreAlternateFile()<cr><c-^>
 
 " execute current line
 nmap <space>gx m`0y$:@"<cr><c-o>
+nmap <space>ql :lclose<cr>
+nmap <space>qc :cclose<cr>
+nmap <space>qp :pclose<cr>
+nmap <space>qh :helpclose<cr>
 
 nnoremap - :silent call utils#toggle_window_to_nerd_tree()<cr>
 nnoremap \\ "_
