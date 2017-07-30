@@ -123,18 +123,23 @@ endfunction
 "-----------------------------------------------------------------------------}}}
 "YANK-RING                                                                    {{{ 
 "--------------------------------------------------------------------------------
+let s:yank_ring_command = 'p'
 function! s:yankRingSink(val)
     let boo = substitute(a:val, '^.\{-\}\(\d\)', '\1', '')
     let num = matchstr(boo, '^\S*')
     YRShow
     redraw
     echo num
-    execute 'normal '.num
+    if num > 1
+        execute 'normal! '.(num - 1).'j'
+    endif
+    execute 'normal '.s:yank_ring_command
 endfunction
 
-function! hzf#yankRing()
-    "todo: set this up like GV instead
-    "you'll likely get away with binding you stuff straight to the yankring buffer
+function! hzf#yankRing(command)
+    if a:command != 'p' && a:command != 'P'
+        echoerr "command must be 'p' or 'P'"
+    let s:yank_ring_command = a:command
     call fzf#run({
                 \'dir': g:yankring_history_dir,
                 \'source': 'cat -n ' . g:yankring_history_file . '_v2.txt | sed -E ''s#,[vV]$##g'' ',
