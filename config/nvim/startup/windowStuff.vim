@@ -61,10 +61,11 @@ if has('nvim')
   tnoremap º <C-\><C-n>:call ToggleForceVerticalResize()<cr>i
 endif
 
-nnoremap <silent><C-j> :wincmd j<cr>
-nnoremap <silent><C-k> :wincmd k<cr>
-nnoremap <silent><C-l> :wincmd l<cr>
-nnoremap <silent><C-h> :wincmd h<cr>
+nnoremap <silent> <C-j> :wincmd j<cr>
+nnoremap <silent> <C-k> :wincmd k<cr>
+nnoremap <silent> <C-l> :wincmd l<cr>
+nnoremap <silent> <C-h> :wincmd h<cr>
+nnoremap <silent> <C-p> :wincmd p<cr>
 
 function! HtmlUnEscape()
   silent s/&lt;/</eg
