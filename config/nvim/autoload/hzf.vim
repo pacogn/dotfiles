@@ -72,7 +72,21 @@ function! hzf#ag_raw(...)
      call fzf#vim#ag_raw(' '.join(a:000), hzf#defaultPreview(), 1)
 endfunction
 
+function! s:sink_leader_mapping(fzfretval)
+    let fname = a:fzfretval
+    let fname = substitute(fname, '\S\+\s\+\([^:]*\).*', '\1', '')
+    let fnum = substitute(a:fzfretval, '.\{-\}:\(\d\+\):.*', '\1', '')
+    execute 'e +'.fnum.' $DOTFILES/config/nvim/startup/'.fname	
+endfunction
 
+function! hzf#leader_mappings_declarations()
+  call fzf#run({
+		\'source': 'cd $DOTFILES/config/nvim/startup; sh '.utils#get_bin_directory().'/leader_mappings_declaration.sh', 
+		\'sink': function('s:sink_leader_mapping'),
+		\'options': '--ansi --bind ''ctrl-s:toggle-sort'' '.
+        \'--preview "'''.s:previewrb.'''"\ -v\ {2} '
+		\})
+endfunction
 "-----------------------------------------------------------------------------}}}
 "GIT                                                                          {{{ 
 "--------------------------------------------------------------------------------

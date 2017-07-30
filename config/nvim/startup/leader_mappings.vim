@@ -95,7 +95,6 @@ nmap g# <Plug>(incsearch-nohl-g#)
 nnoremap \c :Commands<cr>
 nnoremap 1: :History:<cr>
 nnoremap 1; :History:<cr>
-nnoremap <C-r> :History:<cr>
 nnoremap 1/ :History/<cr>
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
 nmap <space>be :BufExplorer<cr>
@@ -241,18 +240,10 @@ nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
 imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 
-function! GfilesArgs()
-    let groot = utils#get_git_root_directory()
-    let args = ''
-    if groot == getcwd()
-        return args
-    endif
-    return ' | grep '''.substitute(getcwd(), groot.'/', '', '').''''
-endfunction
-
-nmap <silent> \f :call fzf#vim#gitfiles(GfilesArgs(), 1)<cr>
-nmap <silent> <C-t> :GFiles<cr>
+cmap <C-a> <Home>
 nmap <silent> \b :Buffers<cr>
+nmap <silent> \f :call hzf#g_files()<cr>
+nmap <silent> <C-t> :call hzf#g_files()<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
@@ -263,6 +254,7 @@ nmap \p :YRShow<cr>
 nmap 1p :call hzf#yankRing()<cr>
 vmap 1p :<C-u>YRShow<cr>
 nmap <space>lc :LetterCommands<cr>
+nmap <space>lm :LeaderMappingsDeclaration<cr>
 nmap <space>cl :LetterCommands<cr>
 nmap <space>cc :CommandLineCommands<cr>
 " i don't like the unimpaired ]l, [l commands, it's too much little finger
