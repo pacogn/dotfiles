@@ -225,22 +225,32 @@ function! utils#toggle_window_to_nerd_tree()
     edit %:p:h
     call search(currfile)
 endfunction
-
-function! utils#cd_project_root(dirname)
-    " convert windows paths to unix style
+function! utils#get_project_root(dirname)
     let l:curDir = substitute(a:dirname, '\\', '/', 'g')
 
     if filereadable(a:dirname.'/package.json') && a:dirname != $HOME
-        execute 'cd '.a:dirname
+        return a:dirname
     elseif a:dirname =~ $DOTFILES.'/config/nvim'
-        execute 'cd '.$DOTFILES.'/config/nvim'
+        return $DOTFILES.'/config/nvim'
     else
         " walk to the top of the dir tree
         let l:parentDir = strpart(l:curDir, 0, strridx(l:curDir, '/'))
         if isdirectory(l:parentDir)
-            call utils#cd_project_root(l:parentDir)
+            call utils#get_project_root(l:parentDir)
         else
-            execute 'Rooter'
+            if exists('*fugitive#repo')
+                try
+                    return fugitive#repo().tree()
+                catch
+                endtry
+            endif
         endif
     endif
+endfunction
+function! utils#cd_project_root(dirname)
+    let project_root = utils#get_project_root(a:dirname)  
+    if len(project_root) > 1
+        execute 'cd '.project_root
+    endif
+
 endfunction
