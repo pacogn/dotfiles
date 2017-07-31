@@ -13,7 +13,7 @@ function! dir_utils#CdOnBufferEnter(isDirChange)
         let g:projectsRootDic = {}
     endif
     let pwd = getcwd()
-    let projRoot = dir_utils#proj_root(expand('%:p:h'))
+    let projRoot = utils#get_project_root(expand('%:p:h'))
     if !isdirectory(projRoot)
         return
     endif
