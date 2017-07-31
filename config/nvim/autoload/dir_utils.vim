@@ -1,8 +1,16 @@
+function! s:cache_dir(key, value)
+    if a:key !~ a:value
+        " key/value must have a parent/child relationship
+        return
+    endif
+    let g:projectsRootDic[a:key] = a:value
+endfunction
+
 function! dir_utils#cd_project_root_or_cache(projRoot)
     if has_key(g:projectsRootDic, a:projRoot)
         execute 'cd '.g:projectsRootDic[a:projRoot]
     else
-        let g:projectsRootDic[a:projRoot] = a:projRoot
+        call s:cache_dir(a:projRoot, a:projRoot)
         execute 'cd '.a:projRoot
         return
     endif
@@ -18,7 +26,7 @@ function! dir_utils#CdOnBufferEnter(isDirChange)
         return
     endif
     if a:isDirChange
-        let g:projectsRootDic[projRoot] = pwd
+        call s:cache_dir(projRoot, pwd)
         return
     endif
     if pwd =~ 'config/nvim/plugged'
@@ -28,7 +36,7 @@ function! dir_utils#CdOnBufferEnter(isDirChange)
     if pwd =~ projRoot 
         "this means that getcwd() is a child of projRoot..."
         "remember which directory we want when comming to the current project
-        let g:projectsRootDic[projRoot] = pwd
+        call s:cache_dir(projRoot, pwd)
         return
     endif
     call dir_utils#cd_project_root_or_cache(projRoot)
