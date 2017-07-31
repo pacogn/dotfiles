@@ -2,14 +2,14 @@
 "PRIVATES                                                                      {{{ 
 "--------------------------------------------------------------------------------
 function! s:get_git_root()
-  if exists('*fugitive#repo')
-    try
-      return fugitive#repo().tree()
-    catch
-    endtry
-  endif
-  let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
-  return v:shell_error ? '' : root
+    if exists('*fugitive#repo')
+        try
+            return fugitive#repo().tree()
+        catch
+        endtry
+    endif
+    let root = split(system('git rev-parse --show-toplevel'), '\n')[0]
+    return v:shell_error ? '' : root
 endfunction
 
 "-----------------------------------------------------------------------------}}}
@@ -232,6 +232,8 @@ function! utils#cd_project_root(dirname)
 
     if isdirectory(a:dirname.'/node_modules') && a:dirname != $HOME
         execute 'cd '.a:dirname
+    elseif a:dirname =~ $DOTFILES.'/config/nvim'
+        execute 'cd '.$DOTFILES.'/config/nvim'
     else
         " walk to the top of the dir tree
         let l:parentDir = strpart(l:curDir, 0, strridx(l:curDir, '/'))
