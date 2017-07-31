@@ -265,6 +265,7 @@ nmap <space>lc :LetterCommands<cr>
 nmap <space>lm :LeaderMappingsDeclaration<cr>
 nmap <space>cl :LetterCommands<cr>
 nmap <space>cc :CommandLineCommands<cr>
+nmap <space>cd :CDC<cr>
 " i don't like the unimpaired ]l, [l commands, it's too much little finger
 nmap <space>lj :lnext<cr>
 nmap <space>lk :lprev<cr>
