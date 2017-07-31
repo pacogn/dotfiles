@@ -216,6 +216,12 @@ augroup configgroup
     autocmd VimResized * exe 'normal! \<c-w>='
 augroup END
 
+command! ClearCache let g:projectsRootDic = {}
+augroup multiProjectAutoCd
+   autocmd!
+   autocmd BufEnter * call dir_utils#CdOnBufferEnter(0)
+   autocmd DirChanged * call dir_utils#CdOnBufferEnter(1)
+augroup END
 "-----------------------------------------------------------------------------}}}
 "COMMANDS                                                                     {{{ 
 "--------------------------------------------------------------------------------
