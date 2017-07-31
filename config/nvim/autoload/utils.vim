@@ -230,7 +230,7 @@ function! utils#cd_project_root(dirname)
     " convert windows paths to unix style
     let l:curDir = substitute(a:dirname, '\\', '/', 'g')
 
-    if isdirectory(a:dirname.'/node_modules') && a:dirname != $HOME
+    if filereadable(a:dirname.'/package.json') && a:dirname != $HOME
         execute 'cd '.a:dirname
     elseif a:dirname =~ $DOTFILES.'/config/nvim'
         execute 'cd '.$DOTFILES.'/config/nvim'
