@@ -105,26 +105,22 @@ endfunction
 "-----------------------------------------------------------------------------}}}
 "SHELL                                                                      {{{ 
 "--------------------------------------------------------------------------------
-function! s:shell_cmd_completed(...)
-    execute 'pedit '.s:shell_tmp_output
+function! s:shell_cmd_completed(...) dict
     wincmd P
-    wincmd J
+    call append(line('$'), self.shell)
+    call append(line('$'), '########################FINISHED########################')
+    normal! G
     setlocal nomodifiable
-    nnoremap <buffer>q :bd<cr>
+    if exists(':DimInactiveBufferOn')
+        DimInactiveBufferOn
+    endif
     wincmd p
 endfunction
 
 function! s:JobHandler(job_id, data, event) dict
-    if a:event == 'stdout' || a:event == 'stderr'
-        let str = join(a:data)
-    else
-        let str = self.shell.' ###FINISHED###'
-    endif
-
+    let str = join(a:data)
     wincmd P
-    setlocal modifiable
     call append(line('$'), str)
-    setlocal nomodifiable
     normal! G
     wincmd p
 endfunction
@@ -145,13 +141,16 @@ function! utils#run_shell_command(cmdline, bang)
     execute 'pedit '.s:shell_tmp_output
     wincmd P
     wincmd J
-    setlocal nomodifiable
+    if exists(':DimInactiveBufferOff')
+        DimInactiveBufferOff
+    endif
+    setlocal modifiable
     nnoremap <buffer>q :bd<cr>
     wincmd p
     let s:callbacks = {
     \ 'on_stdout': function('s:JobHandler'),
     \ 'on_stderr': function('s:JobHandler'),
-    \ 'on_exit': function('s:JobHandler'),
+    \ 'on_exit': function('s:shell_cmd_completed'),
     \ 'shell': expanded_cmdline
     \ }
     call jobstart(expanded_cmdline, s:callbacks)
