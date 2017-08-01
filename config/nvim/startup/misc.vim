@@ -227,9 +227,9 @@ augroup END
 "COMMANDS                                                                     {{{ 
 "--------------------------------------------------------------------------------
 "source http://vim.wikia.com/wiki/Display_output_of_shell_commands_in_new_window
-command! -complete=shellcmd -nargs=+ Shell call utils#run_shell_command(<q-args>)
-command! GPush call utils#run_shell_command('git push')
-command! GPull call utils#run_shell_command('git pull')
+command! -complete=shellcmd -bang -nargs=+ Shell call utils#run_shell_command(<q-args>, <bang>0)
+command! -bang GPush call utils#run_shell_command('git push', <bang>0)
+command! -bang GPull call utils#run_shell_command('git pull', <bang>0)
 
 " quick open snippets file for current filetype
 command! SnipEdit call utils#snipdefinition()

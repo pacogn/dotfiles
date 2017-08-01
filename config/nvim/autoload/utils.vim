@@ -114,9 +114,27 @@ function! s:shell_cmd_completed(...)
     wincmd p
 endfunction
 
-function! utils#run_shell_command(cmdline)
-    " echo a:cmdline
+function! s:JobHandler(job_id, data, event) dict
+    if a:event == 'stdout' || a:event == 'stderr'
+        let str = join(a:data)
+    else
+        let str = self.shell.' ###FINISHED###'
+    endif
+
+    wincmd P
+    setlocal modifiable
+    call append(line('$'), str)
+    setlocal nomodifiable
+    normal! G
+    wincmd p
+endfunction
+
+function! utils#run_shell_command(cmdline, bang)
     let expanded_cmdline = a:cmdline
+    if a:bang
+        let expanded_cmdline = 'source ~/.zshrc; loadall; '.expanded_cmdline
+    endif
+    " echo a:cmdline
     for part in split(a:cmdline, ' ')
         if part[0] =~ '\v[%#<]'
             let expanded_part = fnameescape(expand(part))
@@ -124,7 +142,19 @@ function! utils#run_shell_command(cmdline)
         endif
     endfor
     let s:shell_tmp_output = tempname()
-    call jobstart(expanded_cmdline.' &> '.s:shell_tmp_output, {'on_exit': function('s:shell_cmd_completed')})
+    execute 'pedit '.s:shell_tmp_output
+    wincmd P
+    wincmd J
+    setlocal nomodifiable
+    nnoremap <buffer>q :bd<cr>
+    wincmd p
+    let s:callbacks = {
+    \ 'on_stdout': function('s:JobHandler'),
+    \ 'on_stderr': function('s:JobHandler'),
+    \ 'on_exit': function('s:JobHandler'),
+    \ 'shell': expanded_cmdline
+    \ }
+    call jobstart(expanded_cmdline, s:callbacks)
 endfunction
 
 "-----------------------------------------------------------------------------}}}
