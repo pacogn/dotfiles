@@ -247,7 +247,6 @@ nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
 imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 
-cmap <C-a> <Home>
 nmap <silent> \b :Buffers<cr>
 nmap <silent> \f :call hzf#g_files()<cr>
 

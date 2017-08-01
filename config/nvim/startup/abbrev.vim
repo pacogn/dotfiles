@@ -11,3 +11,38 @@ cnoreabbrev <expr> cdr getcmdtype() == ":" && getcmdline() == 'cdr' ? 'CDR' : 'c
 cnoreabbrev <expr> cdg getcmdtype() == ":" && getcmdline() == 'cdg' ? 'CDG' : 'cdg'
 cnoreabbrev <expr> pp getcmdtype() == ":" && getcmdline() == 'pp' ? 'PP' : 'pp'
 
+"https://github.com/houtsnip/vim-emacscommandline/blob/master/plugin/emacscommandline.vim
+cmap <C-a> <Home>
+cnoremap <c-l> <C-\>e<SID>ForwardWord()<CR>
+function! <SID>ForwardWord()
+    let l:loc = strpart(getcmdline(), 0, getcmdpos() - 1)
+    let l:roc = strpart(getcmdline(), getcmdpos() - 1)
+    if (l:roc =~ '\v^\s*\w')
+        let l:rem = matchstr(l:roc, '\v^\s*\w+')
+    elseif (l:roc =~ '\v^\s*[^[:alnum:]_[:blank:]]')
+        let l:rem = matchstr(l:roc, '\v^\s*[^[:alnum:]_[:blank:]]+')
+    else
+        call setcmdpos(strlen(getcmdline()) + 1)
+        return getcmdline()
+    endif
+    call setcmdpos(strlen(l:loc) + strlen(l:rem) + 1)
+    return getcmdline()
+endfunction
+
+cnoremap <c-h> <C-\>e<SID>BackwardWord()<CR>
+function! <SID>BackwardWord()
+    let l:loc = strpart(getcmdline(), 0, getcmdpos() - 1)
+    let l:roc = strpart(getcmdline(), getcmdpos() - 1)
+    if (l:loc =~ '\v\w\s*$')
+        let l:rem = matchstr(l:loc, '\v\w+\s*$')
+    elseif (l:loc =~ '\v[^[:alnum:]_[:blank:]]\s*$')
+        let l:rem = matchstr(l:loc, '\v[^[:alnum:]_[:blank:]]+\s*$')
+    else
+        call setcmdpos(1)
+        return getcmdline()
+    endif
+    let @c = l:rem
+    call setcmdpos(strlen(l:loc) - strlen(l:rem) + 1)
+    return getcmdline()
+endfunction
+
