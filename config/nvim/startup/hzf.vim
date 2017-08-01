@@ -109,7 +109,7 @@ let vimhelpignores =
 \'--ignore ''change*'' '.
 \'--ignore ''gui_*'' '.
 \'--ignore ''eval'' '
-let vimhelp_default_options = ' --preview-window up:50% --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview''' 
+let vimhelp_default_options = ' --preview-window up:50% --preview "'''.s:previewrb.'''"\ \ {} --bind ''ctrl-g:toggle-preview,ctrl-s:toggle-sort''' 
 command! CommandLineCommands call fzf#vim#ag_raw('--nobreak --noheading '.
             \ vimhelpignores.
             \'''^\s*\|:''', 
