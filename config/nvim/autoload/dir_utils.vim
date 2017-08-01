@@ -33,7 +33,7 @@ function! dir_utils#CdOnBufferEnter(isDirChange)
         call dir_utils#cd_project_root_or_cache(projRoot)
         return
     endif
-    if pwd =~ projRoot 
+    if pwd == projRoot || pwd =~ projRoot.'/' 
         "this means that getcwd() is a child of projRoot..."
         "remember which directory we want when comming to the current project
         call s:cache_dir(projRoot, pwd)
