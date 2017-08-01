@@ -250,7 +250,6 @@ map <C-s>  <Esc>:w<cr>
 cmap <C-a> <Home>
 nmap <silent> \b :Buffers<cr>
 nmap <silent> \f :call hzf#g_files()<cr>
-nmap <silent> <C-t> :call hzf#g_files()<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
