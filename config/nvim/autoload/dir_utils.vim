@@ -1,6 +1,7 @@
 function! s:cache_dir(key, value)
-    if a:key !~ a:value
+    if  a:value !~ a:key
         " key/value must have a parent/child relationship
+        " we check if child matches parent since child path is the longest
         return
     endif
     let g:projectsRootDic[a:key] = a:value
