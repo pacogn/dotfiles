@@ -23,6 +23,9 @@ function! dir_utils#CdOnBufferEnter(isDirChange)
     endif
     let pwd = getcwd()
     let projRoot = utils#get_project_root(expand('%:p:h'))
+    if pwd =~ '/node_modules/' || projRoot =~ '/node_modules/'
+        return
+    endif
     if !isdirectory(projRoot)
         return
     endif
