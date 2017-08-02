@@ -244,6 +244,16 @@ nmap \w :wincmd q<cr>
 nmap \q :wincmd q<cr>
 nnoremap <silent> <space>zj :call NextClosedFold('j')<cr>
 nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
+function! FoldClose()
+    if exists('b:foldinitialized')
+        normal! zc
+    else
+        normal! zRzc
+        let b:foldinitialized = 1
+    endif
+endfunction
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','C']
+nnoremap zc :call FoldClose()<cr>
 imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 
