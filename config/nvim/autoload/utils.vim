@@ -107,6 +107,7 @@ endfunction
 "--------------------------------------------------------------------------------
 function! s:shell_cmd_completed(...) dict
     wincmd P
+    setlocal modifiable
     call append(line('$'), self.shell)
     call append(line('$'), '########################FINISHED########################')
     normal! G
@@ -128,7 +129,7 @@ endfunction
 function! utils#run_shell_command(cmdline, bang)
     let expanded_cmdline = a:cmdline
     if a:bang
-        let expanded_cmdline = 'source ~/.zshrc; loadall; '.expanded_cmdline
+        let expanded_cmdline = 'source ~/.zshrc; loadall; [[ -f .nvmrc ]] && nvm use $(cat .nvmrc); '.expanded_cmdline
     endif
     " echo a:cmdline
     for part in split(a:cmdline, ' ')
@@ -148,6 +149,7 @@ function! utils#run_shell_command(cmdline, bang)
         AnsiEsc
     endif
     setlocal modifiable
+    setlocal nobuflisted
     nnoremap <buffer>q :bd<cr>
     wincmd p
     let s:callbacks = {
