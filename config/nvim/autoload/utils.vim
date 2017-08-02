@@ -112,7 +112,7 @@ function! s:shell_cmd_completed(...) dict
     normal! G
     setlocal nomodifiable
     if exists(':DimInactiveBufferOn')
-        DimInactiveBufferOn
+        " DimInactiveBufferOn
     endif
     wincmd p
 endfunction
@@ -143,6 +143,9 @@ function! utils#run_shell_command(cmdline, bang)
     wincmd J
     if exists(':DimInactiveBufferOff')
         DimInactiveBufferOff
+    endif
+    if exists(':AnsiEsc')
+        AnsiEsc
     endif
     setlocal modifiable
     nnoremap <buffer>q :bd<cr>

@@ -278,6 +278,8 @@ nmap <space>cd :CDC<cr>
 nmap <space>lj :lnext<cr>
 nmap <space>lk :lprev<cr>
 
+" run test (well, if available)
+nmap <space>rt :Shell! [[ -f .nvmrc ]] && nvm use $(cat .nvmrc); export MOCHA_OPTIONS='--colors'; npm run test<cr>
 "<c-l> complete to longest possible
 "<c-d> list all possibilities
 cnoremap <c-space> <C-l><C-d>
