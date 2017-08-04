@@ -244,6 +244,24 @@ nmap \w :wincmd q<cr>
 nmap \q :wincmd q<cr>
 nnoremap <silent> <space>zj :call NextClosedFold('j')<cr>
 nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
+function! FoldClose()
+    if exists('b:foldinitialized')
+        normal! zc
+    else
+        normal! zRzc
+        let b:foldinitialized = 1
+    endif
+endfunction
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','C']
+nnoremap zc :call FoldClose()<cr>
+function GFilesIfNotHelp()
+    if &ft == 'help'
+        execute 'normal! \<c-t>'
+    else
+        call hzf#g_files()
+    endif
+endfunction
+nnoremap <c-t> :call GFilesIfNotHelp()<cr>
 imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 
@@ -268,6 +286,8 @@ nmap <space>cd :CDC<cr>
 nmap <space>lj :lnext<cr>
 nmap <space>lk :lprev<cr>
 
+" run test (well, if available)
+nmap <space>rt :Shell! [[ -f .nvmrc ]] && nvm use $(cat .nvmrc); export MOCHA_OPTIONS='--colors'; npm run test<cr>
 "<c-l> complete to longest possible
 "<c-d> list all possibilities
 cnoremap <c-space> <C-l><C-d>
