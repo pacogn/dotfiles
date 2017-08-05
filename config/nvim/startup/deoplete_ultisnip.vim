@@ -29,3 +29,4 @@ let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:UltiSnipsSnippetsDir = $DOTFILES.'/config/nvim/UltiSnip'
 let g:UltiSnipsSnippetDirectories = [$DOTFILES.'/config/nvim/UltiSnip']
+let g:UltiSnipsEnableSnipMate = 1
