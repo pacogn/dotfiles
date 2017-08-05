@@ -254,7 +254,7 @@ function! FoldClose()
 endfunction
 let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','C']
 nnoremap zc :call FoldClose()<cr>
-function GFilesIfNotHelp()
+function! GFilesIfNotHelp()
     if &ft == 'help'
         execute 'normal! \<c-t>'
     else
