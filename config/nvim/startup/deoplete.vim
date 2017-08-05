@@ -9,7 +9,8 @@ function! s:my_cr_function()
     return pumvisible() ? "\<C-y>" : "\<CR>"
 endfunction
 
-
+" sort popup-menu entries alphabetically -- deoplete.txt 1466
+autocmd InsertEnter * call deoplete#enable() | call deoplete#custom#source('_', 'sorters', ['sorter_word'])
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <c-space> <c-r>=UltiSnips#ExpandSnippet()<cr>
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
