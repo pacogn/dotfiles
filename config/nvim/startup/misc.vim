@@ -28,6 +28,7 @@ let g:yankring_zap_keys = 'f t F T'
 let g:yankring_max_element_length = 2548576
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
+let g:UltiSnipsSnippetsDir = $DOTFILES.'/config/nvim/snippets'
 "-----------------------------------------------------------------------------}}}
 "FUNCTIONS                                                                      {{{ 
 "--------------------------------------------------------------------------------
@@ -70,13 +71,6 @@ function! ClearMessages()
 endfunction
 language en_US
 
-function! s:my_cr_function()
-    " return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
-    " For no inserting <CR> key.
-    return pumvisible() ? "\<C-y>" : "\<CR>"
-endfunction
-
-
 function! OnInsertLeave()
     if(g:normal_cursor_line_column)
         set cursorline nocursorcolumn
@@ -88,9 +82,6 @@ endfunction
 "-----------------------------------------------------------------------------}}}
 "MAPS                                                                        {{{ 
 "--------------------------------------------------------------------------------
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-
 inoremap jk <esc>
 inoremap jj <esc>
 inoremap <C-h> <C-o>h
@@ -193,7 +184,7 @@ augroup configgroup
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab indentkeys-=*<return>
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    " autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType markdown,textile setlocal textwidth=0 wrapmargin=0 wrap spell
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 
