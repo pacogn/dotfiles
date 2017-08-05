@@ -23,12 +23,12 @@ let g:tern#arguments = ["--persistent"]
 let mapleader = ','
 let g:mapleader = ','
 let g:ack_use_dispatch = 1
-let g:yankring_n_keys='D'
+let g:yankring_n_keys=''
 let g:yankring_zap_keys = 'f t F T'
 let g:yankring_max_element_length = 2548576
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
-let g:UltiSnipsSnippetsDir = $DOTFILES.'/config/nvim/snippets'
+let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@ d c x D'
 "-----------------------------------------------------------------------------}}}
 "FUNCTIONS                                                                      {{{ 
 "--------------------------------------------------------------------------------
@@ -78,7 +78,9 @@ function! OnInsertLeave()
         set nocursorline nocursorcolumn
     endif
 endfunction
-
+fun! WordBelowCursor() abort
+	return matchstr(getline('.'), '\S\+\%' . col('.') . 'c')
+endf
 "-----------------------------------------------------------------------------}}}
 "MAPS                                                                        {{{ 
 "--------------------------------------------------------------------------------
@@ -119,6 +121,7 @@ if has('nvim')
     endif
 endif
 if has('nvim')
+   "this is ignored now, defaults are good
     let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
 elseif exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
