@@ -223,8 +223,6 @@ command! -bang GPush call utils#run_shell_command('git push', <bang>0)
 command! -bang GPull call utils#run_shell_command('git pull', <bang>0)
 
 " quick open snippets file for current filetype
-command! SnipEdit call utils#snipdefinition()
-command! Snippets call utils#snipdefinition()
 command! OpenInWebstorm call utils#open_in_webstorm()
 command! ListDotFiles call ListDotFiles('$DOTFILES/',  'git ls-files')
 command! DotFiles call ListDotFiles('$DOTFILES',  'git ls-files')

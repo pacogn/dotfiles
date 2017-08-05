@@ -25,8 +25,7 @@ Plug 'sudavid4/tern_for_vim', {
             \'for': 'javascript',
             \'do': 'npm i' }                                " intellijent navigation and refactor for javascript 
 if(has('nvim'))
-    Plug 'Shougo/deoplete.nvim', 
-                \{ 'for': ['javascript', 'css', 'scss', 'sh', 'zsh', 'vim', 'html'] }
+    Plug 'Shougo/deoplete.nvim'
     Plug 'davidsu4/deoplete-ternjs', 
                 \{ 'for': 'javascript'}
 else
@@ -62,14 +61,6 @@ Plug 'tpope/vim-surround'                                   " mappings to easily
 Plug 'tpope/vim-fugitive'                                   " amazing git wrapper for vim
 Plug 'tpope/vim-rhubarb'                                    " for `:Gbrowse`
 Plug 'tpope/vim-repeat'                                     " enables repeating other supported plugins with the . command
-" Plug 'SirVer/ultisnips'                                     " snippet manager
-" let g:UltiSnipsExpandTrigger='<c-space>'
-" let g:UltiSnipsSnippetsDir = 'UltiSnips'
-" let g:UltiSnipsSnippetsDirectories = ['$HOME/.config/nvim/ultisnippets']
-" Plug 'garbas/vim-snipmate' |                                
-"             \Plug 'MarcWeber/vim-addon-mw-utils' |
-"             \Plug 'tomtom/tlib_vim'                         " snippet manager
-" imap <expr> <c-space> pumvisible() ? '<c-y><Plug>snipMateNextOrTrigger' : '<Plug>snipMateNextOrTrigger'
 Plug 'christoomey/vim-tmux-navigator'                       " seemless pane navigation for vim <-> tmux                         
 " Plug 'wincent/loupe'                                        " enhances Vim's `search-commands`
 Plug 'haya14busa/incsearch.vim'                             "  Improved incremental searching for Vim

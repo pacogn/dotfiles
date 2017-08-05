@@ -74,18 +74,6 @@ function! utils#buf_delete_current()
         echom 'last buffer'
     endif
 endfunction
-"-----------------------------------------------------------------------------}}}
-"SNIP-MATE                                                                    {{{ 
-"--------------------------------------------------------------------------------
-function! utils#snipdefinition()
-    let snippetFileName = s:root.'/snippets/'.&ft.'.snippets' 
-    split
-    execute 'edit '.snippetFileName
-    nmap <buffer>q :quit<cr>
-    if ! filereadable(snippetFileName)
-        echoerr 'no snippet found for '.&ft
-    endif
-endfunction
 
 "-----------------------------------------------------------------------------}}}
 "BASEDIRS                                                                     {{{ 

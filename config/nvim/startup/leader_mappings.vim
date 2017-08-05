@@ -234,7 +234,7 @@ map sd <Plug>(easymotion-s2)
 
 map <space>tc :tabclose<cr>
 map <space>te :call utils#toTerminal()<cr>
-map <space>sn :call utils#snipdefinition()<cr>
+map <space>sn :UltiSnipsEdit<cr>
 map <space>st :Scripts<cr>
 
 "visual mode on pasted text
