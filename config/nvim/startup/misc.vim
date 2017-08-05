@@ -78,9 +78,6 @@ function! OnInsertLeave()
         set nocursorline nocursorcolumn
     endif
 endfunction
-fun! WordBelowCursor() abort
-	return matchstr(getline('.'), '\S\+\%' . col('.') . 'c')
-endf
 "-----------------------------------------------------------------------------}}}
 "MAPS                                                                        {{{ 
 "--------------------------------------------------------------------------------
