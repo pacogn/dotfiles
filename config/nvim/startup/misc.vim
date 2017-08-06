@@ -231,7 +231,7 @@ command! DotPlugged call ListDotFiles('$DOTFILES/config/nvim/plugged',  'find . 
 command! DotPluggedDirectories call ListDotFiles('$DOTFILES/config/nvim/plugged',  'ls | grep -vF .git ')
 command! -nargs=? Vimrc call Vimrc(<q-args>)
 "not good enough CDR for filetype nerdtree but will do it for now
-command! CDG if &filetype == 'nerdtree' | execute 'CDC' | else | execute 'Rooter' | endif
+command! CDG execute 'CDC' | if &filetype != 'nerdtree' | execute 'Rooter' | endif
 command! CDR if &filetype == 'nerdtree' | execute 'CDC' | else | call utils#cd_project_root(expand('%:p:h')) | endif
 command! CDC if &filetype == 'nerdtree' | execute 'cd /'.join(b:NERDTreeRoot.path.pathSegments, '/') | else | cd %:p:h | endif
 command! ClearMessages call ClearMessages()
