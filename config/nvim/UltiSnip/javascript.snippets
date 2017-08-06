@@ -5,3 +5,115 @@ endsnippet
 snippet strict
 'use strict'
 endsnippet
+
+snippet log
+console.log(${1});
+endsnippet
+
+snippet lred
+console.log('%c${1}', 'font-weight:bold;color:red;');
+endsnippet
+
+snippet lgreen
+console.log('%c${1}', 'font-weight:bold;color:green;');
+endsnippet
+
+snippet lblue
+console.log('%c${1}', 'font-weight:bold;color:blue;');
+endsnippet
+
+snippet lpurple
+console.log('%c${1}', 'font-weight:bold;color:purple;');
+endsnippet
+
+snippet lorange
+console.log('%c${1}', 'font-weight:bold;color:orange;');
+endsnippet
+
+snippet trace
+console.trace(${1});
+endsnippet
+
+snippet ctab
+console.table(${1});
+endsnippet
+
+snippet debug
+console.log('[DEBUG] ${1}');
+endsnippet
+
+snippet grp
+console.group('${1}');
+endsnippet
+
+snippet grpe
+console.groupEnd('${1}');
+endsnippet
+
+snippet :
+${1:key}: ${2:value}
+endsnippet
+
+snippet :f
+${1:method_name}: function (${2:args}) {
+}
+endsnippet
+
+snippet fn
+function () {
+}
+endsnippet
+
+snippet fun
+function ${1:name}(${2:args}) {
+}
+endsnippet
+
+snippet iife
+(function () {
+${1}
+})();
+endsnippet
+
+snippet interval
+setInterval(function () {
+${2}
+}, ${1});
+endsnippet
+
+snippet timeout
+setTimeout(function () {
+${2}
+}, ${1});
+# log snippets
+endsnippet
+
+snippet des
+describe('${1}', function () {
+});
+endsnippet
+
+snippet it
+it('${1}', function () {
+});
+endsnippet
+
+snippet def
+define([
+${1}
+], function (${2}) {
+});
+endsnippet
+
+snippet dec
+declare(${1}, {
+});
+endsnippet
+
+snippet req
+require([
+${1}
+], function (${2}) {
+});
+endsnippet
+
