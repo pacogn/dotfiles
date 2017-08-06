@@ -12,13 +12,13 @@ let g:table_mode_corner = '|'
 let g:table_mode_separator = '|'
 let g:yankring_history_dir = '$HOME'
 let g:yankring_history_file = '.yankring_vim_history'
-let g:tern_request_timeout = 2
+let g:tern_request_timeout = 1
 let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
 let g:normal_cursor_line_column = &cursorcolumn
 let g:gitgutter_map_keys = 0
 let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
-" pass --presistent when starting server to avoid it from ever shutting down -- http://ternjs.net/doc/manual.html
-let g:tern#arguments = ["--persistent"]
+" " pass --presistent when starting server to avoid it from ever shutting down -- http://ternjs.net/doc/manual.html
+" let g:tern#arguments = ["--persistent"]
 " set a map leader for more key combos
 let mapleader = ','
 let g:mapleader = ','
