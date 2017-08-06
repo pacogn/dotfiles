@@ -11,7 +11,6 @@ hash -d c=~/projects/wix-ck-editor/
 hash -d r=~/projects/wix-richtext/
 hash -d me=~/projects/santa-members/santa-members-editor-app/
 alias whokilledsanta='open http://santa.wixpress.com'
-alias killsanta='sudo kill -9 `sudo lsof -i tcp:80 -t`'
 #teamcity uses same username+password as in your computer
 alias openteamcitysantaeditor='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=Santa_SantaEditor'\'
 alias openteamcitysantaviewer='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=HtmlClient_Reactum'\'
@@ -20,9 +19,31 @@ alias openteamcitysantamembers='open http://tc.dev.wixpress.com/project.html?pro
 alias openteamcitypullrequestsantaviewer='open https://pullrequest-tc.dev.wixpress.com/project.html?projectId=Santa&tab=projectOverview'
 alias openeditorcurrent='open '\''http://editor.wix.com/html/editor/web/renderer/edit/1fa8b8b7-9cc5-4472-801a-6e14b3a667c7?metaSiteId=80176187-9bac-4cab-9ddc-f700c9e45445&editorSessionId=427C0A90-6DBB-4B6C-B3A1-27A91A1099FF&experiments=sv_dpages%2CdisableDbEditorAutoSave%2CdisableSaveReminder%2CrightClickDebug%2Cdpages%2Cse_platform1%2Csv_platform1%2CfastStyling%2Cse_grid%2Csv_grid%2CdeveloperModeToggle&editorPlatformAppSources=%3A&viewerPlatformAppSources=%3A&WixCodeRuntimeSource=1.2264.0&EditorSource=http%3A%2F%2Flocalhost%2Feditor-base&debug=all&ReactSource=http%3A%2F%2Flocalhost&petri_ovr=specs.EnableNewRelicInSanta%3Afalse%3Bspecs.DisableNewRelicScriptsSantaEditor%3Atrue%3Bspecs.HttpsAllowedForPremiumSites%3Afalse%3Bspecs.HttpsAllowedForFreeSites%3Afalse&leavePagePopUp=false'\'
 alias openviewercurrent='open '\''http://davidsu9.wixsite.com/customrouter?EditorSource=http%3A%2F%2Flocalhost%2Feditor-base&ReactSource=http%3A%2F%2Flocalhost&WixCodeRuntimeSource=1.2244.0&editorPlatformAppSources=%3A&experiments=disableDbEditorAutoSave%2CdisableSaveReminder%2CrightClickDebug%2Cdpages%2Csv_dpages%2Cse_platform1%2Csv_platform1%2CfastStyling%2Cse_grid%2Csv_grid%2CdeveloperModeToggle&petri_ovr=specs.EnableNewRelicInSanta%3Afalse%3Bspecs.DisableNewRelicScriptsSantaEditor%3Atrue%3Bspecs.HttpsAllowedForPremiumSites%3Afalse%3Bspecs.HttpsAllowedForFreeSites%3Afalse&debug=all&viewerPlatformAppSources=%3A'\'
+function killsanta(){
+#kill with SIGINT=2 by default
+    signal=${1:-2}
+    echo killing with signal $signal
+    sudo kill -$signal $(sudo lsof -i tcp:80 -t)
+    kill -$signal $(lsof -i tcp:3000 -t)
+    kill -$signal $(lsof -i tcp:8443 -t)
+}
 function servesanta(){
-   cd ~/projects/santa
-   sudo -b npm start
+    if [[ ! $NVM_DIR =~ $HOME ]]; then
+        loadall
+    fi
+    cd ~/projects/santa
+    sudo -b npm start
+    cd ~/projects
+    nohup serve-https &> /tmp/servehttps &
+    nohup serve &> /tmp/serve &
+    {
+        sleep 1
+        printf "\033[38;5;4m"serve-https output\n
+        cat /tmp/servehttps
+        printf \n"\033[38;5;10m"serve output\n
+        cat -e /tmp/serve
+        printf "\033[0m"\n
+    } &
 }
 function exitIfDirty(){
   if [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]]
@@ -45,11 +66,23 @@ pullmembers(){
   wait
 }
 function openeditormembersarea(){
-   cd /Users/davidsu/projects
-   serve-https &
+  cd /Users/davidsu/projects
    # open 'http://editor.wix.com/html/editor/web/renderer/new?siteId=cbf36d3a-49d0-41c2-9482-1bb58d5fdda3&metaSiteId=a573279f-ae6f-46d1-8556-7c93ae9b2c84&editorSessionId=B67E3913-423B-4C73-A9A3-C38C8A991270&editorPlatformAppSources=members-application:1.4.0&viewerPlatformAppSources=members-application:1.4.0&debug=all&experiments=se_santaMembers,sv_santaMembers&ReactSource=http://localhost&EditorSource=http://localhost/editor-base&petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false'
    # open 'http://editor.wix.com/html/editor/web/renderer/edit/f8a89db9-4c69-4e40-834e-99e811fc2fce?metaSiteId=534248d8-f7f3-4187-a782-aee081e408bc&editorSessionId=16643624-A19C-46DC-82B2-EAD4DF6AE31A&EditorSource=http://localhost/editor-base&ReactSource=http://localhost&editorSdkSource=http://localhost/editor-sdk/build/editorSDK.js&PlatformContainerSource=http://localhost/platform-apps-container&debug=all&editorPlatformAppSources=members-application:1.4.0&experiments=disableDbEditorAutoSave,disableSaveReminder,se_santaMembers,sv_santaMembers&petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false&viewerPlatformAppSources=members-application:1.4.0&leavePagePopUp=false&hot=false'
-   open 'http://editor.wix.com/html/editor/web/renderer/new?siteId=cbf36d3a-49d0-41c2-9482-1bb58d5fdda3&metaSiteId=a573279f-ae6f-46d1-8556-7c93ae9b2c84&editorSessionId=A4DBE6A1-68C4-48B0-BF97-E7D7A4DC4DF0&EditorSource=http://localhost/editor-base&PlatformContainerSource=http://localhost/platform-apps-container&ReactSource=http://localhost&WixCodeRuntimeSource=1.2334.0&debug=all&editorSdkSource=http://localhost/editor-sdk/build/editorSDK.js&experiments=disableDbEditorAutoSave,disableSaveReminder,rightClickDebug,dpages,sv_dpages,se_platform1,sv_platform1,developerModeToggle,se_santaMembers,sv_santaMembers&petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false &isqa=true'
+   open 'http://editor.wix.com/html/editor/web/renderer/new?'\
+'siteId=cbf36d3a-49d0-41c2-9482-1bb58d5fdda3&'\
+'metaSiteId=a573279f-ae6f-46d1-8556-7c93ae9b2c84&'\
+'editorSessionId=A4DBE6A1-68C4-48B0-BF97-E7D7A4DC4DF0&'\
+'EditorSource=http://localhost/editor-base&'\
+'PlatformContainerSource=http://localhost/platform-apps-container&'\
+'ReactSource=http://localhost&'\
+'WixCodeRuntimeSource=1.2334.0&'\
+'sdkSource=http://static.parastorage.com/services/js-wixcode-sdk/48c2ac9b36576881646da2c7745e0c4dc5360a5b/lib/wix.js&'\
+'debug=all&'\
+'experiments=disableDbEditorAutoSave,disableSaveReminder,rightClickDebug,dpages,sv_dpages,se_platform1,sv_platform1,developerModeToggle,se_santaMembers,sv_santaMembers&'\
+'petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false &'\
+'editorSdkSource=http://localhost/editor-sdk/build/editorSDK.js&'\
+'isqa=true'
 }
 function openviewermembersarea(){
     cd /Users/davidsu/projects
@@ -57,9 +90,12 @@ function openviewermembersarea(){
     open 'http://davidsu9.wixsite.com/membersarea?EditorSource=http%3A%2F%2Flocalhost%2Feditor-base&ReactSource=http%3A%2F%2Flocalhost&WixCodeRuntimeSource=1.2335.0&debug=all&editorPlatformAppSources=members-application%3A1.4.0&editorSessionId=771DFA69-D9CE-469A-8DC0-FE47E3BAD95A&experiments=disableDbEditorAutoSave%2CdisableSaveReminder%2CrightClickDebug%2Cdpages%2Csv_dpages%2Cse_platform1%2Csv_platform1%2CfastStyling%2Cse_grid%2Csv_grid%2CdeveloperModeToggle%2Cse_santaMembers%2Csv_santaMembers&leavePagePopUp=false&metaSiteId=32f2979d-5c96-4b85-973c-df62b11afc51&petri_ovr=specs.EnableNewRelicInSanta%3Afalse%3Bspecs.DisableNewRelicScriptsSantaEditor%3Atrue%3Bspecs.HttpsAllowedForPremiumSites%3Afalse%3Bspecs.HttpsAllowedForFreeSites%3Afalse&viewerPlatformAppSources=members-application%3A1.4.0&leavePagePopUp=false'
 }
 function openeditormembersareablank(){
-   cd /Users/davidsu/projects
-   serve-https &
-   open 'http://editor.wix.com/html/editor/web/renderer/edit/a9ab470f-d936-4fde-a076-328737e46b43?EditorSource=http%3A%2F%2Flocalhost%2Feditor-base&ReactSource=http%3A%2F%2Flocalhost&WixCodeRuntimeSource=1.2335.0&debug=all&editorPlatformAppSources=members-application%3A1.4.0&editorSessionId=771DFA69-D9CE-469A-8DC0-FE47E3BAD95A&experiments=disableDbEditorAutoSave,disableSaveReminder,se_santaMembers,sv_santaMembers&leavePagePopUp=false&metaSiteId=32f2979d-5c96-4b85-973c-df62b11afc51&petri_ovr=specs.EnableNewRelicInSanta%3Afalse%3Bspecs.DisableNewRelicScriptsSantaEditor%3Atrue%3Bspecs.HttpsAllowedForPremiumSites%3Afalse%3Bspecs.HttpsAllowedForFreeSites%3Afalse&viewerPlatformAppSources=members-application%3A1.4.0&leavePagePopUp=false&hot=false'
+    {
+        cd /Users/davidsu/projects
+        serve-https 
+    } &
+
+   open 'http://editor.wix.com/html/editor/web/renderer/new?siteId=cbf36d3a-49d0-41c2-9482-1bb58d5fdda3&metaSiteId=a573279f-ae6f-46d1-8556-7c93ae9b2c84&editorSessionId=A4DBE6A1-68C4-48B0-BF97-E7D7A4DC4DF0&EditorSource=http://localhost/editor-base&PlatformContainerSource=http://localhost/platform-apps-container&ReactSource=http://localhost&WixCodeRuntimeSource=1.2334.0&debug=all&editorSdkSource=http://localhost/editor-sdk/build/editorSDK.js&experiments=disableDbEditorAutoSave,disableSaveReminder,rightClickDebug,dpages,sv_dpages,se_platform1,sv_platform1,developerModeToggle,se_santaMembers,sv_santaMembers&petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false &isqa=true'
 }
 function startdynamic(){
     (#parentheses causes code to be run in subshell
