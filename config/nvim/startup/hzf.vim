@@ -87,6 +87,7 @@ command! ChangeColorScheme :call fzf#run({
 
 command! -bang -nargs=* Ag
     \ call fzf#vim#ag(<q-args>,
+    \                 '-p '''.utils#get_git_root_directory().'/.gitignore''',
     \                 hzf#defaultPreview(),
     \                 1)
 
