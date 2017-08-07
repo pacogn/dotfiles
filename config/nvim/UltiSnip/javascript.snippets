@@ -5,55 +5,6 @@ endsnippet
 snippet strict
 'use strict'
 endsnippet
-
-snippet jsonstringify
-JSON.stringify($1, null, 4)
-endsnippet
-
-snippet log
-console.log(${1});
-endsnippet
-
-snippet lred
-console.log('%c${1}', 'font-weight:bold;color:red;');
-endsnippet
-
-snippet lgreen
-console.log('%c${1}', 'font-weight:bold;color:green;');
-endsnippet
-
-snippet lblue
-console.log('%c${1}', 'font-weight:bold;color:blue;');
-endsnippet
-
-snippet lpurple
-console.log('%c${1}', 'font-weight:bold;color:purple;');
-endsnippet
-
-snippet lorange
-console.log('%c${1}', 'font-weight:bold;color:orange;');
-endsnippet
-
-snippet trace
-console.trace(${1});
-endsnippet
-
-snippet ctab
-console.table(${1});
-endsnippet
-
-snippet debug
-console.log('[DEBUG] ${1}');
-endsnippet
-
-snippet grp
-console.group('${1}');
-endsnippet
-
-snippet grpe
-console.groupEnd('${1}');
-endsnippet
-
 snippet :
 ${1:key}: ${2:value}
 endsnippet
@@ -68,55 +19,181 @@ function () {
 }
 endsnippet
 
+
 snippet fun
-function ${1:name}(${2:args}) {$3}
+function ${1:function_name}(${2}) {
+	${0:${VISUAL}}
+}
 endsnippet
 
 snippet iife
 (function () {
 ${1}
-})();
+})()
 endsnippet
 
 snippet interval
 setInterval(function () {
 ${2}
-}, ${1});
+}, ${1})
 endsnippet
 
 snippet timeout
 setTimeout(function () {
 ${2}
-}, ${1});
+}, ${1})
 # log snippets
 endsnippet
 
 snippet des
 describe('${1}', function () {
-});
+})
 endsnippet
 
 snippet it
 it('${1}', function () {
-});
+})
 endsnippet
 
 snippet def
 define([
 ${1}
 ], function (${2}) {
-});
+})
 endsnippet
 
 snippet dec
 declare(${1}, {
-});
+})
 endsnippet
 
 snippet req
 require([
 ${1}
 ], function (${2}) {
-});
+})
 endsnippet
 
+# Flow control
+# if
+snippet if "if (condition) { ... }"
+if (${1:true}) {
+	${0:${VISUAL}}
+}
+endsnippet
+# if ... else
+snippet ife "if (condition) { ... } else { ... }"
+if (${1:true}) {
+	${0:${VISUAL}}
+} else {
+	${2}
+}
+endsnippet
+
+# JSON
+snippet jsons
+JSON.stringify(${0:${VISUAL:#object}}, null, 4)
+endsnippet
+
+# Debugging
+snippet de
+debugger;
+endsnippet
+
+#CONSOLE NODE+BROWSER
+snippet cl "console.log"
+console.log(${VISUAL}$0)
+endsnippet
+
+snippet ctime "console.time ... console.timeEnd"
+console.time("${1:label}");
+${0:${VISUAL}}
+console.timeEnd("$1");
+endsnippet
+
+snippet ca "console.assert"
+console.assert(${1:expression}, ${0:obj});
+endsnippet
+
+snippet ce "console.error"
+console.error(${VISUAL}$0);
+endsnippet
+
+snippet cw "console.warn"
+console.warn(${VISUAL}$0);
+endsnippet
+
+snippet ct "console.trace"
+console.trace(${0:label});
+endsnippet
+
+#CONSOLE BROWSER ONLY
+snippet ci "console.info"
+console.info(${VISUAL}$0);
+endsnippet
+
+snippet ccount "console.count -- https://developer.mozilla.org/en-US/docs/Web/API/Console/count"
+console.count(${0:${VISUAL:#label}})
+endsnippet
+
+snippet cd "console.debug"
+console.debug(${VISUAL}$0);
+endsnippet
+
+snippet ctimestamp "console.timeStamp"
+console.timeStamp("${1:label}");
+endsnippet
+
+snippet cclear "console.clear"
+console.clear();
+endsnippet
+
+snippet cdir "console.dir"
+console.dir(${0:obj});
+endsnippet
+
+snippet cdirx "console.dirxml"
+console.dirxml(${1:object});
+endsnippet
+
+snippet cgroup "console.group"
+console.group("${1:label}");
+${0:${VISUAL}}
+console.groupEnd();
+endsnippet
+
+snippet cgroupc "console.groupCollapsed"
+console.groupCollapsed("${1:label}");
+${0:${VISUAL}}
+console.groupEnd();
+endsnippet
+
+snippet cprof "console.profile"
+console.profile("${1:label}");
+${0:${VISUAL}}
+console.profileEnd();
+endsnippet
+
+snippet ctable "console.table"
+console.table(${1:"${2:value}"});
+endsnippet 
+
+snippet clred
+console.log('%c${1}', 'font-weight:bold;color:red;')
+endsnippet
+
+snippet clgreen
+console.log('%c${1}', 'font-weight:bold;color:green;')
+endsnippet
+
+snippet clblue
+console.log('%c${1}', 'font-weight:bold;color:blue;')
+endsnippet
+
+snippet clpurple
+console.log('%c${1}', 'font-weight:bold;color:purple;')
+endsnippet
+
+snippet clorange
+console.log('%c${1}', 'font-weight:bold;color:orange;')
+endsnippet
