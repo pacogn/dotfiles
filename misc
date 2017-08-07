@@ -1,5 +1,12 @@
 #!/bin/zsh
 hash -d d=~/.dotfiles/
+j() {
+    if [ $(hash -d|cut -d= -f1|grep -c "^$1\$") = 0 ]; then
+	fasd_cd -d "$@"
+    else
+	cd ~$1
+    fi
+}
 function pullMyProjects(){
     skipnvm=1
     pullIfMineAndNotDirty() {

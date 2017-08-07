@@ -88,7 +88,7 @@ FZF-EOF"
 alias chromebookmarks='$DOTFILES/fzf/chromebookmarks.rb'
 
 function jfzf(){
-  dir=`j -s | egrep '^\d+.\d+:\s+/' | tail -r | fzf`
+  dir=`fasd_cd -ds | egrep '^\S+\s+/' | tail -r | fzf`
   if [[ -n dir ]]; then
     cd $(echo $dir | sed -E 's#[^/]*(/.*$)#''\1''#')
   fi

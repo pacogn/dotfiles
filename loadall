@@ -11,7 +11,6 @@ function loadzgen(){
         zgen oh-my-zsh plugins/git
         zgen oh-my-zsh plugins/yarn
         # zgen oh-my-zsh plugins/vi-mode
-        # zgen load wting/autojump
     fi
     #unset SET_CUSTOM_PROMPT value if you want to test other prompt than
     #the custom in ~/.dotFiles/prompt
@@ -90,7 +89,6 @@ function loadall(){
     loadnvmAutocomplete
     # rvm complains about not being first in path
     PATH=$(echo $PATH | tr ':' '\n' | uniq | tr '\n' ':')
-    eval "$(fasd --init auto)"
     reload
     # tabtab source for yarn package
     # uninstall by removing these lines or running `tabtab uninstall yarn`
