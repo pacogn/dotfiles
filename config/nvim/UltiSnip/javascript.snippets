@@ -6,6 +6,10 @@ snippet strict
 'use strict'
 endsnippet
 
+snippet jsonstringify
+JSON.stringify($1, null, 4)
+endsnippet
+
 snippet log
 console.log(${1});
 endsnippet
@@ -65,8 +69,7 @@ function () {
 endsnippet
 
 snippet fun
-function ${1:name}(${2:args}) {
-}
+function ${1:name}(${2:args}) {$3}
 endsnippet
 
 snippet iife

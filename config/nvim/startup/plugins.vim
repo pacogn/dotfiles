@@ -1,4 +1,5 @@
 call plug#begin('~/.config/nvim/plugged')
+Plug 'sudavid4/vim-visual-star-search'                      " extends */# to do what you would expect in visual mode
 Plug 'SirVer/ultisnips'
 Plug 'qpkorr/vim-bufkill'                                   " wipe buffer without closing it's window
 Plug 'tpope/vim-scriptease'                                 " utilities for vim script authoring. Installed to use ':PP'=pretty print dictionary
