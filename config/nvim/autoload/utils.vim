@@ -98,6 +98,8 @@ function! s:shell_cmd_completed(...) dict
     setlocal modifiable
     call append(line('$'), self.shell)
     call append(line('$'), '########################FINISHED########################')
+    call append(line('$'), self.pid)
+    call jobstop(self.pid)
     normal! G
     setlocal nomodifiable
     if exists(':DimInactiveBufferOn')
@@ -146,7 +148,8 @@ function! utils#run_shell_command(cmdline, bang)
     \ 'on_exit': function('s:shell_cmd_completed'),
     \ 'shell': expanded_cmdline
     \ }
-    call jobstart(expanded_cmdline, s:callbacks)
+    let pid = jobstart(expanded_cmdline, s:callbacks)
+    let s:callbacks.pid = pid
 endfunction
 
 "-----------------------------------------------------------------------------}}}
@@ -250,7 +253,7 @@ function! utils#toggle_window_to_nerd_tree()
 endfunction
 
 function! utils#get_project_root(dirname)
-    if a:dirname =~ $DOTFILES.'/config/nvim'
+    if a:dirname =~ $DOTFILES.'/config/nvim' && a:dirname !~ $DOTFILES.'/config/nvim/plugged/'
         return $DOTFILES.'/config/nvim'
     endif
     let foundRoot = isdirectory(a:dirname.'/.git') || filereadable(a:dirname.'/package.json')
