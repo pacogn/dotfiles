@@ -6,6 +6,7 @@ s.vim
 .idea
 Session.vim
 .tern-project
+.tern-port
 tern_proj_generator.js
 tern_proj_generator
 npm-debug.log
