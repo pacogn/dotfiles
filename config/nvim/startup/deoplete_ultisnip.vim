@@ -40,3 +40,4 @@ let g:UltiSnipsJumpBackwardTrigger = '<S-TAB>'
 let g:UltiSnipsSnippetsDir = $DOTFILES.'/config/nvim/UltiSnip'
 let g:UltiSnipsSnippetDirectories = [$DOTFILES.'/config/nvim/UltiSnip']
 let g:UltiSnipsEnableSnipMate = 1
+au VimEnter * call deoplete#custom#source('ultisnips', 'rank', 1000)
