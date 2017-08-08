@@ -34,8 +34,9 @@ function servesanta(){
     cd ~/projects/santa
     sudo -b npm start
     cd ~/projects
-    nohup serve-https &> /tmp/servehttps &
     nohup serve &> /tmp/serve &
+    nvm use 8
+    nohup serve-https &> /tmp/servehttps &
     {
         sleep 1
         printf "\033[38;5;4m"serve-https output\n
