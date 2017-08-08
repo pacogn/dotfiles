@@ -34,15 +34,14 @@ endsnippet
 
 snippet interval
 setInterval(function () {
-${2}
+	${0:${VISUAL}}
 }, ${1})
 endsnippet
 
 snippet timeout
 setTimeout(function () {
-${2}
+	${0:${VISUAL}}
 }, ${1})
-# log snippets
 endsnippet
 
 snippet des
@@ -102,6 +101,10 @@ endsnippet
 
 #CONSOLE NODE+BROWSER
 snippet cl "console.log"
+console.log(${VISUAL}$0)
+endsnippet
+
+snippet clog "console.log"
 console.log(${VISUAL}$0)
 endsnippet
 
@@ -178,22 +181,22 @@ snippet ctable "console.table"
 console.table(${1:"${2:value}"});
 endsnippet 
 
-snippet clred
+snippet cred
 console.log('%c${1}', 'font-weight:bold;color:red;')
 endsnippet
 
-snippet clgreen
+snippet cgreen
 console.log('%c${1}', 'font-weight:bold;color:green;')
 endsnippet
 
-snippet clblue
+snippet cblue
 console.log('%c${1}', 'font-weight:bold;color:blue;')
 endsnippet
 
-snippet clpurple
+snippet cpurple
 console.log('%c${1}', 'font-weight:bold;color:purple;')
 endsnippet
 
-snippet clorange
+snippet corange
 console.log('%c${1}', 'font-weight:bold;color:orange;')
 endsnippet
