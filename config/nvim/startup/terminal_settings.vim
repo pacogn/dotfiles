@@ -7,6 +7,8 @@ endfunction
 if has('nvim')
     " Mappings {{{1
     tnoremap \\ <C-\><C-n>
+    " stop fg job and rerun last command
+    tnoremap <C-x> <C-c><C-l><C-\><C-n>:call ClearTermScrollback()<cr>i<C-p><cr>
 	tnoremap ,, <C-\><C-n>
     tnoremap ,k <C-\><C-n>:wincmd k<cr>
     tnoremap ,j <C-\><C-n>:wincmd j<cr>
