@@ -19,12 +19,19 @@ let g:neomake_rt_maker = {
 	    \'args': [ 'rt']
 	    \}
 
+augroup my_neomake_signs
+    au!
+    autocmd ColorScheme *
+        \ hi NeomakeErrorSign guifg=#ff0000
+        " \ hi NeomakeWarningSign ctermfg=yellow
+augroup END
 "
 " this is eslint fallback version.  'benjie/neomake-local-eslint.vim' will find local eslint for us
 " let g:neomake_javascript_eslint_exe='/Users/davidsu/.nvm/versions/node/v4.2.1/bin/eslint'
 " let g:neomake_error_sign = '❌'
-let g:neomake_error_sign = {
-	\ 'text': '❌',
-	\ 'texthl': 'ErrorMsg',
-	\ }
+ let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeErrorSign'}
+" let g:neomake_error_sign = {
+" 	\ 'text': 'X',
+" 	\ 'texthl': 'ErrorMsg',
+" 	\ }
 let g:neomake_warning_sign = {'text': '💩', 'texthl': 'NeomakeWarningSign'}
