@@ -39,7 +39,7 @@ endfunction
 
 function! FindText(text, ...)
     let additionalParams = ( a:0 > 0 ) ? a:1 : ''
-    let agcmd = ''''.a:text.''' '.additionalParams
+    let agcmd = '-p '''.utils#get_git_root_directory().'/.gitignore'' '.''''.a:text.''' '.additionalParams
     call fzf#vim#ag_raw(agcmd, hzf#defaultPreview())
 endfunction
 
