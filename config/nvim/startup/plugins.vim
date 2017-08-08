@@ -27,9 +27,11 @@ Plug 'sudavid4/tern_for_vim', {
             \'for': 'javascript',
             \'do': 'npm i' }                                " intellijent navigation and refactor for javascript 
 if(has('nvim'))
-    Plug 'sudavid4/deoplete.nvim'
-    Plug 'sudavid4/deoplete-ternjs', 
-                \{ 'for': 'javascript'}
+    Plug 'roxma/nvim-completion-manager'                    "faster than deoplete 
+    Plug 'roxma/nvim-cm-tern',  {'do': 'npm install'}       "tern completion for ncm 
+    " Plug 'sudavid4/deoplete.nvim'
+    " Plug 'sudavid4/deoplete-ternjs', 
+    "             \{ 'for': 'javascript'}
 else
     Plug 'Shougo/neocomplete.vim', 
                 \{ 'for': ['javascript', 'css', 'scss', 'sh', 'vim', 'html'] }
