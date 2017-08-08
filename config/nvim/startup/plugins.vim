@@ -27,7 +27,7 @@ Plug 'sudavid4/tern_for_vim', {
             \'for': 'javascript',
             \'do': 'npm i' }                                " intellijent navigation and refactor for javascript 
 if(has('nvim'))
-    Plug 'sudavid4/deoplete.nvim'
+    Plug 'Shougo/deoplete.nvim'
     Plug 'sudavid4/deoplete-ternjs', 
                 \{ 'for': 'javascript'}
 else
