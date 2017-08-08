@@ -166,7 +166,7 @@ map <silent> gl :call utils#win_move('l')<cr>
 nmap \w :wincmd q<cr>
 nmap \s :%s/\v
 vmap \s :s/\v
-nmap \d :redraw!<cr>
+nmap \d :GitGutterToggle<cr>:redraw!<cr>
 " Toggle NERDTree
 nmap <silent> <C-1> :NERDTreeToggle<cr>
 " expand to the path of the file in the current buffer
@@ -287,7 +287,8 @@ nmap <space>lj :lnext<cr>
 nmap <space>lk :lprev<cr>
 
 " run test (well, if available)
-nmap <space>rt :Shell! [[ -f .nvmrc ]] && nvm use $(cat .nvmrc); export MOCHA_OPTIONS='--colors'; npm run test<cr>
+nmap <space>rt :Shell! export MOCHA_OPTIONS='--colors'; npm run test<cr>
+nmap <space>rb :Shell! [[ -f .nvmrc ]] && nvm use $(cat .nvmrc); export MOCHA_OPTIONS='--colors'; npm run test:debug<cr>
 "<c-l> complete to longest possible
 "<c-d> list all possibilities
 cnoremap <c-space> <C-l><C-d>
