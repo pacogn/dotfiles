@@ -66,7 +66,7 @@ function! utils#buf_delete_current()
     endif
     if exists('l:bufnext')
         if bufnextnr
-            :BD
+            silent! BD
         endif
         execute 'buffer '.l:bufnext
         let @#=bufname(alternate)
