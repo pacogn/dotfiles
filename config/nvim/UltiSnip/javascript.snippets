@@ -22,7 +22,7 @@ endsnippet
 
 snippet fun
 function ${1:function_name}(${2}) {
-	${0:${VISUAL}}
+	${0:${VISUAL:'--CODE--'}}
 }
 endsnippet
 
@@ -34,23 +34,37 @@ endsnippet
 
 snippet interval
 setInterval(function () {
-	${0:${VISUAL}}
+	${0:${VISUAL:'CODE'}}
 }, ${1})
 endsnippet
 
 snippet timeout
 setTimeout(function () {
-	${0:${VISUAL}}
+	${0:${VISUAL:'--CODE--'}}
 }, ${1})
 endsnippet
 
-snippet des
-describe('${1}', function () {
+snippet des "describe('',()=>{}"
+describe('${1}', () => {
+    ${0:${VISUAL:'--CODE--'}}
 })
 endsnippet
 
-snippet it
+snippet it "it('',()=>{}"
 it('${1}', function () {
+    ${0:${VISUAL:'--CODE--'}}
+})
+endsnippet
+
+snippet desf "describe('',function"
+describe('${1}', function () {
+    ${0:${VISUAL:'--CODE--'}}
+})
+endsnippet
+
+snippet itf "it('',function"
+it('${1}', function () {
+    ${0:${VISUAL:'--CODE--'}}
 })
 endsnippet
 
@@ -77,20 +91,40 @@ endsnippet
 # if
 snippet if "if (condition) { ... }"
 if (${1:true}) {
-	${0:${VISUAL}}
+	${0:${VISUAL:'--CODE--'}}
 }
 endsnippet
 # if ... else
 snippet ife "if (condition) { ... } else { ... }"
 if (${1:true}) {
-	${0:${VISUAL}}
+	${0:${VISUAL:'--CODE--'}}
 } else {
 	${2}
 }
 endsnippet
 
+# FUNCTION
+snippet afe "() => $ret"
+(${1}) => ${0:${VISUAL:'--retval--'}}
+endsnippet
+
+snippet () "() => $ret"
+(${1}) => ${0:${VISUAL:'--retval--'}}
+endsnippet
+
+snippet afb "() => {}"
+(${1}) => {
+	${0:${VISUAL:'--CODE--'}
+}
+endsnippet
+
+snippet (){ "() => {}"
+(${1}) => {
+    ${0:${VISUAL:'--CODE--'}}
+}
+endsnippet
 # JSON
-snippet jsons "" w
+snippet jsons "JSON.stringify" w
 JSON.stringify(${0:${VISUAL:#object}}, null, 4)
 endsnippet
 
@@ -110,7 +144,7 @@ endsnippet
 
 snippet ctime "console.time ... console.timeEnd"
 console.time("${1:label}");
-${0:${VISUAL}}
+${0:${VISUAL:'--CODE--'}}
 console.timeEnd("$1");
 endsnippet
 
@@ -161,19 +195,19 @@ endsnippet
 
 snippet cgroup "console.group"
 console.group("${1:label}");
-${0:${VISUAL}}
+${0:${VISUAL:'--CODE--'}}
 console.groupEnd();
 endsnippet
 
 snippet cgroupc "console.groupCollapsed"
 console.groupCollapsed("${1:label}");
-${0:${VISUAL}}
+${0:${VISUAL:'--CODE--'}}
 console.groupEnd();
 endsnippet
 
 snippet cprof "console.profile"
 console.profile("${1:label}");
-${0:${VISUAL}}
+${0:${VISUAL:'--CODE--'}}
 console.profileEnd();
 endsnippet
 
