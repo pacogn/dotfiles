@@ -85,8 +85,6 @@ inoremap jk <esc>
 inoremap jj <esc>
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
-inoremap <C-j> <C-o>j
-inoremap <C-k> <C-o>k
 nnoremap ,h <C-w>h
 nnoremap ,l <C-w>l
 nnoremap ,j <C-w>j
