@@ -27,9 +27,11 @@ Plug 'sudavid4/tern_for_vim', {
             \'for': 'javascript',
             \'do': 'npm i' }                                " intellijent navigation and refactor for javascript 
 if(has('nvim'))
+    " Plug 'roxma/nvim-completion-manager'                  "faster than deoplete
+    " Plug 'sudavid4/nvim-cm-tern',  {'do': 'npm install'}       "tern completion for ncm
     Plug 'Shougo/deoplete.nvim'
-    Plug 'sudavid4/deoplete-ternjs', 
-                \{ 'for': 'javascript'}
+    Plug 'Shougo/neco-vim'                                  " deoplete source for vimscript
+    Plug 'sudavid4/deoplete-ternjs', { 'for': 'javascript'} " deoplete source for javascript
 else
     Plug 'Shougo/neocomplete.vim', 
                 \{ 'for': ['javascript', 'css', 'scss', 'sh', 'vim', 'html'] }
@@ -87,7 +89,7 @@ Plug 'mattn/emmet-vim', { 'for': 'html' }                   " emmet support for 
 Plug 'alvan/vim-closetag'
 Plug 'othree/html5.vim', { 'for': 'html' }                  " html5 support
 Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }     " JavaScript indent support
-Plug 'moll/vim-node', { 'for': 'javascript' }               " node support
+" Plug 'moll/vim-node', { 'for': 'javascript' }               " node support
 " Plug 'jelera/vim-javascript-syntax', { 'for': 'javascript' } " JavaScript syntax plugin
 " Plug 'mxw/vim-jsx', { 'for': ['javascript', 'jsx'] } " JSX support
 Plug 'othree/yajs.vim', { 'for': ['javascript', 'jsx'] }             " JavaScript syntax plugin
