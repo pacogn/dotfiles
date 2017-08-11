@@ -142,6 +142,10 @@ snippet clog "console.log" w
 console.log(${VISUAL}$0)
 endsnippet
 
+snippet cjsons "console.log(JSON.stringify)" w
+console.log('${1:label}', JSON.stringify(${VISUAL}$0, null, 4))
+endsnippet
+
 snippet ctime "console.time ... console.timeEnd"
 console.time("${1:label}");
 ${0:${VISUAL:'--CODE--'}}
