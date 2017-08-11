@@ -29,6 +29,7 @@
 13. download and install [spactacle](https://www.spectacleapp.com/)
 14. do yourself a favor: [glances](https://github.com/nicolargo/glances) `pip3 install glances` OR `brew install htop` and stop using activity monitor
 15. `brew install coreutils` -- you need it for `realpath`
+16. update submodules: `git submodule update --init --recursive`
 
 
 - to push to github (https with two factor authentication) you will need to use a token instead of your password. [Instructions here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
