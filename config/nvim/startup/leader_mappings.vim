@@ -244,16 +244,6 @@ nmap \w :wincmd q<cr>
 nmap \q :wincmd q<cr>
 nnoremap <silent> <space>zj :call NextClosedFold('j')<cr>
 nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
-function! FoldClose()
-    if exists('b:foldinitialized')
-        normal! zc
-    else
-        normal! zRzc
-        let b:foldinitialized = 1
-    endif
-endfunction
-let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','C']
-nnoremap zc :call FoldClose()<cr>
 function! GFilesIfNotHelp()
     if &ft == 'help'
         execute 'normal! \<c-t>'
@@ -266,6 +256,7 @@ imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 
 nmap <silent> \b :Buffers<cr>
+nmap <silent> 1b :Buffers<cr>
 nmap <silent> \f :call hzf#g_files()<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
