@@ -108,7 +108,7 @@ fzf-chth(){
 }
 zle     -N    fzf-chth
 bindkey '^Y' fzf-chth
-
+alias fchth='fzf-chth'
 # fzf-locate-widget() {
 #   local selected
 #   if selected=$(find $DOTFILES/base16-shell/scripts | fzf ); then
