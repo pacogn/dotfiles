@@ -1,7 +1,21 @@
 "--------------------------------------------------------------------------------
 "MAPPINGS{{{
 "--------------------------------------------------------------------------------
-
+function! s:setmapping()
+    " Moving back and forth between lines of same or lower indentation.
+    " nnoremap <buffer><silent> [l :call indent_utils#next_indent(0, 0, 0, 1)<CR>
+    " nnoremap <buffer><silent> ]l :call indent_utils#next_indent(0, 1, 0, 1)<CR>
+    nnoremap <buffer><silent> [[ :call indent_utils#prev_indent()<CR>
+    nnoremap <buffer><silent> ]] :call indent_utils#next_indent()<CR>
+    " vnoremap <buffer><silent> [l <Esc>:call indent_utils#next_indent(0, 0, 0, 1)<CR>m'gv''
+    " vnoremap <buffer><silent> ]l <Esc>:call indent_utils#next_indent(0, 1, 0, 1)<CR>m'gv''
+    vnoremap <buffer><silent> [[ <Esc>:call indent_utils#prev_indent()<CR>m'gv''
+    vnoremap <buffer><silent> ]] <Esc>:call indent_utils#next_indent()<CR>m'gv''
+    " onoremap <buffer><silent> [l :call indent_utils#next_indent(0, 0, 0, 1)<CR>
+    " onoremap <buffer><silent> ]l :call indent_utils#next_indent(0, 1, 0, 1)<CR>
+    onoremap <buffer><silent> [[ :call indent_utils#prev_indent()<CR>
+    onoremap <buffer><silent> ]] :call indent_utils#next_indent()<CR>
+endfunction
 
 "--------------------------------------------------------------------------------
 "FUNCTIONS{{{
@@ -48,13 +62,13 @@ function! GoToNextFunction(originalLineIndentation, recurseCount, searchBackward
     endif
 endfunction
 
-function! JSToggleFoldMethod()
-    if &foldmethod=='syntax' 
-        set foldmethod=manual 
-    else 
-        set foldmethod=syntax 
-    endif
-endfunction
+" function! JSToggleFoldMethod()
+"     if &foldmethod=='syntax' 
+"         set foldmethod=manual 
+"     else 
+"         set foldmethod=syntax 
+"     endif
+" endfunction
 
 function! TernRestartServer()
     py3 tern_killServers()
@@ -69,9 +83,10 @@ augroup javascript
     autocmd BufNewFile,BufRead *.es6 set filetype=javascript
     let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html']
     autocmd BufWritePost * call RunNeomakeEslint()
+    autocmd FileType javascript call <SID>setmapping()
     autocmd FileType javascript nnoremap <buffer>{ :call GoToNextFunction(-1, 0, 1)<cr>
     autocmd FileType javascript nnoremap <buffer>} :call GoToNextFunction(-1, 0, 0)<cr>
-    autocmd FileType javascript nnoremap <buffer>cof :call JSToggleFoldMethod()<cr>
+    " autocmd FileType javascript nnoremap <buffer>cof :call JSToggleFoldMethod()<cr>
     autocmd Filetype javascript vnoremap <buffer>1= :<C-u>setf jsx<cr>gv=:<C-u>setf javascript<cr>
 augroup END
 "-----------------------------------------------------------------------------}}}
