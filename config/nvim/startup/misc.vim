@@ -39,6 +39,14 @@ function! ListDotFiles(dir, command)
 		\'sink': 'e'})
 endfunction
 
+function! IntoTemp(cmd)
+   redir => cout
+   silent execute a:cmd
+   redir END
+   e /tmp/vimredirected
+   put=cout
+
+endfunction
 function! Vimrc(...)
     let query = get(a:000, 0, '^')
     if !len(query)

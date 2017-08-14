@@ -256,6 +256,7 @@ imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 
 nmap <silent> \b :Buffers<cr>
+nmap <silent> 1b :Buffers<cr>
 nmap <silent> \f :call hzf#g_files()<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)

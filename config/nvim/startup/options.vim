@@ -26,7 +26,7 @@ set sessionoptions-=folds
 set foldmethod=syntax     " fold based on indent
 set foldnestmax=10        " deepest fold is 10 levels
 set nofoldenable          " don't fold by default
-set foldlevelstart=99
+set foldlevelstart=99     " start with all folds open
 set wildmenu              " enhanced command line completion
 set hidden                " current buffer can be put into background
 set showcmd               " show incomplete commands

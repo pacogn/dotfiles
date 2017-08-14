@@ -7,7 +7,8 @@ function loadzgen(){
         zgen oh-my-zsh
         zgen load zsh-users/zsh-syntax-highlighting
         zgen load zsh-users/zsh-history-substring-search
-        zgen load 'https://github.com/jimhester/per-directory-history.git'
+        # unfortunatelly thi plugin avoids realtime history share between zsh instances
+        # zgen load 'https://github.com/jimhester/per-directory-history.git'
         zgen oh-my-zsh plugins/git
         zgen oh-my-zsh plugins/yarn
         # zgen oh-my-zsh plugins/vi-mode
@@ -19,7 +20,7 @@ function loadzgen(){
     [[ -n $reloadforzgen ]] && reload
     #we need to re-source fzf here otherwise oh-my-zsh overwrites its bindings!!!
     [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-    _per-directory-history-set-global-history
+    # _per-directory-history-set-global-history
     print -n "using global history \033[38;5;10m(^g to toggle)\033[0m\n"
 }
 reloadforzgen=1
