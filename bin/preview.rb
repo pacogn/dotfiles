@@ -4,7 +4,7 @@
 
 require 'shellwords'
 
-COMMAND = %[(rougify {} || highlight -O ansi -l {} || coderay {} || cat {}) 2> /dev/null]
+COMMAND = %[(rougify highlight --theme base16.monokai -i {} || highlight -O ansi -l {} || coderay {} || cat {}) 2> /dev/null]
 ANSI    = /\x1b\[[0-9;]*m/
 REVERSE = "\x1b[7m"
 DARKBG = "\x1b[48;5;239m"
