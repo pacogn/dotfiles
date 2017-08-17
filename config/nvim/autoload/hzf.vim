@@ -139,6 +139,8 @@ function! hzf#yankRing(command)
     if a:command != 'p' && a:command != 'P'
         echoerr "command must be 'p' or 'P'"
     endif
+    silent! YRShow
+    silent! YRShow
     let s:yank_ring_command = a:command
     call fzf#run({
                 \'dir': g:yankring_history_dir,
