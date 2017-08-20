@@ -44,6 +44,7 @@ nmap <space>ql :lclose<cr>
 nmap <space>qc :cclose<cr>
 nmap <space>qp :pclose<cr>
 nmap <space>qh :helpclose<cr>
+nmap <space>qq :helpclose<cr>:pclose<cr>:cclose<cr>:lclose<cr>
 
 nnoremap - :silent call utils#toggle_window_to_nerd_tree()<cr>
 nnoremap \\ "_
@@ -96,6 +97,7 @@ nmap g* <Plug>(incsearch-nohl-g*)
 nmap g# <Plug>(incsearch-nohl-g#)
 
 
+nnoremap <space>at :AirlineToggleShowingAllSections<cr>
 nnoremap \c :Commands<cr>
 nnoremap 1: :History:<cr>
 nnoremap 1; :History:<cr>

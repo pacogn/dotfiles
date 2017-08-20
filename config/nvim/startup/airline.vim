@@ -10,7 +10,37 @@ let g:airline#extensions#whitespace#checks = []
 "I dont care about the file encoding!
 let g:airline_section_y='%{ShrinkedFilePath()}'
 let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''[ session ]'', '''')}', 'windowswap', '%3p%% ', 'linenr', ':%3v '])
+let g:airline_section_warning = ''
+let g:airline_section_error = ''
 
+let g:airline_showing_all_sections = 1
+function! AirlineSplitted()
+  let g:airline_restore_b = g:airline_section_b
+  let g:airline_restore_x = g:airline_section_x
+  let g:airline_restore_z = g:airline_section_z
+  let g:airline_section_b = ''
+  let g:airline_section_x = ''
+  let g:airline_section_z = ''
+  call airline#update_statusline()
+  let g:airline_showing_all_sections = 0
+endfunction
+function! AirlineRestore()
+  let g:airline_section_b = g:airline_restore_b 
+  let g:airline_section_x = g:airline_restore_x
+  let g:airline_section_z = g:airline_restore_z
+  call airline#update_statusline()
+  let g:airline_showing_all_sections = 1
+endfunction
+function! AirlineToggleShowingAllSections()
+  if g:airline_showing_all_sections
+    call AirlineSplitted()
+  else
+    call AirlineRestore()
+  endif
+endfunction
+command! AirlineSplitted call AirlineSplitted()
+command! AirlineRestore call AirlineRestore()
+command! AirlineToggleShowingAllSections call AirlineToggleShowingAllSections()
 function! ShrinkedFilePath()
   let cwd = getcwd()
   let withoutHome = substitute(cwd, $HOME.'/', '', '')
