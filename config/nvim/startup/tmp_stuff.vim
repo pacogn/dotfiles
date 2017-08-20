@@ -54,4 +54,4 @@ function! FormatIndependentJSObject()
 endfunction
 
 xnoremap <space>jf :<c-u>silent call FormatIndependentJSObject()<cr>
-au! FileType json nnoremap <space>jf :execute '%! python -m json.tool'<cr>
+au! FileType json nnoremap <space>jf :execute '%! python -m json.tool'<cr>:silent w<cr>
