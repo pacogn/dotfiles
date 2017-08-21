@@ -8,8 +8,8 @@ if has('nvim')
     " Mappings {{{1
     tnoremap \\ <C-\><C-n>
     " stop fg job and rerun last command
-    tnoremap <C-x> <C-c><C-l><C-\><C-n>:call ClearTermScrollback()<cr>i<C-p><cr>
-	tnoremap ,, <C-\><C-n>
+    tmap <C-x> <C-c><C-l><C-\><C-n>:call ClearTermScrollback()<cr>i<C-p><cr>
+    tnoremap ,, <C-\><C-n>
     tnoremap ,k <C-\><C-n>:wincmd k<cr>
     tnoremap ,j <C-\><C-n>:wincmd j<cr>
     tnoremap <C-h> <C-\><C-n>:wincmd h<cr>
@@ -29,7 +29,7 @@ if has('nvim')
     tnoremap ,ds '/documentServices/
     augroup terminal_group
 	au!
-	au TermOpen *zsh setlocal nobuflisted 
+	au TermOpen *zsh setlocal nobuflisted | nmap <buffer><C-x> :startinsert<cr><C-x>
     augroup END
     " tmap <silent><Esc> <esc><C-\><c-n>
 endif
