@@ -29,7 +29,9 @@ if has('nvim')
     tnoremap ,ds '/documentServices/
     augroup terminal_group
 	au!
-	au TermOpen *zsh setlocal nobuflisted | nmap <buffer><C-x> :startinsert<cr><C-x>
+	au TermOpen *zsh setlocal nobuflisted | 
+		    \nmap <buffer><C-x> :startinsert<cr><C-x> |
+		    \nmap <buffer><C-c> :startinsert<cr><C-c>
     augroup END
     " tmap <silent><Esc> <esc><C-\><c-n>
 endif
