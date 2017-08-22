@@ -1,4 +1,7 @@
 " http://stackoverflow.com/questions/3131393/remapping-help-in-vim-to-open-in-a-new-tab
+function! s:abbrev(shortcut, expansion)
+    execute "cnoreabbrev <expr> ".a:shortcut." getcmdtype() == ':' && getcmdline() == '".a:shortcut."' ? '".a:expansion."' : '".a:shortcut."'"
+endfunction
 cnoreabbrev <expr> h getcmdtype() == ":" && getcmdline() == 'h' ? 'tab help' : 'h'
 cnoreabbrev <expr> ag getcmdtype() == ":" && getcmdline() == 'ag' ? 'Ag ' : 'ag'
 cnoreabbrev <expr> agb getcmdtype() == ":" && getcmdline() == 'agb' ? 'AgBLines ' : 'ag'
@@ -10,6 +13,8 @@ cnoreabbrev <expr> cdc getcmdtype() == ":" && getcmdline() == 'cdc' ? 'CDC' : 'c
 cnoreabbrev <expr> cdr getcmdtype() == ":" && getcmdline() == 'cdr' ? 'CDR' : 'cdr'
 cnoreabbrev <expr> cdg getcmdtype() == ":" && getcmdline() == 'cdg' ? 'CDG' : 'cdg'
 cnoreabbrev <expr> pp getcmdtype() == ":" && getcmdline() == 'pp' ? 'PP' : 'pp'
+cnoreabbrev <expr> pp getcmdtype() == ":" && getcmdline() == 'pp' ? 'PP' : 'pp'
+call s:abbrev('gdb', 'GDiffBranch')
 
 "https://github.com/houtsnip/vim-emacscommandline/blob/master/plugin/emacscommandline.vim
 cmap <C-a> <Home>
