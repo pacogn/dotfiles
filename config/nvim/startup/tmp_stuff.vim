@@ -31,6 +31,34 @@ function! s:get_visual_selection()
     let lines[0] = lines[0][column_start - 1:]
     return join(lines, "\n")
 endfunction
+function! DiffFile()
+    let winheight = winheight(winnr())
+    let branchname=b:branchName
+    let filename = substitute(getline('.'), '^\w*\s*\(.*\)', '\1', '')
+    let gitroot = b:gitroot
+    only
+    wincmd s
+    execute 'resize '.winheight
+    wincmd j
+    execute 'cd '.gitroot
+    execute 'edit '.filename
+    execute 'Gdiff '.branchname
+endfunction
+function! GDiffBranch(branchName)
+    let gitroot = utils#get_git_root_directory()
+    let tmpfile = tempname()
+    execute 'pedit '.tmpfile
+    wincmd P
+    let b:branchName=a:branchName
+    let b:gitroot = gitroot
+    nmap <buffer> q :q<cr>
+    execute 'silent read! git diff --name-status '.a:branchName
+    normal! ggdd
+    resize 12
+    setlocal nomodifiable
+    nmap <buffer> gd :call DiffFile()<cr>
+endfunction
+command! -nargs=1 GDiffBranch call GDiffBranch(<q-args>)
 function! FormatIndependentJSObject()
 	let tmpfile = tempname()
 	let lines = s:get_visual_selection()
