@@ -28,14 +28,15 @@ function killsanta(){
     kill -$signal $(lsof -i tcp:3000 -t)
     kill -$signal $(lsof -i tcp:8443 -t)
 }
-function servesanta(){
+function servesanta()(
+    #note the wrapping `()` to run in subshell thus staying in pwd
     if [[ ! $NVM_DIR =~ $HOME ]]; then
         loadall
     fi
     cd ~/projects/santa
     sudo -b npm start
     cd ~/projects
-    nohup serve &> /tmp/serve &
+    nohup serve -p 3000 &> /tmp/serve &
     nvm use 8
     nohup serve-https &> /tmp/servehttps &
     {
@@ -46,7 +47,7 @@ function servesanta(){
         cat -e /tmp/serve
         printf "\033[0m"\n
     } &
-}
+)
 function exitIfDirty(){
   if [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]]
   then
@@ -58,17 +59,16 @@ function pullYarnBuild(){
   { git pull && yarn && npm run build }
 }
 pullmembers(){
-  ( pdir="$HOME/projects/santa-platform-apps-container"          && cd $pdir && nvm use 6 && exitIfDirty && { pullYarnBuild                       &> /tmp/spac.me.buildResult || echo  "\033[38;5;9m" $pdir failed "\033[0m" } && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/js-platform-editor-sdk"                 && cd $pdir && nvm use 6 && exitIfDirty && { pullYarnBuild                       &> /tmp/jpes.me.buildResult || echo  "\033[38;5;9m" $pdir failed "\033[0m" } && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/santa"                                  && cd $pdir && nvm use 6 && exitIfDirty && { { git pull && yarn && grunt &&  }   &> /tmp/s.me.buildResult    || echo  "\033[38;5;9m" $pdir failed "\033[0m" } && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/santa-editor"                           && cd $pdir && nvm use 6 && exitIfDirty && { { git pull && yarn && grunt }       &> /tmp/se.me.buildResult   || echo  "\033[38;5;9m" $pdir failed "\033[0m" } && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/santa-members/santa-members-editor-app" && cd $pdir && nvm use 8 && exitIfDirty && { pullYarnBuild                       &> /tmp/smea.me.buildResult || echo  "\033[38;5;9m" $pdir failed "\033[0m" } && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/santa-members/santa-members-viewer-app" && cd $pdir && nvm use 8 && exitIfDirty && { pullYarnBuild                       &> /tmp/smva.me.buildResult || echo  "\033[38;5;9m" $pdir failed "\033[0m" } && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/santa-core/santa-wix-code"              && cd $pdir && nvm use 6 && exitIfDirty && { pullYarnBuild                       &> /tmp/sc.me.buildResult   || echo  "\033[38;5;9m" $pdir failed "\033[0m" } && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/santa-platform-apps-container"          && cd $pdir && nvm use 6 && exitIfDirty && { pullYarnBuild                       &> /tmp/spac.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/js-platform-editor-sdk"                 && cd $pdir && nvm use 6 && exitIfDirty && { pullYarnBuild                       &> /tmp/jpes.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/santa"                                  && cd $pdir && nvm use 6 && exitIfDirty && { { git pull && yarn && grunt &&  }   &> /tmp/s.me.buildResult    || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/santa-editor"                           && cd $pdir && nvm use 6 && exitIfDirty && { { git pull && yarn && grunt }       &> /tmp/se.me.buildResult   || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/santa-members/santa-members-editor-app" && cd $pdir && nvm use 8 && exitIfDirty && { pullYarnBuild                       &> /tmp/smea.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/santa-members/santa-members-viewer-app" && cd $pdir && nvm use 8 && exitIfDirty && { pullYarnBuild                       &> /tmp/smva.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/santa-core/santa-wix-code"              && cd $pdir && nvm use 6 && exitIfDirty && { pullYarnBuild                       &> /tmp/sc.me.buildResult   || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
   wait
 }
 function openeditormembersarea(){
-  cd /Users/davidsu/projects
    # open 'http://editor.wix.com/html/editor/web/renderer/new?siteId=cbf36d3a-49d0-41c2-9482-1bb58d5fdda3&metaSiteId=a573279f-ae6f-46d1-8556-7c93ae9b2c84&editorSessionId=B67E3913-423B-4C73-A9A3-C38C8A991270&editorPlatformAppSources=members-application:1.4.0&viewerPlatformAppSources=members-application:1.4.0&debug=all&experiments=se_santaMembers,sv_santaMembers&ReactSource=http://localhost&EditorSource=http://localhost/editor-base&petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false'
    # open 'http://editor.wix.com/html/editor/web/renderer/edit/f8a89db9-4c69-4e40-834e-99e811fc2fce?metaSiteId=534248d8-f7f3-4187-a782-aee081e408bc&editorSessionId=16643624-A19C-46DC-82B2-EAD4DF6AE31A&EditorSource=http://localhost/editor-base&ReactSource=http://localhost&editorSdkSource=http://localhost/editor-sdk/build/editorSDK.js&PlatformContainerSource=http://localhost/platform-apps-container&debug=all&editorPlatformAppSources=members-application:1.4.0&experiments=disableDbEditorAutoSave,disableSaveReminder,se_santaMembers,sv_santaMembers&petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false&viewerPlatformAppSources=members-application:1.4.0&leavePagePopUp=false&hot=false'
    open 'http://editor.wix.com/html/editor/web/renderer/new?'\
