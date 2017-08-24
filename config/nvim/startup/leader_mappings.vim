@@ -88,7 +88,8 @@ augroup incsearch-indexed
     autocmd User IncSearchLeave ShowSearchIndex
 augroup END
 
-let g:incsearch#auto_nohlsearch = 1
+let g:incsearch#auto_nohlsearch = 0
+command! ToggleIncsearchAutoHl let g:incsearch#auto_nohlsearch = (g:incsearch#auto_nohlsearch + 1) % 2 | echomsg (g:incsearch#auto_nohlsearch ? 'no auto hlsearch' : 'auto hlsearch')
 map <silent>n  <Plug>(incsearch-nohl-n)zv:ShowSearchIndex<CR>
 map <silent>N  <Plug>(incsearch-nohl-N)zv:ShowSearchIndex<CR>
 nmap *  <Plug>(incsearch-nohl-*)
@@ -226,7 +227,6 @@ xmap gS  <Plug>VgSurround
 
 "using map from <Plug>(easymotion...) is cool, the plugin worries to do the right thing with my mappings
 let g:EasyMotion_keys='abcdefghijklmnopqrstuvwxyz'
-map s <Plug>(easymotion-prefix)
 map ss <Plug>(easymotion-s)
 map sn <Plug>(easymotion-sn)
 map s; <Plug>(easymotion-next)
