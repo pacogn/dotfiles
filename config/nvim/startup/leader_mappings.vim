@@ -248,7 +248,7 @@ nnoremap <silent> <space>zj :call NextClosedFold('j')<cr>
 nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
 function! GFilesIfNotHelp()
     if &ft == 'help'
-        execute 'normal! \<c-t>'
+        execute "normal! \<c-t>"
     else
         call hzf#g_files()
     endif
