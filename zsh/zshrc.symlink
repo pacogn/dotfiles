@@ -23,7 +23,7 @@ function reload(){
   export PATH=$(echo "/usr/local/bin:${PATH}" | awk -v RS=':' -v ORS=":" '!a[$1]++')
 }
 reload
-
+startMySQLIfNeeded
 #surround with `(...)` to avoid job controll output
 ( echo $(brew --prefix nvm) > /tmp/brew_prefix_nvm & ) 
 
