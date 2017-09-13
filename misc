@@ -97,6 +97,7 @@ function escape_ls(){
     done
     echo
   done
+  echo reset with \\033[0m
 }
 function createTernProj(){
     echo '
