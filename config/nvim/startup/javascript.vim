@@ -27,8 +27,8 @@ function! RunNeomakeEslint()
     endif
 endfunction
 
-command! FixEslint Neomake fixlint
-command! FixLint Neomake fixlint
+command! FixEslint let g:is_running_fixlint = 1 | Neomake fixlint
+command! FixLint let g:is_running_fixlint = 1 | Neomake fixlint
 function! GetCurrLineIndentation()
     return len(substitute(getline('.'), '\(\s*\).*', '\1', '')) 
 endfunction

@@ -1,28 +1,29 @@
-augroup neomake_runners
-    autocmd!
-    " autocmd FileType javascript let g:neomake_javascript_enabled_makers = ['eslint']
-    autocmd BufWritePost *.rt :Neomake! rt
-augroup end
-let g:neomake_javascript_enabled_makers = ['eslint']
-function! PostEslintFix(...)
-    e %
+let g:is_running_fixlint = 0
+
+function! OnNeomakeJobFinished() abort
+    if g:is_running_fixlint
+        let g:is_running_fixlint = 0
+        silent ! !
+    endif
 endfunction
+
+let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_javascript_fixlint_maker = {
 	    \'exe': 'eslint',
 	    \'args': '-f compact --fix',
         \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
         \   '%W%f: line %l\, col %c\, Warning - %m,%-G,%-G%*\d problems%#',
-	\ 'postprocess': function('PostEslintFix')
 	    \}
 let g:neomake_rt_maker = {
 	    \'exe': 'grunt',
 	    \'args': [ 'rt']
 	    \}
 
-augroup my_neomake_signs
+augroup my_neomake_autocmds
     au!
-    autocmd ColorScheme *
-        \ hi NeomakeErrorSign guifg=#ff0000
+    autocmd BufWritePost *.rt :Neomake! rt
+    autocmd User NeomakeJobFinished call OnNeomakeJobFinished()
+    autocmd ColorScheme * hi NeomakeErrorSign guifg=#ff0000
         " \ hi NeomakeWarningSign ctermfg=yellow
 augroup END
 "
