@@ -56,7 +56,7 @@ function loadnvm(){
     add-zsh-hook chpwd nvm_auto_switch
     #change node version iff .nvmrc in pwd
     if [[ -f .nvmrc ]]; then
-        nvm_auto_switch
+        nvm use
     else
         # use nvm node if not using it already
         if [[ $(type node) =~ 'not found' ]] || [[ ! $(which node) =~ '/.nvm/' ]]; then
