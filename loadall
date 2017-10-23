@@ -9,6 +9,7 @@ function loadzgen(){
         zgen load zsh-users/zsh-history-substring-search
         zgen oh-my-zsh plugins/git
         zgen oh-my-zsh plugins/yarn
+        zgen load paulirish/git-open
     fi
     #unset SET_CUSTOM_PROMPT value if you want to test other prompt than
     #the custom in ~/.dotFiles/prompt
