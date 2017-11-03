@@ -112,8 +112,6 @@ nmap Q @q
 " scroll the viewport faster
 nnoremap <C-d> :call smooth_scroll#down(9, 0, 6)<CR>
 nnoremap <C-u>  :call smooth_scroll#up(9, 0, 6)<CR>
-nnoremap <c-e>  3<c-e>
-nnoremap <c-y>  3<c-y>
 "-----------------------------------------------------------------------------}}}
 "OPTIONS                                                                      {{{ 
 "--------------------------------------------------------------------------------
@@ -227,6 +225,7 @@ augroup END
 command! -complete=shellcmd -bang -nargs=+ Shell call utils#run_shell_command(<q-args>, <bang>0)
 command! -bang GPush call utils#run_shell_command('git push', <bang>0)
 command! -bang GPull call utils#run_shell_command('git pull', <bang>0)
+command! CherryPickHelp call cherry_pick_helper#buffer_commits_ordered_by_date()
 
 " quick open snippets file for current filetype
 command! OpenInWebstorm call utils#open_in_webstorm()
