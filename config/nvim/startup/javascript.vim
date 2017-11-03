@@ -83,7 +83,7 @@ augroup javascript
     autocmd BufNewFile,BufRead *.es6 set filetype=javascript
     let g:markdown_fenced_languages = ['css', 'javascript', 'js=javascript', 'json=javascript', 'stylus', 'html']
     autocmd BufWritePost * call RunNeomakeEslint()
-    autocmd FileType javascript call <SID>setmapping()
+    autocmd FileType javascript,json call <SID>setmapping()
     autocmd FileType javascript nnoremap <buffer>{ :call GoToNextFunction(-1, 0, 1)<cr>
     autocmd FileType javascript nnoremap <buffer>} :call GoToNextFunction(-1, 0, 0)<cr>
     " autocmd FileType javascript nnoremap <buffer>cof :call JSToggleFoldMethod()<cr>
