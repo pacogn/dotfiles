@@ -1,3 +1,4 @@
+"help for fzf related stuff
 let s:previewrb = utils#get_root_directory().'/plugged/fzf.vim/bin/preview.rb'
 "-----------------------------------------------------------------------------}}}
 "UTILITIES                                                                      {{{ 
