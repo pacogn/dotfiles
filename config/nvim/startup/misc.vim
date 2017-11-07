@@ -12,7 +12,7 @@ let g:table_mode_corner = '|'
 let g:table_mode_separator = '|'
 let g:yankring_history_dir = '$HOME'
 let g:yankring_history_file = '.yankring_vim_history'
-let g:tern_request_timeout = 1
+let g:tern_request_timeout = 2
 let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
 let g:normal_cursor_line_column = &cursorcolumn
 let g:gitgutter_map_keys = 0
@@ -39,6 +39,14 @@ function! ListDotFiles(dir, command)
 		\'sink': 'e'})
 endfunction
 
+function! IntoTemp(cmd)
+   redir => cout
+   silent execute a:cmd
+   redir END
+   e /tmp/vimredirected
+   put=cout
+
+endfunction
 function! Vimrc(...)
     let query = get(a:000, 0, '^')
     if !len(query)
@@ -85,8 +93,6 @@ inoremap jk <esc>
 inoremap jj <esc>
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
-inoremap <C-j> <C-o>j
-inoremap <C-k> <C-o>k
 nnoremap ,h <C-w>h
 nnoremap ,l <C-w>l
 nnoremap ,j <C-w>j
@@ -106,8 +112,6 @@ nmap Q @q
 " scroll the viewport faster
 nnoremap <C-d> :call smooth_scroll#down(9, 0, 6)<CR>
 nnoremap <C-u>  :call smooth_scroll#up(9, 0, 6)<CR>
-nnoremap <c-e>  3<c-e>
-nnoremap <c-y>  3<c-y>
 "-----------------------------------------------------------------------------}}}
 "OPTIONS                                                                      {{{ 
 "--------------------------------------------------------------------------------
@@ -221,6 +225,7 @@ augroup END
 command! -complete=shellcmd -bang -nargs=+ Shell call utils#run_shell_command(<q-args>, <bang>0)
 command! -bang GPush call utils#run_shell_command('git push', <bang>0)
 command! -bang GPull call utils#run_shell_command('git pull', <bang>0)
+command! CherryPickHelp call cherry_pick_helper#buffer_commits_ordered_by_date()
 
 " quick open snippets file for current filetype
 command! OpenInWebstorm call utils#open_in_webstorm()

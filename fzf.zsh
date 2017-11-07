@@ -30,7 +30,7 @@ chromehistory() {
         --bind 'ctrl-g:toggle-preview,ctrl-s:toggle-sort,ctrl-o:execute:open {-1}' | perl -pe 's|.*?(https*://.*?)|\1|' | xargs open
 }
 
-alias -g F=' | fzf  --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-g:toggle-preview,ctrl-o:execute:($DOTFILES/fzf/fhelp.sh {})'\'
+alias -g F=' | fzf --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:($DOTFILES/fzf/fhelp.sh {})'\'
 alias fch='chromehistory'  
 
 fstash() {
@@ -88,7 +88,7 @@ FZF-EOF"
 alias chromebookmarks='$DOTFILES/fzf/chromebookmarks.rb'
 
 function jfzf(){
-  dir=`fasd_cd -ds | egrep '^\S+\s+/' | tail -r | fzf`
+  dir=`fasd_cd -ds | egrep '^\S+\s+/' | tail -r | fzf --no-sort --bind 'ctrl-s:toggle-sort'`
   if [[ -n dir ]]; then
     cd $(echo $dir | sed -E 's#[^/]*(/.*$)#''\1''#')
   fi
@@ -108,7 +108,7 @@ fzf-chth(){
 }
 zle     -N    fzf-chth
 bindkey '^Y' fzf-chth
-
+alias fchth='fzf-chth'
 # fzf-locate-widget() {
 #   local selected
 #   if selected=$(find $DOTFILES/base16-shell/scripts | fzf ); then

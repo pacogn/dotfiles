@@ -1,3 +1,4 @@
+"help for fzf related stuff
 let s:previewrb = utils#get_root_directory().'/plugged/fzf.vim/bin/preview.rb'
 "-----------------------------------------------------------------------------}}}
 "UTILITIES                                                                      {{{ 
@@ -37,14 +38,13 @@ endfunction
 "AG                                                                           {{{ 
 "--------------------------------------------------------------------------------
 function! hzf#ag_all_blines(...)
-    let bufs = filter(utils#buffers_listedReadableFile(), 'v:val !~ ''/''')
+    let bufs = filter(utils#buffers_listedReadableFile(), 'v:val !~ ''^/''')
     let agfiles = '-G '''.join(bufs, '|').''''
     let query = get(a:000, 0, '^')
     if !len(query)
         let query = '^'
     endif
     let query = agfiles.' '''.query.''''
-    echom query
     call fzf#vim#ag_raw(query, 
                 \fzf#vim#with_preview({'dir': getcwd()},'up:50%', 'ctrl-g'), 1)
 endfunction
@@ -140,6 +140,8 @@ function! hzf#yankRing(command)
     if a:command != 'p' && a:command != 'P'
         echoerr "command must be 'p' or 'P'"
     endif
+    silent! YRShow
+    silent! YRShow
     let s:yank_ring_command = a:command
     call fzf#run({
                 \'dir': g:yankring_history_dir,

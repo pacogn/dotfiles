@@ -16,6 +16,3 @@
 [submodule "forkedProjects/vim-airline-themes"]
 	path = forkedProjects/vim-airline-themes
 	url = https://github.com/sudavid4/vim-airline-themes.git
-[submodule "forkedProjects/base16-vim"]
-	path = forkedProjects/base16-vim
-	url = https://github.com/sudavid4/base16-vim.git

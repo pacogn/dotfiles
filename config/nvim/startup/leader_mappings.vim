@@ -44,6 +44,7 @@ nmap <space>ql :lclose<cr>
 nmap <space>qc :cclose<cr>
 nmap <space>qp :pclose<cr>
 nmap <space>qh :helpclose<cr>
+nmap <space>qq :helpclose<cr>:pclose<cr>:cclose<cr>:lclose<cr>
 
 nnoremap - :silent call utils#toggle_window_to_nerd_tree()<cr>
 nnoremap \\ "_
@@ -87,7 +88,8 @@ augroup incsearch-indexed
     autocmd User IncSearchLeave ShowSearchIndex
 augroup END
 
-let g:incsearch#auto_nohlsearch = 1
+let g:incsearch#auto_nohlsearch = 0
+command! ToggleIncsearchAutoHl let g:incsearch#auto_nohlsearch = (g:incsearch#auto_nohlsearch + 1) % 2 | echomsg (g:incsearch#auto_nohlsearch ? 'no auto hlsearch' : 'auto hlsearch')
 map <silent>n  <Plug>(incsearch-nohl-n)zv:ShowSearchIndex<CR>
 map <silent>N  <Plug>(incsearch-nohl-N)zv:ShowSearchIndex<CR>
 nmap *  <Plug>(incsearch-nohl-*)
@@ -96,6 +98,7 @@ nmap g* <Plug>(incsearch-nohl-g*)
 nmap g# <Plug>(incsearch-nohl-g#)
 
 
+nnoremap <space>at :AirlineToggleShowingAllSections<cr>
 nnoremap \c :Commands<cr>
 nnoremap 1: :History:<cr>
 nnoremap 1; :History:<cr>
@@ -181,7 +184,7 @@ function! FixNerdSize()
     endif
 endfunction
 nmap 1f :call FixNerdSize()<cr>
-nmap <silent> 1N :NERDTreeToggle<cr>
+nmap <silent> 1N :NERDTreeFind<cr>
 nmap <silent> \t :NERDTreeToggle<cr>
 nmap <silent> <space>nn :NERDTreeToggle<cr>
 nmap 1o :only<cr>
@@ -224,7 +227,6 @@ xmap gS  <Plug>VgSurround
 
 "using map from <Plug>(easymotion...) is cool, the plugin worries to do the right thing with my mappings
 let g:EasyMotion_keys='abcdefghijklmnopqrstuvwxyz'
-map s <Plug>(easymotion-prefix)
 map ss <Plug>(easymotion-s)
 map sn <Plug>(easymotion-sn)
 map s; <Plug>(easymotion-next)
@@ -244,19 +246,9 @@ nmap \w :wincmd q<cr>
 nmap \q :wincmd q<cr>
 nnoremap <silent> <space>zj :call NextClosedFold('j')<cr>
 nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
-function! FoldClose()
-    if exists('b:foldinitialized')
-        normal! zc
-    else
-        normal! zRzc
-        let b:foldinitialized = 1
-    endif
-endfunction
-let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','C']
-nnoremap zc :call FoldClose()<cr>
 function! GFilesIfNotHelp()
     if &ft == 'help'
-        execute 'normal! \<c-t>'
+        execute "normal! \<c-t>"
     else
         call hzf#g_files()
     endif
@@ -266,6 +258,7 @@ imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 
 nmap <silent> \b :Buffers<cr>
+nmap <silent> 1b :Buffers<cr>
 nmap <silent> \f :call hzf#g_files()<cr>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
@@ -282,6 +275,10 @@ nmap <space>lm :LeaderMappingsDeclaration<cr>
 nmap <space>cl :LetterCommands<cr>
 nmap <space>cc :CommandLineCommands<cr>
 nmap <space>cd :CDC<cr>
+nmap ]i :execute "BLines '".expand('<cword>')<cr>
+nmap [i :execute "BLines '".expand('<cword>')<cr>
+nmap ]I :execute 'AgAllBLines \b'.expand('<cword>').'\b'<cr>
+nmap [I :execute 'AgAllBLines \b'.expand('<cword>').'\b'<cr>
 " i don't like the unimpaired ]l, [l commands, it's too much little finger
 nmap <space>lj :lnext<cr>
 nmap <space>lk :lprev<cr>
