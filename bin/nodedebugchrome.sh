@@ -1,4 +1,5 @@
 #!/bin/sh
+export NODE_DEBUG_OPTION="--inspect"
 osascript << 'END'
 tell application "Google Chrome"
     activate
