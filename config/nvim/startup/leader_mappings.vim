@@ -61,7 +61,8 @@ nnoremap <silent> <space>ff :call FindFunction(expand("<cword>"))<cr>
 nnoremap <silent> <space>ft "fyaw:FindText '<C-r>f'<cr>
 nnoremap <silent> <space>fu :call FindUsage(expand("<cword>"))<cr>
 " find word - we spoil the f register which is ... unescessary
-nnoremap <silent> <space>fw "fyaw:FindText '<C-r>f'<cr>
+" nnoremap <silent> <space>fw "fyaw:FindText '<C-r>f'<cr>
+nnoremap <silent> <space>fw :execute "Ag ".expand("<cword>")<cr>
 " find not test hast fnt prefix
 nnoremap <silent> <space>fnta :FindNoTestAssignment expand("<cword>")<cr>
 nnoremap <silent> <space>fntf :FindNoTestFunction expand("<cword>")<cr>
@@ -105,6 +106,7 @@ nnoremap 1; :History:<cr>
 nnoremap 1/ :History/<cr>
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
 nmap <space>be :BufExplorer<cr>
+nmap <space>bh :GV!<cr>
 "view buffer lines
 nmap <space>bl :BLines!<cr>
 nmap <space>vb :AgBLines<cr>
