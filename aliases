@@ -7,6 +7,10 @@ alias vimdiff='nvim -d'
 alias showlinked='ll node_modules G @'
 alias npmlinked='ll node_modules G @'
 alias ag='ag --color-match="1;031"'
+alias rg=' rg --colors line:fg:yellow \
+   --colors line:style:bold     \
+   --colors path:fg:green       \
+   --colors path:style:bold '
 alias agd='cd $DOTFILES && ag --ignore ''plugged*'' --ignore-dir ''forkedProjects'' --ignore ''autoload*'''
 alias -g E=' | egrep '
 alias yi='yarn install'
