@@ -9,6 +9,9 @@ Plug 'sudavid4/mysql-mru.vim'
 Plug 'schickling/vim-bufonly'                                       " delete all buffers but current
 Plug 'jlanzarotta/bufexplorer'                                      " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for )
 Plug 'vim-scripts/YankRing.vim'                                     " Maintains a history of previous yanks, changes and deletes
+Plug 'sudavid4/vim-prettier', { 
+    \ 'do': 'npm install', 
+    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
 Plug 'sbdchd/neoformat', { 'for':                           
             \['javascript', 'css', 'scss', 
             \'sh', 'zsh', 'vim', 'html'] , 
@@ -65,7 +68,7 @@ Plug 'christoomey/vim-tmux-navigator'                               " seemless p
 Plug 'haya14busa/incsearch.vim'                                     " Improved incremental searching for Vim
 " https://github.com/osyo-manga/vim-over -- you really want to check this out!!!
 Plug 'editorconfig/editorconfig-vim'                                " .editorconfig support
-Plug 'junegunn/gv.vim'                                              " :GV browse commits like a pro
+Plug 'sudavid4/gv.vim'                                              " :GV browse commits like a pro
 " see https://github.com/normenmueller/vim-iterm2-navigator/commit/58ca1e3e2ac24689fb1312e7fcf4384acdbe1e33 for how to make the following work
 " Plug 'zephod/vim-iterm2-navigator'                          " Seamlessly navigate vim split panes inside iterm2 split panes
 " Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files
