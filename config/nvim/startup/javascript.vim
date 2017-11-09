@@ -5,8 +5,8 @@ function! s:setmapping()
     " Moving back and forth between lines of same or lower indentation.
     " nnoremap <buffer><silent> [l :call indent_utils#next_indent(0, 0, 0, 1)<CR>
     " nnoremap <buffer><silent> ]l :call indent_utils#next_indent(0, 1, 0, 1)<CR>
-    nnoremap <buffer><silent> [[ :call indent_utils#prev_indent()<CR>
-    nnoremap <buffer><silent> ]] :call indent_utils#next_indent()<CR>
+    nnoremap <buffer><silent> [[ m`:call indent_utils#prev_indent()<CR>
+    nnoremap <buffer><silent> ]] m`:call indent_utils#next_indent()<CR>
     " vnoremap <buffer><silent> [l <Esc>:call indent_utils#next_indent(0, 0, 0, 1)<CR>m'gv''
     " vnoremap <buffer><silent> ]l <Esc>:call indent_utils#next_indent(0, 1, 0, 1)<CR>m'gv''
     vnoremap <buffer><silent> [[ <Esc>:call indent_utils#prev_indent()<CR>m'gv''
