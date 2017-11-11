@@ -72,6 +72,9 @@ endfunction
 
 function! TernRestartServer()
     py3 tern_killServers()
+    if filereadable(getcwd() . '.tern-port')
+        system('rm '.getcwd().'/.tern-port')
+    endif
 endfunction
 command! TernRestartServer call TernRestartServer()
 "-----------------------------------------------------------------------------}}}
