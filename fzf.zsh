@@ -61,7 +61,7 @@ function fman(){
         echo 'need a search argument for this'
         return
     fi
-    fzfretval=$(findmanpage --color $@ | fzf --ansi --preview '$DOTFILES/bin/preview.rb {}' --preview-window 'top:50%' --bind 'ctrl-g:toggle-preview')
+    fzfretval=$(findmanpage $@ | fzf --ansi --preview '$DOTFILES/bin/preview.rb {}' --preview-window 'top:50%' --bind 'ctrl-g:toggle-preview')
     if [[ -n $fzfretval ]]; then
         manpage=$(sed -E 's#.*/(.*)\..*#\1#' <<< $( sed -E 's#([^[:space:]]*):[[:digit:]]+:.*#\1#' <<< $fzfretval))
         # manpage=$(sed -E 's#^[^[:space:]:]*/([[:alnum:]]*)\..*#\1#' <<< $fzfretval)
