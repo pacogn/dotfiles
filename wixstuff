@@ -104,15 +104,7 @@ function openeditormembersarea(){
 '&'\
 'leavePagePopUp=false'\
 '&'\
-'hot=false'\
-'&'\
-'editorPlatformAppSources=santa-members-editor-app:localhost'\
-'&'\
-'viewerPlatformAppSources=santa-members-viewer-app:localhost'\
-'&'\
-'santa-members-editor-app-override=localhost:3000/santa-members/santa-members-editor-app/dist'\
-'&'\
-'santa-members-viewer-app-override=localhost:3000/santa-members/santa-members-viewer-app/dist'
+'hot=false'
 
 sleep 1
 osascript << 'END'
