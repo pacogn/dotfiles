@@ -125,3 +125,22 @@ do
         alias cheat$(basename $f)='cat '$f' | fzf'
     fi
 done
+
+function searchpdf() {
+    find . -iname '*.pdf' -exec pdfgrep -n $@ {} +
+}
+
+function openuni() {
+  osascript << 'END'
+tell application "Google Chrome"
+    activate
+    open location "http://opal.openu.ac.il/course/view.php?id=38275"
+    delay 1
+    execute front window's active tab javascript "document.getElementsByName('p_sisma')[0].value = 'AniMaamin18'"
+    execute front window's active tab javascript "document.getElementsByName('p_user')[0].value = 'sudavid4'"
+    execute front window's active tab javascript "document.getElementsByName('p_mis_student')[0].value = '332519404'"
+    execute front window's active tab javascript "document.getElementById('submit1').click()"
+end tell
+END
+
+}
