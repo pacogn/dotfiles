@@ -97,7 +97,8 @@ alias chromebookmarks='$DOTFILES/fzf/chromebookmarks.rb'
 function jfzf(){
   dir=`fasd_cd -ds | egrep '^\S+\s+/' | tail -r | fzf --no-sort --bind 'ctrl-s:toggle-sort'`
   if [[ -n dir ]]; then
-    cd $(echo $dir | sed -E 's#[^/]*(/.*$)#''\1''#')
+    dir=$(echo $dir | sed -E 's#[^/]*(/.*$)#''\1''#')
+    cd $dir
   fi
 }
 alias jf='jfzf'
