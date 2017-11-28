@@ -3,6 +3,7 @@ mruselect='SELECT @rn:=@rn+1 AS rank, _file, linenum
     FROM (
       SELECT *
       FROM mru
+      WHERE _file NOT LIKE '\''% %'\''
       ORDER BY ts DESC
     ) t1, (SELECT @rn:=0) t2;'
 mrucmd='mysql -uroot --skip-column-names --batch -e "'${mruselect}'" mru_vim | xargs printf '\''%5s %s:%s\n'\'
@@ -12,6 +13,7 @@ mrwselect='SELECT @rn:=@rn+1 AS rank, _file, linenum
     FROM (
       SELECT *
       FROM mrw
+      WHERE _file NOT LIKE '\''% %'\''
       ORDER BY ts DESC
     ) t1, (SELECT @rn:=0) t2;'
 mrwcmd='mysql -uroot --skip-column-names --batch -e "'${mrwselect}'" mru_vim | xargs printf '\''%5s %s:%s\n'\'
@@ -58,6 +60,7 @@ function mru(){
             [[ $(type nvm) != 'nvm not found' ]] && nvm_auto_switch
         fi
         #open selected file in vim AND cd into git's root folder for project of selected file
+        echo  vim $linenum $filename -c 'silent :CDR'
         vim $linenum $filename -c 'silent :CDR'
     fi
 }
@@ -91,6 +94,7 @@ function mrw(){
     mru 0 $mrwcmd
 }
 alias 1m='mru 1'
+alias 1w='mrw'
 function 1m1() {
     startMySQLIfNeeded
     filepath=$(mysql -uroot --skip-column-names --batch -e "SELECT _file FROM mru ORDER BY ts DESC LIMIT 1;" mru_vim )
