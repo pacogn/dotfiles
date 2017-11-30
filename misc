@@ -86,6 +86,29 @@ function dirtyprojs(){
     wait
     skipnvm=0
 }
+
+function branches(){
+    skipnvm=1
+    curdir=$(pwd)
+    let pairity=-1
+    for x in *; do
+        if [[ -d $x ]] && [[ -d ${x}/.git ]]; then
+            cd $x &> /dev/null 
+            if [[ $(expr ${pairity} % 2) == 0 ]]; then
+                echo -n '\033[38;5;246m'
+            fi
+            pairity=${pairity}+1
+            [[ $(expr ${pairity} % 5) == 0 ]] && printf '\n'
+            printf '%s ' $x #print directory name
+            printf '-%.0s' {1..$(( 60 - ${#x} ))} # {1..$(( 60 - ${#x} ))} is a string 1234...[60 - length of x]
+            printf ' %s\n' $(git rev-parse --abbrev-ref HEAD) #print branch name for directory x
+            echo -n '\033[0m'
+            cd $curdir &> /dev/null  
+        fi
+    done
+    wait
+    skipnvm=0
+}
 function escape_ls(){
   for COLOR in {0..255}
   do
