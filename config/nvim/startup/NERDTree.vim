@@ -7,10 +7,6 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore = ['\.js.map$', '.DS_Store']
 let NERDTreeWinSize = 40
 
-if isdirectory(expand(".git"))
-    let g:NERDTreeBookmarksFile = '.git/.NERDTreeBookmarks'
-endif
-
 "vim-nerdtree-syntax-highlight customization
 let g:NERDTreeExtensionHighlightColor = {} " this line is needed to avoid error
 let g:NERDTreeExtensionHighlightColor['rt'] = '8FAA54' 
