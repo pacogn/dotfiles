@@ -71,7 +71,7 @@ function decryptdir(){
 }
 function dirtyprojs(){
     skipnvm=1
-    function printdirty {
+    function _printdirty {
         local d="$1"
         [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]] && echo $(pwd);
     }
@@ -79,7 +79,7 @@ function dirtyprojs(){
     function scan {
         curdir=$(pwd)
         for x in $*; do
-            [[ -d $x ]] && [[ -d ${x}/.git ]] && cd $x &> /dev/null && printdirty "$x" 2> /dev/null; cd $curdir &> /dev/null  
+            [[ -d $x ]] && [[ -d ${x}/.git ]] && cd $x &> /dev/null && _printdirty "$x" 2> /dev/null; cd $curdir &> /dev/null  
         done
     }
     scan * | grep -v 'running nvm' | grep '^/User.*'
@@ -109,6 +109,15 @@ function branches(){
     wait
     skipnvm=0
 }
+alias printbranches='branches'
+alias printdirtyprojs='dirtyprojs'
+alias printescapesequences='escape_ls'
+alias printgitprompt='gitprompt'
+
+function find_sort_latest_modified() {
+  find . -type f -print0 | xargs -0 stat -f "%m %N" | sort -rn | head -100 | cut -f2- -d" "
+}
+
 function escape_ls(){
   for COLOR in {0..255}
   do
@@ -165,5 +174,19 @@ tell application "Google Chrome"
     execute front window's active tab javascript "document.getElementById('submit1').click()"
 end tell
 END
-
 }
+
+function opensheilta() {
+  osascript << 'END'
+tell application "Google Chrome"
+    activate
+    open location "https://sheilta.apps.openu.ac.il/pls/dmyopt2/course_info.courses"
+    delay 1
+    execute front window's active tab javascript "document.getElementsByName('p_sisma')[0].value = 'AniMaamin18'"
+    execute front window's active tab javascript "document.getElementsByName('p_user')[0].value = 'sudavid4'"
+    execute front window's active tab javascript "document.getElementsByName('p_mis_student')[0].value = '332519404'"
+    execute front window's active tab javascript "document.querySelector('#login [type=\"submit\"]').click()"
+end tell
+END
+}
+
