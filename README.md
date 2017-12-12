@@ -33,6 +33,16 @@
 17. install yarn: `brew install yarn --without-node`
 18. install yarn completions:`yarn global add yarn-completions`
 20. install tldr `yarn global add tldr` for [simplified man pages](https://github.com/tldr-pages/tldr)
+21. install iterm and set colors as follows:
+    - black: 727272
+    - red: e64856
+    - green: 35c13c
+    - yellow: b7b334
+    - blue: 88a2f3
+    - magenta: cb31ca
+    - cyan: a5eaf0
+    - white: c7c7c7
+22. install fasd: `brew install fasd`
 
 - to push to github (https with two factor authentication) you will need to use a token instead of your password. [Instructions here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
 
