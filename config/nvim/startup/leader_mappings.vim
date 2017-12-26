@@ -106,7 +106,12 @@ nnoremap 1; :History:<cr>
 nnoremap 1/ :History/<cr>
 " http://vim.wikia.com/wiki/Replace_a_word_with_yanked_text
 nmap <space>be :BufExplorer<cr>
-nmap <space>bh :GV!<cr>
+function! BufferHistory()
+    set eventignore=BufWinEnter,WinEnter,DirChanged
+    GV!
+    set eventignore&
+endfunction
+nmap <space>bh :call BufferHistory()<cr>
 "view buffer lines
 nmap <space>bl :BLines!<cr>
 nmap <space>vb :AgBLines<cr>
