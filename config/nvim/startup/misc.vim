@@ -7,7 +7,6 @@ let g:peekaboo_window='vert bo 60new'
 let g:diminactive_buftype_blacklist = ['nowrite', 'acwrite']
 " let g:diminactive_enable_focus = 1
 let g:rooter_manual_only = 1
-let g:EasyMotion_do_mapping=1
 let g:table_mode_corner = '|'
 let g:table_mode_separator = '|'
 let g:yankring_history_dir = '$HOME'
@@ -110,8 +109,8 @@ endfunction
 nmap Q @q
 
 " scroll the viewport faster
-nnoremap <C-d> :call smooth_scroll#down(9, 0, 6)<CR>
-nnoremap <C-u>  :call smooth_scroll#up(9, 0, 6)<CR>
+" nnoremap <C-d> :call smooth_scroll#down(9, 0, 6)<CR>
+" nnoremap <C-u>  :call smooth_scroll#up(9, 0, 6)<CR>
 "-----------------------------------------------------------------------------}}}
 "OPTIONS                                                                      {{{ 
 "--------------------------------------------------------------------------------
