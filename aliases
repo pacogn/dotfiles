@@ -42,11 +42,13 @@ alias diffjson='vim /tmp/c.json /tmp/o.json  -c '\'':vsplit | bnext'\'
 function gsv() {
     gitstatus=$(git status)
     if [[ $gitstatus =~ 'both modified' ]]; then
-        vim -c 'let g:tmp=search("both modi")' \
-            -c 'call feedkeys("\<C-n>D:Gstatus\<cr>\<C-w>K".g:tmp."G") ' \
-            $(git rev-parse --show-toplevel)/.git/index 
+        vim -u $HOME/.dotfiles/config/nvim/init_for_gsv.vim \
+           -c 'let g:tmp=search("both modi")' \
+           -c 'call feedkeys("\<C-n>D:Gstatus\<cr>\<C-w>K".g:tmp."G") ' \
+           $(git rev-parse --show-toplevel)/.git/index 
     else
-        vim -c 'call feedkeys("\<C-n>D:Gstatus\<cr>\<C-n>\<C-w>K") ' \
+        vim -u $HOME/.dotfiles/config/nvim/init_for_gsv.vim \
+           -c 'call feedkeys("\<C-n>D:Gstatus\<cr>\<C-n>\<C-w>K") ' \
             $(git rev-parse --show-toplevel)/.git/index
     fi
 }
