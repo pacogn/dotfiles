@@ -1,6 +1,6 @@
 # to use this "vimrc"
 
-1. you'll need nvim: `brew install nvim`
+1. you'll need nvim: `brew install neovim`
 2. install python3: `brew install python3`
 3. enable python3 for nvim: `pip3 install neovim`
 4. enable neovim rubygem ( I'll go ahead and suggest sudo here but you'll make yourself a favor on learning how to do this without sudo): `sudo gem install neovim`
@@ -18,3 +18,5 @@
     ```
     cd ~/Library/Fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
     ```
+10. run `:UpdateRemotePlugins` inside vim
+11. run `:CheckHealth` inside vim
