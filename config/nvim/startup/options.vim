@@ -1,5 +1,6 @@
 set nocompatible          " not compatible with vi
 " set maxmemtot=2000000     " give vim some memory - it get's stuck when working with very large files
+set shada=/1000,:1000,<1,'1,h,s5
 set helpheight=39
 set clipboard+=unnamedplus
 set autoread              " detect when a file is changed
