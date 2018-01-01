@@ -8,3 +8,7 @@ quando_o_build_ta_shavur
 trash/
 *.xmark.*.html
 config/configstore
+atom.symlink/.apm
+atom.symlink/packages
+atom.symlink/blob-store
+atom.symlink/.gitignore
