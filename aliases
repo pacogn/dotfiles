@@ -40,6 +40,11 @@ alias -g S='-S Session.vim -c '\''au VimEnter * Obsession .'\'
 #allow atom-open-in-vim to blindly send `:e filename`... works if terminal is in vim or in prompt
 alias :e='vim ' 
 alias diffjson='vim /tmp/c.json /tmp/o.json  -c '\'':vsplit | bnext'\'
+function git-stash-rename() {
+   rev=$(git rev-parse $1)
+   git stash drop $1 || exit 1
+   git stash store -m "$2" $rev
+}
 #git status in vim
 function gsv() {
     gitstatus=$(git status)
