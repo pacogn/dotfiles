@@ -61,24 +61,35 @@ function pullYarnBuild(){
   { git pull && yarn && npm run build }
 }
 pullmembers(){
-  ( pdir="$HOME/projects/santa"                                  && cd $pdir && nvm use   && exitIfDirty && { { git pull && yarn && grunt &&  }   &> /tmp/s.me.buildResult    || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) 
-  ( pdir="$HOME/projects/santa-platform-apps-container"          && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/spac.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/js-platform-editor-sdk"                 && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/jpes.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/santa-members/santa-members-editor-app" && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/smea.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) 
-  ( pdir="$HOME/projects/santa-members/santa-members-viewer-app" && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/smva.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) 
-  ( pdir="$HOME/projects/santa-core/santa-wix-code"              && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/sc.me.buildResult   || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) 
-  ( pdir="$HOME/projects/santa-editor" && sleep 40               && cd $pdir && nvm use   && exitIfDirty && { { git pull && yarn && grunt }       &> /tmp/se.me.buildResult   || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) 
+  ( pdir="$HOME/projects/santa"                                             && cd $pdir && nvm use   && exitIfDirty && { { git pull && yarn && grunt &&  }   &> /tmp/s.me.buildResult    || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) & 
+  ( pdir="$HOME/projects/santa-platform-apps-container"                     && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/spac.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/js-platform-editor-sdk"                            && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/jpes.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/app-market/santa-members/santa-members-editor-app" && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/smea.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/app-market/santa-members/santa-members-viewer-app" && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/smva.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/santa-core/santa-wix-code"                         && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/sc.me.buildResult   || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  ( pdir="$HOME/projects/santa-editor" && sleep 40                          && cd $pdir && nvm use   && exitIfDirty && { { git pull && yarn && grunt }       &> /tmp/se.me.buildResult   || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) 
   wait
 }
-function openeditormembersarea(){
-    open 'http://editor.wix.com'\
-'/html/editor/web/renderer/new'\
+function openviewerlocal(){
+  open 'http://annab21.wixsite.com'\
+'/mysite-582'\
 '?'\
-'siteId=cbf36d3a-49d0-41c2-9482-1bb58d5fdda3'\
+'ReactSource=http://localhost'\
 '&'\
-'metaSiteId=a573279f-ae6f-46d1-8556-7c93ae9b2c84'\
+'debug=all'\
 '&'\
-'editorSessionId=A4DBE6A1-68C4-48B0-BF97-E7D7A4DC4DF0'\
+'experiments=viewer:sv_bookingInstallScript,sv_santaMembers,sv_useMobileTightLayout'\
+'&'\
+'petri_ovr=specs.HttpsAllowedForFreeSites:false'
+}
+function openeditormembersarea(){
+    open 'http://editor.wix.com/html/editor/web/renderer/new'\
+'?'\
+'siteId=8c60c43a-a2bd-4aea-8b58-d4e5a13de8f6'\
+'&'\
+'metaSiteId=3215b29c-ba84-4807-ace9-fc59236c5131'\
+'&'\
+'editorSessionId=ABAE3DEB-1A01-4207-8C00-E076CDF11E47'\
 '&'\
 'EditorSource=http://localhost/editor-base'\
 '&'\
@@ -92,11 +103,11 @@ function openeditormembersarea(){
 '&'\
 'editorSdkSource=http://localhost/editor-sdk/lib/editorSDK.js'\
 '&'\
-'WixCodeRuntimeSource=1.2537.0'\
+'WixCodeRuntimeSource=1.1678.0'\
 '&'\
 'debug=all'\
 '&'\
-'experiments=disableDbEditorAutoSave,disableSaveReminder,rightClickDebug,dpages,sv_dpages,se_platform1,fastStyling,se_grid,developerModeToggle,sv_platform1,se_santaMembers,sv_santaMembers'\
+'experiments=sv_persistentMobilePresets,disableDbEditorAutoSave,disableSaveReminder,rightClickDebug,dpages,sv_dpages,se_platform1,fastStyling,se_grid,developerModeToggle,sv_platform1,se_santaMembers,sv_santaMembers'\
 '&'\
 'petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false;specs.UseHttpsInEditor:false'\
 '&'\
