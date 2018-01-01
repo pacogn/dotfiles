@@ -37,6 +37,8 @@ alias -g MC100='--max-count=100'
 alias -g MC50='--max-count=50'
 alias -g MC20='--max-count=20'
 alias -g S='-S Session.vim -c '\''au VimEnter * Obsession .'\'
+#allow atom-open-in-vim to blindly send `:e filename`... works if terminal is in vim or in prompt
+alias :e='vim ' 
 alias diffjson='vim /tmp/c.json /tmp/o.json  -c '\'':vsplit | bnext'\'
 #git status in vim
 function gsv() {
