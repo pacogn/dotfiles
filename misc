@@ -136,8 +136,6 @@ function createTernProj(){
 {
   "ecmaVersion": 8,
   "libs": [
-      "browser",
-      "ecma6"
   ],
   "plugins": {
     "node": {},
@@ -151,6 +149,7 @@ function createTernProj(){
   }
 }' > .tern-project
 }
+alias generateTernProject='createTernProj'
 for f in $DOTFILES/cheatSheets/*
 do
     if [[ -f $f ]]; then
