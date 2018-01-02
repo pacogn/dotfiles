@@ -201,12 +201,13 @@ nmap 1o :only<cr>
 "VIM-MARK: <space>hi for highlight interesting word
 nmap <space>hi ,m
 " <space>hc for "highlight clear" clear all "interesting words" highlighting
-nmap <space>hc <Plug>MarkClear
+nmap <space>hc :MarkClear<cr>
 nmap ,n ,*
 nmap ,N ,#
 nmap <N ,#
 nmap 1zDisableVimMarkStarMap <Plug>MarkSearchNext
 nmap 1zDisableVimMarkHashMap <Plug>MarkSearchPrev
+nmap 1zDisableVimMarkMarkClear  <Plug>MarkClear
 
 nmap <space>cp :call utils#cursor_ping()<cr>
 "disable automatic mappings for surround.vim and write the here cuz I want `ds{motion}` and `cs{motion}` to use easymotion instead
