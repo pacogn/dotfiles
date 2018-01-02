@@ -22,10 +22,22 @@
 #
 # This file uses CoffeeScript Object Notation (CSON).
 # If you are unfamiliar with CSON, you can read more about it here:
-# https://github.com/bevry/cson#what-is-cson
+# https://github.com/bevry/cson#what-is-cson  
+'atom-workspace atom-text-editor:not([mini])':
+  'cmd-[': 'last-cursor-position:previous'
+  'cmd-]': 'last-cursor-position:next'
+  'cmd-d': 'editor:duplicate-lines'
+'atom-workspace atom-pane':
+  'ctrl-=': 'pane:increase-size'
+  'ctrl--': 'pane:decrease-size'
+
 'atom-workspace':
   'cmd-ctrl-alt-b': 'open-on-github:blame'
+  
 'body':
+  'ctrl-w ctrl-o': 'pane:close-other-items'
+  'ctrl-[': 'window:focus-pane-on-left'
+  'ctrl-]': 'window:focus-pane-on-right'
   'ctrl-h': 'pane:split-left-and-copy-active-item'
   'ctrl-l': 'pane:split-right-and-copy-active-item'
   'ctrl-j': 'pane:split-down-and-copy-active-item'
@@ -37,5 +49,4 @@
   'cmd-1': 'tree-view:toggle'
   'cmd-o': 'fuzzy-finder:toggle-file-finder'
 '.platform-darwin atom-text-editor[data-grammar~=js]':
-  'cmd-d': 'atom-ternjs:definition'
-  'cmd-[': 'atom-ternjs:navigateBack'
+  'cmd-b': 'atom-ternjs:definition'
