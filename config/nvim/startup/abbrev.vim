@@ -13,8 +13,10 @@ cnoreabbrev <expr> cdc getcmdtype() == ":" && getcmdline() == 'cdc' ? 'CDC' : 'c
 cnoreabbrev <expr> cdr getcmdtype() == ":" && getcmdline() == 'cdr' ? 'CDR' : 'cdr'
 cnoreabbrev <expr> cdg getcmdtype() == ":" && getcmdline() == 'cdg' ? 'CDG' : 'cdg'
 cnoreabbrev <expr> pp getcmdtype() == ":" && getcmdline() == 'pp' ? 'PP' : 'pp'
-cnoreabbrev <expr> pp getcmdtype() == ":" && getcmdline() == 'pp' ? 'PP' : 'pp'
 call s:abbrev('gdb', 'GDiffBranch')
+call s:abbrev('man', 'tab Man')
+call s:abbrev('cdg', 'CDG')
+call s:abbrev('cdc', 'CDC')
 
 "https://github.com/houtsnip/vim-emacscommandline/blob/master/plugin/emacscommandline.vim
 cmap <C-a> <Home>
