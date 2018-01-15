@@ -60,6 +60,48 @@ function exitIfDirty(){
 function pullYarnBuild(){
   { git pull && yarn && npm run build }
 }
+printinfo(){
+    echo color='\033[38;5;202m'
+    echo ------------------------------------------------------------------------------------------------------------------------
+    printf -- "-------------------------   %-52s----------------------------------------\n" $*
+    echo ------------------------------------------------------------------------------------------------------------------------
+    echo '\033[0m'
+}
+pullsanta(){
+  ( pdir="$HOME/projects/santa" && cd $pdir && exitIfDirty && git pull && yarn ) &
+  ( pdir="$HOME/projects/santa-editor" && cd $pdir && exitIfDirty && git pull && yarn ) &
+  wait
+}
+buildsantaeditor(){
+  pdir="$HOME/projects/santa-editor" 
+  cd $pdir 
+  nvm use 
+  ( { grunt $1 &> /tmp/se.me.buildResult } || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 }   && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+  wait
+  cat /tmp/se.me.buildResult
+}
+
+buildsanta(){
+    echo $1
+    ( pdir="$HOME/projects/santa"                     && cd $pdir && nvm use && { grunt $1 &> /tmp/sv.me.buildResult } || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 }   && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) & 
+    ( pdir="$HOME/projects/santa-editor" && sleep 40  && cd $pdir && nvm use && { grunt $1 &> /tmp/se.me.buildResult } || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 }   && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+    wait
+    printinfo 'santa-viewer build'
+    cat /tmp/sv.me.buildResult
+    printinfo 'santa-editor build'
+    cat /tmp/se.me.buildResult
+}
+buildmainreditor(){
+  ( pdir="$HOME/projects/santa-editor" && cd $pdir && nvm use   && { grunt genMainR:editorRjs && grunt genMainR:editor &> /tmp/mainr.se.me.buildResult }  || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 }   && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+}
+buildmainrviewer(){
+  ( pdir="$HOME/projects/santa"                     && cd $pdir && nvm use   && { grunt genMainR:viewerRjs && genMainR:viewer && genMainR:seo &> /tmp/mainr.sv.me.buildResult }   || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 }   && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) & 
+}
+buildmainr(){
+  buildmainrviewer
+  sleep 30
+  buildmainreditor
+}
 pullmembers(){
   ( pdir="$HOME/projects/santa"                                             && cd $pdir && nvm use   && exitIfDirty && { { git pull && yarn && grunt &&  }   &> /tmp/s.me.buildResult    || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) & 
   ( pdir="$HOME/projects/santa-platform-apps-container"                     && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/spac.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
@@ -69,6 +111,36 @@ pullmembers(){
   ( pdir="$HOME/projects/santa-core/santa-wix-code"                         && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/sc.me.buildResult   || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
   ( pdir="$HOME/projects/santa-editor" && sleep 40                          && cd $pdir && nvm use   && exitIfDirty && { { git pull && yarn && grunt }       &> /tmp/se.me.buildResult   || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) 
   wait
+}
+function openchromedevtools(){
+osascript << 'END'
+tell application "Google Chrome"
+    activate
+    tell application "System Events" to keystroke "i" using {option down, command down}
+end tell
+END
+}
+function openeditorlocal() {
+    open 'http://editor.wix.com/html/editor/web/renderer/new?'\
+'siteId=cbf36d3a-49d0-41c2-9482-1bb58d5fdda3'\
+'&'\
+'metaSiteId=a573279f-ae6f-46d1-8556-7c93ae9b2c84'\
+'&'\
+'editorSessionId=08A00041-84AE-463A-AB5E-0012F98532F6'\
+'&'\
+'EditorSource=http://localhost/editor-base'\
+'&'\
+'ReactSource=http://localhost'\
+'&'\
+'leavePagePopUp=false'\
+'&'\
+'petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false;specs.UseHttpsInEditor:false'\
+'&'\
+'debug=all'\
+'&'\
+'hot=false'
+    sleep 0.5
+    openchromedevtools
 }
 function openviewerlocal(){
   open 'http://annab21.wixsite.com'\
