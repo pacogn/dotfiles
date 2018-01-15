@@ -88,7 +88,7 @@ endfunction
 "-----------------------------------------------------------------------------}}}
 "MAPS                                                                        {{{ 
 "--------------------------------------------------------------------------------
-inoremap jk <esc>
+inoremap jk <esc>:update<cr>
 inoremap jj <esc>
 inoremap <C-h> <C-o>h
 inoremap <C-l> <C-o>a
