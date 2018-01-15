@@ -17,8 +17,9 @@ endf
 let g:deoplete#auto_complete_delay = 20
 let g:deoplete#auto_refresh_delay = 120
 inoremap <silent><expr> <c-n>
-            \ pumvisible() ? "\<C-n>" :
-            \ deoplete#mappings#manual_complete()
+            \ pumvisible() ? "\<C-n>" : 
+            \ deoplete#is_enabled() ? deoplete#mappings#manual_complete() :
+            \ "\<C-x>\<C-n>"
 
 function! CanExpandUltiSnip()
     " true if there is a snippet named exactly as word under cursor
