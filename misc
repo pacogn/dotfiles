@@ -131,6 +131,17 @@ function escape_ls(){
   done
   echo reset with \\033[0m
 }
+function nodedebugchrome() {
+export NODE_DEBUG_OPTION="--inspect"
+osascript << 'END'
+tell application "Google Chrome"
+    activate
+    open location "chrome://inspect"
+    delay 1
+    execute front window's active tab javascript "document.getElementById('node-frontend').click()"
+end tell
+END
+}
 function createTernProj(){
     echo '
 {
