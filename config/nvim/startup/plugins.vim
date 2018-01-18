@@ -27,7 +27,7 @@ Plug 'airblade/vim-rooter'                                          " cd into ro
 Plug 'kshenoy/vim-signature'                                        " help for working with marks
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}                 " markdown
 Plug 'godlygeek/tabular', {'for': 'markdown'}                       " related to vim-markdown
-Plug 'powerman/vim-plugin-AnsiEsc'                                  " type :AnsiEsc to get colors as terminal
+Plug 'davidsu/vim-plugin-AnsiEsc'                                  " type :AnsiEsc to get colors as terminal
 Plug 'blueyed/vim-diminactive' 
 Plug 'sudavid4/tern_for_vim', {'for': 'javascript', 'do': 'npm i' } " intellijent navigation and refactor for javascript
 if(has('nvim'))
