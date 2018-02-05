@@ -200,9 +200,9 @@ nmap <silent> <space>nn :NERDTreeToggle<cr>
 nmap 1o :only<cr>
 
 "VIM-MARK: <space>hi for highlight interesting word
-nmap <space>hi ,m
+nmap <space>hi :silent normal ,m<cr>
 " <space>hc for "highlight clear" clear all "interesting words" highlighting
-nmap <space>hc :MarkClear<cr>
+nmap <space>hc :silent MarkClear<cr>
 nmap ,n ,*
 nmap ,N ,#
 nmap <N ,#
