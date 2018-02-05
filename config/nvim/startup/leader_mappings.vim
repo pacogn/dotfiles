@@ -255,6 +255,28 @@ nnoremap <space>vp `[v`]
 "same as :quit
 nmap \w :wincmd q<cr>
 nmap \q :wincmd q<cr>
+nmap <S-Up> v<Plug>(expand_region_expand)
+vmap <S-UP> <Plug>(expand_region_expand)
+vmap <S-DOWN> <Plug>(expand_region_shrink)
+let g:expand_region_text_objects = {
+      \ 'iw'  :0,
+      \ 'iW'  :0,
+      \ 'i"'  :0,
+      \ 'a"'  :0,
+      \ 'i''' :0,
+      \ 'a''' :0,
+      \ 'i]'  :1, 
+      \ 'a]'  :1, 
+      \ 'ib'  :1, 
+      \ 'ab'  :1, 
+      \ 'iB'  :1, 
+      \ 'aB'  :1, 
+      \ 'il'  :0, 
+      \ 'ip'  :0,
+      \ 'ie'  :0, 
+      \ }
+" map <UP> <Plug>(wildfire-fuel)
+" vmap <DOWN> <Plug>(wildfire-water)
 nnoremap <silent> <space>zj :call NextClosedFold('j')<cr>
 nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
 function! GFilesIfNotHelp()

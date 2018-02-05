@@ -11,6 +11,7 @@ Plug 'tpope/vim-scriptease'                                         " utilities 
 Plug 'idbrii/vim-mark'                                              " highlighting of interesting words
 Plug 'sudavid4/mysql-mru.vim'
 Plug 'schickling/vim-bufonly'                                       " delete all buffers but current
+Plug 'terryma/vim-expand-region'
 Plug 'jlanzarotta/bufexplorer'                                      " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for )
 Plug 'vim-scripts/YankRing.vim'                                     " Maintains a history of previous yanks, changes and deletes
 Plug 'sudavid4/vim-prettier', { 
