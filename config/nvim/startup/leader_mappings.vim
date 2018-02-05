@@ -137,6 +137,7 @@ nmap <silent><space>oa :call utils#open_in_atom()<cr>
 nmap <silent><space>ov :call utils#open_in_visual_studio_code()<cr>
 nmap <silent><space>gb :Gblame<cr>nmap <silent>,gd :Gdiff<cr>
 nmap <silent><space>gb :Gblame<cr>
+nmap <silent>gb :Gblame<cr>
 nmap <silent><space>gr :Gread<cr>
 nmap <silent><space>gs :Gstatus<cr><C-n>
 nmap <silent><space>gc :Gcommit -v<cr>
