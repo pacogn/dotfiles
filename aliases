@@ -2,6 +2,8 @@
 setopt COMPLETE_ALIASES
 #we wish to have rvm in vim for proper coloring in preview(fzf) for viml files
 alias gbrowse='git open'
+alias ..='cd ../'
+alias ../='cd ../'
 alias vim='[[ -z $HAS_LOADED ]] && loadrvm; nvim'
 alias vimdiff='nvim -d'
 alias showlinked='ll node_modules G @'
@@ -40,6 +42,9 @@ alias -g S='-S Session.vim -c '\''au VimEnter * Obsession .'\'
 #allow atom-open-in-vim to blindly send `:e filename`... works if terminal is in vim or in prompt
 alias :e='vim ' 
 alias diffjson='vim /tmp/c.json /tmp/o.json  -c '\'':vsplit | bnext'\'
+function gdiffbranch() {
+    vim -c 'GDiffBranch '$1
+}
 function git-stash-rename() {
    rev=$(git rev-parse $1)
    git stash drop $1 || exit 1
