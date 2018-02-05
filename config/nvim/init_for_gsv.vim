@@ -4,6 +4,7 @@ Plug 'sudavid4/base16-vim'
 Plug 'sudavid4/vim-unimpaired'                                      " mappings which are simply short normal mode aliases for commonly used ex commands
 Plug 'yuttie/comfortable-motion.vim'                               " Brings physics-based smooth scrolling to the Vim world!
 Plug 'tpope/vim-fugitive'                                           " amazing git wrapper for vim
+Plug 'Shougo/deoplete.nvim'
 call plug#end()
 source $HOME/.config/nvim/startup/hzf.vim
 source $HOME/.config/nvim/startup/abbrev.vim
