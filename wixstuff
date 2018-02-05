@@ -120,6 +120,22 @@ tell application "Google Chrome"
 end tell
 END
 }
+function openeditorproduction(){
+    open 'http://editor.wix.com/html/editor/web/renderer/new?'\
+'siteId=cbf36d3a-49d0-41c2-9482-1bb58d5fdda3'\
+'&'\
+'metaSiteId=a573279f-ae6f-46d1-8556-7c93ae9b2c84'\
+'&'\
+'editorSessionId=08A00041-84AE-463A-AB5E-0012F98532F6'\
+'&'\
+'leavePagePopUp=false'\
+'&'\
+'debug=all'\
+'&'\
+'hot=false'
+  sleep 0.5
+  openchromedevtools
+}
 function openeditorlocal() {
     open 'http://editor.wix.com/html/editor/web/renderer/new?'\
 'siteId=cbf36d3a-49d0-41c2-9482-1bb58d5fdda3'\
