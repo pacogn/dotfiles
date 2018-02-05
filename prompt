@@ -1,5 +1,37 @@
 #!/bin/zsh
 if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
+    # modified from here: .dotfiles/zgen/robbyrussell/oh-my-zsh-master/lib/git.zsh
+    function git_prompt_status() {
+      local INDEX STATUS
+      INDEX=$(command git status --porcelain -b 2> /dev/null)
+      STATUS=""
+      if $(echo "$INDEX" | command grep -E '^\?\? ' &> /dev/null); then
+        STATUS="$ZSH_THEME_GIT_PROMPT_UNTRACKED$STATUS"
+      fi
+      if $(echo "$INDEX" | grep '^A  ' &> /dev/null); then
+        STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
+      elif $(echo "$INDEX" | grep '^M  ' &> /dev/null); then
+        STATUS="$ZSH_THEME_GIT_PROMPT_ADDED$STATUS"
+      fi
+      if $(echo "$INDEX" | grep '^ M ' &> /dev/null); then
+        STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
+      elif $(echo "$INDEX" | grep '^AM ' &> /dev/null); then
+        STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
+      elif $(echo "$INDEX" | grep '^ T ' &> /dev/null); then
+        STATUS="$ZSH_THEME_GIT_PROMPT_MODIFIED$STATUS"
+      fi
+      if $(echo "$INDEX" | grep '^R  ' &> /dev/null); then
+        STATUS="$ZSH_THEME_GIT_PROMPT_RENAMED$STATUS"
+      fi
+      if $(echo "$INDEX" | grep '^ D ' &> /dev/null); then
+        STATUS="$ZSH_THEME_GIT_PROMPT_DELETED$STATUS"
+      elif $(echo "$INDEX" | grep '^D  ' &> /dev/null); then
+        STATUS="$ZSH_THEME_GIT_PROMPT_DELETED_ADDED$STATUS"
+      elif $(echo "$INDEX" | grep '^AD ' &> /dev/null); then
+        STATUS="$ZSH_THEME_GIT_PROMPT_DELETED_ADDED$STATUS"
+      fi
+      echo $STATUS
+    }
     # Outputs current branch info in prompt format
       function my_git_prompt_info() {
        local ref
@@ -42,6 +74,7 @@ if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
     ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}) "
 
     ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[yellow]%}✚ "
+    ZSH_THEME_GIT_PROMPT_DELETED_ADDED="%{$fg[yellow]%}✗ "
     ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[green]%}✭ "
     ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}✗ "
     ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[blue]%}➦ "
@@ -56,13 +89,14 @@ if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
             echo -n "$(printf '\055%.0s' {1..20})" | head -c $(( 20 - ${#str} )) #dashes
             echo -n $1 | sed 's/%{\(.*\)%}/ \1/g' #character that represents it
         }
-        git_prompt $ZSH_THEME_GIT_PROMPT_ADDED added
         git_prompt $ZSH_THEME_GIT_PROMPT_MODIFIED modified
         git_prompt $ZSH_THEME_GIT_PROMPT_DELETED deleted
         git_prompt $ZSH_THEME_GIT_PROMPT_RENAMED renamed
         git_prompt $ZSH_THEME_GIT_PROMPT_UNMERGED unmerged
         git_prompt $ZSH_THEME_GIT_PROMPT_UNTRACKED untracked
         git_prompt '%{[38;5;13m%}@' _has_npm_linked
+        git_prompt $ZSH_THEME_GIT_PROMPT_DELETED_ADDED deleted_and_staged
+        git_prompt $ZSH_THEME_GIT_PROMPT_ADDED added
         unset -f git_prompt #keep global namespace clean
     }
 fi
