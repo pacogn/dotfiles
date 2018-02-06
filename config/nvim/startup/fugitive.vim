@@ -21,6 +21,14 @@ function! DiffInWebstorm()
     endif
 endfunction
 
+function! JiraCommit()
+    normal! gg
+    call search('On branch \zs', '', 6)
+    normal Y
+    0put='$'
+    normal p
+    call feedkeys('a|')
+endfunction
 augroup fugitiveautocmd
 	autocmd!
 	autocmd BufEnter *.git/index nmap <buffer> <silent>q :q<cr>
@@ -30,5 +38,6 @@ augroup fugitiveautocmd
         " autocmd BufEnter *.git/COMMIT_EDITMSG silent! normal zMGzogg
         autocmd FileType gitcommit nmap <buffer> ]c <C-n>
         autocmd FileType gitcommit nmap <buffer> [c <C-p>
+        autocmd FileType gitcommit nmap <buffer> <space>jc :call JiraCommit()<cr>
 augroup END
 command! DiffInWebstorm !git difftool -t=webstorm %
