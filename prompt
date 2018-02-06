@@ -30,6 +30,9 @@ if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
       elif $(echo "$INDEX" | grep '^AD ' &> /dev/null); then
         STATUS="$ZSH_THEME_GIT_PROMPT_DELETED_ADDED$STATUS"
       fi
+      if $(echo "$INDEX" | grep '^UU ' &> /dev/null); then
+          STATUS="$ZSH_THEME_GIT_PROMPT_UNMERGED$STATUS"
+      fi
       echo $STATUS
     }
     # Outputs current branch info in prompt format
