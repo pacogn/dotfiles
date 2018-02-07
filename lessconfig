@@ -1,7 +1,7 @@
 #!/bin/sh
   ###########################################################################################################################
   #SET COLORS IN MAN PAGES
-  PAGER='less -ij5Q'
+  PAGER='less -ij5QK'
   export LESS_TERMCAP_mb=$'\E[01;31m'       # begin blinking
   export LESS_TERMCAP_md=$'\E[01;38;5;74m'  # begin bold
   export LESS_TERMCAP_me=$'\E[0m'           # end mode
