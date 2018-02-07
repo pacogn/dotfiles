@@ -63,6 +63,15 @@ function fag(){
     fi
 }
 
+function fa(){
+    filename=$(find . -type f | fzf --exact --preview '$DOTFILES/bin/preview.rb {}' \
+                --preview-window 'top:50%' \
+    --header 'CTRL-o - open without abort(LESS) :: CTRL-s - toggle sort :: CTRL-g - toggle preview window' \
+    --bind 'ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:$DOTFILES/fzf/fhelp.sh {}:0 > /dev/tty')
+    if [[ -f $filename ]]; then
+        vim $filename
+    fi
+}
 function fman(){
     if [[ $# -eq 0 ]]; then
         echo 'need a search argument for this'
@@ -93,7 +102,6 @@ FZF-EOF"
 }
 
 alias chromebookmarks='$DOTFILES/fzf/chromebookmarks.rb'
-
 function jfzf(){
   dir=`fasd_cd -ds | egrep '^\S+\s+/' | tail -r | fzf --no-sort --bind 'ctrl-s:toggle-sort'`
   if [[ -n dir ]]; then
@@ -117,6 +125,7 @@ fzf-chth(){
 zle     -N    fzf-chth
 bindkey '^Y' fzf-chth
 alias fchth='fzf-chth'
+alias fcd=fzf-cd-widget
 # fzf-locate-widget() {
 #   local selected
 #   if selected=$(find $DOTFILES/base16-shell/scripts | fzf ); then
