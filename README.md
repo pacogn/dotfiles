@@ -43,8 +43,9 @@
     - cyan: a5eaf0
     - white: c7c7c7
 22. install [ITerm2 shell integration](https://www.iterm2.com/documentation-shell-integration.html): `curl -L https://iterm2.com/misc/install_shell_integration.sh | bash`
-23. unmark checkbox of iterm->Preferences->terminal->Shell Integration[Show mark indicators]
-23. install fasd: `brew install fasd`
+23. enable mouse scroll for less in iterm: ITerm -> Preferences -> Advanced and search for "scroll"
+24. unmark checkbox of iterm->Preferences->terminal->Shell Integration[Show mark indicators]
+24. install fasd: `brew install fasd`
 
 - to push to github (https with two factor authentication) you will need to use a token instead of your password. [Instructions here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
 
