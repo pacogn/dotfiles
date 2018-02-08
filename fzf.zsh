@@ -50,9 +50,8 @@ fbr() {
            fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
-function _fgrep(){
-    local command=$([[ $1 = 'ag' ]] && echo 'ag --color' || echo 'rg --smart-case --line-number --color "ansi"')
-    fzfretval=$(eval $command ${@:2} | fzf  --ansi --preview '$DOTFILES/bin/preview.rb {}' \
+function fag(){
+    fzfretval=$(rg --smart-case --line-number --color "ansi" $@ | fzf  --ansi --preview '$DOTFILES/bin/preview.rb {}' \
         --preview-window 'top:50%' \
         --bind 'ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:($DOTFILES/fzf/fhelp.sh {}) > /dev/tty' \
         --header 'CTRL-o - open without abort(LESS) :: CTRL-s - toggle sort :: CTRL-g - toggle preview window')
@@ -62,12 +61,6 @@ function _fgrep(){
     if [[ -f $filename ]]; then
         vim +$linenum $filename
     fi
-}
-function frg(){
-    _fgrep 'rg' $@
-}
-function fag(){
-    _fgrep 'ag' $@
 }
 
 function fa(){
