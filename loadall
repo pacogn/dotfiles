@@ -56,14 +56,14 @@ function loadnvm(){
     autoload -U add-zsh-hook
     add-zsh-hook chpwd nvm_auto_switch
     #change node version iff .nvmrc in pwd
-    if [[ -f .nvmrc ]]; then
-        nvm use
-    else
-        # use nvm node if not using it already
-        if [[ $(type node) =~ 'not found' ]] || [[ ! $(which node) =~ '/.nvm/' ]]; then
-            nvm use 6
-        fi
-    fi
+    # if [[ -f .nvmrc ]]; then
+    #     nvm use
+    # else
+    #     # use nvm node if not using it already
+    #     if [[ $(type node) =~ 'not found' ]] || [[ ! $(which node) =~ '/.nvm/' ]]; then
+    #         nvm use 8
+    #     fi
+    # fi
 }
 function loadnvmAutocomplete(){
     [ -s "${NVM_BREW_PREFIX}/etc/bash_completion.d/nvm" ] && . "${NVM_BREW_PREFIX}/etc/bash_completion.d/nvm"
@@ -90,6 +90,7 @@ function loadall(){
     # rvm complains about not being first in path
     PATH=$(echo $PATH | tr ':' '\n' | uniq | tr '\n' ':')
     reload
+    cd ./
 }
 if [[ -z $loadallsourced ]]; then
     alias l='load'
