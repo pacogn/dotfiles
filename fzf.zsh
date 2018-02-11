@@ -69,7 +69,9 @@ function fa(){
     --header 'CTRL-o - open without abort(LESS) :: CTRL-s - toggle sort :: CTRL-g - toggle preview window' \
     --bind 'ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:$DOTFILES/fzf/fhelp.sh {}:0 > /dev/tty')
     if [[ -f $filename ]]; then
-        vim $filename
+        #man zshzle for what's happenning here
+        LBUFFER="${LBUFFER}${filename}"
+        zle redisplay
     fi
 }
 function fman(){
@@ -122,8 +124,8 @@ fzf-chth(){
     # THEME=selected
   fi
 }
-zle     -N    fzf-chth
-bindkey '^Y' fzf-chth
+zle     -N    fa
+bindkey '^Y' fa
 alias fchth='fzf-chth'
 alias fcd=fzf-cd-widget
 # fzf-locate-widget() {
