@@ -85,7 +85,7 @@ function fman(){
         #-j12: tells less to put 12lines above search result as opposed to search result on top of screen
 
         searchpattern=$(sed 's/\\b//g' <<< ${@: -1})
-        man $manpage | less -i -j12 -p $searchpattern
+        man -P "less -i -j12 -p $searchpattern" $manpage 
     fi
 }
 # fshow - git commit browser
