@@ -237,13 +237,13 @@ xmap <space>s <Plug>VSurround
 xmap gS  <Plug>VgSurround
 
 "using map from <Plug>(easymotion...) is cool, the plugin worries to do the right thing with my mappings
-let g:EasyMotion_keys='abcdefghijklmnopqrstuvwxyz'
-map ss <Plug>(easymotion-s)
-map sn <Plug>(easymotion-sn)
-map s; <Plug>(easymotion-next)
-map s, <Plug>(easymotion-prev)
-map s. <Plug>(easymotion-repeat)
-map sd <Plug>(easymotion-s2)
+" let g:EasyMotion_keys='abcdefghijklmnopqrstuvwxyz'
+" map ss <Plug>(easymotion-s)
+" map sn <Plug>(easymotion-sn)
+" map s; <Plug>(easymotion-next)
+" map s, <Plug>(easymotion-prev)
+" map s. <Plug>(easymotion-repeat)
+" map sd <Plug>(easymotion-s2)
 
 map <space>tc :tabclose<cr>
 map <space>te :call utils#toTerminal()<cr>

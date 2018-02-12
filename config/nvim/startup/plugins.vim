@@ -51,7 +51,6 @@ Plug 'dahu/vim-fanfingtastic'                                       " improved f
 " Plug 'tpope/vim-obsession'                                          " session management
 Plug 'airblade/vim-gitgutter'                                       " add git status for each modified line
 " Plug 'terryma/vim-smooth-scroll'                                    " makes scrolling not jumpy!
-Plug 'easymotion/vim-easymotion'
 Plug 'sudavid4/base16-vim'
 Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
 Plug 'NLKNguyen/papercolor-theme'
