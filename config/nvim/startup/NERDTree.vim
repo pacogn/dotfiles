@@ -52,7 +52,7 @@ function! s:wipeRememberedNerd()
     endif
 endfunction
 function! NERDTreeFindOrClose()
-    if g:NERDTree.IsOpen()
+    if exists('g:NERDTree') && g:NERDTree.IsOpen()
         NERDTreeClose
     else
         NERDTreeFind

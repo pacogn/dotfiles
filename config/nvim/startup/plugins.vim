@@ -57,7 +57,7 @@ Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline'                                      " fancy statusline
 Plug 'sudavid4/vim-airline-themes'                                  " themes for vim-airline
 Plug 'sudavid4/vim-js-goToDeclaration', {'for': 'javascript'}       " better ternjs gotodeclaration
-Plug 'sudavid4/nerdtree' |
+Plug 'sudavid4/nerdtree' ,{'on': ['NERDTreeFind', 'NERDTreeToggle']}|
             \Plug 'tiagofumo/vim-nerdtree-syntax-highlight' |
             \Plug 'ryanoasis/vim-devicons'                          " file drawer
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete
