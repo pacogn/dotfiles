@@ -99,9 +99,6 @@ nnoremap Y y$
 " qq to record, Q to replay (recursive map due to peekaboo)
 nmap Q @q
 
-" scroll the viewport faster
-" nnoremap <C-d> :call smooth_scroll#down(9, 0, 6)<CR>
-" nnoremap <C-u>  :call smooth_scroll#up(9, 0, 6)<CR>
 "-----------------------------------------------------------------------------}}}
 "OPTIONS                                                                      {{{ 
 "--------------------------------------------------------------------------------
