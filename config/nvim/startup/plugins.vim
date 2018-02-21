@@ -2,7 +2,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/vim-peekaboo'
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'yuttie/comfortable-motion.vim'                               " Brings physics-based smooth scrolling to the Vim world!
-
+Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'}  
 Plug 'tommcdo/vim-exchange'                                         " exchange text with cx
 Plug 'sudavid4/vim-visual-star-search'                              " extends */# to do what you would expect in visual mode
 Plug 'SirVer/ultisnips'
