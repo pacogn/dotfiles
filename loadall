@@ -92,6 +92,11 @@ function loadall(){
     reload
     cd ./
 }
+function loadallifneeded(){
+  if [[ ! $NVM_DIR =~ $HOME ]]; then
+      loadall
+  fi
+}
 if [[ -z $loadallsourced ]]; then
     alias l='load'
     alias l!='loadall'

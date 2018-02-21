@@ -3,7 +3,6 @@ export CK="$HOME/projects/wix-ck-editor/"
 export SV="$HOME/projects/santa/"
 export SE="$HOME/projects/santa-editor/"
 export WR="$HOME/projects/wix-richtext/"
-export CODE_SDK="$HOME/projects/js-wixcode-sdk/"
 #https://www.youtube.com/watch?v=FWIZhzy-RJs
 hash -d a=~/projects/santa/
 hash -d e=~/projects/santa-editor/
@@ -18,8 +17,6 @@ alias openteamcitywixrichtext='open http://tc.dev.wixpress.com/viewType.html?bui
 alias openteamcitysantamembers='open http://tc.dev.wixpress.com/project.html?projectId=SantaMembers'
 alias openteamcitymembersarea='openteamcitysantamembers'
 alias openteamcitypullrequestsantaviewer='open https://pullrequest-tc.dev.wixpress.com/project.html?projectId=Santa&tab=projectOverview'
-alias openeditorcurrent='open '\''http://editor.wix.com/html/editor/web/renderer/edit/1fa8b8b7-9cc5-4472-801a-6e14b3a667c7?metaSiteId=80176187-9bac-4cab-9ddc-f700c9e45445&editorSessionId=427C0A90-6DBB-4B6C-B3A1-27A91A1099FF&experiments=sv_dpages%2CdisableDbEditorAutoSave%2CdisableSaveReminder%2CrightClickDebug%2Cdpages%2Cse_platform1%2Csv_platform1%2CfastStyling%2Cse_grid%2Csv_grid%2CdeveloperModeToggle&editorPlatformAppSources=%3A&viewerPlatformAppSources=%3A&WixCodeRuntimeSource=1.2264.0&EditorSource=http%3A%2F%2Flocalhost%2Feditor-base&debug=all&ReactSource=http%3A%2F%2Flocalhost&petri_ovr=specs.EnableNewRelicInSanta%3Afalse%3Bspecs.DisableNewRelicScriptsSantaEditor%3Atrue%3Bspecs.HttpsAllowedForPremiumSites%3Afalse%3Bspecs.HttpsAllowedForFreeSites%3Afalse&leavePagePopUp=false'\'
-alias openviewercurrent='open '\''http://davidsu9.wixsite.com/customrouter?EditorSource=http%3A%2F%2Flocalhost%2Feditor-base&ReactSource=http%3A%2F%2Flocalhost&WixCodeRuntimeSource=1.2244.0&editorPlatformAppSources=%3A&experiments=disableDbEditorAutoSave%2CdisableSaveReminder%2CrightClickDebug%2Cdpages%2Csv_dpages%2Cse_platform1%2Csv_platform1%2CfastStyling%2Cse_grid%2Csv_grid%2CdeveloperModeToggle&petri_ovr=specs.EnableNewRelicInSanta%3Afalse%3Bspecs.DisableNewRelicScriptsSantaEditor%3Atrue%3Bspecs.HttpsAllowedForPremiumSites%3Afalse%3Bspecs.HttpsAllowedForFreeSites%3Afalse&debug=all&viewerPlatformAppSources=%3A'\'
 function killsanta(){
 #kill with SIGINT=2 by default
     signal=${1:-2}
@@ -29,26 +26,13 @@ function killsanta(){
     kill -$signal $(lsof -i tcp:5000 -t)
 }
 function servesanta()(
-    #note the wrapping `()` to run in subshell thus staying in pwd
-    if [[ ! $NVM_DIR =~ $HOME ]]; then
-        loadall
-    fi
+    loadallifneeded
     cd ~/projects/santa
     sudo -b npm start
     cd ~/projects
     nohup serve -p 3000 &> /tmp/serve &
     nvm use 8.7
-    #don't use serve-https, use `local-ssl-proxy --source 3001 --target 5000` instead - navigate to https://localhost:3001
     nohup local-ssl-proxy --source 5000 --target 3000 &> /tmp/local-ssl &
-    # nohup serve-https &> /tmp/servehttps &
-    # {
-    #     sleep 1
-    #     printf "\033[38;5;4m"serve-https output\n
-    #     cat /tmp/servehttps
-    #     printf \n"\033[38;5;10m"serve output\n
-    #     cat -e /tmp/serve
-    #     printf "\033[0m"\n
-    # } &
 )
 function exitIfDirty(){
   if [[ $(git diff --shortstat 2> /dev/null | tail -n1) != "" ]]
@@ -56,9 +40,6 @@ function exitIfDirty(){
     echo "\033[38;5;196m"$(pwd) is dirty, refusing to continue "\033[0m"
     exit 1
   fi
-}
-function pullYarnBuild(){
-  { git pull && yarn && npm run build }
 }
 printinfo(){
     echo color='\033[38;5;202m'
@@ -83,8 +64,8 @@ buildsantaeditor(){
 
 buildsanta(){
     echo $1
-    ( pdir="$HOME/projects/santa"                     && cd $pdir && nvm use && { grunt $1 &> /tmp/sv.me.buildResult } || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 }   && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) & 
-    ( pdir="$HOME/projects/santa-editor" && sleep 40  && cd $pdir && nvm use && { grunt $1 &> /tmp/se.me.buildResult } || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 }   && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
+    ( pdir="$HOME/projects/santa"                     && cd $pdir && nvm use && yarn && { grunt $1 &> /tmp/sv.me.buildResult } || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 }   && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) & 
+    ( pdir="$HOME/projects/santa-editor" && sleep 40  && cd $pdir && nvm use && yarn && { grunt $1 &> /tmp/se.me.buildResult } || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 }   && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
     wait
     printinfo 'santa-viewer build'
     cat /tmp/sv.me.buildResult
@@ -101,16 +82,6 @@ buildmainr(){
   buildmainrviewer
   sleep 30
   buildmainreditor
-}
-pullmembers(){
-  ( pdir="$HOME/projects/santa"                                             && cd $pdir && nvm use   && exitIfDirty && { { git pull && yarn && grunt &&  }   &> /tmp/s.me.buildResult    || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) & 
-  ( pdir="$HOME/projects/santa-platform-apps-container"                     && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/spac.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/js-platform-editor-sdk"                            && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/jpes.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/app-market/santa-members/santa-members-editor-app" && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/smea.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/app-market/santa-members/santa-members-viewer-app" && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/smva.me.buildResult || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/santa-core/santa-wix-code"                         && cd $pdir && nvm use   && exitIfDirty && { pullYarnBuild                       &> /tmp/sc.me.buildResult   || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) &
-  ( pdir="$HOME/projects/santa-editor" && sleep 40                          && cd $pdir && nvm use   && exitIfDirty && { { git pull && yarn && grunt }       &> /tmp/se.me.buildResult   || { echo  "\033[38;5;9m" $pdir failed "\033[0m" && exit 1 } }  && echo  "\033[38;5;2m" $pdir succeeded "\033[0m" ) 
-  wait
 }
 function openchromedevtools(){
 osascript << 'END'
@@ -170,165 +141,7 @@ function openviewerlocal(){
 '&'\
 'petri_ovr=specs.HttpsAllowedForFreeSites:false'
 }
-function openeditormembersarea(){
-    open 'http://editor.wix.com/html/editor/web/renderer/new'\
-'?'\
-'siteId=8c60c43a-a2bd-4aea-8b58-d4e5a13de8f6'\
-'&'\
-'metaSiteId=3215b29c-ba84-4807-ace9-fc59236c5131'\
-'&'\
-'editorSessionId=ABAE3DEB-1A01-4207-8C00-E076CDF11E47'\
-'&'\
-'EditorSource=http://localhost/editor-base'\
-'&'\
-'PlatformContainerSource=http://localhost/platform-apps-container'\
-'&'\
-'ReactSource=http://localhost'\
-'&'\
-'sdkSource=http://localhost/wixcode-sdk/lib/wix.js'\
-'&'\
-'js-wixcode-sdk-override=http://localhost/wixcode-sdk/build'\
-'&'\
-'editorSdkSource=http://localhost/editor-sdk/lib/editorSDK.js'\
-'&'\
-'WixCodeRuntimeSource=1.1678.0'\
-'&'\
-'debug=all'\
-'&'\
-'experiments=sv_persistentMobilePresets,disableDbEditorAutoSave,disableSaveReminder,rightClickDebug,dpages,sv_dpages,se_platform1,fastStyling,se_grid,developerModeToggle,sv_platform1,se_santaMembers,sv_santaMembers'\
-'&'\
-'petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false;specs.UseHttpsInEditor:false'\
-'&'\
-'isqa=true'\
-'&'\
-'leavePagePopUp=false'\
-'&'\
-'hot=false'
-
-sleep 1
-osascript << 'END'
-tell application "Google Chrome"
-    activate
-    tell application "System Events" to keystroke "i" using {option down, command down}
-end tell
-END
-
-
-   # open 'http://editor.wix.com/html/editor/web/renderer/new?'\
-# 'siteId=cbf36d3a-49d0-41c2-9482-1bb58d5fdda3&'\
-# 'metaSiteId=a573279f-ae6f-46d1-8556-7c93ae9b2c84&'\
-# 'editorSessionId=A4DBE6A1-68C4-48B0-BF97-E7D7A4DC4DF0&'\
-# 'EditorSource=http://localhost/editor-base&'\
-# 'PlatformContainerSource=http://localhost/platform-apps-container&'\
-# 'ReactSource=http://localhost&'\
-# 'WixCodeRuntimeSource=1.2334.0&'\
-# 'sdkSource=http://static.parastorage.com/services/js-wixcode-sdk/48c2ac9b36576881646da2c7745e0c4dc5360a5b/lib/wix.js&'\
-# 'debug=all&'\
-# 'experiments=disableDbEditorAutoSave,disableSaveReminder,rightClickDebug,dpages,sv_dpages,se_platform1,sv_platform1,developerModeToggle,se_santaMembers,sv_santaMembers&'\
-# 'petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false;specs.UseHttpsInEditor:false &'\
-# 'editorSdkSource=http://localhost/editor-sdk/build/editorSDK.js&'\
-# 'isqa=true'
-}
-function openviewermembersarea(){
-    cd /Users/davidsu/projects
-    serve-https &
-    open 'http://davidsu9.wixsite.com/membersarea?EditorSource=http%3A%2F%2Flocalhost%2Feditor-base&ReactSource=http%3A%2F%2Flocalhost&WixCodeRuntimeSource=1.2335.0&debug=all&editorPlatformAppSources=members-application%3A1.4.0&editorSessionId=771DFA69-D9CE-469A-8DC0-FE47E3BAD95A&experiments=disableDbEditorAutoSave%2CdisableSaveReminder%2CrightClickDebug%2Cdpages%2Csv_dpages%2Cse_platform1%2Csv_platform1%2CfastStyling%2Cse_grid%2Csv_grid%2CdeveloperModeToggle%2Cse_santaMembers%2Csv_santaMembers&leavePagePopUp=false&metaSiteId=32f2979d-5c96-4b85-973c-df62b11afc51&petri_ovr=specs.EnableNewRelicInSanta%3Afalse%3Bspecs.DisableNewRelicScriptsSantaEditor%3Atrue%3Bspecs.HttpsAllowedForPremiumSites%3Afalse%3Bspecs.HttpsAllowedForFreeSites%3Afalse&viewerPlatformAppSources=members-application%3A1.4.0&leavePagePopUp=false'
-}
-function openeditormembersareablank(){
-    {
-        cd /Users/davidsu/projects
-        serve-https 
-    } &
-
-   open 'http://editor.wix.com/html/editor/web/renderer/new?siteId=cbf36d3a-49d0-41c2-9482-1bb58d5fdda3&metaSiteId=a573279f-ae6f-46d1-8556-7c93ae9b2c84&editorSessionId=A4DBE6A1-68C4-48B0-BF97-E7D7A4DC4DF0&EditorSource=http://localhost/editor-base&PlatformContainerSource=http://localhost/platform-apps-container&ReactSource=http://localhost&WixCodeRuntimeSource=1.2334.0&debug=all&editorSdkSource=http://localhost/editor-sdk/build/editorSDK.js&experiments=disableDbEditorAutoSave,disableSaveReminder,rightClickDebug,dpages,sv_dpages,se_platform1,sv_platform1,developerModeToggle,se_santaMembers,sv_santaMembers&petri_ovr=specs.EnableNewRelicInSanta:false;specs.DisableNewRelicScriptsSantaEditor:true;specs.HttpsAllowedForPremiumSites:false;specs.HttpsAllowedForFreeSites:false &isqa=true'
-}
-function startdynamic(){
-    (#parentheses causes code to be run in subshell
-        trap "kill $(jobs -p)" SIGINT SIGTERM EXIT
-        node $SV/beaker/dynamicPages/backend.js &
-        cd $SV
-        sudo npm start
-    )
-   wait
-}
-function startwixrichtextday(){
-   {
-      cd $WR &&
-      git pull &&
-      npm i
-   }
-}
-function startsantaday(){
-    {
-        cd $SV &&
-        git pull --rebase &&
-        npm  i &&
-        grunt all --force &&
-        node tern_proj_generator `pwd`/packages > .tern-project
-     } | egrep -v $LOG
-}
-function startsantaeditorday(){
-    {
-        cd ~/projects/santa-editor &&
-        git pull --rebase &&
-        npm i &&
-        bower install --force &&
-        grunt all --force &&
-        node tern_proj_generator `pwd`/packages > .tern-project
-    } | egrep -v $LOG
-}
-function startckday(){
-    cd ~/projects/wix-ck-editor &&
-    git pull --rebase &&
-    bower update &&
-    grunt all
-}
-function startwixcodeday(){
-    cd ~/projects/js-wixcode-sdk &&
-    git pull --rebase &&
-    npm i &&
-    grunt all &&
-    npm run build &&
-    cd ~/projects/santa/static/wixcode &&
-    grunt &&
-    cd ~/projects/santa/static/platform &&
-    grunt
-
-}
 function startwixday(){
-#command inside ( parenthesis ) will be run in a subshell
-#allowing for parallelism
-    ( startsantaday ) &
-    ( startsantaeditorday ) &
-    ( startckday ) &
-    ( startwixrichtextday ) &
-    ( startwixcodeday )
+    loadallifneeded
+    pullsanta && buildsanta
 }
-function notonmaster(){
-    local pwd=$PWD
-    cd $SV
-    local currbranch="$(git rev-parse --abbrev-ref HEAD)"
-    [[ $currbranch != "master" ]] && echo $PWD - $currbranch
-
-    cd $SE
-    currbranch="$(git rev-parse --abbrev-ref HEAD)"
-    [[ $currbranch != "master" ]] && echo $PWD - $currbranch
-
-    cd $CK
-    currbranch="$(git rev-parse --abbrev-ref HEAD)"
-    [[ $currbranch != "master" ]] && echo $PWD - $currbranch
-
-    cd $CODE_SDK
-    currbranch="$(git rev-parse --abbrev-ref HEAD)"
-    [[ $currbranch != "master" ]] && echo $PWD - $currbranch
-
-    cd $pwd
-}
-function checkoutmasterfunc(){
-    cd $1
-    echo $fg[yellow]$PWD$reset_color
-    git checkout master
-    printf '*%.0s' {1..50}
-    printf '\n\n'
-}
-alias checkoutmaster='checkoutmasterfunc ~/projects/wix-ck-editor && checkoutmasterfunc ~/projects/santa && checkoutmasterfunc ~/projects/santa-editor && checkoutmasterfunc ~/projects/js-wixcode-sdk'
