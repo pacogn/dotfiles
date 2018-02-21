@@ -197,6 +197,7 @@ nmap 1f :call FixNerdSize()<cr>
 nmap <silent> 1N :NERDTreeFind<cr>
 nmap <silent> \t :NERDTreeToggle<cr>
 nmap <silent> <space>nn :NERDTreeToggle<cr>
+nmap <silent> <space>nf :NERDTreeFind<cr>
 nmap 1o :only<cr>
 
 "VIM-MARK: <space>hi for highlight interesting word
