@@ -111,29 +111,9 @@ if has('nvim')
         set termguicolors
     endif
 endif
-if has('nvim')
-   "this is ignored now, defaults are good
-    let $NVIM_TUI_ENABLE_CURSOR_SHAPE = 1
-elseif exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
-
-
-
-" let g:ack_autofold_results = 1
-" make backspace behave in a sane manner
-
-
-
-" Tab control
 
 if has('mouse')
     set mouse=a
-    " set ttymouse=xterm2
 endif
 " switch syntax highlighting on
 syntax on
