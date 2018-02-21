@@ -122,41 +122,6 @@ function! hzf#g_files()
                 \ 'sink*': function('s:sink_gfiles')
                 \})
 endfunction
-"-----------------------------------------------------------------------------}}}
-"YANK-RING                                                                    {{{ 
-"--------------------------------------------------------------------------------
-let s:yank_ring_command = 'p'
-function! s:yankRingSink(val)
-    let boo = substitute(a:val, '^.\{-\}\(\d\)', '\1', '')
-    let num = matchstr(boo, '^\S*')
-    YRShow
-    redraw
-    echo num
-    if num > 1
-        execute 'normal! '.(num - 1).'j'
-    endif
-    execute 'normal '.s:yank_ring_command
-endfunction
-
-function! hzf#yankRing(command)
-    if a:command != 'p' && a:command != 'P'
-        echoerr "command must be 'p' or 'P'"
-    endif
-    silent! YRShow
-    silent! YRShow
-    let s:yank_ring_command = a:command
-    call fzf#run({
-                \'dir': g:yankring_history_dir,
-                \'source': 'cat -n ' . g:yankring_history_file . '_v2.txt | sed -E ''s#,[vV]$##g'' ',
-                \'sink': function('s:yankRingSink'),
-                \'options': "--preview 'sh ".utils#get_bin_directory()."/tr_002_newline.sh {}' ".
-                \'--header '''.hzf#headerKeyCombinationColor('CTRL-s').' - toggle sort :: '.
-                \hzf#headerKeyCombinationColor('CTRL-g').' - toggle preview window'' '. 
-                \'--preview-window 60%:right '.
-                \"--bind 'ctrl-g:toggle-preview,".
-                \"ctrl-s:toggle-sort'"
-                \})
-endfunction
 
 "-----------------------------------------------------------------------------}}}
 "OPTIONS/VARIABLES                                                            {{{ 

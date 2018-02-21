@@ -12,11 +12,10 @@ Plug 'idbrii/vim-mark'                                              " highlighti
 Plug 'sudavid4/mysql-mru.vim'
 Plug 'schickling/vim-bufonly'                                       " delete all buffers but current
 Plug 'terryma/vim-expand-region'
-Plug 'jlanzarotta/bufexplorer'                                      " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for )
-Plug 'vim-scripts/YankRing.vim'                                     " Maintains a history of previous yanks, changes and deletes
-Plug 'sudavid4/vim-prettier', { 
-    \ 'do': 'npm install', 
-    \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
+" Plug 'jlanzarotta/bufexplorer'                                      " easy visually delete buffers ( and other buffer stuff that I'll probably have no use for )
+" Plug 'sudavid4/vim-prettier', { 
+"     \ 'do': 'npm install', 
+"     \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss'] }
 Plug 'sbdchd/neoformat', { 'for':                           
             \['javascript', 'css', 'scss', 
             \'sh', 'zsh', 'vim', 'html'] , 
@@ -59,7 +58,7 @@ Plug 'sudavid4/vim-airline-themes'                                  " themes for
 Plug 'sudavid4/vim-js-goToDeclaration', {'for': 'javascript'}       " better ternjs gotodeclaration
 Plug 'sudavid4/nerdtree' ,{'on': ['NERDTreeFind', 'NERDTreeToggle']}|
             \Plug 'tiagofumo/vim-nerdtree-syntax-highlight' |
-            \Plug 'ryanoasis/vim-devicons'                          " file drawer
+            \Plug 'ryanoasis/vim-devicons', {'on': ['NERDTreeFind', 'NERDTreeToggle']} " file drawer
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete
 Plug 'tpope/vim-commentary'                                         " comment stuff out
 Plug 'sudavid4/vim-unimpaired'                                      " mappings which are simply short normal mode aliases for commonly used ex commands
@@ -70,7 +69,7 @@ Plug 'tpope/vim-rhubarb'                                            " for `:Gbro
 Plug 'tpope/vim-repeat'                                             " enables repeating other supported plugins with the . command
 Plug 'haya14busa/incsearch.vim'                                     " Improved incremental searching for Vim
 " https://github.com/osyo-manga/vim-over -- you really want to check this out!!!
-Plug 'editorconfig/editorconfig-vim'                                " .editorconfig support
+" Plug 'editorconfig/editorconfig-vim'                                " .editorconfig support
 Plug 'sudavid4/gv.vim'                                              " :GV browse commits like a pro
 " see https://github.com/normenmueller/vim-iterm2-navigator/commit/58ca1e3e2ac24689fb1312e7fcf4384acdbe1e33 for how to make the following work
 " Plug 'sotte/presenting.vim', { 'for': 'markdown' } " a simple tool for presenting slides in vim based on text files

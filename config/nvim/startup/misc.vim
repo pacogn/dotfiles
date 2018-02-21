@@ -9,8 +9,6 @@ let g:diminactive_buftype_blacklist = ['nowrite', 'acwrite']
 let g:rooter_manual_only = 1
 let g:table_mode_corner = '|'
 let g:table_mode_separator = '|'
-let g:yankring_history_dir = '$HOME'
-let g:yankring_history_file = '.yankring_vim_history'
 let g:tern_request_timeout = 2
 let g:tern_show_signature_in_pum = 0  " This do disable full signature type on autocomplete
 let g:normal_cursor_line_column = &cursorcolumn
@@ -22,12 +20,8 @@ let g:closetag_filenames = "*.html,*.xhtml,*.phtml,*.js,*.jsx"
 let mapleader = ','
 let g:mapleader = ','
 let g:ack_use_dispatch = 1
-let g:yankring_n_keys=''
-let g:yankring_zap_keys = 'f t F T'
-let g:yankring_max_element_length = 2548576
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
-let g:yankring_ignore_operator = 'g~ gu gU ! = gq g? > < zf g@ d c x D'
 "-----------------------------------------------------------------------------}}}
 "FUNCTIONS                                                                      {{{ 
 "--------------------------------------------------------------------------------
@@ -98,12 +92,9 @@ nnoremap ,j <C-w>j
 nnoremap ,k <C-w>k
 
 cnoremap jk <C-c>
+
 " Make Y behave like other capitals
-" see YankRing documentation line 520 - map Y to y$ and insert it into yankring
-function! YRRunAfterMaps()
-    nnoremap Y :<C-U>YRYankCount 'y$'<CR>
-endfunction
-" nnoremap Y y$
+nnoremap Y y$
 
 " qq to record, Q to replay (recursive map due to peekaboo)
 nmap Q @q
