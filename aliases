@@ -6,7 +6,7 @@ alias ..='cd ../'
 alias ../='cd ../'
 alias vim='[[ -z $HAS_LOADED ]] && loadrvm; nvim'
 alias vimdiff='nvim -d'
-alias showlinked='ll node_modules G @'
+alias showlinked='ll node_modules G '\''@\s*->'\'
 alias npmlinked='ll node_modules G @'
 alias ag='ag --color-match="1;031"'
 alias rg=' rg --colors line:fg:yellow \
@@ -51,6 +51,11 @@ function git-stash-rename() {
    git stash drop $1 || exit 1
    git stash store -m "$2" $rev
 }
+function git-branch-wipeout(){
+    git branch -D $@
+    git push -d origin $@
+}
+alias gbw='git-branch-wipeout'
 #git status in vim
 function gsv() {
     gitstatus=$(git status)
