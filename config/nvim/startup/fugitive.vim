@@ -24,9 +24,9 @@ endfunction
 function! JiraCommit()
     normal! gg
     call search('On branch \zs', '', 6)
-    normal Y
+    normal "fyW
     0put='$'
-    normal p
+    normal "fp
     call feedkeys('a|')
 endfunction
 augroup fugitiveautocmd
