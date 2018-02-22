@@ -1,10 +1,10 @@
 #!/bin/zsh
 setopt COMPLETE_ALIASES
-#we wish to have rvm in vim for proper coloring in preview(fzf) for viml files
 alias gbrowse='git open'
 alias ..='cd ../'
 alias ../='cd ../'
-alias vim='[[ -z $HAS_LOADED ]] && loadrvm; nvim'
+#we wish to have rvm in vim for proper coloring in preview(fzf) for viml files
+alias vim='if [[ -z $HAS_LOADED ]]; then loadrvm; else alias vim='\''nvim'\''; fi; nvim'
 alias vimdiff='nvim -d'
 alias showlinked='ll node_modules G '\''@\s*->'\'
 alias npmlinked='ll node_modules G @'
