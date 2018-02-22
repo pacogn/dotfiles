@@ -45,7 +45,9 @@
 22. install [ITerm2 shell integration](https://www.iterm2.com/documentation-shell-integration.html): `curl -L https://iterm2.com/misc/install_shell_integration.sh | bash`
 23. enable mouse scroll for less in iterm: ITerm -> Preferences -> Advanced and search for "scroll"
 24. unmark checkbox of iterm->Preferences->terminal->Shell Integration[Show mark indicators]
-24. install fasd: `brew install fasd`
+24. install fasd: `git clone https://github.com/akatrevorjay/fasd.git && cd fasd && make install`
+    - don't use the brew version cuz it messes up the global alias V
+25. make changes in _faasd_preexec [like this](https://github.com/clvv/fasd/issues/120)
 
 - to push to github (https with two factor authentication) you will need to use a token instead of your password. [Instructions here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
 
