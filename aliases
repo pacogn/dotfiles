@@ -15,6 +15,9 @@ alias rg=' rg --smart-case \
    --colors path:fg:green       \
    --colors path:style:bold '
 alias agd='cd $DOTFILES && ag --ignore ''plugged*'' --ignore-dir ''forkedProjects'' --ignore ''autoload*'''
+alias ja='cd $HOME/projects/santa'
+alias je='cd $HOME/projects/santa-editor'
+alias jd='cd $HOME/.dotfiles'
 alias -g E=' | egrep '
 alias yi='yarn install'
 alias killbg='kill -s INT $(sed -E '\''s/\[([[:digit:]]+)\].*/%\1/g'\'' <<< $(jobs))'
