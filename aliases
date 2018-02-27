@@ -9,7 +9,8 @@ alias vimdiff='nvim -d'
 alias showlinked='ll node_modules G '\''@\s*->'\'
 alias npmlinked='ll node_modules G @'
 alias ag='ag --color-match="1;031"'
-alias rg=' rg --colors line:fg:yellow \
+alias rg=' rg --smart-case \
+   --colors line:fg:yellow \
    --colors line:style:bold     \
    --colors path:fg:green       \
    --colors path:style:bold '
