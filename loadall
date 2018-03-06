@@ -10,6 +10,7 @@ function loadzgen(){
         zgen oh-my-zsh plugins/git
         zgen oh-my-zsh plugins/yarn
         zgen load paulirish/git-open
+        zgen load lukechilds/zsh-nvm
     fi
     #unset SET_CUSTOM_PROMPT value if you want to test other prompt than
     #the custom in ~/.dotFiles/prompt
@@ -49,9 +50,9 @@ function nvm_auto_switch {
     fi
 }
 function loadnvm(){
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "${NVM_BREW_PREFIX}/nvm.sh" ] && . "${NVM_BREW_PREFIX}/nvm.sh"
-    export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
+    # export NVM_DIR="$HOME/.nvm"
+    # [ -s "${NVM_BREW_PREFIX}/nvm.sh" ] && . "${NVM_BREW_PREFIX}/nvm.sh"
+    # export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
 
     autoload -U add-zsh-hook
     add-zsh-hook chpwd nvm_auto_switch
