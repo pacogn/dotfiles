@@ -146,7 +146,11 @@ function escape_ls(){
   echo reset with \\033[0m
 }
 alias resetnodedebugchrome='export NODE_DEBUG_OPTION=""'
-alias flagnodedebugchrome='export NODE_DEBUG_OPTION="--inspect"'
+
+function flagnodedebugchrome(){
+  export NODE_DEBUG_OPTION=${1:-'--inspect-brk'}
+}
+alias setnodedebugchrome='flagnodedebugchrome'
 function nodedebugchrome() {
 export NODE_DEBUG_OPTION="--inspect"
 osascript << 'END'
