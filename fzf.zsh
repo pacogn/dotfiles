@@ -70,8 +70,9 @@ function fa(){
     --bind 'ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:$DOTFILES/fzf/fhelp.sh {}:0 > /dev/tty')
     if [[ -f $filename ]]; then
         #man zshzle for what's happenning here
-        LBUFFER="${LBUFFER}${filename}"
-        zle redisplay
+        # LBUFFER="${LBUFFER}${filename}"
+        # zle redisplay
+        vim $filename
     fi
 }
 function fman(){
