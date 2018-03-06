@@ -103,7 +103,7 @@ function findmanpage(){
         echo 'need a search argument for this'
         return
     fi
-    rg -uu --smart-case --line-number --follow --color "ansi" $@ /usr/share/man
+    rg -uu --line-number --follow --color "ansi" $@ /usr/share/man
     # for dir in $(echo /usr/share/man && echo $manpath | tr ':' '\n' | grep '^/Users/' | grep -v '\.nvm')
     # do
     #    ag -a $@ $dir #ack is like grep, recursive by default, great option
