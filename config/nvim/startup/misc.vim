@@ -70,7 +70,7 @@ nnoremap <silent> \z :call <sid>zoom()<cr>
 function! ClearMessages()
     for n in range(200) | echom "" | endfor
 endfunction
-language en_US
+language en_US.UTF-8
 
 function! OnInsertLeave()
     if(g:normal_cursor_line_column)
@@ -179,12 +179,14 @@ augroup configgroup
 augroup END
 
 command! ClearCache let g:projectsRootDic = {}
+if has('nvim')
 augroup multiProjectAutoCd
    autocmd!
    autocmd BufWinEnter * call dir_utils#CdOnBufferEnter(0)
    autocmd WinEnter * call dir_utils#CdOnBufferEnter(0)
    autocmd DirChanged * call dir_utils#CdOnBufferEnter(1)
 augroup END
+endif
 function! CDG()
    let currWorkingDir = utils#get_project_root(getcwd())
    let pwd = getcwd()

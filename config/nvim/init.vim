@@ -5,6 +5,9 @@ autocmd!
 "-------------------------------------------------------------------------------------------------------------------------
 function! SourceMyScripts()
     source $DOTFILES/config/nvim/startup/plugins.vim
+    if !isdirectory($DOTFILES.'/config/nvim/plugged')
+        PlugInstall
+    endif
     let file_list = split(globpath("$DOTFILES/config/nvim/startup/", "*.vim"), '\n')
 
     for file in file_list

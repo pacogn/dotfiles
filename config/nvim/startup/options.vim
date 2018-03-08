@@ -1,6 +1,10 @@
 set nocompatible          " not compatible with vi
 " set maxmemtot=2000000     " give vim some memory - it get's stuck when working with very large files
-set shada=/1000,:1000,<1,'1,h,s5
+if has('nvim')
+    set shada=/1000,:1000,<1,'1,h,s5
+    set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
+    set showbreak=↪
+endif
 set helpheight=39
 set clipboard+=unnamedplus
 set autoread              " detect when a file is changed
@@ -56,11 +60,8 @@ set number                " show line numbers
 set nowrap                " turn on line wrapping
 set wrapmargin=8          " wrap lines when coming within n characters from side
 set linebreak             " set soft wrapping
-set showbreak=…           " show ellipsis at breaking
 set autoindent            " automatically set indent of new line
 set smartindent
 set pastetoggle=<F6>
 set nolist
-set listchars=tab:→\ ,eol:¬,trail:⋅,extends:❯,precedes:❮
-set showbreak=↪
 set nospell
