@@ -10,7 +10,6 @@ function loadzgen(){
         zgen oh-my-zsh plugins/git
         zgen oh-my-zsh plugins/yarn
         zgen load paulirish/git-open
-        zgen load lukechilds/zsh-nvm
     fi
     #unset SET_CUSTOM_PROMPT value if you want to test other prompt than
     #the custom in ~/.dotFiles/prompt
@@ -31,40 +30,35 @@ function nvm_auto_switch {
 
     [[ $skipnvm -eq 1 ]] && return
     unset NVM_RC_VERSION
-    CUR_VERSION=$(node -v |cut -c 2)
+    CUR_VERSION=$(node -v |cut -c 2-)
     nvm_rc_version > /dev/null 2>&1
 
     if [ -z "${NVM_RC_VERSION}" ]
     then
-        export NVM_RC_VERSION=$(nvm_version default | cut -c 2)
+        local nvmrcversion='nvm default version:  '
+        export NVM_RC_VERSION=$(nvm_version default | cut -c 2-)
     else
-        NVM_RC_VERSION=$( cut -c 1 <<< $NVM_RC_VERSION ) 
+      local nvmrcversion='nvmrc version:       '
+        NVM_RC_VERSION=$( cut -c 1- <<< $NVM_RC_VERSION ) 
     fi
 
     if [ $NVM_RC_VERSION != $CUR_VERSION ]
     then
-        echo nvmrcversion: $NVM_RC_VERSION
-        echo curversion: $CUR_VERSION
-        echo changing node version to $NVM_RC_VERSION
-        nvm use >/dev/null 2>&1 || nvm use default >/dev/null 2>&1
+        local version=$NVM_RC_VERSION
+        unset NVM_RC_VERSION
+        echo $nvmrcversion $version
+        echo 'current node version: ' $CUR_VERSION
+        # echo changing node version to $version
+        nvm use $version 
     fi
 }
 function loadnvm(){
-    # export NVM_DIR="$HOME/.nvm"
-    # [ -s "${NVM_BREW_PREFIX}/nvm.sh" ] && . "${NVM_BREW_PREFIX}/nvm.sh"
-    # export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
+    export NVM_DIR="$HOME/.nvm"
+    source "$NVM_DIR/nvm.sh"
+    export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
 
     autoload -U add-zsh-hook
     add-zsh-hook chpwd nvm_auto_switch
-    #change node version iff .nvmrc in pwd
-    # if [[ -f .nvmrc ]]; then
-    #     nvm use
-    # else
-    #     # use nvm node if not using it already
-    #     if [[ $(type node) =~ 'not found' ]] || [[ ! $(which node) =~ '/.nvm/' ]]; then
-    #         nvm use 8
-    #     fi
-    # fi
 }
 function loadnvmAutocomplete(){
     [ -s "${NVM_BREW_PREFIX}/etc/bash_completion.d/nvm" ] && . "${NVM_BREW_PREFIX}/etc/bash_completion.d/nvm"
