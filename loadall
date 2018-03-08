@@ -7,7 +7,6 @@ function loadzgen(){
         zgen oh-my-zsh
         zgen load zsh-users/zsh-syntax-highlighting
         zgen load zsh-users/zsh-history-substring-search
-        zgen oh-my-zsh plugins/git
         zgen oh-my-zsh plugins/yarn
         zgen load paulirish/git-open
     fi
@@ -54,7 +53,7 @@ function nvm_auto_switch {
 }
 function loadnvm(){
     export NVM_DIR="$HOME/.nvm"
-    source "$NVM_DIR/nvm.sh"
+    source "$NVM_DIR/nvm.sh" --no-use
     export NVM_NODEJS_ORG_MIRROR=http://nodejs.org/dist
 
     autoload -U add-zsh-hook
