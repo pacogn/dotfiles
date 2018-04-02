@@ -1,4 +1,5 @@
 runtime! debian.vim
+source $DOTFILES/config/nvim/plug.vim
 call plug#begin('$DOTFILES/config/nvim/plugged')
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'yuttie/comfortable-motion.vim'                               " Brings physics-based smooth scrolling to the Vim world!
