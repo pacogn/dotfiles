@@ -49,7 +49,7 @@ endif
 let file_list = split(globpath("$DOTFILES/config/nvim/startup/", "*.vim"), '\n')
 
 for file in file_list
-    if file !~ "Session.vim" && file !~ "plugins.vim"
+    if file !~ "Session.vim" && file !~ "plugins.vim" && file !~"deoplete_ultisnip.vim"
      " echom file
     execute( 'source '.file )
 endif
