@@ -16,6 +16,7 @@ alias rg=" rg --smart-case \
    --colors path:style:bold "
 alias agd='cd $DOTFILES && ag --ignore ''plugged*'' --ignore-dir ''forkedProjects'' --ignore ''autoload*'''
 alias ja='cd $HOME/projects/santa'
+alias jm='cd $HOME/projects/santa-core/santa-main-r'
 alias je='cd $HOME/projects/santa-editor'
 alias jd='cd $HOME/.dotfiles'
 alias jp='cd $HOME/projects'
@@ -45,6 +46,8 @@ alias -g MC100='--max-count=100'
 alias -g MC50='--max-count=50'
 alias -g MC20='--max-count=20'
 alias -g S='-S Session.vim -c '\''au VimEnter * Obsession .'\'
+alias nodei='node --inspect '
+alias nodeib='node --inspect-brk '
 #allow atom-open-in-vim to blindly send `:e filename`... works if terminal is in vim or in prompt
 alias :e='vim ' 
 alias diffjson='vim /tmp/c.json /tmp/o.json  -c '\'':vsplit | bnext'\'
@@ -67,7 +70,7 @@ function gsv() {
     if [[ $gitstatus =~ 'both modified' ]]; then
         vim -u $HOME/.dotfiles/config/nvim/init_for_gsv.vim \
            -c 'let g:tmp=search("both modi")' \
-           -c 'call feedkeys("\<C-n>D:Gstatus\<cr>\<C-w>K".g:tmp."G") ' \
+           -c 'call feedkeys("\<C-n>dv:Gstatus\<cr>\<C-w>K".g:tmp."G") ' \
            $(git rev-parse --show-toplevel)/.git/index 
      elif [[ $1 ]]; then
       vim -c 'call feedkeys("\<C-n>D:Gstatus\<cr>\<C-n>\<C-w>K") ' \
@@ -140,6 +143,7 @@ alias ls='ls -GF1'
 alias "\a"='rg'
 alias gst='git status'
 alias gls='git log --stat'
+alias gd='git diff'
 alias updatedb='sudo /usr/libexec/locate.updatedb' #for locate's sake
 # alias opengabi='cd ~/Developer/selenium/criancas/selenium && jasmine spec/escola.spec.js gabi'
 alias openescola='cd ~/Developer/selenium/hilanet/selenium && jasmine spec/escola.spec.js'
