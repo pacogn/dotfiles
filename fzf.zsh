@@ -51,15 +51,21 @@ fbr() {
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 function fag(){
-    fzfretval=$(rg --line-number --color "ansi" $@ | fzf  --ansi --preview '$DOTFILES/bin/preview.rb {}' \
+    fzfretval=$(rg --line-number --column --color "ansi" $@ | fzf -m  --ansi --preview '$DOTFILES/bin/preview.rb {}' \
         --preview-window 'top:50%' \
-        --bind 'ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:($DOTFILES/fzf/fhelp.sh {}) > /dev/tty' \
-        --header 'CTRL-o - open without abort(LESS) :: CTRL-s - toggle sort :: CTRL-g - toggle preview window')
+        --bind 'ctrl-l:select-all,ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:($DOTFILES/fzf/fhelp.sh {}) > /dev/tty' \
+        --header 'CTRL-l - select-all :: CTRL-o - open without abort(LESS) :: CTRL-s - toggle sort :: CTRL-g - toggle preview window')
     #note the `< <` here has the same effect as <<. not obvious what could be the difference. see `man zshexpn` +228 for more. here the `<<` fucks up syntax highlight
     #for more on `<<<` see `here string` on `man bash`
     IFS=: read filename linenum ignorerest< <(sed -E 's/([^:]*:[[:digit:]]+)/\1:/' <<< $fzfretval)
     if [[ -f $filename ]]; then
-        vim +$linenum $filename
+        echo '' > /tmp/mruretval
+        echo $fzfretval >> /tmp/mruretval
+        if [[ $(wc -l < /tmp/mruretval) -ge 1 ]]; then
+          vim  -c 'let g:cancelAutoCd=1' -c 'call fzf#vim#MruHandler()'
+        else
+          vim -c 'call fzf#vim#MruHandler()'
+        fi
     fi
 }
 
