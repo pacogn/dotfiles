@@ -205,7 +205,7 @@ function! utils#open_in_atom()
     :call system('atom '.getcwd().' '.expand('%:p').':'.getpos('.')[1]) 
 endfunction
 function! utils#open_in_visual_studio_code()
-    :call system('code -g '.expand('%:p').':'.getpos('.')[1]) 
+    :call system('code '.getcwd().' -g '.expand('%:p').':'.getpos('.')[1]) 
 endfunction
 
 function! utils#isTerminal(_, filename)
