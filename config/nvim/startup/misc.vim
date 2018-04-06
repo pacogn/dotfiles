@@ -31,7 +31,12 @@ function! ListDotFiles(dir, command)
 		\'source': a:command,
 		\'sink': 'e'})
 endfunction
-
+function! SynL()
+   for i in map(synstack(line('.'), col('.')), 'synIDattr(v:val,"name")')
+        exe 'highlight '.i   
+   endfor
+endfunction
+command! SynL call SynL()
 function! IntoTemp(cmd)
    redir => cout
    silent execute a:cmd
@@ -180,12 +185,12 @@ augroup END
 
 command! ClearCache let g:projectsRootDic = {}
 if has('nvim')
-augroup multiProjectAutoCd
-   autocmd!
-   autocmd BufWinEnter * call dir_utils#CdOnBufferEnter(0)
-   autocmd WinEnter * call dir_utils#CdOnBufferEnter(0)
-   autocmd DirChanged * call dir_utils#CdOnBufferEnter(1)
-augroup END
+   augroup multiProjectAutoCd
+      autocmd!
+      autocmd BufWinEnter * call dir_utils#CdOnBufferEnter(0)
+      autocmd WinEnter * call dir_utils#CdOnBufferEnter(0)
+      autocmd DirChanged * call dir_utils#CdOnBufferEnter(1)
+   augroup END
 endif
 function! CDG()
    let currWorkingDir = utils#get_project_root(getcwd())
@@ -205,6 +210,7 @@ command! -complete=shellcmd -bang -nargs=+ Shell call utils#run_shell_command(<q
 command! -bang GPush call utils#run_shell_command('git push', <bang>0)
 command! -bang GPull call utils#run_shell_command('git pull', <bang>0)
 command! CherryPickHelp call cherry_pick_helper#buffer_commits_ordered_by_date()
+command! CopyFilePath :exe "let @*='".expand('%:p')."'"
 
 " quick open snippets file for current filetype
 command! OpenInWebstorm call utils#open_in_webstorm()
@@ -219,5 +225,7 @@ command! CDG call CDG()
 command! CDR if &filetype == 'nerdtree' | execute 'CDC' | else | call utils#cd_project_root(expand('%:p:h')) | endif
 command! CDC if &filetype == 'nerdtree' | execute 'cd /'.join(b:NERDTreeRoot.path.pathSegments, '/') | else | cd %:p:h | endif
 command! ClearMessages call ClearMessages()
+command! AutoCDCancel let g:cancelAutoCd=1
+command! AutoCDEnable unlet! g:cancelAutoCd
 "-----------------------------------------------------------------------------}}}
 

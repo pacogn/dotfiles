@@ -18,6 +18,9 @@ function! dir_utils#cd_project_root_or_cache(projRoot)
 endfunction
 
 function! dir_utils#CdOnBufferEnter(isDirChange)
+    if exists('g:cancelAutoCd')
+        return
+    endif
     if !exists('g:projectsRootDic')
         let g:projectsRootDic = {}
     endif
