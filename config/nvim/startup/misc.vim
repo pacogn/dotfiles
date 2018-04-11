@@ -75,7 +75,8 @@ nnoremap <silent> \z :call <sid>zoom()<cr>
 function! ClearMessages()
     for n in range(200) | echom "" | endfor
 endfunction
-language en_US.UTF-8
+"failing on remote machines occasionaly... not important
+silent! language en_US.UTF-8
 
 function! OnInsertLeave()
     if(g:normal_cursor_line_column)
