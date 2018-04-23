@@ -74,7 +74,9 @@ Plug 'alvan/vim-closetag'
 Plug 'othree/html5.vim', { 'for': 'html' }                          " html5 support
 Plug 'gavocanov/vim-js-indent', { 'for': 'javascript' }             " JavaScript indent support
 if expand('%:p') !~ '.git/index$'
-    Plug 'othree/yajs.vim', { 'for': ['javascript', 'jsx'] }            " JavaScript syntax plugin
+    " yajs started making my vim annoyingly slow... going with pangloss for this reason
+    " Plug 'othree/yajs.vim', { 'for': ['javascript', 'jsx'] }            " JavaScript syntax plugin
+    Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }
 endif
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'elzr/vim-json', { 'for': 'json' }                             " JSON support
