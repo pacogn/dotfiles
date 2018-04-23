@@ -62,9 +62,9 @@ function fag(){
         echo '' > /tmp/mruretval
         echo $fzfretval >> /tmp/mruretval
         if [[ $(wc -l < /tmp/mruretval) -ge 1 ]]; then
-          vim  -c 'let g:cancelAutoCd=1' -c 'call fzf#vim#MruHandler()'
+          vim -c 'cd '`pwd` -c 'AutoCDCancel' -c 'call fzf#vim#MruHandler()'
         else
-          vim -c 'call fzf#vim#MruHandler()'
+          vim -c 'cd '`pwd` -c 'call fzf#vim#MruHandler()'
         fi
     fi
 }
