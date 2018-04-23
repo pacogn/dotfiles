@@ -192,6 +192,18 @@ function searchpdf() {
     find . -iname '*.pdf' -exec pdfgrep -n $@ {} +
 }
 
+function openhilanet(){
+osascript << 'END'
+tell application "Google Chrome"
+  activate
+  open location "https://wix.net.hilan.co.il/login"
+  delay 1
+  execute front window's active tab javascript "document.getElementById('user_nm').value = '221225';"
+  execute front window's active tab javascript "document.getElementById('password_nm').value = 'Filomena18'"
+  execute front window's active tab javascript "document.querySelector('div.h-centered-field button[type=\"submit\"]').click();"
+end tell
+END
+}
 function openuni() {
   osascript << 'END'
 tell application "Google Chrome"
@@ -212,9 +224,9 @@ tell application "Google Chrome"
     activate
     open location "https://sheilta.apps.openu.ac.il/pls/dmyopt2/course_info.courses"
     delay 1
-    execute front window's active tab javascript "document.getElementsByName('p_sisma')[0].value = 'AniMaamin18'"
-    execute front window's active tab javascript "document.getElementsByName('p_user')[0].value = 'sudavid4'"
-    execute front window's active tab javascript "document.getElementsByName('p_mis_student')[0].value = '332519404'"
+    execute front window's active tab javascript "document.getElementById('p_sisma').value = 'AniMaamin18'"
+    execute front window's active tab javascript "document.getElementById('p_user').value = 'sudavid4'"
+    execute front window's active tab javascript "document.getElementById('p_mis_student').value = '332519404'"
     execute front window's active tab javascript "document.querySelector('#login [type=\"submit\"]').click()"
 end tell
 END
