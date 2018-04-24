@@ -115,7 +115,7 @@ function jfzf(){
   dir=`fasd_cd -ds | egrep '^\S+\s+/' | tail -r | fzf --no-sort --bind 'ctrl-s:toggle-sort'`
   if [[ -n dir ]]; then
     dir=$(echo $dir | sed -E 's#[^/]*(/.*$)#''\1''#')
-    cd $dir
+    [[ -d $dir ]] && cd $dir
   fi
 }
 alias jf='jfzf'
