@@ -143,6 +143,8 @@ function openeditorlocal() {
 '&'\
 'debug=all'\
 '&'\
+'debug=viewer'\
+'&'\
 'hot=false'
     sleep 0.5
     openchromedevtools

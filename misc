@@ -191,6 +191,7 @@ done
 function searchpdf() {
     find . -iname '*.pdf' -exec pdfgrep -n $@ {} +
 }
+alias findpdf='searchpdf'
 
 function openhilanet(){
 osascript << 'END'
@@ -199,7 +200,7 @@ tell application "Google Chrome"
   open location "https://wix.net.hilan.co.il/login"
   delay 1
   execute front window's active tab javascript "document.getElementById('user_nm').value = '221225';"
-  execute front window's active tab javascript "document.getElementById('password_nm').value = 'Filomena18'"
+  execute front window's active tab javascript "document.getElementById('password_nm').value = 'Beemuna18'"
   execute front window's active tab javascript "document.querySelector('div.h-centered-field button[type=\"submit\"]').click();"
 end tell
 END
