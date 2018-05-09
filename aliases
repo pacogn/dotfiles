@@ -62,8 +62,10 @@ function git-stash-rename() {
    git stash store -m "$2" $rev
 }
 function git-branch-wipeout(){
-    git branch -D $@
-    git push -d origin $@
+   for gbranch in $*; do
+    git rev-parse --quiet --verify $gbranch > /dev/null && git branch -D $gbranch
+    git rev-parse --quiet --verify origin/$gbranch > /dev/null && git push -d origin $gbranch
+ done
 }
 alias gbw='git-branch-wipeout'
 #git status in vim
