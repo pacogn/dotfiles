@@ -24,10 +24,13 @@ endfunction
 function! JiraCommit()
     normal! gg
     call search('On branch \zs', '', 6)
-    normal "fyW
-    0put='$'
-    normal "fp
-    call feedkeys('a|')
+    let p='$'.substitute(getline('.'), '.*On branch\s*\(.\{-}-.\{-}\)\( \|-\|$\).*', '\1', '').'|'
+    0put=p
+    call feedkeys('A')
+    " normal "fyW
+    " 0put='$'
+    " normal "fp0f-lwD
+    " call feedkeys('a|')
 endfunction
 augroup fugitiveautocmd
 	autocmd!
@@ -41,3 +44,4 @@ augroup fugitiveautocmd
         autocmd FileType gitcommit nmap <buffer> <space>jc :call JiraCommit()<cr>
 augroup END
 command! DiffInWebstorm !git difftool -t=webstorm %
+
