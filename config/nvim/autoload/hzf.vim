@@ -28,12 +28,15 @@ function! hzf#defaultGitLogOptions(isBufferOnlyLog)
     if a:isBufferOnlyLog
         let l:header = l:header.' :: '.hzf#headerKeyCombinationColor("CTRL-d").' - diff with current'
     endif
-    return {'options': 
-                \" --preview  'sh ".utils#get_bin_directory()."/fzfGitShowFilesForSha.zsh {}' --preview-window 'up:40%' ".
-                \"--header '".l:header."' ". 
-                \'--bind "ctrl-g:toggle-preview,'.
-                \'ctrl-o:execute:sh '.utils#get_bin_directory().'/fzfgitshow.sh {} > /dev/tty"' 
-                \  }
+    let options = " --preview  'sh ".utils#get_bin_directory()."/fzfGitShowFilesForSha.zsh {}' --preview-window 'up:40%' ".
+                    \"--header '".l:header."' ". 
+                    \'--bind "ctrl-g:toggle-preview,'.
+                    \'ctrl-o:execute:sh '.utils#get_bin_directory().'/fzfgitshow.sh {} > /dev/tty"' 
+    if !a:isBufferOnlyLog
+        let options = options.' --bind "ctrl-d:execute:sh '.utils#get_bin_directory().'/githubcommit.sh {}"'
+    endif
+    let retval = {'options': options }
+    return retval
 endfunction
 
 "-----------------------------------------------------------------------------}}}
