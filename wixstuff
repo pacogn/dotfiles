@@ -143,7 +143,7 @@ function openeditorlocal() {
 '&'\
 'debug=all'\
 '&'\
-'debug=viewer'\
+'debugViewer=all'\
 '&'\
 'hot=false'
     sleep 0.5
