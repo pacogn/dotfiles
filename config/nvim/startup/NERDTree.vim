@@ -1,5 +1,6 @@
 " close NERDTree after a file is opened
 let g:NERDTreeQuitOnOpen=0
+let g:NERDTreeHijackNetrw=0
 let NERDTreeShowBookmarks=0
 " show hidden files in NERDTree
 let NERDTreeShowHidden=1
@@ -52,7 +53,20 @@ function! s:wipeRememberedNerd()
     endif
 endfunction
 function! NERDTreeFindOrClose()
-    if exists('g:NERDTree') && g:NERDTree.IsOpen()
+    if &ft == 'nerdtree'
+        Explore
+    elseif &ft == 'netrw' 
+        let l:winsize = winwidth('.')
+        let curdir=b:netrw_curdir
+        if !exists('g:NERDTree')
+            exec 'NERDTreeFind'
+        endif
+        exec 'NERDTree '.curdir
+        wincmd p
+        wincmd q
+        2wincmd h
+        execute 'vertical resize '.l:winsize
+    elseif exists('g:NERDTree') && g:NERDTree.IsOpen()
         NERDTreeClose
     else
         NERDTreeFind
@@ -76,7 +90,6 @@ endfunction
 augroup myNerdTreeGroup
 	autocmd!
 	autocmd FileType nerdtree call s:setUpNerdMappings()
-        autocmd Filetype nerdtree nmap<buffer> 1n :NERDTreeClose<cr>
 	autocmd BufHidden * call RememberNerdToWipe(expand('<afile>'))
         " autocmd BufEnter * call SyncTree()
     autocmd BufWinEnter * call s:wipeRememberedNerd()

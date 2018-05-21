@@ -169,7 +169,7 @@ augroup configgroup
     " when there are multiple windows open
     autocmd FileType qf wincmd J
     " close help files on 'q'
-    autocmd FileType qf,help nnoremap <buffer>q :bd<cr>
+    autocmd FileType qf,help,netrw nnoremap <buffer>q :bd<cr>
     autocmd FileType vim set shiftwidth=4 
     autocmd FileType vim map <space>sc :source %<cr> 
     autocmd FileType vim setlocal foldmethod=marker 

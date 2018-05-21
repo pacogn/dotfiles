@@ -181,7 +181,7 @@ nmap \s :%s/\v
 vmap \s :s/\v
 nmap \d :GitGutterToggle<cr>:redraw!<cr>
 " Toggle NERDTree
-nmap <silent> <C-1> :NERDTreeToggle<cr>
+nmap <silent> 1t :execute '25Lexplore '.expand('%:p:h')<cr>
 " expand to the path of the file in the current buffer
 nmap <silent> 1n :call NERDTreeFindOrClose()<cr>
 function! FixNerdSize()
