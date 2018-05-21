@@ -189,7 +189,7 @@ do
 done
 
 function searchpdf() {
-    find . -iname '*.pdf' -exec pdfgrep -n $@ {} +
+    find . -iname '*.pdf' -exec pdfgrep --color=always -n $@ {} +
 }
 alias findpdf='searchpdf'
 
