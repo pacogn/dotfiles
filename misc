@@ -145,14 +145,16 @@ function escape_ls(){
   done
   echo reset with \\033[0m
 }
-alias resetnodedebugchrome='export NODE_DEBUG_OPTION=""'
+alias resetnodedebugchrome='export NODE_DEBUG_OPTION="" && export NODE_OPTIONS=""'
 
 function flagnodedebugchrome(){
   export NODE_DEBUG_OPTION=${1:-'--inspect-brk'}
+  export NODE_OPTIONS=${1:-'--inspect-brk'}
 }
 alias setnodedebugchrome='flagnodedebugchrome'
 function nodedebugchrome() {
 export NODE_DEBUG_OPTION="--inspect"
+export NODE_OPTIONS="--inspect"
 osascript << 'END'
 tell application "Google Chrome"
     activate
