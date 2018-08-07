@@ -87,7 +87,7 @@ Plug 'cakebaker/scss-syntax.vim', { 'for': 'scss' }                 " sass scss 
 Plug 'wavded/vim-stylus', { 'for': ['stylus', 'markdown'] }         " markdown support
 Plug 'ap/vim-css-color', { 'for': ['css','stylus','scss'] }         " set the background of hex color values to the color
 Plug 'hail2u/vim-css3-syntax', { 'for': 'css' }                     " CSS3 syntax support
-" Plug 'dhruvasagar/vim-table-mode'
+Plug 'dhruvasagar/vim-table-mode', {'for': 'markdown'}
 
 highlight def link jsxCloseTag javascriptIdentifierName
 highlight def link jsxCloseString javascriptIdentifierName

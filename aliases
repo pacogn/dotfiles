@@ -171,6 +171,7 @@ alias startitsmylife='osascript ~/Developer/ItsMyLife/start_Mongod_Nodemon_Watch
 alias gacp='echo "enter commit message : " && read MSG && git add . && git commit -m "$MSG" && git push'
 alias gmdc='git merge --no-commit --no-ff'
 
+alias ap='vim ~/Dropbox/ap.html'
 alias open8080='open http://localhost:8080'
 alias npmprivate='npm config set registry http://repo.dev.wix/artifactory/api/npm/npm-repos'
 alias npmpublic='npm config set registry https://registry.npmjs.org/'
