@@ -1,50 +1,28 @@
-snippet us
+snippet us "'use strict'"
 'use strict'
 endsnippet
 
-snippet strict
+snippet strict "'use strict'"
 'use strict'
 endsnippet
 
-snippet :
+snippet : "key: value"
 ${1:key}: ${2:value}
 endsnippet
 
-snippet :f
-${1:method_name}: function (${2:args}) {
-}
-endsnippet
-
-snippet fn
-function () {
-}
-endsnippet
-
-snippet cowrap "co.wrap(function" w
-co.wrap(function*() {
-	${0:${VISUAL:'--CODE--'}}
-})
-endsnippet
-
-snippet fun
+snippet fun "function... or visual<c-s>"
 function ${1:function_name}(${2}) {
 	${0:${VISUAL:'--CODE--'}}
 }
 endsnippet
 
-snippet iife
+snippet iife 
 (function () {
 ${1}
 })()
 endsnippet
 
-snippet interval
-setInterval(function () {
-	${0:${VISUAL:'CODE'}}
-}, ${1})
-endsnippet
-
-snippet timeout
+snippet timeout "setTimeout... or visual<c-s>"
 setTimeout(function () {
 	${0:${VISUAL:'--CODE--'}}
 }, ${1})

@@ -291,6 +291,7 @@ endfunction
 nnoremap <c-t> :call GFilesIfNotHelp()<cr>
 imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
+nnoremap <C-s> :Snippets<cr>
 
 nmap <silent> \b :Buffers<cr>
 nmap <silent> 1b :Buffers<cr>
