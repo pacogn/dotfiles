@@ -48,7 +48,15 @@
 25. make cmd+click filename in iterm open in terminal vim (or cd into dir) [Preferences -> Profiles -> Advanced, Under "Semantic History", choose "Run coprocess..". In the text field, put:`echo 'if [[ -d \1 ]]; then cd \1; else vim \1 \2; fi'`
 24. install fasd: `git clone https://github.com/akatrevorjay/fasd.git && cd fasd && make install`
     - don't use the brew version cuz it messes up the global alias V
-25. make changes in _faasd_preexec [like this](https://github.com/clvv/fasd/issues/120)
+25. make changes in `_faasd_preexec` [like this](https://github.com/clvv/fasd/issues/120)
+26. install hub: `brew install hub`
+27. create a file in `~/.config/hub`
+```
+---
+github.com:
+- oauth_token: TOKEN
+  user: sudavid4
+```
 
 - to push to github (https with two factor authentication) you will need to use a token instead of your password. [Instructions here](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
 
