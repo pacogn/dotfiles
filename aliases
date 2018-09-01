@@ -19,7 +19,9 @@ alias agd='cd $DOTFILES && ag --ignore ''plugged*'' --ignore-dir ''forkedProject
 alias ja='cd $HOME/projects/santa'
 alias jm='cd $HOME/projects/santa-core/santa-main-r'
 alias jc='cd $HOME/projects/santa-core'
-alias je='cd $HOME/projects/santa-editor/santa-editor'
+alias ji='cd $HOME/projects/santa-infra'
+alias je='cd $HOME/projects/santa-editor'
+alias jee='cd $HOME/projects/santa-editor/santa-editor'
 alias jd='cd $HOME/.dotfiles'
 alias jp='cd $HOME/projects'
 alias -g E=' | egrep '
@@ -32,6 +34,7 @@ alias -g NOLOG=' | egrep -v $LOG '
 alias -g NOTEST="--ignore '*.unit.js' --ignore '*.spec.js'"
 alias chalk='source $DOTFILES/base16-shell/scripts/base16-chalk.sh && THEME=base16-chalk'
 alias cls='clear; tmux clear-history'
+alias gbr='git branch'
 #we pipe overwrite '>' to a file instead of openning it derectly in vim '| vim -'
 #because we want to exit ZZ 
 alias -g V=' > ~/.vim-tmp/t && vim ~/.vim-tmp/t -c '\''nmap q :q!<cr>'\'
@@ -42,12 +45,13 @@ alias vimc='chalk && vim '
 alias cvim='chalk && vim '
 alias -g ME='--author=davidsu'
 alias -g NO='--name-only'
+alias -g PJ='package.json'
+alias -g NY="':!yarn.lock' ':!*/yarn.lock'"
 alias -g NS='--name-status'
 alias -g MC='--max-count=100'
 alias -g MC100='--max-count=100'
 alias -g MC50='--max-count=50'
 alias -g MC20='--max-count=20'
-alias -g S='-S Session.vim -c '\''au VimEnter * Obsession .'\'
 alias nodei='node --inspect '
 alias nodeib='node --inspect-brk '
 #allow atom-open-in-vim to blindly send `:e filename`... works if terminal is in vim or in prompt
@@ -64,7 +68,7 @@ function git-stash-rename() {
 function git-branch-wipeout(){
    for gbranch in $*; do
     git rev-parse --quiet --verify $gbranch > /dev/null && git branch -D $gbranch
-    git rev-parse --quiet --verify origin/$gbranch > /dev/null && git push -d origin $gbranch
+    { git rev-parse --quiet --verify origin/$gbranch > /dev/null && git push -d origin $gbranch } &
  done
 }
 alias gbw='git-branch-wipeout'
@@ -111,7 +115,8 @@ function findmanpage(){
         echo 'need a search argument for this'
         return
     fi
-    rg -uu --line-number --follow --color "ansi" $@ /usr/share/man
+    rg -uu --line-number --follow --color "ansi" $@ /usr/share/man '/usr/local/Cellar/git/2.14.1/share/man'
+
     # for dir in $(echo /usr/share/man && echo $manpath | tr ':' '\n' | grep '^/Users/' | grep -v '\.nvm')
     # do
     #    ag -a $@ $dir #ack is like grep, recursive by default, great option
