@@ -25,6 +25,9 @@ Plug 'plasticboy/vim-markdown', {'for': 'markdown'}                 " markdown
 Plug 'godlygeek/tabular', {'for': 'markdown'}                       " related to vim-markdown
 Plug 'sudavid4/vim-plugin-AnsiEsc'                                  " type :AnsiEsc to get colors as terminal
 Plug 'blueyed/vim-diminactive' 
+let g:nvim_typescript#diagnosticsEnable=0
+let g:nvim_typescript#javascript_support=1
+Plug 'sudavid4/nvim-typescript', {'for': ['javascript', 'typescript'], 'do': './install.sh'}
 Plug 'sudavid4/tern_for_vim', {'for': 'javascript', 'do': 'npm i' } " intellijent navigation and refactor for javascript
 if(has('nvim'))
     Plug 'Shougo/deoplete.nvim'

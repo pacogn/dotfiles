@@ -142,6 +142,7 @@ command! Scripts call fzf#run({
 augroup myfzfgroup
     autocmd!
     autocmd FileType javascript nnoremap <buffer>gd :call GoToDeclaration()<cr>
+    autocmd FileType javascript nnoremap <buffer><space>ts :TSDef<cr>
     autocmd FileType nerdtree nnoremap <buffer>,<Tab> :call  FzfNerdTreeMappings()<cr>
     autocmd FileType gitcommit nnoremap <buffer>,<Tab> :call FugitiveMappings()<cr>
     autocmd FileType nerdtree nnoremap <buffer>\<Tab> :call  FzfNerdTreeMappings()<cr>
