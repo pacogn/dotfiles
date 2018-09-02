@@ -19,6 +19,35 @@ alias openteamcitysantamainr='open '\''http://tc.dev.wixpress.com/viewType.html?
 alias otsantamainr='openteamcitysantamainr'
 alias openteamcitypullrequestsantaviewer='open https://pullrequest-tc.dev.wixpress.com/project.html?projectId=Santa&tab=projectOverview'
 alias openkarmadebug='open '\''http://localhost:9876/debug.html'\'
+alias openprse="open 'https://github.com/wix-private/santa-editor/pulls/sudavid4'"
+alias openprsv="open 'https://github.com/wix-private/santa/pulls/sudavid4'"
+alias initupdater='{ initupdaterEditor; initupdaterViewer } &>/dev/null &'
+alias initupdaterEditor='rm /tmp/foreverse; forever start -l /tmp/foreverse $HOME/projects/versionupdater/santa-editor.js && tail -f /tmp/foreverse'
+alias initupdaterViewer='rm /tmp/foreversv; forever start -l /tmp/foreversv $HOME/projects/versionupdater/santa.js && tail -f /tmp/foreversv'
+alias killupdatedEditor='forever stop $HOME/projects/versionupdater/santa-editor.js'
+alias killupdatedViewer='forever stop $HOME/projects/versionupdater/santa.js'
+alias killupdater='forever stopall'
+alias killupdater-editor='kill $(ps -e G davidsu/.nvm/versions/node/v8.11.3/bin/node G santa-editor.js | cut -c1-5)'
+
+function pr-follow(){
+  create-pr $@
+  currBranchName=$(git rev-parse --abbrev-ref HEAD)
+  prnum=$(hub pr list -h $currBranchName)
+  if [[ $? == 0 ]]; then;
+      sha=$(git rev-parse HEAD)
+      while 1; do
+          hub ci-status -v $sha
+          if [[ $? < 2 ]]; then
+              baseurl=$(hub browse -u | perl -pe 's|(.*?)/tree.*|\1|')
+              echo $baseurl/$pull/$prnum
+              return
+          fi
+          sleep 10
+      done
+  fi
+
+}
+
 function killsanta(){
 #kill with SIGINT=2 by default
     signal=${1:-2}
@@ -149,6 +178,7 @@ function openeditorlocal() {
     sleep 0.5
     openchromedevtools
 }
+alias openviewerproduction="open 'http://davidsu9.wixsite.com/default'"
 function openviewerlocal(){
   open 'http://annab21.wixsite.com'\
 '/mysite-582'\
