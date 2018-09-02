@@ -184,7 +184,15 @@ augroup configgroup
     autocmd VimResized * exe 'normal! \<c-w>='
 augroup END
 
+function! ToggleDiffWhiteSpace()
+   if &diffopt =~ 'iwhite'
+      set diffopt-=iwhite
+   else
+      set diffopt+=iwhite
+   endif
+endfunction
 command! ClearCache let g:projectsRootDic = {}
+command! ToggleDiffWhiteSpace call ToggleDiffWhiteSpace()
 if has('nvim')
    augroup multiProjectAutoCd
       autocmd!

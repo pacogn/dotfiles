@@ -22,7 +22,7 @@ set shiftwidth=4          " number of spaces to use for indent and unindent
 set shiftround            " round indent to a multiple of 'shiftwidth'
 set completeopt+=longest
 set ttyfast
-set diffopt+=vertical
+set diffopt+=vertical,iwhite
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set noswapfile
