@@ -8,7 +8,7 @@ function loadzgen(){
         zgen load zsh-users/zsh-syntax-highlighting
         zgen load zsh-users/zsh-history-substring-search
         zgen oh-my-zsh plugins/yarn
-        zgen load paulirish/git-open
+        # zgen load paulirish/git-open
     fi
     #unset SET_CUSTOM_PROMPT value if you want to test other prompt than
     #the custom in ~/.dotFiles/prompt
@@ -71,6 +71,7 @@ function load(){
     reload
 }
 function loadall(){
+    currPwd=$(pwd)
     export HAS_LOADED=1  
     if [[ $NVM_BREW_PREFIX == '' ]]; then
         export NVM_BREW_PREFIX=$(cat /tmp/brew_prefix_nvm)
@@ -84,7 +85,7 @@ function loadall(){
     # rvm complains about not being first in path
     PATH=$(echo $PATH | tr ':' '\n' | uniq | tr '\n' ':')
     reload
-    cd ./
+    cd $currPwd
 }
 function loadallifneeded(){
   if [[ ! $NVM_DIR =~ $HOME ]]; then
