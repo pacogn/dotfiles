@@ -171,6 +171,8 @@ augroup configgroup
     " close help files on 'q'
     autocmd FileType qf,help,netrw nnoremap <buffer>q :bd<cr>
     autocmd FileType vim set shiftwidth=4 
+    autocmd FileType vim call matchadd('vimComment', '|"[^''"]*$')
+    
     autocmd FileType vim map <space>sc :source %<cr> 
     autocmd FileType vim setlocal foldmethod=marker 
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
