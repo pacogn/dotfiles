@@ -1,3 +1,0 @@
-#!/bin/sh
-#$HOME/Developer/selenium/hilanet/selenium/spec/hilanet.spec.js
-cd ~/Developer/selenium/hilanet/selenium && jasmine spec/hilanet.spec.js gabi
