@@ -35,26 +35,23 @@ function! NextClosedFold(dir)
     endif
 endfunction
 
+nmap ' ` |"when goto mark, allways take cursor position
 nmap ,. :call utils#restoreAlternateFile()<cr><c-^>
 nmap sa :call utils#restoreAlternateFile()<cr><c-^>
 
-" execute current line
-nmap <space>gx m`0y$:@"<cr><c-o>
+nmap <space>gx m`0y$:@"<cr><c-o>  |" execute current line
+nmap <space>qq :helpclose<cr>:pclose<cr>:cclose<cr>:lclose<cr>
 nmap <space>ql :lclose<cr>
 nmap <space>qc :cclose<cr>
 nmap <space>qp :pclose<cr>
 nmap <space>qh :helpclose<cr>
-nmap <space>qq :helpclose<cr>:pclose<cr>:cclose<cr>:lclose<cr>
+noremap <space>oc :copen<cr>
+noremap <space>ol :lopen<cr>
 
 nnoremap - :silent call utils#toggle_window_to_nerd_tree()<cr>
 nnoremap \\ "_
 
 noremap <space>fd :filetype detect<cr>
-noremap <space>co :copen<cr>
-noremap <space>lo :lopen<cr>
-noremap <space>cq :copen<cr>
-noremap <space>lq :lopen<cr>
-noremap <space>pq :pclose<cr>
 "find variable assignment - `a=b` or `a:b` - fails for es6
 nnoremap <silent> <space>fva :call FindAssignment(expand("<cword>"))<cr>
 nnoremap <silent> <space>ff :call FindFunction(expand("<cword>"))<cr>
