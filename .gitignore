@@ -14,3 +14,6 @@ atom.symlink/.apm
 atom.symlink/packages
 atom.symlink/blob-store
 atom.symlink/.gitignore
+bkup
+bin/outdated
+bin/versiondiff
