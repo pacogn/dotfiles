@@ -112,12 +112,10 @@ function! BufferHistory()
     set eventignore&
 endfunction
 nmap <space>bh :call BufferHistory()<cr>
-"view buffer lines
-nmap <space>bl :BLines!<cr>
-nmap <space>vb :AgBLines<cr>
-nmap <space>agb :AgBLines<cr>
-"view loaded(all) buffer lines
-nnoremap <silent><space>vl :AgAllBLines<cr>
+
+nmap <space>bl :BLines!<cr> |"view buffer lines
+
+nnoremap <silent><space>vl :AgAllBLines<cr> |"view loaded(all) buffer lines
 nmap <space>bd :call utils#buf_delete_current()<cr>
 "end diff --- clean close diff window
 nmap <space>ed <C-w><C-j><C-w><C-l><C-w><C-o>

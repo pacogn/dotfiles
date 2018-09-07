@@ -54,24 +54,6 @@ function! hzf#ag_all_blines(...)
                 \fzf#vim#with_preview({'dir': getcwd()},'up:50%', 'ctrl-g'), 1)
 endfunction
 
-function! hzf#ag_bLines(...)
-    let query = get(a:000, 0, '^')
-    if !len(query)
-        let query = '^'
-    endif
-    "We get filename without path, set working directory to dir of the file so filename will be sortest in fzf
-    let filename = expand('%:t')
-    if len(filename) == 0
-        execute('BLines')
-        return
-    endif
-    let query = '-G '.filename.' '.query
-    call fzf#vim#ag_raw(query, 
-                \fzf#vim#with_preview({
-                \'dir':expand('%:p:h'), 
-                \'options': ' --header ''ctrl-t: toggleSort'' --bind ctrl-t:toggle-sort,ctrl-s:toggle-sort '},'up:50%', 'ctrl-g'), 1)
-endfunction
-
 function! hzf#ag_raw(...)
     call fzf#vim#ag_raw(' '.join(a:000), hzf#defaultPreview(), 1)
 endfunction

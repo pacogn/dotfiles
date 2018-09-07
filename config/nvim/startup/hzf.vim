@@ -126,7 +126,6 @@ command! LetterCommands call fzf#vim#ag_raw('--nobreak --noheading '.
 "todo give this sink function (+ preview?)
 command! LeaderMappingsDeclaration call hzf#leader_mappings_declarations()
 let s:leaderOrAltChars = '[,`¡™£¢∞§¶•ªº≠œ∑´®†¥¨ˆøπ“‘«åß∂ƒ©˙∆˚¬…æΩ≈ç√∫˜µ≤≥÷q]'
-command! -nargs=? AgBLines call hzf#ag_bLines(<q-args>)
 command! -nargs=? AgAllBLines call hzf#ag_all_blines(<q-args>)
 " command! LeaderMappingsDeclaration call fzf#vim#ag('^\s*[^"\s]*map.*' . s:leaderOrAltChars . '[!-~]*', fzf#vim#with_preview({'dir':'$DOTFILES/config/nvim/startup', 'down': '100%'},'up:30%', 'ctrl-g'))
 command! Options call hzf#options()
