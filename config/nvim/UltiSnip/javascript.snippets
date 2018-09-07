@@ -208,7 +208,15 @@ console.table(${1:"${2:value}"});
 endsnippet 
 
 snippet cred
-console.log('%c${1}', 'font-weight:bold;color:red;')
+console.log('\x1b[31m%s\x1b[0m', ${1})
+endsnippet
+
+snippet cyellow
+console.log('\x1b[33m%s\x1b[0m', ${1})
+endsnippet
+
+snippet cwhite
+console.log('\x1b[32m%s\x1b[0m', ${1})
 endsnippet
 
 snippet cgreen
