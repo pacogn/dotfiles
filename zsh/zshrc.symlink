@@ -1,14 +1,15 @@
 PROMPT="%~$ "
 DISABLE_AUTO_UPDATE=true
 export DOTFILES=$HOME/.dotfiles
-export PATH=$PATH:$HOME/.dotfiles/bin:$HOME/.zgen/paulirish/git-open-master
+export PATH=$PATH:$HOME/.dotfiles/bin #:$HOME/.zgen/paulirish/git-open-master
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf/shell/completion.zsh ] && source ~/.fzf/shell/completion.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--reverse'
 export THEME
 eval "$(fasd --init auto)"
-ssh-add -K &> /dev/null
+#do I need this???
 alias a='loadall'
 function reload(){
   for f in ~/.dotFiles/* #foreach file in directory
@@ -34,8 +35,6 @@ startMySQLIfNeeded
 
 # test -d "${GOPATH}" || mkdir "${GOPATH}"
 # test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
-
-export PATH="$HOME/.yarn/bin:$PATH"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
