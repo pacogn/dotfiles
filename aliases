@@ -32,6 +32,7 @@ alias agc='ag --color '
 alias -g G=' | grep -i '
 alias -g NOLOG=' | egrep -v $LOG '
 alias -g NOTEST="--ignore '*.unit.js' --ignore '*.spec.js'"
+alias -g NOBOT=' --perl-regexp --author='\''^((?!Santa Infra).*)$'\' #WIX - ignore santa-little-helper commits
 alias chalk='source $DOTFILES/base16-shell/scripts/base16-chalk.sh && THEME=base16-chalk'
 alias cls='clear; tmux clear-history'
 alias gbr='git branch'
@@ -129,7 +130,7 @@ function npminfo(){
 function npmlatest(){
    # echo http://repo.dev.wix/artifactory/api/npm/npm-repos/"$1"
    loadallifneeded
-   curl --no-progress-bar http://repo.dev.wix/artifactory/api/npm/npm-repos/"$1"/latest 2> /tmp/npmlatesterror | rougify -l json | egrep '"(version|url)"'
+   curl --no-progress-bar https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/"$1"/latest 2> /tmp/npmlatesterror | rougify -l json | egrep '"(version|url)"'
    # curl --no-progress-bar http://repo.dev.wix/artifactory/api/npm/npm-repos/"$1"/latest 2> /tmp/npmlatesterror | egrep '"(version|url)"'
 }
 function goto(){
@@ -178,7 +179,7 @@ alias gmdc='git merge --no-commit --no-ff'
 
 alias ap='vim ~/Dropbox/ap.html'
 alias open8080='open http://localhost:8080'
-alias npmprivate='npm config set registry http://repo.dev.wix/artifactory/api/npm/npm-repos'
+alias npmprivate='npm config set registry http://npm.dev.wixpress.com'
 alias npmpublic='npm config set registry https://registry.npmjs.org/'
 function spectrum_escape(){
     for COLOR in {0..255}
