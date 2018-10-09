@@ -3,6 +3,7 @@ setopt COMPLETE_ALIASES
 alias gbrowse='git open'
 alias ..='cd ../'
 alias ../='cd ../'
+
 #we wish to have rvm in vim for proper coloring in preview(fzf) for viml files
 alias vim='if [[ -z $HAS_LOADED ]]; then loadrvm; else alias vim='\''nvim'\''; fi; nvim'
 alias vimdiff='nvim -d'
