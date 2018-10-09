@@ -143,7 +143,7 @@ function escape_ls(){
     done
     echo
   done
-  echo reset with \\033[0m
+  echo 'reset with \\033[0m'
 }
 alias resetnodedebugchrome='export NODE_DEBUG_OPTION="" && export NODE_OPTIONS=""'
 
@@ -196,6 +196,20 @@ function searchpdf() {
 }
 alias findpdf='searchpdf'
 
+function insist(){
+osascript << 'END'
+tell application "Google Chrome"
+  activate
+  open location "http://tc.dev.wixpress.com/viewType.html?buildTypeId=Santa_SantaEditor&tab=buildTypeStatusDiv&branch_Santa_SantaEditor=%3Cdefault%3E"
+  delay 5
+  execute front window's active tab javascript "window.document.querySelector('.btn.btn_mini').click()"
+  delay 5
+  tell its window 1
+    close active tab
+  end tell
+end tell
+END
+}
 function openhilanet(){
 osascript << 'END'
 tell application "Google Chrome"
