@@ -12,8 +12,10 @@ hash -d me=~/projects/santa-members/santa-members-editor-app/
 alias whokilledsanta='open http://santa.wixpress.com'
 #teamcity uses same username+password as in your computer
 alias openteamcitysantaeditor='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=Santa_SantaEditor'\'
+alias openteamcitysantainfra='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=SantaInfra_SantaInfra'\'
 alias otsantaeditor='openteamcitysantaeditor'
 alias openteamcitysantaviewer='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=HtmlClient_Reactum'\'
+alias openteamcitysantacore='open '\''http://tc.dev.wixpress.com/project.html?projectId=Santa_SantaCore&branch_Santa_SantaCore=__all_branches__'\'
 alias otsantaviewer='openteamcitysantaviewer'
 alias openteamcitysantamainr='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=Santa_SantaCore_SantaMainR'\'
 alias otsantamainr='openteamcitysantamainr'
@@ -30,19 +32,21 @@ alias killupdater='forever stopall'
 alias killupdater-editor='kill $(ps -e G davidsu/.nvm/versions/node/v8.11.3/bin/node G santa-editor.js | cut -c1-5)'
 
 function pr-follow(){
-  create-pr $@
+  if [[ $# > 0 ]]; then
+      create-pr $@
+  fi
   currBranchName=$(git rev-parse --abbrev-ref HEAD)
-  prnum=$(hub pr list -h $currBranchName)
+  prnum=$(hub pr list -h $currBranchName | cut -c 4-9)
   if [[ $? == 0 ]]; then;
       sha=$(git rev-parse HEAD)
       while 1; do
           hub ci-status -v $sha
           if [[ $? < 2 ]]; then
               baseurl=$(hub browse -u | perl -pe 's|(.*?)/tree.*|\1|')
-              echo $baseurl/$pull/$prnum
+              echo $baseurl/pull/$prnum
               return
           fi
-          sleep 10
+          sleep 40
       done
   fi
 
