@@ -7,8 +7,9 @@ alias ../='cd ../'
 #we wish to have rvm in vim for proper coloring in preview(fzf) for viml files
 alias vim='if [[ -z $HAS_LOADED ]]; then loadrvm; else alias vim='\''nvim'\''; fi; nvim'
 alias vimdiff='nvim -d'
+alias -g vimjson=' | jq . -M > /tmp/vimjson.json && vim /tmp/vimjson.json'
 alias showlinked='ll node_modules G '\''@\s*->'\'
-alias npmlinked='ll node_modules G @'
+alias npmlinked="ll node_modules G '@ ->'"
 alias ag='ag --color-match="1;031"'
 alias la='ls -lAh'
 alias rg=" rg --smart-case \
@@ -49,6 +50,7 @@ alias -g ME='--author=davidsu'
 alias -g NO='--name-only'
 alias -g PJ='package.json'
 alias -g NY="':!yarn.lock' ':!*/yarn.lock'"
+alias -g NOYARN="':!yarn.lock' ':!*/yarn.lock'"
 alias -g NS='--name-status'
 alias -g MC='--max-count=100'
 alias -g MC100='--max-count=100'
@@ -83,8 +85,7 @@ function gsv() {
            -c 'call feedkeys("\<C-n>dv:Gstatus\<cr>\<C-w>K".g:tmp."G") ' \
            $(git rev-parse --show-toplevel)/.git/index 
      elif [[ $1 ]]; then
-      vim -c 'call feedkeys("\<C-n>D:Gstatus\<cr>\<C-n>\<C-w>K") ' \
-          $(git rev-parse --show-toplevel)/.git/index
+        vim -c 'call feedkeys(":Gstatus\<cr>\<C-n>D:call DeferGstatus()\<cr>") ' 
      else
         vim -u $HOME/.dotfiles/config/nvim/init_for_gsv.vim \
            -c 'call feedkeys("\<C-n>D:Gstatus\<cr>\<C-n>\<C-w>K") ' \
