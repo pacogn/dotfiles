@@ -54,7 +54,7 @@ fbr() {
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
 function fag(){
-    fzfretval=$(rg --line-number --column --color "ansi" $@ | fzf -m  --ansi --preview '$DOTFILES/bin/preview.rb {}' \
+    fzfretval=$(rgf $@ | fzf -m  --ansi --preview '$DOTFILES/bin/preview.rb {}' \
         --preview-window 'top:50%' \
         --bind 'ctrl-l:select-all,ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:($DOTFILES/fzf/fhelp.sh {}) > /dev/tty' \
         --header 'CTRL-l - select-all :: CTRL-o - open without abort(LESS) :: CTRL-s - toggle sort :: CTRL-g - toggle preview window')
@@ -71,7 +71,7 @@ function fag(){
         fi
     fi
 }
-
+alias rgf='rg --line-number --column --color "ansi" '
 function fa(){
     filename=$(find . -type f | fzf --exact --preview '$DOTFILES/bin/preview.rb {}' \
                 --preview-window 'top:50%' \
@@ -89,15 +89,12 @@ function fman(){
         echo 'need a search argument for this'
         return
     fi
-    fzfretval=$(findmanpage $@ | fzf --ansi --preview '$DOTFILES/bin/preview.rb {}' --preview-window 'top:50%' --bind 'ctrl-g:toggle-preview,ctrl-s:toggle-sort')
+    export FMAN_SEARCH_PATTERN=$(sed 's/\\b//g' <<< ${@: -1})
+    fzfretval=$(findmanpage $@ | fzf --ansi --preview '$DOTFILES/bin/preview.rb {}' --preview-window 'top:50%' --bind 'ctrl-g:toggle-preview,ctrl-s:toggle-sort,ctrl-o:execute:($DOTFILES/bin/fmaopen {}) > /dev/tty')
     if [[ -n $fzfretval ]]; then
         manpage=$(sed -E 's#.*/(.*)\..*#\1#' <<< $( sed -E 's#([^[:space:]]*):[[:digit:]]+:.*#\1#' <<< $fzfretval))
-        # manpage=$(sed -E 's#^[^[:space:]:]*/([[:alnum:]]*)\..*#\1#' <<< $fzfretval)
-        #`${@: -1}` get the last argument to the function
-        #-j12: tells less to put 12lines above search result as opposed to search result on top of screen
-
-        searchpattern=$(sed 's/\\b//g' <<< ${@: -1})
-        man -P "less -i -j12 -p $searchpattern" $manpage 
+        man -P "nvim -c 'set ft=man' - +/$FMAN_SEARCH_PATTERN" $manpage 
+        # man -P "less -i -j12 -p $searchpattern" $manpage 
     fi
 }
 # fshow - git commit browser
