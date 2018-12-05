@@ -200,7 +200,7 @@ function insist(){
 osascript << 'END'
 tell application "Google Chrome"
   activate
-  open location "http://tc.dev.wixpress.com/viewType.html?buildTypeId=Santa_SantaEditor&tab=buildTypeStatusDiv&branch_Santa_SantaEditor=%3Cdefault%3E"
+  open location "http://tc.dev.wixpress.com/viewType.html?buildTypeId=SantaInfra_SantaInfra"
   delay 5
   execute front window's active tab javascript "window.document.querySelector('.btn.btn_mini').click()"
   delay 5
@@ -217,7 +217,7 @@ tell application "Google Chrome"
   open location "https://wix.net.hilan.co.il/login"
   delay 1
   execute front window's active tab javascript "document.getElementById('user_nm').value = '221225';"
-  execute front window's active tab javascript "document.getElementById('password_nm').value = 'Shlema18'"
+  execute front window's active tab javascript "document.getElementById('password_nm').value = '77AP87bW9xMsWfE'"
   execute front window's active tab javascript "document.querySelector('div.h-centered-field button[type=\"submit\"]').click();"
 end tell
 END

@@ -1,7 +1,7 @@
 PROMPT="%~$ "
 DISABLE_AUTO_UPDATE=true
 export DOTFILES=$HOME/.dotfiles
-export PATH=$PATH:$HOME/.dotfiles/bin #:$HOME/.zgen/paulirish/git-open-master
+export PATH=~/Library/Python/3.6/bin:$PATH:$HOME/.dotfiles/bin #:$HOME/.zgen/paulirish/git-open-master
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.fzf/shell/completion.zsh ] && source ~/.fzf/shell/completion.zsh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
@@ -44,3 +44,7 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [[ -f /Users/davidsu/projects/santa-infra/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/davidsu/projects/santa-infra/node_modules/tabtab/.completions/sls.zsh
+
+# tabtab source for yarn package
+# uninstall by removing these lines or running `tabtab uninstall yarn`
+[[ -f /Users/davidsu/.dotfiles/config/yarn/global/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/davidsu/.dotfiles/config/yarn/global/node_modules/tabtab/.completions/yarn.zsh

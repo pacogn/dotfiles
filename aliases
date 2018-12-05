@@ -100,7 +100,8 @@ alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --u
 alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
 # git log in vim. Limit to last 500 commits otherwise its pretty slow.
 alias glv='git log --max-count=500 --name-only V'
-alias todo="vim ~/projects/todo.md -c 'set nowrap'"
+# alias todo="vim ~/projects/todo.md -c 'set nowrap'"
+alias todo="vim ~/Dropbox/todo.md -c 'set nowrap'"
 alias gbrowse='open https://github.$(git config remote.origin.url | cut -f2 -d. | tr ':' /)'
 function specialchars(){echo '⇧ ⌘ ⌥ ⇥ ⌫  ⌦  ⎋  ⌃ '}
 function findfunction(){

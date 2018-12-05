@@ -1,4 +1,5 @@
 #!/bin/zsh
+export skipUpdateCheck=1 #for santa-cli/create-pr
 export CK="$HOME/projects/wix-ck-editor/"
 export SV="$HOME/projects/santa/"
 export SE="$HOME/projects/santa-editor/"
@@ -31,6 +32,22 @@ alias killupdatedViewer='forever stop $HOME/projects/versionupdater/santa.js'
 alias killupdater='forever stopall'
 alias killupdater-editor='kill $(ps -e G davidsu/.nvm/versions/node/v8.11.3/bin/node G santa-editor.js | cut -c1-5)'
 
+function santa-create-coverage(){
+  if [[ ! -d ./packages ]]; then
+    return
+  fi
+  cp -R packages packages_coverage
+  local workingdir=$(pwd)
+  for package in $(find packages | grep '/src/main$')
+  do
+      cd ${workingdir}/${package}
+      local destinydir=$(sed 's/packages/packages_coverage/' <<< ${package})
+      echo $destinydir
+      nyc instrument ./ ${workingdir}/${destinydir} &
+  done
+  cd ${workingdir}
+  wait
+}
 function pr-follow(){
   if [[ $# > 0 ]]; then
       create-pr $@
@@ -39,7 +56,7 @@ function pr-follow(){
   prnum=$(hub pr list -h $currBranchName | cut -c 4-9)
   if [[ $? == 0 ]]; then;
       sha=$(git rev-parse HEAD)
-      while 1; do
+      while true; do
           hub ci-status -v $sha
           if [[ $? < 2 ]]; then
               baseurl=$(hub browse -u | perl -pe 's|(.*?)/tree.*|\1|')
@@ -57,6 +74,7 @@ function killsanta(){
     signal=${1:-2}
     echo killing with signal $signal
     sudo kill -$signal $(sudo lsof -i tcp:80 -t)
+    sudo kill -$signal $(sudo lsof -i tcp:443 -t)
     kill -$signal $(lsof -i tcp:3000 -t)
     kill -$signal $(lsof -i tcp:5000 -t)
 }
@@ -64,6 +82,7 @@ function servesanta()(
     loadallifneeded
     cd ~/projects/santa
     sudo -b npm start
+    sudo -b yarn ssl
     cd ~/projects
     nohup serve -p 3000 --cors &> /tmp/serve &
     nvm use 8.7
