@@ -96,6 +96,9 @@ function oldmru(){
 function mrw(){
     mru 0 $mrwcmd
 }
+function ideamru() {
+    mru 1 $DOTFILES/js-helpers/ideamru/ideamru.js
+}
 alias 1m='mru 1'
 alias 1w='mrw'
 function 1m1() {

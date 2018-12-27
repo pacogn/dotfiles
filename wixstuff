@@ -88,6 +88,21 @@ function servesanta()(
     nvm use 8.7
     nohup local-ssl-proxy --source 5000 --target 3000 &> /tmp/local-ssl &
 )
+
+function killbolt(){
+#kill with SIGINT=2 by default
+    signal=${1:-2}
+    echo killing with signal $signal
+    kill -$signal $(lsof -i tcp:9228 -t)
+    kill -$signal $(lsof -i tcp:9229 -t)
+}
+function servebolt()(
+    loadallifneeded
+    cd ~/projects/bolt/bolt-main
+    nohup yarn start &> /tmp/bolt-main-nohup &
+    cd ~/projects/bolt/bolt-server
+    nohup yarn start &> /tmp/bolt-server-nohup &
+)
 function gomainr(){
   local cwd=$(pwd)
   cd ~/projects/santa-core/santa-main-r
@@ -217,4 +232,9 @@ function openviewerlocal(){
 function startwixday(){
     loadallifneeded
     pullsanta && buildsanta
+}
+function logforever() {
+       	local logfile=$(forever list | grep "$1"'[^-]' | perl -pe "s#.*($HOME\S+.log).*#\1#")
+	echo $logfile
+	tail -f -n 1000 $logfile
 }

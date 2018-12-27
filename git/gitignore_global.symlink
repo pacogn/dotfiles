@@ -7,6 +7,7 @@ s.vim
 Session.vim
 .tern-project
 .tern-port
+NetrwTreeListing*
 tern_proj_generator.js
 tern_proj_generator
 npm-debug.log
