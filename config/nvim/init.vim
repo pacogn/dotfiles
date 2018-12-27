@@ -18,6 +18,15 @@ function! SourceMyScripts()
 	endfor
 endfunction
 call SourceMyScripts()
+function! DeferGstatus(...)
+    if(a:0 == 0)
+        call timer_start(3, 'DeferGstatus', {'repeat':1})
+    else
+        Gstatus
+    endif
+endfunction
+
+
 "}}}----------------------------------------------------------------------------------------------------------------------
 
 
