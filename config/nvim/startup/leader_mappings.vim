@@ -48,8 +48,10 @@ nmap <space>qh :helpclose<cr>
 noremap <space>oc :copen<cr>
 noremap <space>ol :lopen<cr>
 
-nnoremap - :silent call utils#toggle_window_to_nerd_tree()<cr>
+" nnoremap - :silent call utils#toggle_window_to_nerd_tree()<cr>
+nnoremap - :let currfile = expand('%:p:t')<cr>:edit %:p:h<cr>:call search(currfile)<cr>
 nnoremap \\ "_
+vnoremap \\ "_
 
 noremap <space>fd :filetype detect<cr>
 "find variable assignment - `a=b` or `a:b` - fails for es6
@@ -196,8 +198,8 @@ nmap <silent> <space>nf :NERDTreeFind<cr>
 nmap 1o :only<cr>
 
 "VIM-MARK: <space>hi for highlight interesting word
-nmap <space>hi <Plug>MarkSet
-vmap <space>hi <Plug>MarkSet
+nmap <silent><space>hi <Plug>MarkSet
+vmap <silent><space>hi <Plug>MarkSet
 " <space>hc for "highlight clear" clear all "interesting words" highlighting
 nmap <space>hc :silent MarkClear<cr>
 nmap ,n ,*
@@ -212,12 +214,15 @@ nmap <space>cp :call utils#cursor_ping()<cr>
 let g:surround_no_mappings = 1
 "delete surrounding
 nmap <space>ds  <Plug>Dsurround
+nmap ds  <Plug>Dsurround
 "change surrounding
 nmap <space>cs  <Plug>Csurround
+nmap cs  <Plug>Csurround
 "??
 nmap <space>cS  <Plug>CSurround
 "motion + surrounding
 nmap <space>ys  <Plug>Ysurround
+nmap ys  <Plug>Ysurround
 "put created surrounding in its own line
 nmap <space>yS  <Plug>YSurround
 "surround entire line

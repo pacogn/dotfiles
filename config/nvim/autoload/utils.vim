@@ -184,7 +184,7 @@ endfunction
 
 function! utils#restoreAlternateFile()
     let alternate = expand('#')
-    if ! len(alternate) || alternate == expand('%') || alternate =~ 'term://' || alternate =~ 'NERD_tree'
+    if ! len(alternate) || alternate == expand('%') || alternate =~ 'term://' || alternate =~ 'NERD_tree' || alternate =~ 'NetrwTree'
         let listedbuffers=utils#buffers_listed()
         if len(listedbuffers) > 1
             if expand(bufname(listedbuffers[1])) == expand('%')

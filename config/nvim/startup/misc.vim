@@ -1,6 +1,8 @@
 "-----------------------------------------------------------------------------}}}
 "VARIABLES                                                                    {{{ 
 "--------------------------------------------------------------------------------
+"see :h sh.vim line 2871... in /bin/sh $(command) is an error 
+let g:is_bash = 1
 "avoid paren error on continuation liine - https://groups.google.com/forum/#!topic/vim_use/ohVfm9Iodwg
 let g:vimsyn_noerror = 1
 let g:peekaboo_window='vert bo 60new'
@@ -169,11 +171,11 @@ augroup configgroup
     " when there are multiple windows open
     autocmd FileType qf wincmd J
     " close help files on 'q'
-    autocmd FileType qf,help,netrw nnoremap <buffer>q :bd<cr>
+    autocmd FileType qf,help nnoremap <buffer>q :bd<cr>
     autocmd FileType vim set shiftwidth=4 
     autocmd FileType vim call matchadd('vimComment', '|"[^''"]*$')
     
-    autocmd FileType vim map <space>sc :source %<cr> 
+    autocmd FileType vim map <buffer><space>sc :source %<cr> 
     autocmd FileType vim setlocal foldmethod=marker 
     autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
     autocmd InsertEnter * set cursorline nocursorcolumn
