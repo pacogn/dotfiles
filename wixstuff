@@ -13,6 +13,7 @@ hash -d me=~/projects/santa-members/santa-members-editor-app/
 alias whokilledsanta='open http://santa.wixpress.com'
 #teamcity uses same username+password as in your computer
 alias openteamcitysantaeditor='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=Santa_SantaEditor'\'
+alias openteamcitysantabolt='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=Santa_WixBolt_O'\'
 alias openteamcitysantainfra='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=SantaInfra_SantaInfra'\'
 alias otsantaeditor='openteamcitysantaeditor'
 alias openteamcitysantaviewer='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=HtmlClient_Reactum'\'

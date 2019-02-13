@@ -48,3 +48,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 # tabtab source for yarn package
 # uninstall by removing these lines or running `tabtab uninstall yarn`
 [[ -f /Users/davidsu/.dotfiles/config/yarn/global/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/davidsu/.dotfiles/config/yarn/global/node_modules/tabtab/.completions/yarn.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/davidsu/projects/santa-infra/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/davidsu/projects/santa-infra/node_modules/tabtab/.completions/slss.zsh
