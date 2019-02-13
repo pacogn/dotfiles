@@ -6,15 +6,15 @@ endif
 call plug#begin('~/.config/nvim/plugged')
 Plug 'junegunn/vim-peekaboo'
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
-Plug 'sudavid4/comfortable-motion.vim'                               " Brings physics-based smooth scrolling to the Vim world!
+Plug 'davidsu/comfortable-motion.vim'                               " Brings physics-based smooth scrolling to the Vim world!
 Plug 'tweekmonster/startuptime.vim', {'on': 'StartupTime'}  
 Plug 'tommcdo/vim-exchange'                                         " exchange text with cx
-Plug 'sudavid4/vim-visual-star-search'                              " extends */# to do what you would expect in visual mode
+Plug 'davidsu/vim-visual-star-search'                              " extends */# to do what you would expect in visual mode
 Plug 'SirVer/ultisnips'
-Plug 'qpkorr/vim-bufkill'                                           " wipe buffer without closing it's window
+Plug 'davidsu/vim-bufkill'                                           " wipe buffer without closing it's window
 Plug 'tpope/vim-scriptease'                                         " utilities for vim script authoring. Installed to use ':PP'=pretty print dictionary
 Plug 'idbrii/vim-mark'                                              " highlighting of interesting words
-Plug 'sudavid4/mysql-mru.vim'
+Plug 'davidsu/mysql-mru.vim'
 Plug 'schickling/vim-bufonly'                                       " delete all buffers but current
 Plug 'terryma/vim-expand-region'
 Plug 'sbdchd/neoformat', { 'for':                           
@@ -28,52 +28,52 @@ Plug 'airblade/vim-rooter'                                          " cd into ro
 Plug 'kshenoy/vim-signature'                                        " help for working with marks
 Plug 'plasticboy/vim-markdown', {'for': 'markdown'}                 " markdown
 Plug 'godlygeek/tabular', {'for': 'markdown'}                       " related to vim-markdown
-Plug 'sudavid4/vim-plugin-AnsiEsc'                                  " type :AnsiEsc to get colors as terminal
+Plug 'davidsu/vim-plugin-AnsiEsc'                                  " type :AnsiEsc to get colors as terminal
 Plug 'blueyed/vim-diminactive' 
 let g:nvim_typescript#diagnosticsEnable=0
 let g:nvim_typescript#javascript_support=1
-Plug 'sudavid4/nvim-typescript', {'for': ['javascript', 'typescript'], 'do': './install.sh'}
-Plug 'sudavid4/tern_for_vim', {'for': 'javascript', 'do': 'npm i' } " intellijent navigation and refactor for javascript
+Plug 'davidsu/nvim-typescript', {'for': ['javascript', 'typescript'], 'do': './install.sh'}
+Plug 'davidsu/tern_for_vim', {'for': 'javascript', 'do': 'npm i' } " intellijent navigation and refactor for javascript
 if(has('nvim'))
     Plug 'Shougo/deoplete.nvim'
     Plug 'Shougo/neco-vim', {'for': 'vim'}                          " deoplete source for vimscript
     Plug 'zchee/deoplete-zsh', {'for': 'zsh'}                       " deoplete source for zsh
-    Plug 'sudavid4/deoplete-ternjs', { 'for': 'javascript'}         " deoplete source for javascript
+    Plug 'davidsu/deoplete-ternjs', { 'for': 'javascript'}         " deoplete source for javascript
 else
     Plug 'Shougo/neocomplete.vim', 
                 \{ 'for': ['javascript', 'css', 'scss', 'sh', 'vim', 'html'] }
 endif
 Plug 'Konfekt/FastFold'                                             " fold zyntax is too heavy for vim, makes neocomplete very slow. this plugin solves it
 Plug 'henrik/vim-indexed-search'                                    " Match 123 of 456 /search term/ in Vim searches
-Plug '/usr/local/opt/fzf' | Plug 'sudavid4/fzf.vim'                 " fuzzy file finder and so much more
-Plug 'sudavid4/neomake-local-eslint.vim', 
+Plug '/usr/local/opt/fzf' | Plug 'davidsu/fzf.vim'                 " fuzzy file finder and so much more
+Plug 'davidsu/neomake-local-eslint.vim', 
             \{ 'for': 'javascript' }                                " let neomake know how to find local eslint
 Plug 'benekastah/neomake', 
             \{ 'for': ['javascript', 'rt', 'html'] }                " neovim replacement for syntastic using neovim's job control functonality
 Plug 'dahu/vim-fanfingtastic'                                       " improved f F t T commands
 Plug 'airblade/vim-gitgutter'                                       " add git status for each modified line
-Plug 'sudavid4/base16-vim'
+Plug 'davidsu/base16-vim'
 Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline'                                      " fancy statusline
-Plug 'sudavid4/vim-airline-themes'                                  " themes for vim-airline
-Plug 'sudavid4/vim-js-goToDeclaration', {'for': 'javascript'}       " better ternjs gotodeclaration
+Plug 'davidsu/vim-airline-themes'                                  " themes for vim-airline
+Plug 'davidsu/vim-js-goToDeclaration', {'for': 'javascript'}       " better ternjs gotodeclaration
 if isdirectory(expand('%:p'))
-    Plug 'sudavid4/nerdtree'
+    Plug 'davidsu/nerdtree'
 else
-    Plug 'sudavid4/nerdtree' ,{'on': ['NERDTreeFind', 'NERDTreeToggle']}
+    Plug 'davidsu/nerdtree' ,{'on': ['NERDTreeFind', 'NERDTreeToggle']}
 endif
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' 
 Plug 'ryanoasis/vim-devicons', {'on': ['NERDTreeFind', 'NERDTreeToggle']} " file drawer
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete
 Plug 'tpope/vim-commentary'                                         " comment stuff out
-Plug 'sudavid4/vim-unimpaired'                                      " mappings which are simply short normal mode aliases for commonly used ex commands
+Plug 'davidsu/vim-unimpaired'                                      " mappings which are simply short normal mode aliases for commonly used ex commands
 Plug 'tpope/vim-surround'                                           " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.
 Plug 'tpope/vim-fugitive'                                           " amazing git wrapper for vim
 Plug 'tpope/vim-rhubarb'                                            " for `:Gbrowse`
 Plug 'tpope/vim-repeat'                                             " enables repeating other supported plugins with the . command
 Plug 'haya14busa/incsearch.vim'                                     " Improved incremental searching for Vim
-Plug 'sudavid4/gv.vim'                                              " :GV browse commits like a pro
+Plug 'davidsu/gv.vim'                                              " :GV browse commits like a pro
 Plug 'tpope/vim-sleuth'                                             " detect indent style (tabs vs. spaces)
 Plug 'sickill/vim-pasta'                                            " fix indentation when pasting
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }                " focus tool. Good for presentating with vim
