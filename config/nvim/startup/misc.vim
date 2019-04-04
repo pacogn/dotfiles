@@ -62,6 +62,19 @@ function! Vimrc(...)
 		\fzf#vim#with_preview({'dir': '$DOTFILES/config/nvim/', 'options': '--bind ctrl-s:toggle-sort'}, 'up:40%', 'ctrl-g'), 1)
 endfunction
 
+function! Carmicat(...)
+    let query = get(a:000, 0, '^')
+    if !len(query)
+	let query = '^'
+    endif
+    if query !~ '^''' || query !~ '''$'
+	let query = shellescape(query)
+    endif
+    call fzf#vim#ag_raw(
+		\"-G ".
+        \'''carmi\.js''', 
+		\fzf#vim#with_preview({'dir': '~/projects/bolt/', 'options': '--bind ctrl-s:toggle-sort'}, 'up:40%', 'ctrl-g'), 1)
+endfunction
 " Zoom - from https://github.com/junegunn/dotfiles/blob/master/vimrc<Paste>
 function! s:zoom()
     if winnr('$') > 1
@@ -224,6 +237,8 @@ command! -bang GPush call utils#run_shell_command('git push', <bang>0)
 command! -bang GPull call utils#run_shell_command('git pull', <bang>0)
 command! CherryPickHelp call cherry_pick_helper#buffer_commits_ordered_by_date()
 command! CopyFilePath :exe "let @*='".expand('%:p')."'"
+command! CopyFileName :exe "let @*='".expand('%:t')."'"
+command! CopyFileNameNoExtension :exe "let @*='".substitute(expand('%:t'), '\(.*\)\..*', '\1', '')."'"
 
 " quick open snippets file for current filetype
 command! OpenInWebstorm call utils#open_in_webstorm()

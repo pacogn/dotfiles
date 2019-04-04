@@ -198,6 +198,7 @@ function! utils#restoreAlternateFile()
 endfunction
 
 function! utils#open_in_webstorm()
+    echom 'webstorm --line '.getpos('.')[1].' '.expand('%:p')
     :call system('webstorm --line '.getpos('.')[1].' '.expand('%:p')) 
 endfunction
 

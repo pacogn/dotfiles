@@ -7,7 +7,9 @@ function loadzgen(){
         zgen oh-my-zsh
         zgen load zsh-users/zsh-syntax-highlighting
         zgen load zsh-users/zsh-history-substring-search
+        # zgen load zsh-users/zsh-autosuggestions
         zgen oh-my-zsh plugins/yarn
+        # zgen oh-my-zsh plugins/zsh-autosuggestions
         # zgen load paulirish/git-open
     fi
     #unset SET_CUSTOM_PROMPT value if you want to test other prompt than

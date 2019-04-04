@@ -130,7 +130,7 @@ nnoremap <silent><space>fl :Lines<cr>
 "fugitive
 nmap <silent><space>wd :call DiffInWebstorm()<cr>
 nmap <silent><space>ws :OpenInWebstorm()<cr>
-nmap <silent><space>ow :OpenInWebstorm()<cr>
+nmap <silent><space>ow :OpenInWebstorm<cr>
 nmap <silent><space>oa :call utils#open_in_atom()<cr>
 nmap <silent><space>ov :call utils#open_in_visual_studio_code()<cr>
 nmap <silent><space>gb :Gblame<cr>nmap <silent>,gd :Gdiff<cr>

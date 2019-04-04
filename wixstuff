@@ -239,3 +239,58 @@ function logforever() {
 	echo $logfile
 	tail -f -n 1000 $logfile
 }
+function boltBuildPrAll() {
+	for pr in `hub pr list G ____`
+	do
+		if [[ $pr =~ ^.[[:digit:]] ]]; then
+			echo $pr
+			boltBuildPr $(perl -pe 's#.(.*)#\1#' <<< $pr)
+		fi
+	done
+}
+
+function boltBuildPrAndClose() {
+  url=$1
+osascript <<EOF
+tell application "Google Chrome"
+  activate
+  open location "$url"
+  delay 2
+  execute front window's active tab javascript "window.document.querySelector('.btn.btn_mini').click()"
+  delay 0.5
+  tell its window 1
+    close active tab
+  end tell
+end tell
+EOF
+}
+function boltBuildPrAndKeepOpen() {
+  url=$1
+osascript <<EOF
+tell application "Google Chrome"
+  activate
+  open location "$url"
+  delay 2
+  execute front window's active tab javascript "window.document.querySelector('.btn.btn_mini').click()"
+  delay 0.5
+end tell
+EOF
+}
+function boltBuildPr() {
+for url in \
+	"http://pullrequest-tc.dev.wixpress.com/viewType.html?buildTypeId=Bolt_Lint_2&branch_Bolt=$1%2Fmerge&tab=buildTypeStatusDiv" \
+	"http://pullrequest-tc.dev.wixpress.com/viewType.html?buildTypeId=Bolt_TestBolt&branch_Bolt=$1%2Fmerge&tab=buildTypeStatusDiv" \
+	"http://pullrequest-tc.dev.wixpress.com/viewType.html?buildTypeId=Bolt_TestGeneric&branch_Bolt=$1%2Fmerge&tab=buildTypeStatusDiv" \
+	"http://pullrequest-tc.dev.wixpress.com/viewType.html?buildTypeId=Bolt_TestPerformance&branch_Bolt=$1%2Fmerge&tab=buildTypeStatusDiv" \
+	"http://pullrequest-tc.dev.wixpress.com/viewType.html?buildTypeId=Bolt_TestSsr_2&branch_Bolt=$1%2Fmerge&tab=buildTypeStatusDiv" \
+	"http://pullrequest-tc.dev.wixpress.com/viewType.html?buildTypeId=Bolt_TestSsrOptimistic&branch_Bolt=$1%2Fmerge&tab=buildTypeStatusDiv" \
+	"http://pullrequest-tc.dev.wixpress.com/viewType.html?buildTypeId=Bolt_TestLambdaE2e&branch_Bolt=$1%2Fmerge&tab=buildTypeStatusDiv" \
+	"http://pullrequest-tc.dev.wixpress.com/viewType.html?buildTypeId=Bolt_Parallel&branch_Bolt=$1%2Fmerge&tab=buildTypeStatusDiv"
+do
+    if [[ $# == 1 ]]; then 
+        boltBuildPrAndClose $url
+    else
+        boltBuildPrAndKeepOpen $url
+    fi
+done
+}
