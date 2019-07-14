@@ -35,4 +35,5 @@ augroup END
 " 	\ 'text': 'X',
 " 	\ 'texthl': 'ErrorMsg',
 " 	\ }
-let g:neomake_warning_sign = {'text': '💩', 'texthl': 'NeomakeWarningSign'}
+" let g:neomake_warning_sign = {'text': '💩', 'texthl': 'NeomakeWarningSign'}
+let g:neomake_warning_sign = {'text': 'W', 'texthl': 'NeomakeWarningSign'}

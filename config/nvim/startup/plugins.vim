@@ -33,7 +33,7 @@ Plug 'blueyed/vim-diminactive'
 let g:nvim_typescript#diagnosticsEnable=0
 let g:nvim_typescript#javascript_support=1
 Plug 'davidsu/nvim-typescript', {'for': ['javascript', 'typescript'], 'do': './install.sh'}
-Plug 'davidsu/tern_for_vim', {'for': 'javascript', 'do': 'npm i' } " intellijent navigation and refactor for javascript
+Plug 'davidsu/tern_for_vim', {'for': ['javascript', 'typescript'], 'do': 'npm i' } " intellijent navigation and refactor for javascript
 if(has('nvim'))
     Plug 'Shougo/deoplete.nvim'
     Plug 'Shougo/neco-vim', {'for': 'vim'}                          " deoplete source for vimscript
@@ -57,7 +57,7 @@ Plug 'kchmck/vim-coffee-script', {'for': 'coffee'}
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline'                                      " fancy statusline
 Plug 'davidsu/vim-airline-themes'                                  " themes for vim-airline
-Plug 'davidsu/vim-js-goToDeclaration', {'for': 'javascript'}       " better ternjs gotodeclaration
+Plug 'davidsu/vim-js-goToDeclaration', {'for': ['javascript', 'typescript']}       " better ternjs gotodeclaration
 if isdirectory(expand('%:p'))
     Plug 'davidsu/nerdtree'
 else
@@ -66,6 +66,8 @@ endif
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' 
 Plug 'ryanoasis/vim-devicons', {'on': ['NERDTreeFind', 'NERDTreeToggle']} " file drawer
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete
+Plug 'mxw/vim-jsx', {'for': 'javascript'}
+" Plug 'maxmellon/vim-jsx-pretty', {'for': 'javascript'}
 Plug 'tpope/vim-commentary'                                         " comment stuff out
 Plug 'davidsu/vim-unimpaired'                                      " mappings which are simply short normal mode aliases for commonly used ex commands
 Plug 'tpope/vim-surround'                                           " mappings to easily delete, change and add such surroundings in pairs, such as quotes, parens, etc.

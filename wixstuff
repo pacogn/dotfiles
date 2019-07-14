@@ -12,6 +12,9 @@ hash -d r=~/projects/wix-richtext/
 hash -d me=~/projects/santa-members/santa-members-editor-app/
 alias whokilledsanta='open http://santa.wixpress.com'
 #teamcity uses same username+password as in your computer
+alias openteamcityaccountrecovery='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=AccountRecovery_AccountRecovery'\'
+alias openteamcitymemberpermissions='open '\''http://tc.dev.wixpress.com/project.html?projectId=mono_repo_crm_member_permissions'\'
+alias otaccountrecovery='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=AccountRecovery_AccountRecovery'\'
 alias openteamcitysantaeditor='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=Santa_SantaEditor'\'
 alias openteamcitysantabolt='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=Santa_WixBolt_O'\'
 alias openteamcitysantainfra='open '\''http://tc.dev.wixpress.com/viewType.html?buildTypeId=SantaInfra_SantaInfra'\'
@@ -88,6 +91,20 @@ function servesanta()(
     nohup serve -p 3000 --cors &> /tmp/serve &
     nvm use 8.7
     nohup local-ssl-proxy --source 5000 --target 3000 &> /tmp/local-ssl &
+)
+function servememberinfo()(
+  loadallifneeded
+  cd ~/projects/crm-site-members/member-info/dist/statics
+  nvm use 8.7
+  nohup serve -p 3000 --cors &> /tmp/serve &
+  nohup local-ssl-proxy --source 5000 --target 3000 &> /tmp/local-ssl &
+)
+function serveformbuilder()(
+  loadallifneeded
+  cd /Users/davidsu/projects/form-builder/dist/statics
+  nvm use 8.7
+  nohup serve -p 3001 --cors &> /tmp/serve &
+  nohup local-ssl-proxy --source 5000 --target 3001 &> /tmp/local-ssl &
 )
 
 function killbolt(){
@@ -186,8 +203,6 @@ function openeditorproduction(){
 'editorSessionId=08A00041-84AE-463A-AB5E-0012F98532F6'\
 '&'\
 'leavePagePopUp=false'\
-'&'\
-'debug=all'\
 '&'\
 'hot=false'
   sleep 0.5
