@@ -17,6 +17,7 @@ let g:NERDTreeExtensionHighlightColor['js'] = 'd1bf70'
 "see help devicons 521
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols = {} " needed
 let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['rt'] = ''
+let g:WebDevIconsUnicodeDecorateFileNodesExtensionSymbols['vim'] = ''
 "git indication in nerdtree --- not in use
 let g:NERDTreeIndicatorMapCustom = {
     \ "Modified"  : "✭",
