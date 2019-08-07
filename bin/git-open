@@ -170,7 +170,11 @@ else
   providerBranchRef="/tree/$branch"
 fi
 
-if [[ "$domain" == 'bitbucket.org' ]]; then
+echo $domain
+if [[ "$domain" == 'git.walkmedev.com' ]]; then
+  domain="$domain"
+  providerBranchRef="?at=refs%2Fheads%2F$branch"
+elif [[ "$domain" == 'bitbucket.org' ]]; then
   # Bitbucket, see https://github.com/paulirish/git-open/issues/80 for why ?at is needed.
   providerBranchRef="/src?at=$branch"
 elif [[ "${#pathargs[@]}" -ge 3 && ${pathargs[${#pathargs[@]} - 3]} == 'scm' ]]; then
@@ -222,17 +226,28 @@ elif [[ "$domain" =~ amazonaws\.com$ ]]; then
 fi
 
 openurl="$protocol://$domain/$urlpath"
-
 openurl="$openurl$providerBranchRef"
-toplevel=$(git rev-parse --show-toplevel)
-toplevellen=${#toplevel}
-pwdfull=$(pwd)
-pwdlen=${#pwdfull}
-if [[ $toplevellen != $pwdlen ]]; then
-  toplevellen=$(expr $toplevellen + 2)
-  additional=$(echo $pwdfull | cut  -c ${toplevellen}-)
-  echo $additional
-  openurl="$openurl/$additional"
+if [[ "$domain" == 'git.walkmedev.com' ]]; then
+    domain="$domain"/projects/WAL/repos
+    echo $urlpath
+    urlpath=$(sed 's#wal/\(.*\)#\1#' <<< $urlpath)
+    echo $urlpath
+    echo $providerBranchRef
+    openurl="$protocol://$domain/$urlpath/browse$providerBranchRef"
+    echo openurl--------------
+    echo $openurl
+    echo -------------------------
+else 
+    toplevel=$(git rev-parse --show-toplevel)
+    toplevellen=${#toplevel}
+    pwdfull=$(pwd)
+    pwdlen=${#pwdfull}
+    if [[ $toplevellen != $pwdlen ]]; then
+        toplevellen=$(expr $toplevellen + 2)
+        additional=$(echo $pwdfull | cut  -c ${toplevellen}-)
+        echo $additional
+        openurl="$openurl/$additional"
+    fi
 fi
 
 
