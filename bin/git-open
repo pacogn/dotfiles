@@ -228,12 +228,13 @@ fi
 openurl="$protocol://$domain/$urlpath"
 openurl="$openurl$providerBranchRef"
 if [[ "$domain" == 'git.walkmedev.com' ]]; then
-    domain="$domain"/projects/WAL/repos
-    echo $urlpath
+    [[ ! $urlpath =~ 'users/' ]] && domain="$domain"/projects/WAL/repos
+    echo url path: $urlpath
     urlpath=$(sed 's#wal/\(.*\)#\1#' <<< $urlpath)
-    echo $urlpath
-    echo $providerBranchRef
-    openurl="$protocol://$domain/$urlpath/browse$providerBranchRef"
+    [[ ! $urlpath =~ '/browse' ]] && urlpath="$urlpath/browse"
+    echo url path: $urlpath
+    echo provider branch: $providerBranchRef
+    openurl="$protocol://$domain/$urlpath$providerBranchRef"
     echo openurl--------------
     echo $openurl
     echo -------------------------
