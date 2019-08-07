@@ -1,5 +1,6 @@
 PROMPT="%~$ "
 DISABLE_AUTO_UPDATE=true
+export LC_ALL=en_US.UTF-8
 export DOTFILES=$HOME/.dotfiles
 export PATH=~/Library/Python/3.6/bin:$PATH:$HOME/.dotfiles/bin #:$HOME/.zgen/paulirish/git-open-master
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -24,7 +24,7 @@ alias jc='cd $HOME/projects/santa-core'
 alias ji='cd $HOME/projects/santa-infra'
 alias jv='cd $HOME/projects/santa-infra/santa-version-updater'
 alias jb='cd $HOME/projects/bolt'
-alias je='cd $HOME/projects/santa-editor'
+alias je='cd $HOME/projects/editor.pagescript'
 alias jee='cd $HOME/projects/santa-editor/santa-editor'
 alias jd='cd $HOME/.dotfiles'
 alias jp='cd $HOME/projects'
@@ -51,7 +51,7 @@ alias -g VC=' > ~/.vim-tmp/t && vim ~/.vim-tmp/t -c '\''nmap q :q!<cr>'\'
 alias vc='chalk && vim '
 alias vimc='chalk && vim '
 alias cvim='chalk && vim '
-alias -g ME='--author=davidsu'
+alias -g ME='--author=david.susskind'
 alias -g NO='--name-only'
 alias -g PJ='package.json'
 alias -g NY="':!yarn.lock' ':!*/yarn.lock'"
@@ -187,8 +187,8 @@ alias gmdc='git merge --no-commit --no-ff'
 
 alias ap='vim ~/Dropbox/ap.html'
 alias open8080='open http://localhost:8080'
-alias npmprivate='npm config set registry http://npm.dev.wixpress.com'
-alias npmpublic='npm config set registry https://registry.npmjs.org/'
+alias npmprivate='npm config set registry https://npm.walkmedev.com; yarn config set registry https://npm.walkmedev.com'
+alias npmpublic='npm config set registry https://registry.npmjs.org/; yarn config set registry https://registry.yarnpkg.com'
 function spectrum_escape(){
     for COLOR in {0..255}
     do

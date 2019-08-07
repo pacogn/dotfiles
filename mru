@@ -1,5 +1,5 @@
 #!/bin/zsh
-mruselect='SELECT @rn:=@rn+1 AS rank, _file, linenum 
+mruselect='SELECT @rn:=@rn+1 AS \"rank\", _file, linenum 
     FROM (
       SELECT *
       FROM mru
