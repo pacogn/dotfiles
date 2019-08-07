@@ -38,9 +38,9 @@ joi@^13.1.2:
     isemail "3.x.x"
     topo "3.x.x"
 
-lodash@^4.17.11:
-  version "4.17.11"
-  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+lodash@^4.17.13:
+  version "4.17.13"
+  resolved "https://repo.dev.wixpress.com/artifactory/api/npm/npm-repos/lodash/-/lodash-4.17.13.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha1-s56mIp72B+zYniyN8SU2iRysm40=
 
 nan@^2.10.0:
