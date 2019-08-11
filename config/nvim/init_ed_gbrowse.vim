@@ -3,11 +3,8 @@ Plug 'ssh://git@git.walkmedev.com:7999/~david.susskind/walkme-vim-gbrowse.git'
 Plug 'tpope/vim-fugitive'                                           " amazing git wrapper for vim
 call plug#end()
 
-function! s:shell_cmd_completed(...)
-    Gbrowse
+function! Shell_cmd_completed(...)
+    silent! Gbrowse
     quit
 endfunction
-let s:callbacks = {
-\ 'on_exit': function('s:shell_cmd_completed'),
-\ }
-call jobstart('sleep 0', s:callbacks)
+call timer_start('0', 'Shell_cmd_completed')
