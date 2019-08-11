@@ -170,10 +170,9 @@ else
   providerBranchRef="/tree/$branch"
 fi
 
-echo $domain
 if [[ "$domain" == 'git.walkmedev.com' ]]; then
-  domain="$domain"
-  providerBranchRef="?at=refs%2Fheads%2F$branch"
+  nvim --headless . -u ~/.config/nvim/init_ed_gbrowse.vim
+  exit 0
 elif [[ "$domain" == 'bitbucket.org' ]]; then
   # Bitbucket, see https://github.com/paulirish/git-open/issues/80 for why ?at is needed.
   providerBranchRef="/src?at=$branch"
@@ -227,28 +226,14 @@ fi
 
 openurl="$protocol://$domain/$urlpath"
 openurl="$openurl$providerBranchRef"
-if [[ "$domain" == 'git.walkmedev.com' ]]; then
-    [[ ! $urlpath =~ 'users/' ]] && domain="$domain"/projects/WAL/repos
-    echo url path: $urlpath
-    urlpath=$(sed 's#wal/\(.*\)#\1#' <<< $urlpath)
-    [[ ! $urlpath =~ '/browse' ]] && urlpath="$urlpath/browse"
-    echo url path: $urlpath
-    echo provider branch: $providerBranchRef
-    openurl="$protocol://$domain/$urlpath$providerBranchRef"
-    echo openurl--------------
-    echo $openurl
-    echo -------------------------
-else 
-    toplevel=$(git rev-parse --show-toplevel)
-    toplevellen=${#toplevel}
-    pwdfull=$(pwd)
-    pwdlen=${#pwdfull}
-    if [[ $toplevellen != $pwdlen ]]; then
+toplevel=$(git rev-parse --show-toplevel)
+toplevellen=${#toplevel}
+pwdfull=$(pwd)
+pwdlen=${#pwdfull}
+if [[ $toplevellen != $pwdlen ]]; then
         toplevellen=$(expr $toplevellen + 2)
         additional=$(echo $pwdfull | cut  -c ${toplevellen}-)
-        echo $additional
         openurl="$openurl/$additional"
-    fi
 fi
 
 
