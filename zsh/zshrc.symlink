@@ -7,6 +7,7 @@ export PATH=~/Library/Python/3.6/bin:$PATH:$HOME/.dotfiles/bin #:$HOME/.zgen/pau
 [ -f ~/.fzf/shell/completion.zsh ] && source ~/.fzf/shell/completion.zsh
 [ -f ~/Dropbox/terminal/quickOpen.sh ] && source ~/Dropbox/terminal/quickOpen.sh
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -g ""'
+export FZF_TMUX_HEIGHT=0 #make fzf fullscreen on terminal
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS='--reverse'
 export THEME
@@ -40,16 +41,6 @@ startMySQLIfNeeded
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/davidsu/projects/santa-infra/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/davidsu/projects/santa-infra/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/davidsu/projects/santa-infra/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/davidsu/projects/santa-infra/node_modules/tabtab/.completions/sls.zsh
-
 # tabtab source for yarn package
 # uninstall by removing these lines or running `tabtab uninstall yarn`
 [[ -f /Users/davidsu/.dotfiles/config/yarn/global/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/davidsu/.dotfiles/config/yarn/global/node_modules/tabtab/.completions/yarn.zsh
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/davidsu/projects/santa-infra/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/davidsu/projects/santa-infra/node_modules/tabtab/.completions/slss.zsh
