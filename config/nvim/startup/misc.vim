@@ -162,6 +162,7 @@ augroup configgroup
     au FocusLost,WinLeave * :silent! wa
 
     au VimEnter * call histdel(':', '^qa\?$')
+    au VimEnter * set tabstop=4
     "this is my way of disabling syntax highlight for very large files... A little clumsy but good enough for now
     autocmd BufEnter * if line('$') > 15000 | set filetype=none | endif
     autocmd BufNewFile,BufRead *.rt set filetype=html
