@@ -9,7 +9,7 @@ mruselect='SELECT @rn:=@rn+1 AS \"rank\", _file, linenum
 mrucmd='mysql -uroot --skip-column-names --batch -e "'${mruselect}'" mru_vim | xargs printf '\''%5s %s:%s\n'\'
 
 
-mrwselect='SELECT @rn:=@rn+1 AS rank, _file, linenum 
+mrwselect='SELECT @rn:=@rn+1 AS \"rank\", _file, linenum 
     FROM (
       SELECT *
       FROM mrw
