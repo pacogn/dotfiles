@@ -4,6 +4,9 @@ if empty(glob('~/.vim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 call plug#begin('~/.config/nvim/plugged')
+" Plug 'tommcdo/vim-fubitive'
+Plug 'ssh://git@git.walkmedev.com:7999/~david.susskind/walkme-vim-gbrowse.git'
+" Plug 'matthewtodd/vim-fustashtive'
 Plug 'junegunn/vim-peekaboo'
 Plug 'leafgarland/typescript-vim', {'for': 'typescript'}
 Plug 'davidsu/comfortable-motion.vim'                               " Brings physics-based smooth scrolling to the Vim world!
@@ -13,6 +16,7 @@ Plug 'davidsu/vim-visual-star-search'                              " extends */#
 Plug 'SirVer/ultisnips'
 Plug 'davidsu/vim-bufkill'                                           " wipe buffer without closing it's window
 Plug 'tpope/vim-scriptease'                                         " utilities for vim script authoring. Installed to use ':PP'=pretty print dictionary
+Plug 'inkarkat/vim-ingo-library'                                    "dependency of vim-mark
 Plug 'idbrii/vim-mark'                                              " highlighting of interesting words
 Plug 'davidsu/mysql-mru.vim'
 Plug 'schickling/vim-bufonly'                                       " delete all buffers but current
@@ -47,9 +51,9 @@ Plug 'Konfekt/FastFold'                                             " fold zynta
 Plug 'henrik/vim-indexed-search'                                    " Match 123 of 456 /search term/ in Vim searches
 Plug '/usr/local/opt/fzf' | Plug 'davidsu/fzf.vim'                 " fuzzy file finder and so much more
 Plug 'davidsu/neomake-local-eslint.vim', 
-            \{ 'for': 'javascript' }                                " let neomake know how to find local eslint
+            \{ 'for': ['javascript', 'typescript'] }                                " let neomake know how to find local eslint
 Plug 'benekastah/neomake', 
-            \{ 'for': ['javascript', 'rt', 'html'] }                " neovim replacement for syntastic using neovim's job control functonality
+            \{ 'for': ['javascript', 'typescript', 'html'] }                " neovim replacement for syntastic using neovim's job control functonality
 Plug 'dahu/vim-fanfingtastic'                                       " improved f F t T commands
 Plug 'airblade/vim-gitgutter'                                       " add git status for each modified line
 Plug 'davidsu/base16-vim'
@@ -66,7 +70,7 @@ endif
 Plug 'tiagofumo/vim-nerdtree-syntax-highlight' 
 Plug 'ryanoasis/vim-devicons', {'on': ['NERDTreeFind', 'NERDTreeToggle']} " file drawer
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete
-Plug 'mxw/vim-jsx', {'for': 'javascript'}
+" Plug 'mxw/vim-jsx', {'for': 'javascript'}
 " Plug 'maxmellon/vim-jsx-pretty', {'for': 'javascript'}
 Plug 'tpope/vim-commentary'                                         " comment stuff out
 Plug 'davidsu/vim-unimpaired'                                      " mappings which are simply short normal mode aliases for commonly used ex commands
@@ -88,7 +92,7 @@ if expand('%:p') !~ '.git/index$'
     " Plug 'othree/yajs.vim', { 'for': ['javascript', 'jsx'] }            " JavaScript syntax plugin
     Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'jsx'] }
 endif
-Plug 'maxmellon/vim-jsx-pretty'
+" Plug 'maxmellon/vim-jsx-pretty'
 Plug 'elzr/vim-json', { 'for': 'json' }                             " JSON support
 Plug 'othree/es.next.syntax.vim', { 'for': 'javascript' }           " ES6 and beyond syntax
 " Plug 'Quramy/tsuquyomi', { 'for': 'typescript', 'do': 'npm install' } " extended typescript support - works as a client for TSServer
@@ -105,3 +109,4 @@ highlight def link jsxTag javascriptIdentifierName
 hi link javascriptReserved javascriptVariable
 hi link javascriptReservedCase javascriptVariable
 call plug#end()
+

@@ -22,7 +22,8 @@ endfunction
 "--------------------------------------------------------------------------------
 
 function! RunNeomakeEslint()
-    if exists("b:neomake_javascript_eslint_exe") && b:neomake_javascript_eslint_exe !~ 'eslint not found' && &ft =~ 'javascript' && filereadable(b:neomake_javascript_eslint_exe)
+    if (exists("b:neomake_javascript_eslint_exe") && b:neomake_javascript_eslint_exe !~ 'eslint not found' && &ft =~ 'javascript' && filereadable(b:neomake_javascript_eslint_exe)) ||
+        \ (exists("b:neomake_typescript_eslint_exe") && b:neomake_typescript_eslint_exe !~ 'eslint not found' && &ft =~ 'typescript' && filereadable(b:neomake_typescript_eslint_exe))
         Neomake
     endif
 endfunction
@@ -90,6 +91,6 @@ augroup javascript
     autocmd FileType javascript nnoremap <buffer>{ :call GoToNextFunction(-1, 0, 1)<cr>
     autocmd FileType javascript nnoremap <buffer>} :call GoToNextFunction(-1, 0, 0)<cr>
     " autocmd FileType javascript nnoremap <buffer>cof :call JSToggleFoldMethod()<cr>
-    autocmd Filetype javascript vnoremap <buffer>1= :<C-u>setf jsx<cr>gv=:<C-u>setf javascript<cr>
+    " autocmd Filetype javascript vnoremap <buffer>1= :<C-u>setf jsx<cr>gv=:<C-u>setf javascript<cr>
 augroup END
 "-----------------------------------------------------------------------------}}}

@@ -8,20 +8,18 @@ function! OnNeomakeJobFinished() abort
 endfunction
 
 let g:neomake_javascript_enabled_makers = ['eslint']
-let g:neomake_javascript_fixlint_maker = {
+let g:neomake_typescript_enabled_makers = ['eslint']
+let eslintMaker = {
 	    \'exe': 'eslint',
-	    \'args': '-f compact --fix',
-        \ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
-        \   '%W%f: line %l\, col %c\, Warning - %m,%-G,%-G%*\d problems%#',
+	    \'args': '-f compact --ext ".js,.ts" --fix',
+	\ 'errorformat': '%E%f: line %l\, col %c\, Error - %m,' .
+	\   '%W%f: line %l\, col %c\, Warning - %m,%-G,%-G%*\d problems%#',
 	    \}
-let g:neomake_rt_maker = {
-	    \'exe': 'grunt',
-	    \'args': [ 'rt']
-	    \}
+let g:neomake_javascript_fixlint_maker = eslintMaker
+let g:neomake_typescript_fixlint_maker = eslintMaker
 
 augroup my_neomake_autocmds
     au!
-    autocmd BufWritePost *.rt :Neomake! rt
     autocmd User NeomakeJobFinished call OnNeomakeJobFinished()
     autocmd ColorScheme * hi NeomakeErrorSign guifg=#ff0000
         " \ hi NeomakeWarningSign ctermfg=yellow
