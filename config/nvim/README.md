@@ -16,7 +16,7 @@
 8. install mysql - needed for [mysql_mru.vim](https://github.com/sudavid4/mysql-mru.vim)  `brew install mysql`
 9. download and install a font compatible with nerdtree devicons:[nerd-fonts](https://github.com/ryanoasis/nerd-fonts#combinations). Once you've done that go to Iterm -> preferences -> profiles -> text -> change font -> choose "Droid Sans Mono for Powerline Nerd Font Complete.otf"
     ```
-    cd ~/Library/Fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://raw.githubusercontent.com/ryanoasis/nerd-fonts/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20for%20Powerline%20Nerd%20Font%20Complete.otf
+    cd ~/Library/Fonts && curl -fLo "Droid Sans Mono for Powerline Nerd Font Complete.otf" https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DroidSansMono/complete/Droid%20Sans%20Mono%20Nerd%20Font%20Complete.otf
     ```
 10. run `:UpdateRemotePlugins` inside vim
 11. run `:CheckHealth` inside vim
