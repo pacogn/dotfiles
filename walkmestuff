@@ -1,0 +1,22 @@
+function serveeditor()(
+    loadallifneeded
+    cd ~/projects/tools/wm-local-http-static-server
+    sudo -b npm start
+)
+function killeditor(){
+    #kill with SIGINT=2 by default
+    signal=${1:-2}
+    echo killing with signal $signal
+    sudo kill -$signal $(sudo lsof -i tcp:80 -t)
+    sudo kill -$signal $(sudo lsof -i tcp:443 -t)
+}
+function runjest(){
+    if [[ ${@: -1} == '--inspect-brk' ]]; then
+        set -- "${@:1:$(($#-1))}"
+        node --inspect-brk node_modules/.bin/jest $*
+    else
+        yarn jest $*
+    fi
+}
+alias nolocal='[[ -f ~/walkme/settings.json ]] && mv ~/walkme/settings.json ~/walkme/_settings.json'
+alias setlocal='[[ -f ~/walkme/_settings.json ]] && mv ~/walkme/_settings.json ~/walkme/settings.json'
