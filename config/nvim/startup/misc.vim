@@ -240,6 +240,7 @@ command! CherryPickHelp call cherry_pick_helper#buffer_commits_ordered_by_date()
 command! CopyFilePath :exe "let @*='".expand('%:p')."'"
 command! CopyFileName :exe "let @*='".expand('%:t')."'"
 command! CopyFileNameNoExtension :exe "let @*='".substitute(expand('%:t'), '\(.*\)\..*', '\1', '')."'"
+command! CopyRelativeFilePath exe "let @*='".substitute(expand('%:p'), getcwd().'/', '', '')."'"
 
 " quick open snippets file for current filetype
 command! OpenInWebstorm call utils#open_in_webstorm()

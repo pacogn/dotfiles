@@ -154,8 +154,8 @@ nmap <space>hu :GitGutterUndoHunk<cr>
 "hunk before = hunk prev
 nmap <space>hb :GitGutterPrevHunk<cr>
 nmap <space>hN :GitGutterPrevHunk<cr>
-nmap [c <Plug>GitGutterPrevHunk
-nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>(GitGutterPrevHunk)
+nmap ]c <Plug>(GitGutterNextHunk)
 nmap <space>hv :call gitgutter#hunk#text_object(1)<cr>
 nmap 1H :GitGutterPrevHunk<cr>
 "highlight hunks

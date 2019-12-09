@@ -5,7 +5,7 @@ let NERDTreeShowBookmarks=0
 " show hidden files in NERDTree
 let NERDTreeShowHidden=1
 " remove some files by extension
-let NERDTreeIgnore = ['\.js.map$', '.DS_Store', '\.class$']
+let NERDTreeIgnore = ['\.js.map$', '.DS_Store', '\.class$', '\.tern-port']
 let NERDTreeWinSize = 40
 
 "vim-nerdtree-syntax-highlight customization
