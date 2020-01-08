@@ -48,7 +48,7 @@ if [[ $SET_CUSTOM_PROMPT == "true" ]]; then
      function color_for_most_used_dirs() {
        if [[ $(pwd) =~ .*santa-edi.* ]]; then
         echo "%{[38;5;101m%}"
-      elif [[ $(pwd) =~ .*santa.* ]]; then
+      elif [[ $(pwd) =~ .*MT.player.* ]]; then
         echo "%{[38;5;67m%}"
       elif [[ $(pwd) =~ .*wix-ck-ed.* ]]; then
         echo "%{[38;5;131m%}"

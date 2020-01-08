@@ -18,14 +18,8 @@ alias rg=" rg --smart-case \
    --colors path:fg:green       \
    --colors path:style:bold "
 alias agd='cd $DOTFILES && ag --ignore ''plugged*'' --ignore-dir ''forkedProjects'' --ignore ''autoload*'''
-alias ja='cd $HOME/projects/santa'
-alias jm='cd $HOME/projects/santa-core/santa-main-r'
-alias jc='cd $HOME/projects/santa-core'
-alias ji='cd $HOME/projects/santa-infra'
-alias jv='cd $HOME/projects/santa-infra/santa-version-updater'
-alias jb='cd $HOME/projects/bolt'
+alias jm='cd $HOME/projects/MT.player'
 alias je='cd $HOME/projects/editor.pagescript'
-alias jee='cd $HOME/projects/santa-editor/santa-editor'
 alias jd='cd $HOME/.dotfiles'
 alias jp='cd $HOME/projects'
 alias random='vim `get-random-interview-question`'

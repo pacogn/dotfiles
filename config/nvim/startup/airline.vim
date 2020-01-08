@@ -49,11 +49,7 @@ function! ShrinkedFilePath()
   " if len(withoutHome) > 20
   "   let withoutHome=strpart(withoutHome, 0, 20) . '...'
   " endif
-  if withoutHome == 'santa'
-    return 'SANTA VIEWER'
-  elseif withoutHome == 'santa-editor'
-    return 'SANTA-EDITOR'
-  elseif getcwd() =~ 'nvim/startup'
+  if getcwd() =~ 'nvim/startup'
     return 'NVIM/STARTUP' 
   endif
   if len(withoutHome) > 20
