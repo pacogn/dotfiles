@@ -50,10 +50,17 @@ function deepuistart() {
     echo 'yarn start --> ' $(pwd)
     nohup yarn start &> /tmp/deepui-automaton-processor &
 }
-alias showdeepuiprocessor='tail -f /tmp/deepui-automaton-processor'
-alias showdeepuiexecutor='tail -f /tmp/deepui-automaton-executor'
-alias showdeepuiserver='tail -f /tmp/deepui-web-server'
-alias showdeepuienduser='tail -f /tmp/deepui-end-user'
+function sshci() {
+    if [[ $# != 1 ]]; then
+        echo 'usage: sshci $machine_ip'
+        return 1
+    fi
+    ssh -i $HOME/.ssh/dev-server.pem root@$1 -p 22 -v
+}
+alias showdeepuiprocessor='tail -f -n 1000 /tmp/deepui-automaton-processor'
+alias showdeepuiexecutor='tail -f  -n 1000 /tmp/deepui-automaton-executor'
+alias showdeepuiserver='tail -f    -n 1000 /tmp/deepui-web-server'
+alias showdeepuienduser='tail -f   -n 1000 /tmp/deepui-end-user'
 
 alias nolocal='[[ -f ~/walkme/settings.json ]] && mv ~/walkme/settings.json ~/walkme/_settings.json'
 alias setlocal='[[ -f ~/walkme/_settings.json ]] && mv ~/walkme/_settings.json ~/walkme/settings.json'
