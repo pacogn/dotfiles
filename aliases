@@ -29,6 +29,7 @@ alias killbg='kill -s INT $(sed -E '\''s/\[([[:digit:]]+)\].*/%\1/g'\'' <<< $(jo
 # alias -g F=' | fzf --bind '\''ctrl-g:toggle-preview'\'' --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'
 alias agc='ag --color '
 alias -g IB='--inspect-brk'
+alias -g NC='--no-coverage'
 alias -g NB='$NODE_DEBUG_OPTION'
 alias -g G=' | grep -i '
 alias -g NOLOG=' | egrep -v $LOG '
@@ -48,6 +49,7 @@ alias cvim='chalk && vim '
 alias -g ME='--author=david.susskind'
 alias -g NO='--name-only'
 alias -g PJ='package.json'
+alias -g NP='NOPRETTY=true'
 alias -g NY="':!yarn.lock' ':!*/yarn.lock'"
 alias -g NOYARN="':!yarn.lock' ':!*/yarn.lock'"
 alias -g NS='--name-status'

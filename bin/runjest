@@ -1,10 +1,9 @@
 #!/usr/bin/env node
 const args = process.argv.splice(2)
-let inspectBrk = ''
 console.log(args)
-if(args.indexOf('--inspect-brk') > -1)
-    inspectBrk = '--inspect-brk'
+const isInspectBrk = arg => /--inspect-brk/.test(arg)
+const inspectBrk = args.find(isInspectBrk) || ''
 
-const cmd = `node ${inspectBrk} node_modules/.bin/jest ${args.filter(a => a != '--inspect-brk').join(' ')}`
+const cmd = `node ${inspectBrk} node_modules/.bin/jest ${args.filter(a => !isInspectBrk(a)).join(' ')}`
 console.log(cmd)
 require('child_process').execSync(cmd, {stdio: [0,1,2]})

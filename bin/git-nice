@@ -1,7 +1,7 @@
 args=$@
-if [[ $@ == *' -- '* ]]; then
-  args=$(sed 's/ -- .*//' <<< $@)
-  paths=' -- '$(sed 's/.* -- //' <<< $@)
+if [[ $@ == *'-- '* ]]; then
+  args=$(sed 's/-- .*//' <<< $@)
+  paths=' -- '$(sed 's/.*-- //' <<< $@)
 fi
 args=$(perl -pe "s#(--author=)(.*?\$)#\1\'\2\'#" <<< $args)
 # echo args: $args

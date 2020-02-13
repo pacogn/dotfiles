@@ -215,3 +215,12 @@ END
 done
 }
 
+function countlinesofcode(){
+  if git rev-parse --git-dir > /dev/null 2>&1; then
+    # This is a valid git repository (but the current working directory may not be the top level.
+    git ls-files | xargs wc -l
+  else
+    # this is not a git repository
+    find . -type f | xargs wc -l
+  fi
+}

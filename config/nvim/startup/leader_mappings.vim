@@ -74,29 +74,8 @@ nnoremap <silent> <space>fotf :FindOnlyTestFunction expand("<cword>")<cr>
 nnoremap <silent> <space>fott "fyaw:FindOnlyTestText '<C-r>f'<cr>
 nnoremap <silent> <space>fotw "fyaw:FindOnlyTestText '<C-r>f'<cr>
 nnoremap <silent> <space>fotu :FindOnlyTestUsage expand("<cword>")<cr>
-"real incsearch with plugin
-nmap /  <Plug>(incsearch-forward)\v
-nmap ?  <Plug>(incsearch-backward)\v
-nmap g/ <Plug>(incsearch-stay)
 vmap / /\v
 vmap ? ?\v
-
-" integration of incsearch with indexed_search -- https://github.com/haya14busa/incsearch.vim/issues/21
-let g:indexed_search_mappings = 0
-augroup incsearch-indexed
-    autocmd!
-    autocmd User IncSearchLeave ShowSearchIndex
-augroup END
-
-let g:incsearch#auto_nohlsearch = 0
-command! ToggleIncsearchAutoHl let g:incsearch#auto_nohlsearch = (g:incsearch#auto_nohlsearch + 1) % 2 | echomsg (g:incsearch#auto_nohlsearch ? 'no auto hlsearch' : 'auto hlsearch')
-map <silent>n  <Plug>(incsearch-nohl-n)zv:ShowSearchIndex<CR>
-map <silent>N  <Plug>(incsearch-nohl-N)zv:ShowSearchIndex<CR>
-nmap *  <Plug>(incsearch-nohl-*)
-nmap #  <Plug>(incsearch-nohl-#)
-nmap g* <Plug>(incsearch-nohl-g*)
-nmap g# <Plug>(incsearch-nohl-g#)
-
 
 nnoremap <space>at :AirlineToggleShowingAllSections<cr>
 nnoremap \c :Commands<cr>

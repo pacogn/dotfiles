@@ -241,6 +241,7 @@ command! CopyFilePath :exe "let @*='".expand('%:p')."'"
 command! CopyFileName :exe "let @*='".expand('%:t')."'"
 command! CopyFileNameNoExtension :exe "let @*='".substitute(expand('%:t'), '\(.*\)\..*', '\1', '')."'"
 command! CopyRelativeFilePath exe "let @*='".substitute(expand('%:p'), getcwd().'/', '', '')."'"
+command! ToStoreKey :%s#\C\(\<\u[a-z0-9]\+\|[a-z0-9]\+\)\(\u\)#\l\1_\l\2#gc
 
 " quick open snippets file for current filetype
 command! OpenInWebstorm call utils#open_in_webstorm()

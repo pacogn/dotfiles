@@ -55,7 +55,7 @@ function sshci() {
         echo 'usage: sshci $machine_ip'
         return 1
     fi
-    ssh -i $HOME/.ssh/dev-server.pem root@$1 -p 22 -v
+    ssh -i $HOME/.ssh/dev-server.pem ec2-user@$1 -p 22 -v
 }
 alias showdeepuiprocessor='tail -f -n 1000 /tmp/deepui-automaton-processor'
 alias showdeepuiexecutor='tail -f  -n 1000 /tmp/deepui-automaton-executor'
