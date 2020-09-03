@@ -24,6 +24,9 @@ let g:mapleader = ','
 let g:ack_use_dispatch = 1
 " don't hide quotes in json files
 let g:vim_json_syntax_conceal = 0
+
+command! -nargs=* -complete=shellcmd Rsplit execute "new | r! <args>"
+
 "-----------------------------------------------------------------------------}}}
 "FUNCTIONS                                                                      {{{ 
 "--------------------------------------------------------------------------------
@@ -39,14 +42,15 @@ function! SynL()
    endfor
 endfunction
 command! SynL call SynL()
+
 function! IntoTemp(cmd)
    redir => cout
    silent execute a:cmd
    redir END
    e /tmp/vimredirected
    put=cout
-
 endfunction
+
 function! Vimrc(...)
     let query = get(a:000, 0, '^')
     if !len(query)
@@ -75,6 +79,7 @@ function! Carmicat(...)
         \'''carmi\.js''', 
 		\fzf#vim#with_preview({'dir': '~/projects/bolt/', 'options': '--bind ctrl-s:toggle-sort'}, 'up:40%', 'ctrl-g'), 1)
 endfunction
+
 " Zoom - from https://github.com/junegunn/dotfiles/blob/master/vimrc<Paste>
 function! s:zoom()
     if winnr('$') > 1
@@ -100,13 +105,16 @@ function! OnInsertLeave()
         set nocursorline nocursorcolumn
     endif
 endfunction
+
 "-----------------------------------------------------------------------------}}}
 "MAPS                                                                        {{{ 
 "--------------------------------------------------------------------------------
 inoremap jk <esc>:update<cr>
 inoremap jj <esc>
-inoremap <C-h> <C-o>h
-inoremap <C-l> <C-o>a
+
+inoremap <C-h> <C-o>h                          " move left while in insert mode
+inoremap <C-l> <C-o>a                          " move right while in insert mode
+
 nnoremap ,h <C-w>h
 nnoremap ,l <C-w>l
 nnoremap ,j <C-w>j
@@ -133,19 +141,39 @@ endif
 if has('mouse')
     set mouse=a
 endif
-" switch syntax highlighting on
-syntax on
 
+syntax on " switch syntax highlighting on
 let base16colorspace=256  " Access colors present in 256 colorspace"
-if has('nvim')
-    if ( $THEME =~ 'base16' )
-        execute "colorscheme ".$THEME
-    else
-        colorscheme base16-chalk
-    endif
-else
-    colorscheme PaperColor
-endif
+
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+" colorscheme ayu
+" colorscheme PaperColor
+colorscheme dracula
+
+" set background=dark
+hi Normal guibg=NONE ctermbg=NONE
+
+"
+" syntax on
+" set t_Co=256
+" set cursorline
+" colorscheme onehalf
+" let g:airline_theme='onehalfdark'
+"lightline
+"let g:lightline.colorscheme='onehalfdark'
+
+" Select the colorscheme
+" if has('nvim')
+"     if ( $THEME =~ 'base16' )
+"         execute "colorscheme ".$THEME
+"     else
+"         colorscheme base16-chalk
+"     endif
+" else
+"     colorscheme PaperColor
+" endif
 
 
 " highlight conflicts
@@ -171,8 +199,6 @@ augroup configgroup
     autocmd BufNewFile,BufRead .eslintrc set filetype=json
     autocmd BufNewFile,BufRead,BufWrite *.md syntax match Comment /\%^---\_.\{-}---$/
     autocmd BufNewFile,BufReadPost *.md set filetype=markdown
-
-
 
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html setlocal ts=4 sts=4 sw=4 noexpandtab indentkeys-=*<return>
@@ -209,6 +235,7 @@ function! ToggleDiffWhiteSpace()
       set diffopt+=iwhite
    endif
 endfunction
+
 command! ClearCache let g:projectsRootDic = {}
 command! ToggleDiffWhiteSpace call ToggleDiffWhiteSpace()
 if has('nvim')

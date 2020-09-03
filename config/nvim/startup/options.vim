@@ -56,7 +56,7 @@ set t_vb=
 
 set tm=500
 set t_Co=256              " Explicitly tell vim that the terminal supports 256 colors"
-set background=dark
+
 set number                " show line numbers
 set nowrap                " turn on line wrapping
 set wrapmargin=8          " wrap lines when coming within n characters from side

@@ -22,7 +22,7 @@ let g:mapleader = ','
 nmap 1n :execute 'e '.getcwd()<cr>
 nmap - :execute 'e '.getcwd()<cr>
 source $HOME/.dotfiles/config/nvim/startup/fugitive.vim
-nnoremap s :source $HOME/.dotfiles/config/nvim/init.vim<cr>:unmap s<cr>
+"noremap s :source $HOME/.dotfiles/config/nvim/init.vim<cr>:unmap s<cr>
 "end diff --- clean close diff window
 nmap <space>ed <C-w><C-j><C-w><C-l><C-w><C-o>
 map <space>ev :source ~/.dotfiles/config/nvim/init.vim<cr> 

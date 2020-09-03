@@ -1,26 +1,31 @@
+" Search and replace word under cursor
+nnoremap <F4> :%s/<c-r><c-w>/<c-r><c-w>/gc<c-f>$F/i
+
+" delete without yanking
+nnoremap <leader>d "_d
+vnoremap <leader>d "_d
+
+" replace currently selected text with default register
+" without yanking it
+vnoremap <leader>p "_dP
+
+nmap <space><space> :call FixPowerlineFontsAndSave()<cr>
+vmap <space><space> :call FixPowerlineFontsAndSave()<cr>
 function! FixPowerlineFontsAndSave()
-    " can't load powerline fonts on startup, it looks terrible. This is a hacky workaround
+    " can't load powerline fonts on startup, it looks terrible.
+    " This is a hacky workaround.
     execute('source '.expand('$DOTFILES/config/nvim/startup/airline.vim'))
     execute('source '.expand('$DOTFILES/config/nvim/startup/options.vim'))
-    iunmap ,,
-    vunmap ,,
-    nunmap ,,
     vunmap <space><space>
     nunmap <space><space>
     silent! update
-    "there is an issue with airline not updating when `:update` writes, running twice `:update` solves it
-    "nnn
-    inoremap ,, <esc>:update<cr>:update<cr>
-    nmap ,, :update<cr>:update<cr>
-    vmap ,, :update<cr>:update<cr>
+
+    " there is an issue with airline not updating when
+    " `:update` writes, running twice `:update` solves it
     nmap <space><space> :update<cr>:update<cr>
     vmap <space><space> :update<cr>:update<cr>
 endfunction
-inoremap ,, <esc>:call FixPowerlineFontsAndSave()<cr>
-nmap ,, :call FixPowerlineFontsAndSave()<cr>
-vmap ,, :call FixPowerlineFontsAndSave()<cr>
-nmap <space><space> :call FixPowerlineFontsAndSave()<cr>
-vmap <space><space> :call FixPowerlineFontsAndSave()<cr>
+
 function! NextClosedFold(dir)
     let cmd = 'norm!z' . a:dir
     let view = winsaveview()
@@ -35,7 +40,8 @@ function! NextClosedFold(dir)
     endif
 endfunction
 
-nmap ' ` |"when goto mark, allways take cursor position
+noremap ' `
+
 nmap ,. :call utils#restoreAlternateFile()<cr><c-^>
 nmap sa :call utils#restoreAlternateFile()<cr><c-^>
 
@@ -99,33 +105,36 @@ nmap <space>bd :call utils#buf_delete_current()<cr>
 nmap <space>ed <C-w><C-j><C-w><C-l><C-w><C-o>
 map <space>ev :source ~/.dotfiles/config/nvim/init.vim<cr> 
 "add explanation inside code
-nnoremap <space>ex O<esc>120i-<esc>o-<cr><esc>120i-<esc>V2k:Commentary<cr>j$xA
-" nnoremap <space>ex O120i-o120i-VkkgcjgccA
+nnoremap <space>ex O<esc>80i-<esc>o-<cr><esc>80i-<esc>V2k:Commentary<cr>j$xA
+" nnoremap <space>ex O120i-o
+
 " find any file
 nmap <silent><space>fa :FZFFiles<cr>
 nmap <silent><space>fh :Helptags<cr>
+
 " find line in open buffers
 nnoremap <silent><space>fl :Lines<cr>
+
 "fugitive
 nmap <silent><space>wd :call DiffInWebstorm()<cr>
 nmap <silent><space>ws :OpenInWebstorm()<cr>
 nmap <silent><space>ow :OpenInWebstorm<cr>
 nmap <silent><space>oa :call utils#open_in_atom()<cr>
 nmap <silent><space>ov :call utils#open_in_visual_studio_code()<cr>
-nmap <silent><space>gb :Gblame<cr>nmap <silent>,gd :Gdiff<cr>
-nmap <silent><space>gb :Gblame<cr>
-nmap <silent>gb :Gblame<cr>
 nmap <silent><space>gr :Gread<cr>
-nmap <silent><space>gs :Gstatus<cr><C-n>
 nmap <silent><space>gc :Gcommit -v<cr>
 nmap <silent><space>gl :call hzf#git_log()<cr>
 "gf cuz the git command is 'git log --follow $FileName' 
 nmap <silent><space>gf :call hzf#git_log_follow()<cr>
 nmap <silent><space>bc :call hzf#git_log_follow()<cr>
-nmap <silent>gs :Gstatus<cr><C-n>
 
+nmap <silent><space>gs :Gstatus<cr><C-n>
+nmap <silent><space>gb :Gblame<cr>
 nmap <silent><space>gd :Gdiff<cr>
 nmap <space>ge :Gedit<cr>
+
+nmap <silent>gs :Gstatus<cr><C-n>
+nmap <silent>gb :Gblame<cr>
 
 "hunk stage
 nmap <space>hs :GitGutterStageHunk<cr>
@@ -160,7 +169,6 @@ nmap \d :GitGutterToggle<cr>:redraw!<cr>
 " Toggle NERDTree
 nmap <silent> 1t :execute '25Lexplore '.expand('%:p:h')<cr>
 " expand to the path of the file in the current buffer
-nmap <silent> 1n :call NERDTreeFindOrClose()<cr>
 function! FixNerdSize()
     if &ft == 'nerdtree' 
         vertical resize 30
@@ -171,6 +179,7 @@ function! FixNerdSize()
     endif
 endfunction
 nmap 1f :call FixNerdSize()<cr>
+nmap <silent> 1n :call NERDTreeFindOrClose()<cr>
 nmap <silent> 1N :NERDTreeFind<cr>
 nmap <silent> \t :NERDTreeToggle<cr>
 nmap <silent> <space>nn :NERDTreeToggle<cr>
@@ -189,34 +198,34 @@ nmap 1zDisableVimMarkStarMap <Plug>MarkSearchNext
 nmap 1zDisableVimMarkHashMap <Plug>MarkSearchPrev
 nmap 1zDisableVimMarkMarkClear  <Plug>MarkClear
 
-nmap <space>cp :call utils#cursor_ping()<cr>
-"disable automatic mappings for surround.vim and write the here cuz I want `ds{motion}` and `cs{motion}` to use easymotion instead
-let g:surround_no_mappings = 1
-"delete surrounding
-nmap <space>ds  <Plug>Dsurround
-nmap ds  <Plug>Dsurround
-"change surrounding
-nmap <space>cs  <Plug>Csurround
-nmap cs  <Plug>Csurround
-"??
-nmap <space>cS  <Plug>CSurround
-"motion + surrounding
-nmap <space>ys  <Plug>Ysurround
-nmap ys  <Plug>Ysurround
-"put created surrounding in its own line
-nmap <space>yS  <Plug>YSurround
-"surround entire line
-nmap <space>yss <Plug>Yssurround
-"surrond {start}\n{currentline}\n{end}
-nmap <space>ySs <Plug>YSsurround
-"same as ySs
-nmap <space>ySS <Plug>YSsurround
-"surround visual selection
-xmap S <Plug>VSurround
-"surround visual selection
-xmap <space>s <Plug>VSurround
-"surroung visual into it's own line
-xmap gS  <Plug>VgSurround
+" add date
+" nmap <F3> i<C-R>=strftime("%Y-%m-%d")<CR><Esc>
+" imap <F3> <C-R>=strftime("%Y-%m-%d")<CR>
+" nmap <F4> i<C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR><Esc>
+" imap <F4> <C-R>=strftime("%Y-%m-%d %a %I:%M %p")<CR>
+
+vmap <space>cp :call utils#cursor_ping()<cr>
+
+" Surround {{{
+    " disable automatic mappings for surround.vim and write the here cuz I want `ds{motion}` and `cs{motion}` to use easymotion instead
+    let g:surround_no_mappings = 1
+
+    nmap <space>ds  <Plug>Dsurround
+    nmap ds  <Plug>Dsurround         |"delete surrounding
+    "
+    nmap <space>cs  <Plug>Csurround  |" change surrounding 
+    nmap <space>cS  <Plug>CSurround  |" change surrounding
+    nmap cs         <Plug>Csurround  |" change surrounding
+    nmap ys         <Plug>Ysurround  |" change surrounding
+    nmap <space>ys  <Plug>Ysurround  |" motion + surrounding
+    nmap <space>yS  <Plug>YSurround  |" put created surrounding in its own line
+    nmap <space>yss <Plug>Yssurround |" surround entire line
+    nmap <space>ySs <Plug>YSsurround |" surrond {start}\n{currentline}\n{end}
+    nmap <space>ySS <Plug>YSsurround |" same as ySs
+    xmap S          <Plug>VSurround  |" surround visual selection
+    xmap gS         <Plug>VgSurround |" surround visual into its own line
+    xmap <space>s   <Plug>VSurround  |" surround visual selection
+" }}}
 
 "using map from <Plug>(easymotion...) is cool, the plugin worries to do the right thing with my mappings
 " let g:EasyMotion_keys='abcdefghijklmnopqrstuvwxyz'
@@ -234,9 +243,12 @@ map <space>st :Scripts<cr>
 
 "visual mode on pasted text
 nnoremap <space>vp `[v`]
+
 "same as :quit
 nmap \w :wincmd q<cr>
 nmap \q :wincmd q<cr>
+
+" Expand selected region
 nmap <S-Up> v<Plug>(expand_region_expand)
 vmap <S-UP> <Plug>(expand_region_expand)
 vmap <S-DOWN> <Plug>(expand_region_shrink)
@@ -261,14 +273,16 @@ let g:expand_region_text_objects = {
 " vmap <DOWN> <Plug>(wildfire-water)
 nnoremap <silent> <space>zj :call NextClosedFold('j')<cr>
 nnoremap <silent> <space>zk :call NextClosedFold('k')<cr>
+
 function! GFilesIfNotHelp()
     if &ft == 'help'
-        execute "normal! \<c-t>"
+        execute "normal! \<C-p>"
     else
         call hzf#g_files()
     endif
 endfunction
-nnoremap <c-t> :call GFilesIfNotHelp()<cr>
+nnoremap <C-t> :call GFilesIfNotHelp()<cr>
+
 imap <C-s>  <Esc>:w<cr>
 map <C-s>  <Esc>:w<cr>
 nnoremap <C-s> :Snippets<cr>
@@ -297,9 +311,57 @@ nmap <space>lk :lprev<cr>
 
 " run test (well, if available)
 nmap <space>rt :Shell! export MOCHA_OPTIONS='--colors'; npm run test<cr>
-nmap <space>rb :Shell! [[ -f .nvmrc ]] && nvm use $(cat .nvmrc); export MOCHA_OPTIONS='--colors'; npm run test:debug<cr>
+" nmap <space>rb :Shell! [[ -f .nvmrc ]] && nvm use $(cat .nvmrc); export MOCHA_OPTIONS='--colors'; npm run test:debug<cr>
+nmap <space>rb :Shell! [[ -f .nvmrc ]] && nvm use $(cat .nvmrc); export MOCHA_OPTIONS='--colors'; npm run build<cr>
 "<c-l> complete to longest possible
 "<c-d> list all possibilities
 cnoremap <c-space> <C-l><C-d>
 cnoremap <c-p> <up>
 cnoremap <c-n> <down>
+
+function! PecoOpen()
+  for filename in split(system("find . -type f | peco"), "\n")
+    execute "e" filename
+  endfor
+endfunction
+nnoremap <space>op :call PecoOpen()<CR>
+
+let t:is_transparent = 0
+function! Toggle_transparent()
+    if t:is_transparent == 0
+        hi Normal guibg=NONE ctermbg=NONE
+        let t:is_transparent = 1
+    else
+        set background=dark
+        let t:is_tranparent = 0
+    endif
+endfunction
+" Toggle_transparent()
+
+nnoremap <space>t :call Toggle_transparent()<CR>
+
+" zoom pane
+noremap <space>z <c-w>_ \| <c-w>\|
+noremap <space>o <c-w>=
+
+" Convert slashes to backslashes for Windows.
+if has('win32')
+  nmap ,cs :let @*=substitute(expand("%"), "/", "\\", "g")<CR>
+  nmap ,cl :let @*=substitute(expand("%:p"), "/", "\\", "g")<CR>
+
+  " This will copy the path in 8.3 short format, for DOS and Windows 9x
+  nmap ,c8 :let @*=substitute(expand("%:p:8"), "/", "\\", "g")<CR>
+else
+  nmap ,cs :let @*=expand("%")<CR>
+  nmap ,cl :let @*=expand("%:p")<CR>
+endif
+
+" paste from register
+vmap  "_dP
+
+imap <F2> <Esc>v`^me<Esc>gi<C-o>:call Ender()<CR>
+function Ender()
+  let endchar = nr2char(getchar())
+  execute "normal \<End>a".endchar
+  normal `e
+endfunction

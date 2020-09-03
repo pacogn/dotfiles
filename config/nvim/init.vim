@@ -2,7 +2,6 @@
 " vim: foldmethod=marker
 autocmd!
 " Load startup files{{{1--------------------------------------------------------------------------------------------------
-"-------------------------------------------------------------------------------------------------------------------------
 function! SourceMyScripts()
     source $DOTFILES/config/nvim/startup/plugins.vim
     if !isdirectory($DOTFILES.'/config/nvim/plugged')
@@ -12,11 +11,12 @@ function! SourceMyScripts()
 
     for file in file_list
         if file !~ "Session.vim" && file !~ "plugins.vim"
-         " echom file
-		execute( 'source '.file )
-    endif
-	endfor
+            " echom file
+            execute( 'source '.file )
+        endif
+    endfor
 endfunction
+
 call SourceMyScripts()
 function! DeferGstatus(...)
     if(a:0 == 0)
@@ -25,10 +25,7 @@ function! DeferGstatus(...)
         Gstatus
     endif
 endfunction
-
-
 "}}}----------------------------------------------------------------------------------------------------------------------
-
 
 " source $DOTFILES/config/nvim/startup/plugins.vim
 " source $DOTFILES/config/nvim/startup/NERDTree.vim
@@ -51,3 +48,6 @@ endfunction
 " source $DOTFILES/config/nvim/startup/windowStuff.vim
 
 " source $DOTFILES/config/nvim/startup/fzf.vim
+" source $DOTFILES/config/nvim/startup/vimwiki.vim
+
+hi Normal guibg=NONE ctermbg=NONE

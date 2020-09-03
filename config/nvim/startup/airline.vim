@@ -12,7 +12,7 @@ let g:airline_section_y='%{ShrinkedFilePath()}'
 " let g:airline_section_z = airline#section#create(['%{ObsessionStatus(''[ session ]'', '''')}', 'windowswap', '%3p%% ', 'linenr', ':%3v '])
 let g:airline_section_warning = ''
 let g:airline_section_error = ''
-
+"let g:airline#extensions#tabline#enabled = 1
 let g:airline_showing_all_sections = 1
 function! AirlineSplitted()
   let g:airline_restore_b = g:airline_section_b

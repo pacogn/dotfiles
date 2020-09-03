@@ -90,7 +90,7 @@ augroup javascript
     autocmd FileType javascript,json call <SID>setmapping()
     autocmd FileType javascript nnoremap <buffer>{ :call GoToNextFunction(-1, 0, 1)<cr>
     autocmd FileType javascript nnoremap <buffer>} :call GoToNextFunction(-1, 0, 0)<cr>
-    " autocmd FileType javascript nnoremap <buffer>cof :call JSToggleFoldMethod()<cr>
+    autocmd FileType javascript nnoremap <buffer>cof :call JSToggleFoldMethod()<cr>
     " autocmd Filetype javascript vnoremap <buffer>1= :<C-u>setf jsx<cr>gv=:<C-u>setf javascript<cr>
 augroup END
 "-----------------------------------------------------------------------------}}}
