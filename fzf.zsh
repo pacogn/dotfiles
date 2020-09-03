@@ -1,3 +1,11 @@
+alias gc=fbr # Git Checkout - include remote branches
+alias gl=fbl # Git Checkout Local
+alias ch='chromehistory' # Search Chrome History
+alias cb='$DOTFILES/fzf/chromebookmarks.rb' # Search Chrome Bookmarks
+
+
+# alias chromebookmarks='$DOTFILES/fzf/chromebookmarks.rb'
+
 # c - browse chrome history
 # copied from https://junegunn.kr/2015/04/browsing-chrome-history-with-fzf/
 chromehistory() {
@@ -34,7 +42,6 @@ chromehistory() {
 }
 
 alias -g F=' | fzf --ansi --preview '\''$DOTFILES/bin/preview.rb {}'\'' --preview-window '\''top:50%'\'' --bind '\''ctrl-s:toggle-sort,ctrl-g:toggle-preview,ctrl-o:execute:($DOTFILES/fzf/fhelp.sh {})'\'
-alias fch='chromehistory'  
 
 fstash() {
   git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
@@ -45,14 +52,26 @@ fstash() {
       --bind 'ctrl-g:toggle-preview,ctrl-s:toggle-sort,ctrl-o:execute:git stash show -p {1}' | perl -pe 's#(.*?) .*#\1#' | pbcopy
   rm /tmp/tmp
 }
+
 # fbr - checkout git branch (including remote branches)
-fbr() {
+function fbr() {
   local branches branch
   branches=$(git branch --all | grep -v HEAD) &&
   branch=$(echo "$branches" |
            fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
   git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
+
+
+function fbl() {
+  local branches branch
+  branches=$(git branch --sort=-committerdate) &&
+  branch=$(echo "$branches" |
+           fzf-tmux -d $(( 2 + $(wc -l <<< "$branches") )) +m) &&
+  git checkout $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+alias rgf='rg --line-number --column --color "ansi" '
 function fag(){
     fzfretval=$(rgf $@ | fzf -m  --ansi --preview '$DOTFILES/bin/preview.rb {}' \
         --preview-window 'top:50%' \
@@ -71,7 +90,8 @@ function fag(){
         fi
     fi
 }
-alias rgf='rg --line-number --column --color "ansi" '
+
+
 function fa(){
     filename=$(find . -type f | fzf --exact --preview '$DOTFILES/bin/preview.rb {}' \
                 --preview-window 'top:50%' \
@@ -84,6 +104,7 @@ function fa(){
         vim $filename
     fi
 }
+
 function fman(){
     if [[ $# -eq 0 ]]; then
         echo 'need a search argument for this'
@@ -110,7 +131,6 @@ fshow() {
 FZF-EOF"
 }
 
-alias chromebookmarks='$DOTFILES/fzf/chromebookmarks.rb'
 function jfzf(){
   dir=`fasd_cd -ds | egrep '^\S+\s+/' | tail -r | fzf --no-sort --bind 'ctrl-s:toggle-sort'`
   if [[ -n dir ]]; then
