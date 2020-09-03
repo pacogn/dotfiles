@@ -3,6 +3,9 @@
 #among other things, vim's yankRing needs this to work
 set-option -g default-command "reattach-to-user-namespace -l zsh"
 
+bind-key r source-file ~/.tmux.conf \; display-message "~/.tmux.conf reloaded"
+bind-key M split-window -h "vim ~/.tmux.conf"
+
 # remap prefix from 'C-b' to 'C-a'
 # see ~/.config/karabiner/karabiner.json for capslock to escape_or_control configuration
 unbind C-b
