@@ -24,16 +24,16 @@
 8. symlink all `.symlink` files to your home folder `ln -s PATH_TO_SOURCE_FILE.symlink ~/.FILE_NAME`
 9. apply macos defaults: `sh ~/.dotfiles/macos/defaults`
 10. install rouge (I'll go ahead and suggest sudoing this, there must be a better way though): `sudo gem install rouge` 
-11. install [karabiner-elements](https://github.com/tekezo/Karabiner-Elements/blob/master/usage/README.md)
+11. install [karabiner-elements](https://github.com/tekezo/Karabiner-Elements/blob/master/usage/README.md) `brew cask install karabiner-elements`
 12. install mysql for mru ( most recently used - vim plugin ): `brew install mysql`
-13. download and install [spactacle](https://www.spectacleapp.com/)
+13. download and install [spactacle](https://www.spectacleapp.com/) `brew cask install spectacle`
 14. do yourself a favor: [glances](https://github.com/nicolargo/glances) `pip3 install glances` OR `brew install htop` and stop using activity monitor
 15. `brew install coreutils` -- you need it for `realpath`
 16. update submodules: `git submodule update --init --recursive`
 17. install yarn: `brew install yarn --without-node`
 18. install yarn completions:`yarn global add yarn-completions`
 20. install tldr `yarn global add tldr` for [simplified man pages](https://github.com/tldr-pages/tldr)
-21. install iterm and set colors as follows:
+21. install iterm `brew cask install iterm` and set colors as follows:
     - black: 727272
     - red: e64856
     - green: 35c13c
