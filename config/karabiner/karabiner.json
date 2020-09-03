@@ -19,7 +19,6 @@
                         "description": "FC660C Volume Controls (fn + 0/9 to volume up/down)",
                         "manipulators": [
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "9",
                                     "modifiers": {
@@ -32,10 +31,10 @@
                                     {
                                         "key_code": "volume_decrement"
                                     }
-                                ]
+                                ],
+                                "type": "basic"
                             },
                             {
-                                "type": "basic",
                                 "from": {
                                     "key_code": "0",
                                     "modifiers": {
@@ -48,7 +47,8 @@
                                     {
                                         "key_code": "volume_increment"
                                     }
-                                ]
+                                ],
+                                "type": "basic"
                             }
                         ]
                     },
@@ -106,7 +106,21 @@
                     }
                 ]
             },
-            "devices": [],
+            "devices": [
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 636,
+                        "vendor_id": 1452
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": true,
+                    "simple_modifications": []
+                }
+            ],
             "fn_function_keys": [
                 {
                     "from": {
