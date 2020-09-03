@@ -32,6 +32,7 @@ function reload(){
   export PATH=$(echo "/usr/local/bin:${PATH}" | awk -v RS=':' -v ORS=":" '!a[$1]++')
 }
 reload
+
 startMySQLIfNeeded
 #surround with `(...)` to avoid job controll output
 ( echo $(brew --prefix nvm) > /tmp/brew_prefix_nvm & ) 
@@ -48,4 +49,4 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 # tabtab source for yarn package
 # uninstall by removing these lines or running `tabtab uninstall yarn`
-[[ -f /Users/davidsu/.dotfiles/config/yarn/global/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/davidsu/.dotfiles/config/yarn/global/node_modules/tabtab/.completions/yarn.zsh
+# [[ -f /Users/davidsu/.dotfiles/config/yarn/global/node_modules/tabtab/.completions/yarn.zsh ]] && . /Users/davidsu/.dotfiles/config/yarn/global/node_modules/tabtab/.completions/yarn.zsh
