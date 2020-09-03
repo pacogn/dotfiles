@@ -1,4 +1,8 @@
-PROMPT="%~$ "
+#  # NVM
+#  export NVM_DIR=~/.nvm
+ source $(brew --prefix nvm)/nvm.sh
+#
+# PROMPT="%~$ "
 DISABLE_AUTO_UPDATE=true
 export LC_ALL=en_US.UTF-8
 export DOTFILES=$HOME/.dotfiles
@@ -14,6 +18,7 @@ export THEME
 eval "$(fasd --init auto)"
 #do I need this???
 alias a='loadall'
+
 function reload(){
   for f in ~/.dotFiles/* #foreach file in directory
   do
