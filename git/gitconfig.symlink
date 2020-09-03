@@ -1,25 +1,32 @@
 [user]
-	name = David
-	email = david.susskind@walkme.com
+	name = Paco Garcia
+	email = paco.g@walkme.com
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = /Users/paco.g/.gitignore_global
 	autocrlf = input
 	editor = /usr/local/bin/nvim
 [diff]
-    tool = nvimdiff
+	tool = nvimdiff
 [difftool "nvimdiff"]
-    cmd = "nvim -d -u ~/.vimrc \"$LOCAL\" \"$REMOTE\""
+	cmd = "nvim -d -u ~/.vimrc \"$LOCAL\" \"$REMOTE\""
 [difftool "webstorm"]
 	cmd = webstorm diff $(cd $(dirname "$LOCAL") && pwd)/$(basename "$LOCAL") $(cd $(dirname "$REMOTE") && pwd)/$(basename "$REMOTE")
 [alias]
-    d = "difftool -t=nvimdiff"
+    b = "branch --sort=-committerdate"
+	d = "difftool -t=nvimdiff"
+	ad = "!git ls-files --modified --others --exclude-standard | peco --initial-filter=Fuzzy | xargs git add --"
+	df = "!git diff --name-only HEAD | peco --initial-filter=Fuzzy | xargs git diff HEAD --"
+	rs = "!git diff --name-only --cached | peco --initial-filter=Fuzzy | xargs git reset -q --"
+	rb = "!git diff --name-only HEAD | peco --initial-filter=Fuzzy | xargs -I {} sh -c 'git reset -q -- {}; git checkout -- {} 2>/dev/null'"
+	apply-gitignore = "!git ls-files -ci --exclude-standard -z | xargs -0 git rm --cached"
+
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
 [credential]
 	helper = osxkeychain
 [push]
-	default = simple
+	default = current
 [help]
 	autocorrect = 15
 [color]
@@ -28,14 +35,16 @@
 	changed = cyan
 	modified = cyan
 	meta = yellow bold
-    frag = magenta bold
-    old = red bold
-    new = green bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
 [color "status"]
-    added = yellow
-    changed = green
-    untracked = cyan
+	added = yellow
+	changed = green
+	untracked = cyan
 [difftool]
 	prompt = false
 [pager]
 	branch = false
+[http]
+	sslVerify = false
